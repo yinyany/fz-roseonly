@@ -24,9 +24,9 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexv1()
+    public function welcome()
     {
-        return view('admin.index_v1');
+        return view('admin.welcome');
     }
 
     /**

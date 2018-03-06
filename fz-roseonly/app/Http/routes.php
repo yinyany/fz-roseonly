@@ -12,7 +12,7 @@
 */
 
 /**
- * 后台路由设置区域
+ * 后台登陆注册路由设置区域
  */
 
 
@@ -28,7 +28,7 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');//加载注册页
 Route::post('auth/register', 'Auth\AuthController@postRegister');//执行注册
 
 Route::get('/admin', 'Admin\IndexController@index')->middleware('auth');//执行注册
-Route::get('/admin/indexv1', 'Admin\IndexController@indexv1');//执行注册
+Route::get('/admin/welcome', 'Admin\IndexController@welcome');//执行注册
 
 
 

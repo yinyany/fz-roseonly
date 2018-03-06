@@ -1,39 +1,42 @@
 @extends('layouts.admin.masterAdmin')
 @section('title', '重置密码')
-@section('link')
-    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
-@endsection
 
-@section('class','class="gray-bg"')
+@section('class','class="login-bg"')
 @section('content')
-     <div class="middle-box text-center loginscreen  animated fadeInDown">
-        <div>
-            <div style="position:relative;left:-200px">
-                <h1 class="logo-name">roseonly</h1>
+    <div class="login">
+        <div class="message">roseonly 后台- 重置密码</div>
+
+        <div id="darkbannerwrap"></div>
+        <a href="">注册</a>
+        
+        <form method="post" action="{{ url('password/email') }}" class="layui-form" >
+            {{csrf_field()}}
+            <input name="email" placeholder="邮箱"  type="email" class="layui-input" value="{{ old('email') }}">
+            <hr class="hr15">
+            <input value="发送重置密码邮件" style="width:100%;" type="submit">
+            <hr class="hr20" >
+        </form>
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <h3>重置 roseonly 密码</h3>
-            <form class="m-t" role="form" action="{{ url('password/email') }}" method="post">
-                {!! csrf_field() !!}
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="邮箱" required="" value="{{ old('email') }}">
-                </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">发送重置密码邮件</button>
-                <p class="text-muted text-center"><small>重新登陆？</small><a href="{{ url('auth/login') }}">点此登录</a>
-                </p>
-            </form>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-        </div>
+        @endif
     </div>
+
 @endsection
+@section('js')
+    <script>
+        $(function  () {
+            layui.use('form', function(){
+              var form = layui.form;
+              });
+        })
 
+    </script>
 
+@endsection 
    

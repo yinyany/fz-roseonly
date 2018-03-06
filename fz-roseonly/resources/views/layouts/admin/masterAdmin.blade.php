@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <title>resonly 后台- @yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('./static/admin/favicon.ico')}}"> 
-    <link href="{{ asset('./static/admin/css/bootstrap.min.css?v=3.3.6')}}" rel="stylesheet">
-    <link href="{{ asset('./static/admin/css/font-awesome.css?v=4.4.0')}}" rel="stylesheet">
-    <link href="{{ asset('./static/admin/css/animate.css')}}" rel="stylesheet">
-    <link href="{{ asset('./static/admin/css/style.css?v=4.1.0')}}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>roseonly 后台- @yield('title')</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="shortcut icon" href="{{ asset('static/admin/favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ asset('static/admin/css/font.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/admin/css/xadmin.css') }}">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('static/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ asset('static/admin/js/xadmin.js') }}"></script>
     @section('link')
         {{-- 此区块继承加载其他外部引入文件 --}}    
     @show
@@ -20,9 +24,6 @@
         {{-- 此区块继承加载页面主体 --}}    
     @show
 
-    <!-- 全局js -->
-    <script src="{{ asset('./static/admin/js/jquery.min.js?v=2.1.4')}}"></script>
-    <script src="{{ asset('./static/admin/js/bootstrap.min.js?v=3.3.6')}}"></script>
     @section('js')
         {{-- 此区块继承加载js文件 --}}    
     @show
