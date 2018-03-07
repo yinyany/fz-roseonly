@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9823faee533a25766a48e3e2f4be24da",
+    "content-hash": "ec1ffad7f4accd3829673c130e6bb4be",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -409,6 +409,60 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
+        },
+        {
+            "name": "laracasts/flash",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/flash.git",
+                "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/laracasts/flash/10cd420ab63fd0796bf5e1e5b99f87636d2f4333.zip",
+                "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracasts\\Flash\\FlashServiceProvider"
+                    ],
+                    "aliases": {
+                        "Flash": "Laracasts\\Flash\\Flash"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Flash": "src/"
+                },
+                "files": [
+                    "src/Laracasts/Flash/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Easy flash notifications",
+            "time": "2017-06-22T19:01:19+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1133,7 +1187,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -1193,7 +1247,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.35",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -1246,7 +1300,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -1303,7 +1357,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -1358,7 +1412,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.35",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -1418,16 +1472,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "850138b3e3e5c1b4a82d4a682b8cd84ab49834c8"
+                "reference": "1f813a57d23235d052b16367e2fdcafa27d8e5d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/finder/850138b3e3e5c1b4a82d4a682b8cd84ab49834c8.zip",
-                "reference": "850138b3e3e5c1b4a82d4a682b8cd84ab49834c8",
+                "url": "https://files.phpcomposer.com/files/symfony/finder/1f813a57d23235d052b16367e2fdcafa27d8e5d4.zip",
+                "reference": "1f813a57d23235d052b16367e2fdcafa27d8e5d4",
                 "shasum": ""
             },
             "require": {
@@ -1463,11 +1517,11 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-11T10:02:34+00:00"
+            "time": "2018-03-04T15:13:29+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -1523,16 +1577,16 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "39a217598692e56b1b7b2de2542cfcfa92a78079"
+                "reference": "11ef2d10a8d3218bd6db465030235bab35a8f370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/39a217598692e56b1b7b2de2542cfcfa92a78079.zip",
-                "reference": "39a217598692e56b1b7b2de2542cfcfa92a78079",
+                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/11ef2d10a8d3218bd6db465030235bab35a8f370.zip",
+                "reference": "11ef2d10a8d3218bd6db465030235bab35a8f370",
                 "shasum": ""
             },
             "require": {
@@ -1602,7 +1656,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-28T22:53:23+00:00"
+            "time": "2018-03-05T18:32:00+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1773,7 +1827,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -1822,7 +1876,7 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
@@ -1896,7 +1950,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -1959,7 +2013,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v2.7.42",
+            "version": "v2.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -2064,6 +2118,84 @@
                 "environment"
             ],
             "time": "2015-05-30T15:59:26+00:00"
+        },
+        {
+            "name": "zizaco/entrust",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zizaco/entrust.git",
+                "reference": "ba9241426f9c518982d868e2cbac381a9581d802"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/Zizaco/entrust/ba9241426f9c518982d868e2cbac381a9581d802.zip",
+                "reference": "ba9241426f9c518982d868e2cbac381a9581d802",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "~5.0",
+                "illuminate/console": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~5.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.1",
+                "sami/sami": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Zizaco\\Entrust\\EntrustServiceProvider"
+                    ],
+                    "aliases": {
+                        "Entrust": "Zizaco\\Entrust\\EntrustFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/commands"
+                ],
+                "psr-4": {
+                    "Zizaco\\Entrust\\": "src/Entrust/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Elkins",
+                    "homepage": "http://andrewelkins.com"
+                },
+                {
+                    "name": "Zizaco Zizuini",
+                    "email": "zizaco@gmail.com"
+                },
+                {
+                    "name": "Ben Batschelet",
+                    "homepage": "http://github.com/bbatsche"
+                },
+                {
+                    "name": "Michele Angioni",
+                    "email": "michele.angioni@gmail.com"
+                }
+            ],
+            "description": "This package provides a flexible way to add Role-based Permissions to Laravel",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permission",
+                "roles"
+            ],
+            "time": "2017-11-13T23:46:19+00:00"
         }
     ],
     "packages-dev": [
@@ -3458,7 +3590,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "barryvdh/laravel-debugbar": 20
+        "barryvdh/laravel-debugbar": 20,
+        "zizaco/entrust": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

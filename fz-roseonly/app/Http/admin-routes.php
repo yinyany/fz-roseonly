@@ -20,3 +20,9 @@ Route::get('member','MemberController@index');
 // 加载添加会员页面
 Route::get('member/create','MemberController@create');
 Route::post('member/store','MemberController@store');
+// 删除会员
+Route::get('member/destroy/{id}','MemberController@destroy');
+// 加载修改页面
+Route::get('member/edit/{id}','MemberController@edit');
+Route::post('member/update/{id}','MemberController@update');
+// 

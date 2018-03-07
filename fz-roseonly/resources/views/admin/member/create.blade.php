@@ -17,6 +17,8 @@
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
+    @include('flash::message')
+
     <div class="x-body">
       <form class="layui-form" action="{{ url('admin/member/store') }}" method="post">
           {{csrf_field()}}
@@ -95,6 +97,12 @@
 @endsection
 
 @section('js')
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#flash-overlay-modal').modal();
+    </script>
     <script>
         layui.use(['form','layer'], function(){
             $ = layui.jquery;
