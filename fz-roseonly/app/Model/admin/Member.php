@@ -16,13 +16,6 @@ class Member extends Model
     protected $primaryKey = 'id';
 
     /**
-     * 指定是否模型应该被戳记时间。
-     *
-     * @var bool
-     */
-    public $timestamps = ture;
-
-    /**
      * 可以被批量赋值的属性。
      *
      * @var array

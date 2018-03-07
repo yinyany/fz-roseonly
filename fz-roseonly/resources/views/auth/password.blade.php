@@ -1,6 +1,10 @@
 @extends('layouts.admin.masterAdmin')
 @section('title', '重置密码')
 
+@section('link')
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@endsection 
+
 @section('class','class="login-bg"')
 @section('content')
     <div class="login">

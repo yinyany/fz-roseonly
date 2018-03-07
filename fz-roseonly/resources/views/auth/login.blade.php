@@ -1,6 +1,11 @@
 @extends('layouts.admin.masterAdmin')
 @section('title', '登录')
 
+@section('link')
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@endsection 
+
+
 @section('class','class="login-bg"')
 @section('content')
     <div class="login">
@@ -11,9 +16,9 @@
         
         <form method="post" action="{{ url('auth/login') }}" class="layui-form" >
             {{csrf_field()}}
-            <input name="name" placeholder="用户名"  type="text" class="layui-input" >
+            <input name="name" placeholder="用户名"  type="text" class="layui-input" value="{{ old('name') }}">
             <hr class="hr15">
-            <input name="password" placeholder="密码"  type="password" class="layui-input">
+            <input name="password" placeholder="密码"  type="password" class="layui-input" value="{{ old('password') }}">
             <hr class="hr15">
             <input name="remember" type="checkbox">记住密码
             <hr class="hr15">
