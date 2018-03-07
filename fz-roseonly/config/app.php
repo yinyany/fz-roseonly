@@ -146,6 +146,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -195,6 +197,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

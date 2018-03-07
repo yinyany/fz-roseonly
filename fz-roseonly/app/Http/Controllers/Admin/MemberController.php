@@ -14,11 +14,22 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $member = Member::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
-        // dd($member);
-        return view('admin.member.member',['member'=>$member]);
+        $where=[];
+        $keywords = $request->name;
+        if ($keywords != '') {
+            $member = Member::where('name','like',"%$keywords%")->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+            $sum = Member::where('name','like',"%$keywords%")->count();
+
+        }else{
+            $member = Member::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+            $sum = Member::count();
+        }
+        
+        
+        // dd($sum);
+        return view('admin.member.member',['member'=>$member,'sum'=>$sum,'keywords'=>$keywords]);
     }
 
     /**
@@ -67,8 +78,10 @@ class MemberController extends Controller
         // dd($request->all());
         // $member = Member::create($request->all());
         if (Member::create($request->all())) {
-           return redirect('admin/member');
+            flash()->overlay('添加成功', 1);
+            return redirect('admin/member');
         }else{
+            flash()->overlay('添加失败', 5);
             return back();
         }
     }
@@ -92,7 +105,8 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Member::findOrFail($id);
+        return view('admin.member.edit',['model'=>$model]);
     }
 
     /**
@@ -104,7 +118,16 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->state);
+        $model = Member::where('id',$id)->update(['state'=>$request->state]);
+        // dd($model);
+        if ($model) {
+            flash()->overlay('修改成功', 1);
+            return redirect('admin/member');
+        }else{
+            flash()->overlay('修改失败', 5);
+            return back();
+        }
     }
 
     /**
@@ -115,6 +138,13 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Member::destroy($id);
+        if (Member::destroy($id)) {
+            flash()->overlay('删除成功', 1);
+            return redirect('admin/member');
+        }else{
+            flash()->overlay('删除失败', 5);
+            return back();
+        }
     }
 }
