@@ -25,4 +25,7 @@ Route::get('member/destroy/{id}','MemberController@destroy');
 // 加载修改页面
 Route::get('member/edit/{id}','MemberController@edit');
 Route::post('member/update/{id}','MemberController@update');
-// 
+
+// 加载轮播图页面
+Route::get('carousel','CarouselController@index');
+Route::get('carousel/create','CarouselController@create');

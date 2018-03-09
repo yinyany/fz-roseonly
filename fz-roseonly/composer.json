@@ -9,7 +9,9 @@
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar":"2.4.x-dev",
         "laracasts/flash": "^3.0",
-        "zizaco/entrust": "dev-master"
+        "zizaco/entrust": "dev-master",
+        "overtrue/laravel-lang": "dev-master",
+        "mews/captcha": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

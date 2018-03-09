@@ -20,6 +20,11 @@
             <hr class="hr15">
             <input name="password" placeholder="密码"  type="password" class="layui-input" value="{{ old('password') }}">
             <hr class="hr15">
+            <div class="layui-input-inline">
+              <input type="text" name="captcha" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+            </div>
+            <a  href="javascript:location.replace(location.href);">{!!captcha_img()!!}</a>
+            <hr class="hr15">
             <input name="remember" type="checkbox">记住密码
             <hr class="hr15">
             <input value="登录" style="width:100%;" type="submit">
