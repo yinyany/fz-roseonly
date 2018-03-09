@@ -150,6 +150,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
 
     ],
 
