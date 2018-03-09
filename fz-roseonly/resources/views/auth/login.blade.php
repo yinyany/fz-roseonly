@@ -20,10 +20,11 @@
             <hr class="hr15">
             <input name="password" placeholder="密码"  type="password" class="layui-input" value="{{ old('password') }}">
             <hr class="hr15">
-            <div class="layui-input-inline">
+            <div class="layui-input-inline" style="width:50%;">
               <input type="text" name="captcha" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
             </div>
-            <a  href="javascript:location.replace(location.href);">{!!captcha_img()!!}</a>
+           <a href="#" onclick="reloadCaptcha();" class="pull-right" style="width:40%;margin-top: 10px;margin-left: 1px;"><img src="{{URL::to('captcha/create')}}" id="captcha-img"></a>
+
             <hr class="hr15">
             <input name="remember" type="checkbox">记住密码
             <hr class="hr15">
@@ -45,12 +46,11 @@
 @endsection
 @section('js')
     <script>
-        $(function  () {
-            layui.use('form', function(){
-              var form = layui.form;
-              });
-        })
-
+      
+        function reloadCaptcha(){
+          $("#captcha-img").attr("src","{{URL::to('captcha/create')}}?rand="+Math.random());
+          return false;
+        }
     </script>
 
 @endsection 

@@ -29,10 +29,18 @@ Route::get('member/destroy/{id}','MemberController@destroy');
 Route::get('member/edit/{id}','MemberController@edit');
 Route::post('member/update/{id}','MemberController@update');
 
+//轮播图管理=================================================
 
 // 加载轮播图页面
 Route::get('carousel','CarouselController@index');
+//加载上传图片页面
 Route::get('carousel/create','CarouselController@create');
+//上传图片方法
+Route::post('carousel/upload','CarouselController@upload');
+//执行加载方法
+Route::post('carousel/store','CarouselController@store');
+//加载修改页面
+Route::get('carousel/edit/{id}','CarouselController@edit');
 
 
 // 权限管理--------------------------------------------------------

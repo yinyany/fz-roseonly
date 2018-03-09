@@ -11,7 +11,8 @@
         "laracasts/flash": "^3.0",
         "zizaco/entrust": "dev-master",
         "overtrue/laravel-lang": "dev-master",
-        "mews/captcha": "^2.1"
+        "mews/captcha": "^2.1",
+        "baum/baum": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
