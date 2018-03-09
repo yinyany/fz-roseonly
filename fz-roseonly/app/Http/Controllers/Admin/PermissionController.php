@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Model\admin\Member;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Model\admin\Permission;
 
-class MemberController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,17 +20,17 @@ class MemberController extends Controller
         $where=[];
         $keywords = $request->name;
         if ($keywords != '') {
-            $member = Member::where('name','like',"%$keywords%")->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
-            $sum = Member::where('name','like',"%$keywords%")->count();
+            $permission = Permission::where('name','like',"%$keywords%")->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+            $sum = Permission::where('name','like',"%$keywords%")->count();
 
         }else{
-            $member = Member::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
-            $sum = Member::count();
+            $permission = Permission::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+            $sum = Permission::count();
         }
         
         
         // dd($sum);
-        return view('admin.member.member',['member'=>$member,'sum'=>$sum,'keywords'=>$keywords]);
+        return view('admin.pers.pers',['permission'=>$permission,'sum'=>$sum,'keywords'=>$keywords]);
     }
 
     /**
@@ -39,7 +40,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('admin.member.create');
+        return view('admin.pers.create');
     }
 
     /**
@@ -50,36 +51,28 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required|unique:member|max:36',
-        //     'phone' => 'required|unique:member|digits:11',
-        //     'email' => 'required|email',
-        //     'sex' => 'required|in:男,女',
-        //     'password' => 'required|confirmed|min:6',
-        // ],[
-        //     'name.required' => '用户名必填',
-        //     'name.unique' => '用户名已存在',
-        //     'name.max' => '用户名最长36位',
+        $this->validate($request, [
+            'name' => 'required|unique:permissions|max:36',
+            'display_name' => 'required',
+            'description' => 'required',
+        ],[
+            'name.required' => '角色名必填',
+            'name.unique' => '角色名已存在',
+            'name.max' => '角色名最长36位',
 
-        //     'phone.required' => '手机号必填',
-        //     'phone.unique' => '此手机号已注册',
-        //     'phone.digits' => '手机号为11位',
+            'display_name.required' => '权力规则必填',
 
-        //     'email.required' => '邮箱必填',
-        //     'email.email' => '邮箱格式错误',
-
-        //     'sex.required' => '性别必填',
-        //     'sex.in' => '性别单选"男"或"女"',
-
-        //     'password.required' => '密码必填',
-        //     'password.confirmed' => '两次密码不一样',
-        //     'password.min'  => '密码最小6位',
-        // ]);
-        // dd($request->all());
-        // $member = Member::create($request->all());
-        if (Member::create($request->all())) {
+            'description.required' => '角色描述',
+        ]);
+        // dd($request->description);
+        $Permission = Permission::create([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+            'description' => $request->description,
+        ]);
+        if($Permission) {
             flash()->overlay('添加成功', 1);
-            return redirect('admin/member');
+            return redirect('admin/pers');
         }else{
             flash()->overlay('添加失败', 5);
             return back();
@@ -105,8 +98,9 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $model = Member::findOrFail($id);
-        return view('admin.member.edit',['model'=>$model]);
+        $Permission = Permission::findOrFail($id);
+        // dd($Permission);
+        return view('admin.pers.edit',['Permission'=>$Permission]);
     }
 
     /**
@@ -119,11 +113,12 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->state);
-        $model = Member::where('id',$id)->update(['state'=>$request->state]);
+        $input = $request->except('_token');
+        $Permission = Permission::where('id',$id)->update($input);
         // dd($model);
-        if ($model) {
+        if ($Permission) {
             flash()->overlay('修改成功', 1);
-            return redirect('admin/member');
+            return redirect('admin/pers');
         }else{
             flash()->overlay('修改失败', 5);
             return back();
@@ -138,10 +133,9 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        // Member::destroy($id);
-        if (Member::destroy($id)) {
+        if (Permission::destroy($id)) {
             flash()->overlay('删除成功', 1);
-            return redirect('admin/member');
+            return redirect('admin/role');
         }else{
             flash()->overlay('删除失败', 5);
             return back();
