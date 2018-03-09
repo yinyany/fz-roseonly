@@ -39,6 +39,10 @@ Route::post('carousel/upload','CarouselController@upload');
 Route::post('carousel/store','CarouselController@store');
 //加载修改页面
 Route::get('carousel/edit/{id}','CarouselController@edit');
+//执行修改方法
+Route::post('carousel/update/{id}','CarouselController@update');
+//修改删除方法
+Route::get('carousel/destroy/{id}','CarouselController@destroy');
 
 
 // 权限管理--------------------------------------------------------

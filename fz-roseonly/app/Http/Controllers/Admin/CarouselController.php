@@ -63,8 +63,7 @@ class CarouselController extends Controller
      */
     public function store(Request $request)
     {   
-        
-        if (!$request->hasFile('imgurl')) {
+        if (!$request->has('imgurl')) {
             flash()->overlay('上传图片错误', 5);
             return back();
         }
@@ -107,9 +106,12 @@ class CarouselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        if (!$request->has('imgurl')) {
+            flash()->overlay('上传图片错误', 5);
+            return back();
+        }
         $model = Carousel::where('id',$id)->update(['state'=>$request->state,'imgurl'=>$request->imgurl]);
-        // dd($model);
         if ($model) {
             flash()->overlay('修改成功', 1);
             return redirect('admin/carousel');
@@ -126,7 +128,14 @@ class CarouselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        
+        if (Carousel::destroy($id)) {
+            flash()->overlay('删除成功', 1);
+            return redirect('admin/carousel');
+        }else{
+            flash()->overlay('删除失败', 5);
+            return back();
+        }
     }
 }
