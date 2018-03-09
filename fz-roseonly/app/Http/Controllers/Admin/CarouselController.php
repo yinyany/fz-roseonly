@@ -14,10 +14,19 @@ class CarouselController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $carousel = [];
-        return view('admin.carousel.index',['carousel'=>$carousel]);
+        $where=[];
+        $keywords = $request->id;
+        if ($keywords != '') {
+            $carousel = Carousel::where('id','like',"%$keywords%")->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+            $count = Carousel::where('id','like',"%$keywords%")->count();
+
+        }else{
+            $carousel = Carousel::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+            $count = Carousel::count();
+        }
+        return view('admin.carousel.index',['carousel'=>$carousel,'count'=>$count,'keywords'=>$keywords]);
     }
 
     /**
@@ -26,8 +35,24 @@ class CarouselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+
         return view('admin.carousel.create');
+    }
+
+    public function upload(Request $request)
+    {   
+        //接受图片信息
+        $field = $request->file('imgurl');
+
+        if($field->isValid()){
+            //获取文件的后缀
+            $ext = $field->getClientOriginalExtension();
+            $newName = md5(time().rand(1,6666)).'.'.$ext;
+            $path = $field->move(public_path().'/uploads',$newName);
+            return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
+        }
+        
     }
 
     /**
@@ -37,8 +62,18 @@ class CarouselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        
+        if (!$request->hasFile('imgurl')) {
+            flash()->overlay('上传图片错误', 5);
+            return back();
+        }
+        $carousel = new Carousel;
+        $carousel->imgurl = $request->input("imgurl"); 
+        $carousel->state = $request->input("state");
+        $carousel->save();
+        flash()->overlay('添加成功',1);
+        return redirect('/admin/carousel');
     }
 
     /**
@@ -60,7 +95,8 @@ class CarouselController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Carousel::findOrFail($id);
+        return view('admin.carousel.edit',['model'=>$model]);
     }
 
     /**
@@ -72,7 +108,15 @@ class CarouselController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Carousel::where('id',$id)->update(['state'=>$request->state,'imgurl'=>$request->imgurl]);
+        // dd($model);
+        if ($model) {
+            flash()->overlay('修改成功', 1);
+            return redirect('admin/carousel');
+        }else{
+            flash()->overlay('修改失败', 5);
+            return back();
+        }
     }
 
     /**

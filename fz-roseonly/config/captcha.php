@@ -2,11 +2,11 @@
 
 return [
 
-    'characters' => '2346789abcdefghjmnpqrtuxyzABCDEFGHJMNPQRTUXYZ',
+    'characters' => '012346789',
 
     'default'   => [
-        'length'    => 4,
-        'width'     => 130,
+        'length'    => 5,
+        'width'     => 110,
         'height'    => 50,
         'quality'   => 90,
     ],
