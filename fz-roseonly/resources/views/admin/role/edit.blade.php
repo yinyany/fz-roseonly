@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
+        <button class="layui-btn" lay-submit="" lay-filter="add">提交</button>
         </div>
       </form>
     </div>

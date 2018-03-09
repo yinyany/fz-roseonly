@@ -10,7 +10,7 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="{{ url('/admin/welcome') }}">首页</a>
-        <a href="{{ url('admin/role') }}">管理员管理</a>
+        <a href="{{ url('admin/role') }}">角色管理</a>
         <a>
           <cite>角色列表</cite></a>
       </span>

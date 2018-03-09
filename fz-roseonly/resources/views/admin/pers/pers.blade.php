@@ -10,7 +10,7 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="{{ url('/admin/welcome') }}">首页</a>
-        <a href="{{ url('admin/pers') }}">管理员管理</a>
+        <a href="{{ url('admin/pers') }}">权限管理</a>
         <a>
           <cite>权限列表</cite></a>
       </span>
@@ -49,7 +49,7 @@
             <td>{{ $list->description }}</td>
             <td>{{ $list->created_at }}</td>
             <td class="td-manage">
-              <a title="修改状态" href='{{ url("admin/pers/edit/$list->id") }}'>
+              <a title="修改权限" href='{{ url("admin/pers/edit/$list->id") }}'>
                 <i class="layui-icon" style="font-size: 25px; color: #1E9FFF;">&#xe642;</i>
               </a>
               <a title="删除" href='{{ url("admin/pers/destroy/$list->id") }}'>

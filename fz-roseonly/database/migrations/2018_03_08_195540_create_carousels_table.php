@@ -16,6 +16,7 @@ class CreateCarouselsTable extends Migration
             $table->increments('id');
             $table->string('imgurl');   //图片的路径
             $table->string('url');   //图片的链接路径
+            $table->enum('state', ['启用', '禁用']);
             $table->timestamps();
         });
     }
