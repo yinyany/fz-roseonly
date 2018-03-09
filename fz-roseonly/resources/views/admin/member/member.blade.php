@@ -45,7 +45,7 @@
           @foreach($member as $list)
           <tr>
             <td>{{ $list->id }}</td>
-            <td>{{ $list->name }}</td>
+            <td><a href='{{ url("admin/member/show/$list->id") }}' title="点击查看详情">{{ $list->name }}</a></td>
             <td class="td-status">
               @if($list->state === "启用")
                 <span class="layui-btn layui-btn-normal layui-btn-mini">{{ $list->state }}</span>
