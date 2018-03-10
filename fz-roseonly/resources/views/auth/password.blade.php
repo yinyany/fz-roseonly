@@ -11,7 +11,7 @@
         <div class="message">roseonly 后台- 重置密码</div>
 
         <div id="darkbannerwrap"></div>
-        <a href="">注册</a>
+        
         
         <form method="post" action="{{ url('password/email') }}" class="layui-form" >
             {{csrf_field()}}
@@ -20,6 +20,9 @@
             <input value="发送重置密码邮件" style="width:100%;" type="submit">
             <hr class="hr20" >
         </form>
+        <span>返回登录页：</span>
+        <a href="{{ url('auth/login') }}">登录</a>
+
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>

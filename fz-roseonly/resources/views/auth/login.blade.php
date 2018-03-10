@@ -12,8 +12,6 @@
         <div class="message">roseonly 后台- 登录</div>
 
         <div id="darkbannerwrap"></div>
-        <a href="{{ url('auth/register') }}">注册</a>
-        
         <form method="post" action="{{ url('auth/login') }}" class="layui-form" >
             {{csrf_field()}}
             <input name="name" placeholder="用户名"  type="text" class="layui-input" value="{{ old('name') }}">
@@ -23,7 +21,7 @@
             <div class="layui-input-inline" style="width:50%;">
               <input type="text" name="captcha" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
             </div>
-           <a href="#" onclick="reloadCaptcha();" class="pull-right" style="width:40%;margin-top: 10px;margin-left: 1px;"><img src="{{URL::to('captcha/create')}}" id="captcha-img"></a>
+           <img src="{{URL::to('captcha/create')}}" id="captcha-img" onclick="reloadCaptcha();" class="pull-right" style="width:48%;">
 
             <hr class="hr15">
             <input name="remember" type="checkbox">记住密码
@@ -31,7 +29,13 @@
             <input value="登录" style="width:100%;" type="submit">
             <hr class="hr20" >
         </form>
-        <a href="{{ url('password/email') }}">邮箱找回密码</a>
+        <div style="float:right">
+                <span>忘记密码？点击：</span>
+                <a href="{{ url('password/email') }}">邮箱找回密码</a>
+            </div>
+        <span>没有账号？点击：</span>
+        <a href="{{ url('auth/register') }}">注册</a>
+        
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>

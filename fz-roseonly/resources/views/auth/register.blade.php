@@ -11,7 +11,7 @@
         <div class="message">roseonly 后台- 注册</div>
 
         <div id="darkbannerwrap"></div>
-        <a href="{{ url('auth/login') }}">点此登录</a>
+        
         
         <form method="post" action="{{ url('auth/register') }}" class="layui-form" >
             {{csrf_field()}}
@@ -27,6 +27,8 @@
             <hr class="hr20" >
             
         </form>
+        <span>已有账号？点击：</span>
+        <a href="{{ url('auth/login') }}">登录</a>
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
