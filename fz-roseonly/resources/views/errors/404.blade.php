@@ -1,18 +1,47 @@
-@extends('layouts.admin.masterAdmin')
-@section('title', '404 页面')
-@section('class','class="gray-bg"')
-@section('content')
-    <div class="middle-box text-center animated fadeInDown">
-        <h1>404</h1>
-        <h3 class="font-bold">页面未找到！</h3>
-        <div class="error-desc">
-            抱歉，页面好像去火星了~
-            <form class="form-inline m-t" role="form">
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="请输入您需要查找的内容 …">
-                </div>
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>404 NOT FOUND.</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                color: #B0BEC5;
+                display: table;
+                font-weight: 100;
+                font-family: 'Lato';
+            }
+
+            .container {
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .content {
+                text-align: center;
+                display: inline-block;
+            }
+
+            .title {
+                font-size: 72px;
+                margin-bottom: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                <div class="title">404 NOT FOUND.</div>
+            </div>
         </div>
-    </div>
-@endsection
+    </body>
+</html>
