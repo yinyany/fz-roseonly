@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->integer('receipt_time');                  //收货时间 UNIX时间戳
             $table->string('ship_number', 100);               //快递单号
             $table->tinyInteger('status');                    //记录状态。0：禁用，1：正常，2，删除
-            $table->timestamps();                               //创建时间，和修改时间
+            $table->timestamps();                              //创建时间，和修改时间
         });
     }
 
