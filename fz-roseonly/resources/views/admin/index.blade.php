@@ -31,21 +31,7 @@
     <div class="left-nav">
       <div id="side-nav">
         <ul id="nav">
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="{{ url('admin/member') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
@@ -59,6 +45,36 @@
                             <cite>订单列表</cite>
                         </a>
                     </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>评论管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="order-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>评论列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>会员管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{{ url('admin/member') }}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>会员列表</cite>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
