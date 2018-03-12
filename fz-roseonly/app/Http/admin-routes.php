@@ -94,3 +94,7 @@ Route::post('pers/store','PermissionController@store');
 //删除权限
 Route::get('pers/destroy/{id}','PermissionController@destroy');
 
+
+
+//加载订单页面
+Route::get('order','OrderController@index');

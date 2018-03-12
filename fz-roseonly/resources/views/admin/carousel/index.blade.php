@@ -52,10 +52,10 @@
             <td>{{ $list->created_at }}</td>
             <td class="td-manage">
               <a title="修改" href='{{ url("admin/carousel/edit/$list->id") }}'>
-                <i class="layui-icon">&#xe642;</i>
+                <i class="layui-icon" style="font-size: 25px; color: #1E9FFF;">&#xe642;</i>
               </a>
               <a title="删除" href='{{ url("admin/carousel/destroy/$list->id") }}'>
-                <i class="layui-icon">&#xe640;</i>
+                <i class="layui-icon" style="font-size: 25px; color: #1E9FFF;">&#xe640;</i>
               </a>
             </td>
           </tr>
