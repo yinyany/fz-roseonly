@@ -20,7 +20,7 @@
             <input value="发送重置密码邮件" style="width:100%;" type="submit">
             <hr class="hr20" >
         </form>
-        <span>返回登录页：</span>
+        <span>返回登录页？点击：</span>
         <a href="{{ url('auth/login') }}">登录</a>
 
         @if (count($errors) > 0)
