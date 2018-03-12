@@ -1,19 +1,47 @@
-@extends('layouts.admin.masterAdmin')
-@section('title', '503 页面')
-@section('class','class="gray-bg"')
-@section('content')
-    <div class="middle-box text-center animated fadeInDown">
-        <h1>503</h1>
-        <h3 class="font-bold">网站维护中...</h3>
-        <div class="error-desc">
-            抱歉，请稍后刷新~
-            <form class="form-inline m-t" role="form">
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="请输入您需要查找的内容 …">
-                </div>
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </form>
-        </div>
-    </div>
-@endsection
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Be right back.</title>
 
+        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                color: #B0BEC5;
+                display: table;
+                font-weight: 100;
+                font-family: 'Lato';
+            }
+
+            .container {
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .content {
+                text-align: center;
+                display: inline-block;
+            }
+
+            .title {
+                font-size: 72px;
+                margin-bottom: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                <div class="title">Be right back.</div>
+            </div>
+        </div>
+    </body>
+</html>

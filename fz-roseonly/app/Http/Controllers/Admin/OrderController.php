@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Custom;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Model\admin\Order;
 
-class CustomController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class CustomController extends Controller
      */
     public function index()
     {
-        //
+          
     }
 
     /**
@@ -83,15 +84,5 @@ class CustomController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-
-
-    public function custom($table,$id)
-    {   
-       $list = new $table;
-       $info = $table::findOrFail($id);
-       dd($info);
     }
 }

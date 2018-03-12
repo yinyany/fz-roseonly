@@ -51,7 +51,7 @@
               <div class="layui-input-inline">
                 <select name="state" lay-verify="">
                   <option value="">请选择状态</option>
-                  <option value="启用">启用</option>
+                  <option value="启用" selected>启用</option>
                   <option value="禁用">禁用</option>
                 </select> 
               </div>  
