@@ -18,7 +18,7 @@ class CreateGoodsShopcarsTable extends Migration
             $table->integer('goods_id');                     //商品ID   
             $table->integer('num');                          //商品数量 
             $table->tinyInteger('status');                    //记录状态。0：禁用，1：正常，2，删除
-            $table->timestamps();
+            $table->timestamps();         
         });
     }
 
