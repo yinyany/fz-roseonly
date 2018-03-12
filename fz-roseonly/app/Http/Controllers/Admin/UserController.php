@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:users|max:36',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
         ],[
             'name.required' => '用户名必填',
@@ -62,6 +62,7 @@ class UserController extends Controller
             'name.max' => '用户名最长36位',
 
             'email.required' => '邮箱必填',
+            'email.unique' => '此邮箱已注册',
             'email.email' => '邮箱格式错误',
 
             'password.required' => '密码必填',
