@@ -94,7 +94,8 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        $model = Member::findOrFail($id);
+        return view('admin.member.details',['model'=>$model]);
     }
 
     /**

@@ -42,7 +42,7 @@
             </div>
         @endif
     </div>
-
+@include('flash::message')
 @endsection
 @section('js')
     <script>

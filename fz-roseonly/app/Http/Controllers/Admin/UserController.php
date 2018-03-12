@@ -143,7 +143,7 @@ class UserController extends Controller
         // dd($request->all());
         $roleData = $request->name;
  
-        $userw = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $roleId = $request->input('rid',[]);
         // dd($roleData);

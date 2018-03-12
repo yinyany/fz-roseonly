@@ -18,6 +18,8 @@
 // 会员管理--------------------------------------------------------
 // 加载会员列表
 Route::get('member','MemberController@index');
+// 加载会员列表
+Route::get('member/show/{id}','MemberController@show');
 // 加载添加会员页面
 Route::get('member/create','MemberController@create');
 Route::post('member/store','MemberController@store');
@@ -43,6 +45,27 @@ Route::get('carousel/edit/{id}','CarouselController@edit');
 Route::post('carousel/update/{id}','CarouselController@update');
 //修改删除方法
 Route::get('carousel/destroy/{id}','CarouselController@destroy');
+
+
+//商品分类管理=================================================
+
+// 加载分类页面
+Route::get('type','TypeController@index');
+//加载添加分类页面
+Route::get('type/create','TypeController@create');
+//上传图片方法
+Route::post('type/upload','TypeController@upload');
+//执行添加方法
+Route::post('type/store','TypeController@store');
+//加载修改页面
+Route::get('type/edit/{id}','TypeController@edit');
+//执行修改方法
+Route::post('type/update/{id}','TypeController@update');
+//修改删除方法
+Route::get('type/destroy/{id}','TypeController@destroy');
+//使用ajax链接后台
+Route::get('type/show','TypeController@show');
+
 
 
 // 权限管理--------------------------------------------------------
