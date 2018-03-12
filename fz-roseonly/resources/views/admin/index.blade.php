@@ -31,10 +31,60 @@
     <div class="left-nav">
       <div id="side-nav">
         <ul id="nav">
-            
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="layui-icon" style="font-size: 17px;">&#xe634;</i>
+                    <cite>轮播图管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{{ url('admin/carousel') }}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>轮播列表</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon" style="font-size: 17px;">&#xe657;</i>
+                    <cite>商品管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="layui-icon" style="font-size: 17px;">&#xe631;</i>
+                            <cite>商品分类管理</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="xxx.html">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>商品分类别表</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>
+                    <li>
+                        <a _href="{{ url('admin/role') }}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>商品列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{{ url('admin/pers') }}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>商品详情</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon" style="font-size: 17px;">&#xe65e;</i>
                     <cite>订单管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -49,7 +99,7 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="layui-icon" style="font-size: 17px;">&#xe63a;</i>
                     <cite>评论管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -64,7 +114,7 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
+                    <i class="iconfont" style="font-size: 17px;">&#xe70b;</i>
                     <cite>会员管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -79,7 +129,7 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
+                    <i class="layui-icon" style="font-size: 17px;">&#xe735;</i>
                     <cite>管理员管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -102,27 +152,6 @@
                             <cite>权限分类</cite>
                         </a>
                     </li >
-    <!--                 <li>
-                        <a _href="{{ url('admin/member') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li > -->
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>轮播图管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="{{ url('admin/carousel') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>轮播列表</cite>
-                        </a>
-                    </li>
                 </ul>
             </li>
         </ul>
@@ -148,7 +177,7 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div class="copyright">Copyright ©2017 x-admin v2.3 All Rights Reserved</div>  
+        <div class="copyright">Copyright ©1717 x-admin v2.3 All Rights Reserved</div>  
     </div>
     <!-- 底部结束 -->
 @endsection
