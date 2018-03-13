@@ -116,6 +116,16 @@ Route::post('pers/store','PermissionController@store');
 Route::get('pers/destroy/{id}','PermissionController@destroy');
 
 
+
+
+//加载订单列表
+Route::get('order','OrderController@index');
+//加载订单详情页面
+Route::get('order/edit/{id}','OrderController@edit');
+//执行修改订单详情页面
+Route::post('order/update/{id}','OrderController@update');
+
+
 //评论管理--------------------------------------------------------------------
 
 //加载评论列表
@@ -129,3 +139,4 @@ Route::post('comment/update/{id}','CommentController@update');
 
 // //删除权限
 // Route::get('pers/destroy/{id}','PermissionController@destroy');
+

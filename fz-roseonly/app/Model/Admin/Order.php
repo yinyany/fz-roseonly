@@ -11,7 +11,7 @@ class Order extends Model
      *
      * @var string
      */
-    protected $table = 'Order';
+    protected $table = 'Orders';
 
     protected $primaryKey = 'id';
 
