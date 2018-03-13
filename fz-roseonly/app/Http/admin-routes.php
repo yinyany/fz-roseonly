@@ -115,3 +115,17 @@ Route::post('pers/store','PermissionController@store');
 //删除权限
 Route::get('pers/destroy/{id}','PermissionController@destroy');
 
+
+//评论管理--------------------------------------------------------------------
+
+//加载评论列表
+Route::get('comment','CommentController@index');
+//加载回复评论页面
+Route::get('comment/edit/{id}','CommentController@edit');
+Route::post('comment/update/{id}','CommentController@update');
+// //加载回复评论页面
+// Route::get('pers/create','PermissionController@create');
+// Route::post('pers/store','PermissionController@store');
+
+// //删除权限
+// Route::get('pers/destroy/{id}','PermissionController@destroy');

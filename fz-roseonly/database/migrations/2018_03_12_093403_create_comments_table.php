@@ -18,6 +18,10 @@ class CreateCommentsTable extends Migration
             $table->tinyInteger('sid');
             $table->string('content');
             $table->string('reply');
+            $table->tinyInteger('parent_id')->nullable();
+            $table->integer('lft')->nullable();
+            $table->integer('rgt')->nullable();
+            $table->integer('depth')->nullable();
             $table->timestamps();
         });
     }
