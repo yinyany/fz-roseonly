@@ -17,7 +17,20 @@ class OrderController extends Controller
      */
     public function index()
     {
-          
+        // $where=[];
+        // if ($keywords != '') {
+            $order = Order::where("is_pay","=",1)
+                            ->orderBy('is_ship','asc')
+                            ->orderBy('id','desc')
+                            ->paginate(env('PAGE_SIZE',10));
+            $sum = Order::where("is_pay","=",1)
+                         ->orderBy('is_ship','asc')
+                         ->orderBy('id','desc')
+                         ->count();
+
+        // return "123123";
+        // dd($sum);
+        return view('admin.order.order',['order'=>$order,'sum'=>$sum]);
     }
 
     /**
@@ -60,7 +73,9 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+         $orderinfo = Order::findOrFail($id);
+         // dd($orderinfo);
+        return view('admin.order.edit',['orderinfo'=>$orderinfo]);
     }
 
     /**
@@ -72,7 +87,21 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+         $model = Order::where('id',$id)->update(['ship_time'=>$request->ship_time,
+                                                 'ship_number'=>$request->ship_number,
+                                                'is_ship'=>$request->is_ship
+                                                ]);
+
+         // dd($model);
+         if ($model) {
+            flash()->overlay('修改成功', 1);
+            return redirect('admin/order');
+        }else{
+            flash()->overlay('修改失败', 5);
+            return back();
+        }
+
     }
 
     /**
@@ -85,4 +114,20 @@ class OrderController extends Controller
     {
         //
     }
+
+    // /**
+    //  * 查询已发货订单
+    //  * @return [type] [description]
+    //  */
+    //  public function shipped()
+    // {
+    //     // $where=[];
+    //     // if ($keywords != '') {
+    //         $shipped = Order::where('is_ship',"=",1)->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+    //         $sum = Order::where('is_ship',"=",1)->count();
+
+    //     // return "123123";
+    //     // dd($sum);
+    //     return view('admin.order.shipped',['shipped'=>$shipped,'sum'=>$sum]);
+    // }
 }
