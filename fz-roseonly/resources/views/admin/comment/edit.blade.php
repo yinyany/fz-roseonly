@@ -51,7 +51,7 @@
                     <span class="x-red">*</span>评论
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text"  name="name" class="layui-input" value="{{ $node->content }}" disabled>
+                    <input type="text"  name="content" class="layui-input" value="{{ $node->content }}" disabled>
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>
@@ -62,7 +62,7 @@
                   <span class="x-red">*</span>回复
               </label>
               <div class="layui-input-inline">
-                   <textarea name="description" placeholder="请输入角色描述" class="layui-textarea">{{ $node->reply }}</textarea>
+                   <textarea name="reply" placeholder="请输入角色描述" class="layui-textarea">{{ $node->reply }}</textarea>
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>

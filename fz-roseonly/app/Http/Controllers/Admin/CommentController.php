@@ -101,7 +101,16 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->reply);
+        $model = Comment::where('id',$id)->update(['reply'=>$request->reply]);
+        // dd($model);
+        if ($model) {
+            flash()->overlay('回复成功', 1);
+            return redirect('admin/comment');
+        }else{
+            flash()->overlay('回复失败', 5);
+            return back();
+        }
     }
 
     /**
