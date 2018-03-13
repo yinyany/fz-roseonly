@@ -105,7 +105,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="order-list.html">
+                        <a _href="{{ url('admin/comment') }}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>评论列表</cite>
                         </a>

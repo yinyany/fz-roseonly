@@ -47,6 +47,27 @@ Route::post('carousel/update/{id}','CarouselController@update');
 Route::get('carousel/destroy/{id}','CarouselController@destroy');
 
 
+//商品分类管理=================================================
+
+// 加载分类页面
+Route::get('type','TypeController@index');
+//加载添加分类页面
+Route::get('type/create','TypeController@create');
+//上传图片方法
+Route::post('type/upload','TypeController@upload');
+//执行添加方法
+Route::post('type/store','TypeController@store');
+//加载修改页面
+Route::get('type/edit/{id}','TypeController@edit');
+//执行修改方法
+Route::post('type/update/{id}','TypeController@update');
+//修改删除方法
+Route::get('type/destroy/{id}','TypeController@destroy');
+//使用ajax链接后台
+Route::get('type/show','TypeController@show');
+
+
+
 // 权限管理--------------------------------------------------------
 //加载管理员列表
 Route::get('user','UserController@index');
@@ -96,9 +117,26 @@ Route::get('pers/destroy/{id}','PermissionController@destroy');
 
 
 
+
 //加载订单列表
 Route::get('order','OrderController@index');
 //加载订单详情页面
 Route::get('order/edit/{id}','OrderController@edit');
 //执行修改订单详情页面
 Route::post('order/update/{id}','OrderController@update');
+
+
+//评论管理--------------------------------------------------------------------
+
+//加载评论列表
+Route::get('comment','CommentController@index');
+//加载回复评论页面
+Route::get('comment/edit/{id}','CommentController@edit');
+Route::post('comment/update/{id}','CommentController@update');
+// //加载回复评论页面
+// Route::get('pers/create','PermissionController@create');
+// Route::post('pers/store','PermissionController@store');
+
+// //删除权限
+// Route::get('pers/destroy/{id}','PermissionController@destroy');
+

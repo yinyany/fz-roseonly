@@ -1,104 +1,148 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
-use Baum\Node;
+use Illuminate\Http\Request;
+use App\Model\Admin\Type;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
-/**
-* TypeController
-*/
-class TypeController extends Node {
+class TypeController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $where=[];
+        $keywords = $request->name;
+        if ($keywords != '') {
+                $type = Type::where('name','like',"%$keywords%")->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+                $count = Type::where('name','like',"%$keywords%")->count();
 
-  /**
-   * Table name.
-   *
-   * @var string
-   */
-  protected $table = 'type_controllers';
+            }else{
+                $type = Type::orderBy('name','desc')->paginate(env('PAGE_SIZE',10));
+                $count = Type::count();
+            }
+            return view('admin.type.index',['type'=>$type,'count'=>$count,'keywords'=>$keywords]);
+    }
 
-  //////////////////////////////////////////////////////////////////////////////
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {   
+        $id = $_GET['id']?$_GET['id']:null;
 
-  //
-  // Below come the default values for Baum's own Nested Set implementation
-  // column names.
-  //
-  // You may uncomment and modify the following fields at your own will, provided
-  // they match *exactly* those provided in the migration.
-  //
-  // If you don't plan on modifying any of these you can safely remove them.
-  //
+        $type = Type::findOrFail($id);
+        dd($type);
+        return view('admin.type.create',['id'=>$id]);
+    }
 
-  // /**
-  //  * Column name which stores reference to parent's node.
-  //  *
-  //  * @var string
-  //  */
-  // protected $parentColumn = 'parent_id';
 
-  // /**
-  //  * Column name for the left index.
-  //  *
-  //  * @var string
-  //  */
-  // protected $leftColumn = 'lft';
+    public function upload(Request $request)
+    {   
+        //接受图片信息
+        $field = $request->file('imgurl');
+        //判读图片是否为正常图片
+        if($field->isValid()){
+            //获取文件的后缀
+            $ext = $field->getClientOriginalExtension();
+            //给文件重新起个名字
+            $newName = md5(time().rand(1,6666)).'.'.$ext;
+            //移动文件
+            $path = $field->move(public_path().'/uploads',$newName);
+            return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
+        }
+        
+    }
 
-  // /**
-  //  * Column name for the right index.
-  //  *
-  //  * @var string
-  //  */
-  // protected $rightColumn = 'rgt';
 
-  // /**
-  //  * Column name for the depth field.
-  //  *
-  //  * @var string
-  //  */
-  // protected $depthColumn = 'depth';
 
-  // /**
-  //  * Column to perform the default sorting
-  //  *
-  //  * @var string
-  //  */
-  // protected $orderColumn = null;
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|unique:types|max:16',
+        ],[
+            'name.required' => '类名必填',
+            'name.unique' => '类名已存在',
+            'name.max' => '类名最长16位',
+        ]);
+        if (!$request->has('imgurl')) {
+            flash()->overlay('上传图片错误', 5);
+            return back();
+        }
+        $type = new Type;
+        $type->imgurl = $request->input("imgurl"); 
+        $type->name = $request->input("name");
+        $type->save();
+        flash()->overlay('添加成功',1);
+        return redirect('/admin/type');
+    }
 
-  // /**
-  // * With Baum, all NestedSet-related fields are guarded from mass-assignment
-  // * by default.
-  // *
-  // * @var array
-  // */
-  // protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {   
+        $type = Type::where('parent_id',null)->paginate(env('PAGE_SIZE',10));
+        $types = Type::where('parent_id',!null)->paginate(env('PAGE_SIZE',10));
+        
+        
+        return view('admin.type.show',['type'=>$type]);
+    }
 
-  //
-  // This is to support "scoping" which may allow to have multiple nested
-  // set trees in the same database table.
-  //
-  // You should provide here the column names which should restrict Nested
-  // Set queries. f.ex: company_id, etc.
-  //
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
-  // /**
-  //  * Columns which restrict what we consider our Nested Set list
-  //  *
-  //  * @var array
-  //  */
-  // protected $scoped = array();
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
-  //////////////////////////////////////////////////////////////////////////////
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 
-  //
-  // Baum makes available two model events to application developers:
-  //
-  // 1. `moving`: fired *before* the a node movement operation is performed.
-  //
-  // 2. `moved`: fired *after* a node movement operation has been performed.
-  //
-  // In the same way as Eloquent's model events, returning false from the
-  // `moving` event handler will halt the operation.
-  //
-  // Please refer the Laravel documentation for further instructions on how
-  // to hook your own callbacks/observers into this events:
-  // http://laravel.com/docs/5.0/eloquent#model-events
+
+    public function type()
+    {
+        
+    }
 
 }

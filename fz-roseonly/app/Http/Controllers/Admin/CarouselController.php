@@ -63,8 +63,6 @@ class CarouselController extends Controller
      */
     public function store(Request $request)
     {   
-
-        // dd($request->input("imgurl"));
         if (!$request->has('imgurl')) {
             flash()->overlay('上传图片错误', 5);
             return back();

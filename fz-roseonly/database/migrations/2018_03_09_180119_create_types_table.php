@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypeControllersTable extends Migration {
+class CreateTypesTable extends Migration {
 
   /**
    * Run the migrations.
@@ -11,7 +11,7 @@ class CreateTypeControllersTable extends Migration {
    * @return void
    */
   public function up() {
-    Schema::create('type_controllers', function(Blueprint $table) {
+    Schema::create('types', function(Blueprint $table) {
       // These columns are needed for Baum's Nested Set implementation to work.
       // Column names may be changed, but they *must* all exist and be modified
       // in the model.
@@ -19,6 +19,7 @@ class CreateTypeControllersTable extends Migration {
       // We add indexes on parent_id, lft, rgt columns by default.
       $table->increments('id');
       $table->integer('parent_id')->nullable()->index();
+      $table->string('imgurl');   //图片的路径
       $table->integer('lft')->nullable()->index();
       $table->integer('rgt')->nullable()->index();
       $table->integer('depth')->nullable();
@@ -36,7 +37,7 @@ class CreateTypeControllersTable extends Migration {
    * @return void
    */
   public function down() {
-    Schema::drop('type_controllers');
+    Schema::drop('types');
   }
 
 }

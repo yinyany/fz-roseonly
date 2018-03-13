@@ -37,15 +37,8 @@
             <table  class="layui-table layui-input-block">
                 <tbody>
                     <tr>
-<!--                         <td>
-                            用户管理
-                            <input name="id[]" type="checkbox" value="2">
-                        </td> -->
                         <td>
                             <div class="layui-input-block">
-                                <!-- <input name="id[]" type="checkbox" value="2"> 会员删除
-                                <input name="id[]" type="checkbox" value="2"> 会员修改
-                                <input name="id[]" type="checkbox" value="2"> 用户列表 -->
                                 @foreach($role as $list)
                                     <input name="rid[]" type="checkbox" 
                                         @foreach($user->roles as $checklist) 
