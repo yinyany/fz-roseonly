@@ -19,7 +19,7 @@ class Comment extends Node {
 
   public function getMidAttribute($value)
   {
-    $member = [];
+    // $member = [];
     $members = Member::get(['id','name'])->toArray();
         // dd($members);
     foreach ($members as $v) {
