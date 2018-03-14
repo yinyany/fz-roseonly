@@ -1,0 +1,262 @@
+#content{
+    height:1500px;
+    /*border:1px solid red;*/
+}
+
+/*轮播图*/
+    #banner{
+        width:1060px;
+        height:550px;
+        margin:0 auto;
+        overflow:hidden;
+        position:relative;
+    }
+    /*轮播图 - 图片*/
+    #banner ul.banner{
+        width:3180px;
+        height:500px;
+        position:absolute;
+        top:0;
+        left:0;
+    }
+    #banner ul.banner li{
+        float:left;
+        width:1060px;
+    }
+    /*切换按钮*/
+    #banner ul.icon{
+        height:40px;
+        line-height:40px;
+        margin:0 auto;
+        position:absolute;
+        left:50%;
+        margin-left:-315px;
+        bottom:-10px;
+    }
+    #banner ul.icon li{
+        float:left;
+        width:200px;
+        height:10px;
+        background:#ccc;
+        margin:0 5px;
+    }
+    #banner ul.icon li.banner_hover{
+        background-color:#999;
+    }
+
+/* 选择城市 */
+    #select_city{
+        width:1060px;
+        height:80px;
+        line-height:80px;
+        margin:0 auto 40px;
+        background:#f2f2f2;
+        font-size:16px;
+        font-weight:bold;
+    }
+    #select_city p{
+        margin-left:30px;
+    }
+    #select_city p select{
+        width:200px;
+        height:40px;
+        line-height:40px;
+        background:url('../images/office/select_bg.jpg') no-repeat scroll 0px 0;
+        background-size:106% 100%;
+        font-size:16px;
+        font-weight:bold;
+        padding-left:10px;
+        margin-right:10px;
+    }
+
+/* 各省市专卖店地址 address */
+    #address{
+        width:1060px;
+        margin:0 auto;
+    }
+    #address div.offic_details{
+        width:430px;
+        height:200px;
+    }
+    #address div.offic_details:nth-child(2n-1){
+        float:left;
+        margin-left:30px;
+    }
+    #address div.offic_details:nth-child(2n){
+        float:right;
+        margin-right:30px;
+    }
+    #address div.offic_details h3{
+        line-height:28px;
+        margin-top:10px;
+        border-bottom:1px dashed #999;
+    }
+    #address div.offic_details h3>span{
+        float:left;
+        cursor: pointer;
+    }
+    #address div.offic_details h3>span.office_name{
+        font-size:18px;
+        color:#414141;
+    }
+    #address div.offic_details h3>span.position{
+        margin-left:50px;
+    }
+    #address div.offic_details h3>span.tel_btn{
+        float:right;
+        width:140px;
+        height:30px;
+        line-height:30px;
+        color:#fff;
+        font-size:16px;
+        text-align: center;
+        background:#83847e;
+    }
+    #address div.offic_details p{
+        color:#b8b8b5;
+        line-height:24px;
+        font-size:14px;
+    }
+
+
+/* 地址弹框 position_map */
+    #position_map{
+        width:700px;
+        height:578px;
+        border:1px solid #414141;
+        position:relative;
+        position:fixed;
+        left:50%;
+        top:50%;
+        margin-left:-350px;
+        margin-top:-269px;
+        z-index:99;
+    }
+    #position_map p.title{
+        width:100%;
+        height:78px;
+        line-height:24px;
+        padding-left:30px;
+        padding-top:10px;
+        color:#83847e;
+        background:#fff;
+        box-sizing:border-box;
+        border-bottom: 1px solid #83847e;
+    }
+    #position_map p.title>span{
+        float:right;
+        width:16px;
+        height:16px;
+        text-align: center;
+        line-height:16px;
+        font-size:32px;
+        margin-right:15px;
+        margin-top:-10px;
+        cursor: pointer;
+    }
+    #position_map div.map{
+        width:100%;
+        height:500px;
+        background:#ccc;
+        border:1px solid #ccc;
+        overflow:hidden;
+    }
+
+/* 发送手机弹框 */
+    #tel{
+        width:530px;
+        height:464px;
+        border:1px solid #414141;
+        background:#fff;
+        position:relative;
+        position:fixed;
+        left:50%;
+        top:50%;
+        margin-left:-265px;
+        margin-top:-232px;
+        z-index:99;
+    }
+    #tel h3.title{
+        width:100%;
+        height:56px;
+        font-size:20px;
+        line-height:56px;
+        padding-left:30px;
+        color:#414141;
+        background:#f2f2f2;
+        box-sizing:border-box;
+        border-bottom: 1px solid #414141;
+    }
+    #tel h3.title>span.close{
+        float:right;
+        width:16px;
+        height:16px;
+        text-align: center;
+        line-height:56px;
+        font-weight:normal;
+        color:#83847e;
+        font-size:32px;
+        margin-right:15px;
+        cursor: pointer;
+    }
+    #tel div.tel_con{
+        margin:20px;
+        font-size:14px;
+    }
+    #tel div.tel_con div.address_work_time{
+        width:480px;
+        height:140px;
+        line-height:20px;
+        padding-left:20px;
+        padding-top:20px;
+        margin:0 auto;
+        font-size:14px;
+        color:#9f9f9f;
+        border:1px solid #9f9f9f;
+    }
+    #tel div.tel_con div.bd{
+        width:400px;
+        margin:40px auto 30px;
+    }
+    #tel div.tel_con div.bd label>span{
+        float:left;
+        width:120px;
+        height:30px;
+        line-height:30px;
+        text-align: right;
+    }
+    #tel div.tel_con div.bd label>input{
+        float:left;
+        width:180px;
+        height:26px;
+        line-height:26px;
+        border:1px solid #83847e;
+    }
+    #tel div.tel_con div.bd label>#input{
+        width:80px;
+    }
+    #tel div.tel_con div.bd label>#code{
+        width:70px;
+        height:25px;
+        border:0;
+        font-size:25px;
+        background:#ccc;
+        margin:1px 5px 0 20px;
+    }
+    #tel div.tel_con div.bd label.yz{
+        display:block;
+        width:150px;
+        height:46px;
+        margin:15px auto 0;
+    }
+    #tel div.tel_con div.bd label.yz input{
+        width:150px;
+        height:46px;
+        background:#999;
+        border:1px solid #707070;
+        color:#fff;
+        text-align: center;
+        line-height:46px;
+        font-size:20px;
+        
+    }

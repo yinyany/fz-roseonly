@@ -50,8 +50,6 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
 /**
- * 前台路由设置区域
+ * 前台登陆注册路由设置区域
  */
-Route::get('/', function () {
-    return view('welcome');
-});
+

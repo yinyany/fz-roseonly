@@ -1,0 +1,48 @@
+/*内容区域*/
+#content section{
+	width: 900px;
+	margin:10px auto;
+}
+#content .pinpai_two{
+	width:900px;
+	margin:20px auto; 
+}
+#content .pinpai_two div{
+	width:290px;
+	height: 400px;
+	text-align: center;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	color: #414141;
+}
+#content .pinpai_two div p{
+	width: 290px;
+	height: 290px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#content .pinpai_two div p img{
+	transition: all 1s;
+}
+#content .pinpai_two div p:hover img{
+	transform: scale(1.1,1.1);
+	transition: all 1s;
+}
+#content .pinpai_two div h4{
+	padding-top: 10px;
+	font:16px/1.5 微软雅黑;
+	height: 50px;
+	padding-bottom: 15px;
+}
+#content .pinpai_two div h5{
+	font:14px/1.5 微软雅黑;
+}
+.pinpai_three{
+	margin-top: 10px;
+	width: 1240px;
+	margin:0 auto;
+	height: 2px;
+	border-top: 2px solid #414141;
+	border-bottom: 1px solid #414141;	
+}

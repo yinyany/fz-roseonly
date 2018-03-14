@@ -1,0 +1,54 @@
+/* banner */
+    #banner1{
+        width:100%;
+    }
+    #banner1>img{
+        display:block;
+        width:100%;
+    }
+
+/*  规格 */
+    #sepc{
+        width:100%;
+    }
+    #sepc li{
+        float:left;
+        box-sizing:border-box;
+    }
+
+/* 玫瑰分类 rose_sepc */
+    #rose_sepc{
+        width:100%;
+    }
+    #rose_sepc>img.big{
+        float:left;
+    }
+    #rose_sepc div.small{
+        float:right;
+    }
+    #rose_sepc div.small>a{
+        display:block;
+    }
+    #rose_sepc div.small>a>img{
+        display:block;
+    }
+
+
+/* banner */
+    #banner2{
+        width:100%;
+    }
+    #banner2>img{
+        display:block;
+        width:100%;
+    }
+
+
+
+/*描述 desc*/
+    #desc{
+        width:100%;
+    }
+    #desc>a>img{
+        display:block;
+    }

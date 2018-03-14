@@ -60,8 +60,8 @@ class CommentController extends Controller
     {
         //  $root = Comment::create(['mid'=>'1','sid'=>'2','content'=>'的风格的','reply'=>'过分的风格的的事']);
         // $child1 = $root->children()->create(['mid'=>'1','sid'=>'2','content'=>'公司撒打算 发的','reply'=>'过分收到贵司的事']);
-        // $child1 = $root->children()->create(['mid'=>'1','sid'=>'2','content'=>'收到发顺丰','reply'=>'是个分公司 ']);
-        // $child1 = $root->children()->create(['mid'=>'1','sid'=>'2','content'=>'公司或多或少的发发的','reply'=>' 实打实打算']);
+        // $child2 = $child1->children()->create(['mid'=>'1','sid'=>'2','content'=>'收到发顺丰','reply'=>'是个分公司 ']);
+        // $child3 = $child2->children()->create(['mid'=>'1','sid'=>'2','content'=>'公司或多或少的发发的','reply'=>' 实打实打算']);
     }
 
     /**

@@ -1,0 +1,213 @@
+#line{
+    width:1240px;
+    height:6px;
+    background:#414141;
+    box-sizing:border-box;
+    border-top:2px solid #83847e;
+    border-bottom:1px solid #83847e;
+}
+#order{
+    width:962px;
+    min-height:500px;
+    margin:0 auto 30px;
+}
+#order .order_con{
+    width:100%;
+}
+#order .order_con .sec{
+    width:100%;
+    margin-top:20px;
+    /*display: none;*/
+}
+
+/*我的订单信息*/
+.sec1 .order-nav{
+    width:100%;
+     height: 70px;
+    line-height: 100px;
+    font-size: 22px;
+    color: #414141;
+    text-align: center;
+}
+.sec1 .per-nav{
+    height: 32px;
+    margin:20px auto;
+    line-height: 30px;
+    font-weight: bolder;
+    font-size: 16px;
+    border-bottom: solid 1px #414141;
+}
+
+.sec1 .order-nav1{
+    width:100%;
+     height: 70px;
+    line-height: 100px;
+    font-size: 22px;
+    color: #414141;
+    text-align: center;
+}
+.sec1 .per-nav1{
+    height: 32px;
+    margin:20px auto;
+    line-height: 30px;
+    font-weight: bolder;
+    font-size: 16px;
+    border-bottom: solid 1px #414141;
+}
+
+
+#order .order_con .sec1 .per_ada{
+   width:100%;
+   height:40px;
+   position: relative;
+}
+#order .order_con .sec1 .per_ada input{
+ margin-top:14px;
+ position: absolute;
+ left:33px;
+}
+
+#order .order_con .sec1 .per_ada .nickper{
+   width:410px;
+   height:20px;
+   line-height: 40px;
+    margin-top:20px;
+   /*position: absolute;*/
+   margin-left:60px;
+   top:0px;
+   font-size: 14px;
+   color:#414141;
+   left:60px;
+}
+#order .order_con .sec1 p{
+    color:#333;
+    font-size: 14px;
+}
+#order .order_con .sec1 p span{
+    display: inline;
+}
+#order .order_con .sec1 .per_cor_2{
+    width: 100%;
+    line-height: 30px;
+    height: 30px;
+    margin:10px auto;
+}
+#order .order_con .sec1 .per_cor_2 span{
+    float:left;
+    color:#414141;
+    font-size: 14px;
+}
+#order .order_con .sec1 .per_cor_2 a{
+    float:right;
+    margin-right:450px;
+    font-size:14px;
+}
+#order .order_con .sec1 .per_cor_2 input{
+    margin-left:20px;
+    margin-right:20px;
+}
+#order .order_con .sec1 .per_cor_2 label{
+    font-size: 14px;
+}
+/*商品清单内容*/
+#order .order_con .sec1 .com_list{
+    width: 100%;
+    height: 165px;
+    position: relative;
+    margin:10px auto;
+    border:1px solid #ccc;
+}
+/*左边商品*/
+#order .order_con .sec1 .com_list .com_left{
+    width: 405px;
+    margin:25px 0px 0px 20px;
+    height: 125px;
+    /*border-right:1px solid #838471;*/
+}
+#order .order_con .sec1 .com_list .com_left img{
+    width:100px;
+    margin-top:10px;
+}
+#order .order_con .sec1 .com_list .com_pay1{
+    width:260px;
+    height: 125px;
+    float:right;
+}
+#order .order_con .sec1 .com_list .com_pay1 span{
+    display: inline-block;
+    color:#414141;
+    margin-top:10px;
+    font-size: 14px;
+}
+#order .order_con .sec1 .com_list .com_pay1 p{
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+
+}
+.sec1 .area_right{
+    width: 100%;
+    height: 30px;
+    margin:50px 0px 0px 0px;
+    line-height: 30px;
+    border-bottom: solid 5px #414141;
+}
+.sec1 .area_right p{
+    width: 100px;
+    height: 30px;
+    float:right;
+
+}
+.sec1 .area_right strong{
+    display: inline-block;
+    font-size: 14px;
+    color:#414141;
+}
+.sec1 .pay_submit {
+    width: 100%;
+    height: 40px;
+    margin:10px auto;
+}
+.sec1 .pay_submit input{
+    width: 200px;
+    background:#414141;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    float:right;
+    color:#fff;
+}
+
+
+/*点击添加*/
+#order .order_con .sec1 .tianjia{
+    display: inline-block;
+    font-size:14px;
+    color:#414141;
+    cursor:pointer;
+    text-align:left;
+    margin:20px 0px 30px 60px;
+}
+
+/*添加信息*/
+ #content-wrap{
+    width:800px;
+    margin:0 auto;
+    display: none;
+}
+
+#content-wrap .save_sumbmit{
+    width:800px;
+    height:37px;
+    text-align: right;
+    line-height: 37px;  
+}
+#content-wrap .save2 input{
+   float:right;
+   border:none;
+   background: #414141;
+   color:#fff;
+}
+
+
+

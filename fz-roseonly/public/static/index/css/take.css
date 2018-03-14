@@ -1,0 +1,135 @@
+/*购物车内容区域*/
+section{
+    width: 1240px;
+    margin:0 auto;
+}
+.clear:after{
+    clear: both;
+    height: 0;
+    content: "";
+    overflow: hidden;
+    display: block;
+}
+#about_one{
+    width: 118px;
+    height: 504px;
+    margin-top: 80px;
+    margin-right: 40px;
+    float: left;
+    background-color: #d9d9d9;
+    text-align: center;
+}
+#about_one ul li{
+    width: 118px;
+    height: 42px;
+}
+#about_one ul li a{
+    cursor: auto;
+    font:14px/42px 'Î¢ÈíÑÅºÚ';
+    color: #000;
+} 
+
+#take_right{
+    float:right;
+    width:1083px;
+    box-sizing:border-box;
+}
+#take_right h2{
+    width:100%;
+    line-height:80px;
+    font-size:20px;
+    font-weight:normal;
+    text-align: center;
+    border-bottom: 2px solid #414141;
+}
+
+
+
+
+
+    #take_right .take{
+        width:100%;
+    }
+    #take_right .take .take_content{
+        width:100%;
+    }
+    #take_right .take .take_content dl{
+        width:100%;
+        border-bottom:2px solid #414141;
+    }
+    #take_right .take .take_content dl dt{
+        float:left;
+        width:270px;
+        padding-bottom:20px;
+        box-sizing:border-box;
+    }
+    #take_right .take .take_content dl dt>span{
+        display:block;
+        line-height:40px;
+        text-align: center;
+        border-bottom:1px solid #a2a2a2;
+    }
+    #take_right .take .take_content dl dt>img{
+        display:block;
+        margin:5px auto;
+    }
+    #take_right .take .take_content dl dt>b{
+        display:block;
+        width:130px;
+        height:30px;
+        line-height:30px;
+        margin:5px auto;
+        font-weight:normal;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    #take_right .take .take_content dl div.take_des{
+        width:100%;
+        padding-bottom:20px;
+    }
+    #take_right .take .take_content dl div.take_des dd{
+        width:100%;
+        margin-left:0px;
+    }
+    #take_right .take .take_content dl div.take_des dd p.title{
+        line-height:50px;
+        font-size:16px;
+        margin:10px auto;
+        text-align: center;
+        border-top:1px solid #a2a2a2;
+    }
+    #take_right .take .take_content dl div.take_des dd div.classif{
+        width:100%;
+    }
+    #take_right .take .take_content dl div.take_des dd div.classif table{
+        float:left;
+        width:50%;
+        margin-bottom:10px;
+    }
+    #take_right .take .take_content dl div.take_des dd div.classif table tr td.text{
+        color:#000;
+        font-size:14px;
+        font-style:normal;
+        line-height:25px;
+        text-align: left;
+        vertical-align:middle;
+        padding-left:20px;
+    }
+   #take_right .take .take_content dl div.take_des dd div.classif table tr td.text>i{
+        font-size:20px;
+        font-weight:bold;
+    }
+   #take_right .take .take_content dl div.take_des dd table.rose{
+        width:100%;
+   }
+   #take_right .take .take_content dl div.take_des dd table.rose tr td.img{
+        padding-left:50px;
+   }
+   #take_right .take .take_content dl div.take_des dd table tr td.text{
+        color:#000;
+        font-size:14px;
+        font-style:normal;
+        line-height:25px;
+        text-align: left;
+   }

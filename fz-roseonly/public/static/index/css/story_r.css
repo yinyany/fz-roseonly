@@ -1,0 +1,33 @@
+/*内容区域*/
+#content section{
+	width: 900px;
+	margin:0 auto;
+}
+#content .report_one{
+    margin-top: 20px;
+	text-align: center;
+}
+#content .report_one h2{
+	width: 100%;
+    font:24px/50px 微软雅黑;
+    height: 50px;
+    border-bottom: 2px solid rgb(204,204,204);
+}
+#content .report_one h3{
+    font: 18px/2 微软雅黑;
+}
+#content .report_two img{
+   	display: block;
+   	margin:5px auto;
+}
+#content .report_two p{
+  font:14px/2 微软雅黑;
+  text-align: center;
+  margin: 15px auto;
+}
+#content .report_two p span{
+  color: #888;
+}
+#content .report_two p .span_red{
+  color: #d92142;
+}

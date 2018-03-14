@@ -1,0 +1,109 @@
+body,div,ul,li,img,a,span,input,h3,h2,p{
+	margin:0;
+	padding:0;
+}
+
+a{
+	text-decoration: none;
+}
+li{
+	list-style:none;
+}
+.big{
+	width:100%;
+}
+/*标题永生玫瑰*/
+#image{
+	width:1240px;
+	height:95px;
+	margin:10px auto;
+}
+/*排序*/
+#paixu{
+	width:1240px;
+	height:42px;
+	margin:10px auto;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+}
+
+#paixu a{
+	display: inline-block;
+	width:56px;
+	height:30px;
+	font-size:14px;
+	line-height: 33px;
+	color:#000;
+	margin:4px 30px 0;
+	text-align: center;
+}
+#paixu .selected{
+	font-weight:bold;
+	border-bottom:9px solid #000;
+}
+
+/*#paixu .first:hover{
+	font-weight:bold;
+	border-bottom:9px solid #000;
+}*/
+#paixu input{
+	width:200px;
+	height:30px;
+	margin:5px 10px;
+	border:1px solid #B3B3B3;
+	text-indent: 6px;
+}
+#paixu span{
+	display: inline-block;
+	color: #B3B3B3;
+}
+.list_con{
+	width:1240px;
+	/*height:1660px;*/
+	margin:0 auto;
+	display: none;
+}
+.list_con li{
+	width:310px;
+	height:415px;
+	float:left;
+}
+.list_con li a img{
+	width:260px;
+	height:260px;
+	margin:25px 25px 0;
+}
+.list_con li a h3{
+	height:30px;
+	line-height: 30px;
+	text-align: center;
+	font-size:14px;
+	margin-top:10px;
+	color:#000;
+}
+.list_con li a p{
+	height:25px;
+	line-height: 25px;
+	text-align: center;
+	font-size:12px;
+	color:#000;
+}
+.list_con li a h2{
+	height:25px;
+	line-height: 25px;
+	text-align: center;
+	font-size:14px;
+	color:#000;
+}
+
+
+/*分页*/
+.bot_list{
+	clear:both;
+	width: 1200px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	/*border:1px solid red;*/
+	margin:0 auto;
+}
