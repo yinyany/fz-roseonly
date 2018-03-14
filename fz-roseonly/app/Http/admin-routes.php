@@ -124,6 +124,8 @@ Route::get('order','OrderController@index');
 Route::get('order/edit/{id}','OrderController@edit');
 //执行修改订单详情页面
 Route::post('order/update/{id}','OrderController@update');
+//
+Route::get('order/hasmany','OrderController@hasmany');
 
 
 //评论管理--------------------------------------------------------------------

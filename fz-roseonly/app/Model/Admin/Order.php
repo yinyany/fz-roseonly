@@ -15,4 +15,11 @@ class Order extends Model
 
     protected $primaryKey = 'id';
 
+
+
+    public function member()
+    {
+        return $this->belongsTo('App\Model\admin\Member','id','member_id');
+    }
+
 }

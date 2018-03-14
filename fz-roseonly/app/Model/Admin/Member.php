@@ -21,4 +21,9 @@ class Member extends Model
      * @var array
      */
     protected $fillable = ['name','phone','password','sex','birthday','affective','address','email','fere','fere-phone'];
+
+    public function order()
+    {
+        return $this->hasMany('App\Model\admin\Order','member_id');
+    }
 }

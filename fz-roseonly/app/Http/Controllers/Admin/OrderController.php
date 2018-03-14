@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\admin\Order;
+use App\Model\admin\Member;
+
 
 class OrderController extends Controller
 {
@@ -62,7 +64,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -73,9 +75,21 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-         $orderinfo = Order::findOrFail($id);
+        //订单的id查询数据
+         $orderinfo = Order::findOrFail($id);   //对象形式的订单信息
          // dd($orderinfo);
-        return view('admin.order.edit',['orderinfo'=>$orderinfo]);
+         $aOrderinfo = $orderinfo->toArray(); //数组形式的订单信息
+         $memberid = $aOrderinfo['member_id']; 
+         
+        $member = Member::with('order')->find($memberid);  //对象形式的会员信息
+        // dd($member);
+        // dd($member->toArray());
+        $memberinfo = $member->toArray();
+
+        // dd($memberinfo);
+
+
+        return view('admin.order.edit',['orderinfo'=>$orderinfo,'minfo' =>$memberinfo]);
     }
 
     /**
@@ -130,4 +144,16 @@ class OrderController extends Controller
     //     // dd($sum);
     //     return view('admin.order.shipped',['shipped'=>$shipped,'sum'=>$sum]);
     // }
+    
+    public function hasmany()
+    {
+         $member = Member::with('order')->find(1);
+
+        dd($member->toArray());
+    }
+
+
+     
+     
+    
 }
