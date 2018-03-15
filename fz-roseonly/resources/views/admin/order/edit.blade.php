@@ -39,7 +39,7 @@
            <table class="layui-table" lay-even>
               <tr>
                 <td style="width:100px;">收货人姓名：</td>
-                <td></td>
+                <td>{{ $minfo['name']}}</td>
               </tr>
               <tr>
                 <td>收货人地址：</td>
