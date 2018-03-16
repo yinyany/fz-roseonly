@@ -21,16 +21,16 @@
 // 首页管理--------------------------------------------------------
 // 加载首页
 Route::get('/','HomeController@index');
-// // 
-// Route::get('member/show/{id}','MemberController@show');
-// // 加载添加会员页面
-// Route::get('member/create','MemberController@create');
-// Route::post('member/store','MemberController@store');
-// // 删除会员
-// Route::get('member/destroy/{id}','MemberController@destroy');
-// // 加载修改页面
-// Route::get('member/edit/{id}','MemberController@edit');
-// Route::post('member/update/{id}','MemberController@update');
+// 加载个人中心
+Route::get('/member/{id}','HomeController@member');
+//修改密码
+Route::post('/newpass/{id}','HomeController@newpass');
+//修改个人信息
+Route::post('/newmember/{id}','HomeController@newmember');
+//添加收货地址
+Route::post('/newmember/{id}','HomeController@newmember');
+//加载添加会员页面
+
 
 
 

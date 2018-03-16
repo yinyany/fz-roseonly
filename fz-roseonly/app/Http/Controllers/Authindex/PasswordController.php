@@ -109,7 +109,7 @@ class PasswordController extends Controller
             flash()->overlay('修改成功,请登陆', 1);
             return redirect('authindex/login');
         }else{
-            flash()->overlay('修改成功,请重试', 5);
+            flash()->overlay('修改失败,请重试', 5);
             return back();
         }
     }

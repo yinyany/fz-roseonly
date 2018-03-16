@@ -26,7 +26,7 @@
                 <!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
                 <div class="head_right">
                     @if(session('usersInfo') != null)
-                        <a href="{{ url('/authindex/login') }}" class="login">{{ session('usersInfo')['name'] }}</a>
+                        <a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login">{{ session('usersInfo')['name'] }}</a>
                         <span>|</span>
                         <a href="{{ url('/authindex/logout') }}" class="register">退出</a>
                         <span>|</span>

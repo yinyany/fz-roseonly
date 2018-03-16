@@ -4,10 +4,12 @@
 @section('link')
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/person.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/css/city.css') }}">
-    <script src="{{ asset('static/index/js/person.js" type="text/javascript') }}"></script>
-    <script src="{{ asset('static/index/js/js/jquery.min_1.js" type="text/javascript') }}"></script>
-    <script src="{{ asset('static/index/js/js/city.min.js" type="text/javascript') }}"></script>
-    <script src="{{ asset('static/index/js/index.js" type="text/javascript') }}"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('static/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('static/index/js/person.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
 @endsection 
 
 
@@ -119,7 +121,6 @@
                             </div>
                         </div>
                         <!-- 结束订单标号内容 -->
-
                     </div>
                    
                    
@@ -130,7 +131,8 @@
                             <a href="javascript:;">修改密码</a>
                         </h3>
                         <div class="sec3" class="selected1">
-                            <form action="" method="get">
+                            <form action="{{ url('/newmember',[$model->id]) }}" method="post">
+                                {{ csrf_field() }}
                                 <table id="person_info">
                                     <colgroup>
                                         <col width="120">
@@ -140,42 +142,39 @@
                                         <col width="232">
                                     </colgroup>
                                      <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>姓名</td>
                                         <td>
-                                            <img src="{{ asset('static/index/images/details/img1.jpg') }}" width="60px" height="60px">
-                                            <span style="color:red;margin-left:30px;">Andy</span>
+                                            <input type="text" name="name" maxlength=15 class="text" value="{{ $model->name }}" style="text-indent: 20px;">
                                         </td>
-                                        <td></td>
-                                        
-                                        <td>昵称</td>
-                                        <td><input type="text" maxlength=15 class="text"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="2" rowspan="3">
+                                            <!-- 上传的头像 -->
+                                            <!-- 上传的头像 -->
+                                            <!-- 上传的头像 -->
+                                            <img src="{{ asset('static/index/images/details/img1.jpg') }}" width="100px" height="100px" style="float:left;">
+
+                                            <!-- 上传头像按钮 -->
+                                            <!-- 上传头像按钮 -->
+                                            <!-- 上传头像按钮 -->
+                                            <!-- 上传头像按钮 -->
+                                        </td>
                                     </tr>
                                     <tr>
-
                                         <td>爱人名字</td>
-                                        <td><input type="text" name="love" value="畅甜莉" maxlength=15 class="text"></td>
-                                        <td>昵称</td>
-                                        <td><input type="text" maxlength=15 class="text"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input type="text" name="fere" value="{{ $model->fere }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
+                                        <td>手机</td>
+                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;">
+                                        </td>
+                                        <td colspan="2"></td>
                                     </tr>
                                     <tr>
                                         <td>爱人手机</td>
-                                        <td><input type="text" name="love" value="" maxlength=15 class="text"></td>
-                                        <td>手机</td>
-                                        <td><input type="text" name="love" value="" maxlength=15 class="text"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input type="text" name="fere_phone" value="{{ $model->fere_phone }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
                                         <td>生日</td>
-                                        <td><input type="text" name="love" value="" maxlength=15 class="text"></td>
-                                       
-                                        <td></td>
-                                        <td></td>
+                                        <td><input type="text" name="birthday" value="{{ $model->birthday }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
+                                        <td colspan="2"></td>
+                                        
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -183,10 +182,26 @@
                                         <td>情感状态</td>
                                         <td>
                                             <select name="marriage" id="marriage">
-                                                <option value="" selected>关系</option>
-                                                <option value="">未婚</option>
-                                                <option value="">订婚</option>
-                                                <option value="">已婚</option>
+                                                <option value=""
+                                                @if($model->affective == null)
+                                                    selected
+                                                @endif
+                                                >关系</option>
+                                                <option value="未婚" 
+                                                @if($model->affective == "未婚")
+                                                    selected
+                                                @endif
+                                                >未婚</option>
+                                                <option value="订婚" 
+                                                @if($model->affective == "订婚")
+                                                    selected
+                                                @endif
+                                                >订婚</option>
+                                                <option value="已婚" 
+                                                @if($model->affective == "已婚")
+                                                    selected
+                                                @endif
+                                                >已婚</option>
                                             </select>
                                         </td>
                                         <td></td>
@@ -197,8 +212,16 @@
                                         <td></td>
                                         <td>性别</td>
                                         <td>
-                                            <input type="radio" name="sex" value='男' class="sex" checked> 男 &nbsp;&nbsp;
-                                            <input type="radio" name="sex" value='女' class="sex"> 女
+                                            <input type="radio" name="sex" value='男' class="sex"
+                                            @if($model->sex == "男")
+                                                checked
+                                            @endif
+                                             > 男 &nbsp;&nbsp;
+                                            <input type="radio" name="sex" value='女' class="sex"
+                                            @if($model->sex == "女")
+                                                checked
+                                            @endif
+                                            > 女
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -207,20 +230,19 @@
                                         <td></td>
                                         <td></td>
                                         <td>居住地</td>
-                                        <td>
+                                        <!-- <td>
                                             <select name="s_province" id="s_province"></select>
                                             <select name="s_city" id="s_city"></select>
                                             <select id="s_county" name="s_county"></select>
                                             <script class="resources library" src="{{ asset('static/index/js/area.js') }}" type="text/javascript"></script>
                                             <script type="text/javascript">_init_area();</script>
                                             <div id="show"></div>
+                                        </td> -->
+                                        <td colspan="2">
+                                            <input type="text" name="address" value="{{ $model->address }}" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:400px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;">
                                         </td>
-                                        <td>
-                                            <input type="text" name="det_address" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:230px;height: 30px;border:1px solid #83847e;color:#83847e;">
-                                        </td>
-                                        <td></td>
                                     </tr>
-                                    <script type="text/javascript">
+                                   <!--  <script type="text/javascript">
                                         var Gid  = document.getElementById ;
                                         var showArea = function(){
                                             Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +  
@@ -228,27 +250,26 @@
                                             Gid('s_county').value + "</h3>"
                                                                     }
                                         // Gid('s_county').setAttribute('onchange','showArea()');
-                                    </script>
-                                    
+                                    </script> -->
                                     <tr>
                                         <td></td>
                                         <td></td>
                                         <td>邮箱</td>
-                                        <td><input type="text" name="email" class="text"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input type="text" name="email" value="{{ $model->email }}" class="text" style="width:400px; text-indent: 20px;"></td>
+                                        <td colspan="2"></td>
                                     </tr>
-                                  
                                 </table>
                                 <div class="person_btn" style="text-align: center;">
-                                    <input type="image" name="" src="{{ asset('static/index/images/comment/pf.gif') }}">
-                                    <strong style="display: block;clear:both;"></strong>
+                                    <input type="submit" name="" style="background-color: #414141;border:none;width:150px;height:35px;line-height:35px;color:#fff;margin-bottom:20px;margin-top:10px;"  value="提交">
+                                    <!-- <strong style="display: block;clear:both;"></strong> -->
+
                                 </div>
 
                             </form>
                         </div>
                         <div class="sec3"  style="display:none;">
-                            <form action="" method="get">
+                            <form action="{{ url('/newpass',[$model->id]) }}" method="post">
+                                {{ csrf_field() }}
                                 <table id="person_pass">
                                     <colgroup>
                                         <col width="200">
@@ -260,23 +281,7 @@
                                     <tbody>
                                         <tr>
                                             <td><span style="color:red;width:5px;height: 5px;float: right">＊</span>旧 密 码</td>
-                                            <td><input type="text" name="oldpass" value="" maxlength=15 class="text"></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span style="color:red;width:5px;height: 5px;float: right">＊</span>新 密 码</td>
-                                            <td><input type="text" name="newpass" value="" maxlength=15 class="text"></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span style="color:red;width:5px;height: 5px;float: right">＊</span>确认新密码</td>
-                                            <td><input type="text" name="newpass" value="" maxlength=15 class="text"></td>
+                                            <td><input type="password" name="oldpass" value="{{ old('oldpass') }}" maxlength=15 class="text"></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -285,8 +290,60 @@
                                         <tr>
                                             <td></td>
                                             <td>
-                                                <input type="image" name="" src="{{ asset('static/index/images/comment/pe.gif') }}" style="margin-left:">
-                                                <strong style="display: block;clear:both;"></strong>
+                                                <div class="reminder_validate" >
+                                                    @if($errors->has('oldpass'))
+                                                        <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
+                                                        {{$errors->first('oldpass')}}
+                                                    @endif 
+                                                </div> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span style="color:red;width:5px;height: 5px;float: right">＊</span>新 密 码</td>
+                                            <td><input type="password" name="password" value="{{ old('password') }}" maxlength=15 class="text"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="reminder_validate" >
+                                                    @if($errors->has('password'))
+                                                        <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
+                                                        {{$errors->first('password')}}
+                                                    @endif 
+                                                </div> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span style="color:red;width:5px;height: 5px;float: right">＊</span>确认新密码</td>
+                                            <td><input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" maxlength=15 class="text"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="reminder_validate" >
+                                                    @if($errors->has('password'))
+                                                        <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
+                                                        {{$errors->first('password')}}
+                                                    @endif 
+                                                </div> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="person_btn" style="text-align: center;">
+                                                    <input type="submit" name="" style="background-color: #414141;border:none;width:150px;height:35px;line-height:35px;color:#fff;margin-bottom:20px;margin-top:10px;"  value="提交">
+                                                    <!-- <strong style="display: block;clear:both;"></strong> -->
+
+                                                </div>
                                             </td>
                                             <td></td>
                                             <td></td>
@@ -308,7 +365,7 @@
                             <div class="nickname">
                                 <span >niu<em>收</em></span>
                                  <span >
-                                     <strong>山西省</strong><strong>运城市</strong><strong>盐湖区</strong><em style="font-style:normal">盐湖区</em>
+                                     <strong>山西省</strong><strong>运城市</strong><strong>盐湖区</strong><em style="font-style:normal">北城街道货场路</em>
                                  </span>
                                  <span class="mobilenumber">
                                      15234375791
@@ -341,7 +398,6 @@
                                     </tr>
                                     <tr>
                                         <td class="one">
-                                           
                                             手机号码 :&nbsp;&nbsp;
                                         </td>
                                         <td class="two">
@@ -406,7 +462,7 @@
                                    
 
                                 <div class="save_sumbmit">
-                                    <input type="submit" value="保存"style="width:100px;height:30px;">
+                                    <input type="submit" value="保存" style="width:100px;height:30px;">
                                     
                                 </div>
                             </form>
@@ -437,6 +493,8 @@
             </div>
         </div>
     </article>
+    @include('flash::message')
+
 @endsection
 
 @section('js')

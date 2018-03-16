@@ -23,7 +23,7 @@
     		<form action="{{ url('/authindex/reset') }}" method="post">
                 {{ csrf_field() }}
             
-                <div class="register_phote"style="margin-top:30px;">
+                <div class="register_phote" style="margin-top:30px;">
                     <input type="text" placeholder="验证码" name="key"  maxlength="30" class="register_text " value="{{ old('key') }}">
                    
                 </div>  
