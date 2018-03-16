@@ -15,4 +15,9 @@ class Goods_shopcar extends Model
 
     protected $primaryKey = 'id';
 
+    public function goods()
+    {
+        return $this->belongsTo('App\Model\admin\Goods','goods_id');
+    }
+
 }

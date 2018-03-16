@@ -28,3 +28,11 @@ Route::get('/','HomeController@index');
 // // 加载修改页面
 // Route::get('member/edit/{id}','MemberController@edit');
 // Route::post('member/update/{id}','MemberController@update');
+
+
+
+
+// 购物车页面 ----------------------------------------------------
+
+Route::get('shopcar','ShopcarController@index');
+Route::get('orderhome','OrderhomeController@index');

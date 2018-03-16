@@ -22,4 +22,9 @@ class Order extends Model
         return $this->belongsTo('App\Model\admin\Member','id','member_id');
     }
 
+    public function order_goods()
+    {
+        return $this->belongsTo('App\Model\admin\Member','id','order_id');
+    }
+
 }

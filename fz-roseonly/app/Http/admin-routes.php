@@ -117,15 +117,13 @@ Route::get('pers/destroy/{id}','PermissionController@destroy');
 
 
 
-
 //加载订单列表
 Route::get('order','OrderController@index');
 //加载订单详情页面
 Route::get('order/edit/{id}','OrderController@edit');
 //执行修改订单详情页面
 Route::post('order/update/{id}','OrderController@update');
-//
-Route::get('order/hasmany','OrderController@hasmany');
+
 
 
 //评论管理--------------------------------------------------------------------
