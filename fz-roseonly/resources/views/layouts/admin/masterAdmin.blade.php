@@ -19,7 +19,7 @@
     @show
 </head>
 
-<body @yield('class')>
+<body @yield('class')">
     @section('content')
         {{-- 此区块继承加载页面主体 --}}    
     @show

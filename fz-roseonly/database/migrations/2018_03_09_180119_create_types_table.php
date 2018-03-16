@@ -19,7 +19,6 @@ class CreateTypesTable extends Migration {
       // We add indexes on parent_id, lft, rgt columns by default.
       $table->increments('id');
       $table->integer('parent_id')->nullable()->index();
-      $table->string('imgurl');   //图片的路径
       $table->integer('lft')->nullable()->index();
       $table->integer('rgt')->nullable()->index();
       $table->integer('depth')->nullable();

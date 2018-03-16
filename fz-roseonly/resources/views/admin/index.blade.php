@@ -3,6 +3,7 @@
 
 @section('link')
     <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection 
 
 @section('content')
@@ -61,23 +62,44 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="xxx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>商品分类别表</cite>
+                                <a _href="{{ url('admin/type') }}" id="href">
+                                    <i class="iconfont" >&#xe6a7;</i>
+                                    <cite id="type">商品分类别表</cite>
                                 </a>
                             </li >
                         </ul>
                     </li>
                     <li>
-                        <a _href="{{ url('admin/role') }}">
+                        <a href="javascript:;">
+                            <i class="layui-icon" style="font-size: 17px;">&#xe631;</i>
+                            <cite>商品属性管理</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="{{ url('admin/bute') }}" id="href">
+                                    <i class="iconfont" >&#xe6a7;</i>
+                                    <cite id="type">商品属性名</cite>
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="{{ url('admin/values') }}" id="href">
+                                    <i class="iconfont" >&#xe6a7;</i>
+                                    <cite id="type">商品属性值</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>
+                    <li>
+                        <a _href="{{ url('admin/goods') }}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>商品列表</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="{{ url('admin/pers') }}">
+                        <a _href="{{ url('admin/stock') }}">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>商品详情</cite>
+                            <cite>库存管理</cite>
                         </a>
                     </li >
                 </ul>
@@ -129,13 +151,8 @@
             </li>
             <li>
                 <a href="javascript:;">
-<<<<<<< HEAD
-                    <i class="iconfont">&#xe64a;</i>
-                    <cite>轮播图管理</cite>
-=======
                     <i class="layui-icon" style="font-size: 17px;">&#xe735;</i>
                     <cite>管理员管理</cite>
->>>>>>> 109f4ca178e468cbb1804580e9fe37bfbf3ce1aa
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
@@ -159,37 +176,7 @@
                     </li >
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe7a0;</i>
-                    <cite>商品管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="{{ url('admin/type') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>分类列表</cite>
-                        </a>
-                    </li >
-                </ul>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="{{ url('admin/type') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>商品列表</cite>
-                        </a>
-                    </li >
-                </ul>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="{{ url('admin/type') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>商品详情</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+            
         </ul>
       </div>
     </div>
@@ -216,4 +203,5 @@
         <div class="copyright">Copyright ©1717 x-admin v2.3 All Rights Reserved</div>  
     </div>
     <!-- 底部结束 -->
+
 @endsection

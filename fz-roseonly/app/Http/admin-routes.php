@@ -53,19 +53,33 @@ Route::get('carousel/destroy/{id}','CarouselController@destroy');
 Route::get('type','TypeController@index');
 //加载添加分类页面
 Route::get('type/create','TypeController@create');
-//上传图片方法
-Route::post('type/upload','TypeController@upload');
 //执行添加方法
 Route::post('type/store','TypeController@store');
 //加载修改页面
 Route::get('type/edit/{id}','TypeController@edit');
 //执行修改方法
 Route::post('type/update/{id}','TypeController@update');
-//修改删除方法
+//执行删除方法
 Route::get('type/destroy/{id}','TypeController@destroy');
-//使用ajax链接后台
-Route::get('type/show','TypeController@show');
 
+//商品列表管理=================================================
+
+// 商品列表页面
+Route::get('goods','GoodsController@index');
+//加载添加分类页面
+Route::get('goods/create','GoodsController@create');
+
+Route::get('goods/good','GoodsController@good');
+//上传图片方法
+Route::post('goods/upload','GoodsController@upload');
+//执行添加方法
+Route::post('goods/store','GoodsController@store');
+//加载修改页面
+Route::get('goods/edit/{id}','GoodsController@edit');
+//执行修改方法
+Route::post('goods/update/{id}','GoodsController@update');
+//修改删除方法
+Route::get('goods/destroy/{id}','GoodsController@destroy');
 
 
 // 权限管理--------------------------------------------------------
@@ -115,3 +129,53 @@ Route::post('pers/store','PermissionController@store');
 //删除权限
 Route::get('pers/destroy/{id}','PermissionController@destroy');
 
+
+//属性名列表管理=================================================
+
+// 属性列表页面
+Route::get('bute','ButeController@index');
+//加载添加分类页面
+Route::get('bute/create','ButeController@create');
+Route::get('bute/good','ButeController@good');
+//执行添加方法
+Route::post('bute/store','ButeController@store');
+//加载修改页面
+Route::get('bute/edit/{id}','ButeController@edit');
+//执行修改方法
+Route::post('bute/update/{id}','ButeController@update');
+//执行删除方法
+Route::get('bute/destroy/{id}','ButeController@destroy');
+
+
+//属性值列表管理=================================================
+
+// 属性列表页面
+Route::get('values','ValueController@index');
+//加载添加分类页面
+Route::get('values/create','ValueController@create');
+//执行添加方法
+Route::post('values/store','ValueController@store');
+//加载修改页面
+Route::get('values/edit/{id}','ValueController@edit');
+//执行修改方法
+Route::post('values/update/{id}','ValueController@update');
+//执行删除方法
+Route::get('values/destroy/{id}','ValueController@destroy');
+//上传图片方法
+Route::post('values/upload','ValueController@upload');
+
+//库存列表管理=================================================
+
+//库存列表页面
+Route::get('stock','StockController@index');
+//加载添加页面
+Route::get('stock/create','StockController@create');
+Route::get('stock/good','StockController@good');
+//执行添加方法
+Route::post('stock/store','StockController@store');
+//加载修改页面
+Route::get('stock/edit/{id}','StockController@edit');
+//执行修改方法
+Route::post('stock/update/{id}','StockController@update');
+//执行删除方法
+Route::get('stock/destroy/{id}','StockController@destroy');
