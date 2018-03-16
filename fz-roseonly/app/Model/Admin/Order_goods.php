@@ -15,4 +15,14 @@ class Order_goods extends Model
 
     protected $primaryKey = 'id';
 
+    public function goods()
+    {
+        return $this->belongsTo('App\Model\admin\Goods','goods_id');
+    }
+
+    public function Order()
+    {
+        return $this->belongsTo('App\Model\admin\Order','order_id');
+    }
+
 }

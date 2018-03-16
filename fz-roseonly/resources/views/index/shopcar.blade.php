@@ -20,7 +20,9 @@
                         
                 </div>
                 <!-- 表格 -->
-                <table id="cartTable" >
+
+                <form  method=post>
+                     <table id="cartTable" >
                     <thead>
                         <tr>
                             <th >
@@ -35,6 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                       {{-- @foreach($order as $list) --}} 
                         <tr class="on">
                             <td class="checkbox">
                                 <input class="check-one check" type="checkbox">
@@ -51,53 +54,13 @@
                             <td class="subtotal">5999.88</td>
                             <td class="operation"><span class="delete">删除</span></td>
                         </tr>
-                        <tr class="on">
-                            <td class="checkbox">
-                                <input class="check-one check" type="checkbox">
-                            </td>
-                            <td class="goods">
-                                <img src="{{ asset('static/index/images/shopcar/decoration3.png') }}" alt="">
-                                <span>经典永续-时光之吻-925银玫瑰色-中型手镯</span></td>
-                            <td class="price">3888.50</td>
-                            <td class="count"><span class="reduce"></span>
-                                <input class="count-input" type="text" value="1">
-                                <span class="add">+</span></td>
-                            <td class="subtotal">3888.50</td>
-                            <td class="operation"><span class="delete">删除</span></td>
-                        </tr>
-                        <tr class="on">
-                            <td class="checkbox">
-                                <input class="check-one check" type="checkbox">
-                            </td>
-                            <td class="goods">
-                                <img src="{{ asset('static/index/images/index/decoration4.png') }}" alt="">
-                                <span>玫瑰公仔-甜心狗-18K双色金-手链</span>
-                            </td>
-                            <td class="price">1428.50</td>
-                            <td class="count">
-                                <span class="reduce"></span>
-                                <input class="count-input" type="text" value="1">
-                                <span class="add">+</span></td>
-                            <td class="subtotal">1428.50</td>
-                            <td class="operation"><span class="delete">删除</span></td>
-                        </tr>
-                        <tr class="on">
-                            <td class="checkbox">
-                                <input class="check-one check" type="checkbox">
-                            </td>
-                            <td class="goods">
-                                <img src="{{ asset('static/index/images/index/decoration5.png') }}" alt="">
-                                <span>玫瑰公仔-甜心狗-18K双色金-手链</span></td>
-                            <td class="price">640.60</td>
-                            <td class="count"><span class="reduce"></span>
-                                <input class="count-input" type="text" value="1">
-                                <span class="add">+</span></td>
-                            <td class="subtotal">640.60</td>
-                            <td class="operation"><span class="delete">删除</span></td>
-                        </tr>
+                         {{-- @endforeach --}}
 
                     </tbody>
                 </table>
+
+                </form>
+               
                 <!-- ++++++++++ 结算+++++++++++ -->
 
                 <div class="foot" id="foot">
@@ -109,34 +72,34 @@
                     <input type="hidden" id="cartTotalPrice">
                     <div class="fr total">
                         合计：￥
-                        <span id="priceTotal">11957.48</span>
+                        <span id="priceTotal"></span>
                     </div>
                     <div class="fr selected" id="selected">
                         已选商品
-                        <span id="selectedTotal">4</span>
-                        件<span class="arrow up">︽</span>
+                        <span id="selectedTotal">4</span>件
+                        <span class="arrow up">︽</span>
                         <span class="arrow down">︾</span>
                     </div>
                     <div class="selected-view">
-                        <div id="selectedViewList" class="clearfix"><div>
-                            <img src="http://www.jq22.com/demo/jquery-guc20151105/images/1.jpg">
-                            <span class="del" index="0">取消选择</span>
+                        <div id="selectedViewList" class="clearfix">
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/1.jpg">
+                                <span class="del" index="0">取消选择</span>
+                            </div>
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/2.jpg">
+                                <span class="del" index="1">取消选择</span>
+                            </div>
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/3.jpg">
+                                <span class="del" index="2">取消选择</span>
+                            </div>
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/4.jpg">
+                                <span class="del" index="3">取消选择</span>
+                            </div>
                         </div>
-                        <div>
-                            <img src="http://www.jq22.com/demo/jquery-guc20151105/images/2.jpg">
-                            <span class="del" index="1">取消选择</span>
-                        </div>
-                        <div>
-                            <img src="http://www.jq22.com/demo/jquery-guc20151105/images/3.jpg">
-                            <span class="del" index="2">取消选择</span>
-                        </div>
-                        <div>
-                            <img src="http://www.jq22.com/demo/jquery-guc20151105/images/4.jpg">
-                            <span class="del" index="3">取消选择</span>
-                        </div>
-                    </div>
                         <span class="arrow">◆<span>◆</span></span> 
-
                     </div>
                 </div>
                 <!-- ++++++++++++ 订单帮助++++++++++++++ -->

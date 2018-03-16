@@ -145,12 +145,12 @@ class OrderController extends Controller
     //     return view('admin.order.shipped',['shipped'=>$shipped,'sum'=>$sum]);
     // }
     
-    public function hasmany()
-    {
-         $member = Member::with('order')->find(1);
+    // public function hasmany()
+    // {
+    //      $member = Member::with('order')->find(1);
 
-        dd($member->toArray());
-    }
+    //     dd($member->toArray());
+    // }
 
 
      
