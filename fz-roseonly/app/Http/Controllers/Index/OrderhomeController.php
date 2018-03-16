@@ -23,11 +23,11 @@ class OrderhomeController extends Controller
         //查询出会员的id是多少，再通过购物车查商品
         $order = Order::where('member_id',1)->get();
 
-        foreach ($order as $k=>$v) {
-            echo $v['id'];
-        }
+        // foreach ($order as $k=>$v) {
+        //     echo $v['id'];
+        // }
 
-        // dd($order_goods->toArray());
+        dd($order->toArray());
 
         // $a = $order_goods->toArray();
     }

@@ -24,11 +24,13 @@ class ShopcarController extends Controller
         //查询出会员的id是多少，再通过购物车查商品
         $shopcar = Goods_shopcar::with('goods')->where('member_id',1)->get();
 
-        dd($shopcar->toArray());
+        // dd($shopcar->toArray());
 
-        $a = $shopcar->toArray();
+        $shopgoods = $shopcar->toArray();
 
+        // dd($shopgoods['goods']['name']);
 
+        return view('index.shopcar',['shop'=>$shopgoods]);
         
         
 
@@ -59,7 +61,7 @@ class ShopcarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

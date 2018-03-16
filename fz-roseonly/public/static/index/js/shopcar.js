@@ -143,6 +143,39 @@
                 getTotal(); //更新总数
             }
         }
+
+        //点击提交订单
+
+       $("#jiesuan").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "",
+                data: "",
+                async: true,//相当于ajax里的同步异步
+                success:function(msg){
+
+                },
+                error:function(msg){
+                    alert('结算失败');
+                }
+            })
+
+                           
+
+        }) 
+
+
+
+
+
+
         // 点击全部删除
         deleteAll.onclick = function () {
             if (selectedTotal.innerHTML != 0) {
@@ -165,4 +198,9 @@
         // 默认全选
         checkAllInputs[0].checked = true;
         checkAllInputs[0].onclick();
+
+    
+        
+     
+
     }
