@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>登录</title>
+	<title>找回密码</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/login_edit.css') }}">
-    
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('static/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
 </head>
 <body>
 	<!-- ++++++++++ logo +++++++++++ -->
@@ -30,20 +31,17 @@
                             {{$errors->first('email')}}
                         @endif 
                     </div>
-          
                 </div>
             
                 <div class="signin_login">
                      <input type="submit" value="发送邮件找回密码">
                 </div> 
-                
-                
             </form>
             <div class="register_bonter">
                 roseonly支持门店城市同城速递服务!
             </div> 
     	</div>
-
+    @include('flash::message')
     </div>
 </body>
 </html>

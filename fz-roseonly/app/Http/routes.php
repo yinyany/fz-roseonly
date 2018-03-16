@@ -65,7 +65,7 @@ Route::get('authindex/password', 'Authindex\PasswordController@getEmail');
 Route::post('authindex/password', 'Authindex\PasswordController@postEmail');
 
 // 密码重置的路由...
-Route::get('authindex/reset/{token}', 'Authindex\PasswordController@getReset');
+Route::get('authindex/reset', 'Authindex\PasswordController@getReset');
 Route::post('authindex/reset', 'Authindex\PasswordController@postReset');
 
 

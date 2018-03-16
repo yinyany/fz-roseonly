@@ -71,7 +71,11 @@ li{
 .list_con li a img{
 	width:260px;
 	height:260px;
+	transition: all 0.3s;
 	margin:25px 25px 0;
+}
+.list_con li a img:hover{
+	transition: scale(1.1);
 }
 .list_con li a h3{
 	height:30px;

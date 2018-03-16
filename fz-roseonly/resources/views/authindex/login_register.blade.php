@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>注册</title>
+	<title>重置密码</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/login_register.css') }}">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('static/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
 </head>
 <body>
 	<!-- ++++++++++ logo +++++++++++ -->
@@ -18,61 +20,44 @@
     <div class="banner">
     	<!-- 左半边 -->
     	<div class="register_bj">
-    		<form action="" >
-            <!--     <div class="register_phote" style="margin-top:20px;">
-                    <input type="text" placeholder="用户名" name="username"  maxlength="30" class="register_text ">
-                   
-               </div>   -->
-                 <!-- 手机号错误提示信息 -->
-                <!-- <div class="reminder_validate" >
-                    <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
-                   请填写正确的用户名
-                </div>  -->
+    		<form action="{{ url('/authindex/reset') }}" method="post">
+                {{ csrf_field() }}
+            
                 <div class="register_phote"style="margin-top:30px;">
-                    <input type="text" placeholder="邮箱" name="username"  maxlength="30" class="register_text ">
+                    <input type="text" placeholder="验证码" name="key"  maxlength="30" class="register_text " value="{{ old('key') }}">
                    
-               </div>  
-                 <!-- 手机号错误提示信息 -->
+                </div>  
                 <div class="reminder_validate" >
-                    <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
-                   请填写正确的邮箱地址
-                </div>    
-                
-                <!-- 验证码 -->
-               <!--  <div class="register_yzmpas" >
-                    <input type="text" name="rand" placeholder="图片验证码" maxlength="4" class="register_yzm" id="rand_yzm">
-                    <div class="register_yzmimg">
-                        <img  src="{{ asset('static/index/images/login/3.jpg') }}" width="100px" height="47px" alt="验证码" title="验证码" onclick="javascript:refreshRand();">
-                        
-                    </div>
-        
-                </div> -->
-                <!-- 验证码提示信息 -->
-                <!-- <div class="reminder_validate" >
-                    <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
-                     请输入4位图片验证码                     
-                </div>   -->
-
+                    @if($errors->has('key'))
+                        <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
+                        {{$errors->first('key')}}
+                    @endif 
+                </div> 
              
-               <div class="register_phote">
-                    <input input type="password" name="password" placeholder="重置密码"  maxlength="30" class="register_text " >
+                <div class="register_phote">
+                    <input input type="password" name="password" placeholder="输入密码"  maxlength="30" class="register_text " value="{{ old('password') }}">
                    
-               </div>
-                <!-- 验证码提示信息 -->
+                </div>
+                <!-- 错误提示信息 -->
                 <div class="reminder_validate" >
-                    <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
-                     请输入正确的密码                    
-                </div>  
+                    @if($errors->has('password'))
+                        <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
+                        {{$errors->first('password')}}
+                    @endif 
+                </div> 
 
                <div class="register_phote">
-                    <input input type="password" name="password" placeholder="确认重置密码"  maxlength="30" class="register_text " >
+                    <input input type="password" name="password_confirmation" placeholder="确认密码"  maxlength="30" class="register_text " value="{{ old('password_confirmation') }}">
                    
                </div>
-                <!-- 验证码提示信息 -->
+                <!-- 错误提示信息 -->
                 <div class="reminder_validate" >
-                    <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
-                     请输入正确的密码                      
-                </div>  
+                    @if($errors->has('password_confirmation'))
+                        <img src="{{ asset('static/index/images/login/warning.png') }}" alt="">
+                        {{$errors->first('password_confirmation')}}
+                    @endif 
+                </div> 
+
                 
                 <div class="signin_regist">
                     <input type="submit" value="找回密码">
@@ -85,7 +70,8 @@
                 <a href="">roseonly支持门店城市同城速递服务!</a>
             </div>
     	</div>
-
+    @include('flash::message')
+    
     </div>
 </body>
 </html>
