@@ -11,11 +11,11 @@
 |
 */
 
+
+
 /**
  * 后台登陆注册路由设置区域
  */
-
-
 
 
 // 认证路由...
@@ -31,9 +31,6 @@ Route::get('/admin', 'Admin\IndexController@index')->middleware('auth');//执行
 Route::get('/admin/welcome', 'Admin\IndexController@welcome');//执行注册
 
 
-
-
-
 // 密码重置链接的路由...
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
@@ -46,10 +43,29 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
 
-
-
-
 /**
- * 前台登陆注册路由设置区域
+ * 前台登陆注册路由设置区域----------------------------------------------------
  */
+
+// 认证路由...
+Route::get('authindex/login', 'Authindex\AuthindexController@index');//加载登陆页面
+Route::post('authindex/login', 'Authindex\AuthindexController@dologin');//执行登陆
+Route::get('authindex/logout', 'Authindex\AuthindexController@logout');//退出登陆
+
+// 注册路由...
+Route::get('authindex/register', 'Authindex\AuthindexController@reset');//加载注册页面
+Route::post('authindex/register', 'Authindex\AuthindexController@postreset');//执行注册
+
+// Route::get('/admin', 'Authindex\AuthindexController@index')->middleware('auth');//执行注册
+// Route::get('/admin/welcome', 'Authindex\AuthindexController@welcome');//执行注册
+
+
+// 密码重置链接的路由...
+Route::get('authindex/password', 'Authindex\PasswordController@getEmail');
+Route::post('authindex/password', 'Authindex\PasswordController@postEmail');
+
+// 密码重置的路由...
+Route::get('authindex/reset/{token}', 'Authindex\PasswordController@getReset');
+Route::post('authindex/reset', 'Authindex\PasswordController@postReset');
+
 

@@ -25,10 +25,17 @@
                 </div>
                 <!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
                 <div class="head_right">
-                    <a href="javascript:;" class="login">登录</a>
-                    <span>|</span>
-                    <a href="javascript:;" class="register">注册</a>
-                    <span>|</span>
+                    @if(session('usersInfo') != null)
+                        <a href="{{ url('/authindex/login') }}" class="login">{{ session('usersInfo')['name'] }}</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/logout') }}" class="register">退出</a>
+                        <span>|</span>
+                    @elseif(session('usersInfo') == null)
+                        <a href="{{ url('/authindex/login') }}" class="login">登录</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/register') }}" class="register">注册</a>
+                        <span>|</span>
+                    @endif
                     <a href="javascript:;" class="shopCar"></a>
                     <span id="shopNum">(0)</span>
                 </div>
