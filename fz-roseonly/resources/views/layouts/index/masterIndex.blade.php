@@ -24,9 +24,9 @@
 					<a href="javascript:;" class="loveroseonly"></a>
 				</div>
 				<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
-				<div class="select_com" style="margin-left:800px;">
+				<div class="select_com" style="margin-left:850px;">
 					<form action="" method="post">
-						<input type="text" name="" placeholder="请输入关键字" style="border:none;width:180px; height:25px;border-radius: 30px;text-indent: 12px;outline:none;">
+						<input type="text" name="" placeholder="请输入关键字" style="border:none;width:180px; height:25px;border-radius: 30px;text-indent: 12px;outline:none;font-size: 12px;">
 						<button style="float:right;margin:5px 40px 0px 0px;width:22px;height:22px;border:none; background: #e7e7e7;outline:none;">
 							<img style="width:25px;" src="{{ asset('static/index/images/comment/sou.png') }}">
 						</button>
