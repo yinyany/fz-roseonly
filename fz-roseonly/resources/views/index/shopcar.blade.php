@@ -6,6 +6,10 @@
     <script src="{{ asset('static/index/js/area.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/shopcar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('static/index/js/js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('static/index/js/js/jquery.qrcode.js') }}" type="text/javascript"></script> -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection 
 
 
@@ -21,7 +25,6 @@
                 </div>
                 <!-- 表格 -->
 
-                <form  method=post>
                      <table id="cartTable" >
                     <thead>
                         <tr>
@@ -37,30 +40,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                       {{-- @foreach($order as $list) --}} 
+                      @foreach($shop as $list)
                         <tr class="on">
                             <td class="checkbox">
                                 <input class="check-one check" type="checkbox">
                             </td>
                             <td class="goods">
                                 <img src="{{ asset('static/index/images/shopcar/tut.png') }}" alt="">
-                                <span>一生一世-嫣红-盛开版-中型方形</span>
+                                <span>{{$list['goods']['name']}}</span>
+                                {{$list['goods']['id']}}
                             </td>
                             <td class="price">5999.88</td>
                             <td class="count">
                                 <span class="reduce"></span>
-                                <input class="count-input" type="text" value="1">
+                                <input class="count-input" type="text" value="{{$list['num']}}">
                                 <span class="add">+</span></td>
-                            <td class="subtotal">5999.88</td>
+                            <td class="subtotal">{{5999.8 * $list['num']}}</td>
                             <td class="operation"><span class="delete">删除</span></td>
                         </tr>
-                         {{-- @endforeach --}}
+                         @endforeach 
 
                     </tbody>
                 </table>
-
-                </form>
-               
+    
+                {{ csrf_field()}}
                 <!-- ++++++++++ 结算+++++++++++ -->
 
                 <div class="foot" id="foot">
@@ -68,7 +71,7 @@
                         <input type="checkbox" class="check-all check">&nbsp;&nbsp;全选
                     </label>
                     <a class="fl delete" id="deleteAll" href="javascript:;">删除</a>
-                    <div class="fr closing" onclick="getTotal();">结 算</div>
+                    <div class="fr closing" id="jiesuan">结 算</div>
                     <input type="hidden" id="cartTotalPrice">
                     <div class="fr total">
                         合计：￥
