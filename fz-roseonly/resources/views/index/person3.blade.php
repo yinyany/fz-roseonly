@@ -534,7 +534,7 @@
                                 url:'{{ url("/file/mmm") }}',
                                 data:'{"name":+fileM.files[0].name+}',
                                 success:function(msg){
-                                    // alert("请求成功");
+                                    
                                 },
                                 error:function(msg){
                                     // alert("请求失败");
