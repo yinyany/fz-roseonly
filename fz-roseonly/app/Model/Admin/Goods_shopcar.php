@@ -11,8 +11,13 @@ class Goods_shopcar extends Model
      *
      * @var string
      */
-    protected $table = 'Goods_shopcar';
+    protected $table = 'Goods_shopcars';
 
     protected $primaryKey = 'id';
+
+    public function goods()
+    {
+        return $this->belongsTo('App\Model\admin\Goods','goods_id');
+    }
 
 }

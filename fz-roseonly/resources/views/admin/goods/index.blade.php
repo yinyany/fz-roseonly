@@ -34,6 +34,7 @@
             <th>商品名</th>
             <th>商品图片</th>
             <th>商品简介</th>
+            <th>商品价格</th>
             <th>商品销售量</th>
             <th>商品状态</th>
             <th>添加时间</th>
@@ -45,8 +46,9 @@
             <td>{{ $list->id }}</td>
             <td>{{ $datas[$list->type_id]}}</td> 
             <td>{{ $list->name }}</td>
-            <td><img src="/uploads/{{ $list->imgurl }}"></td>
+            <td><img src="/good/{{ $list->imgurl }}"></td>
             <td>{{ $list->content }}</td>
+            <td>{{ $list->price }}</td>
             <td>{{ $list->votes }}</td>
             <td>{{ $list->state }}</td>
             <td>{{ $list->created_at }}</td>

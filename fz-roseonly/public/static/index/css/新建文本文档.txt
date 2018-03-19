@@ -1,0 +1,12 @@
+#content{
+	border:1px solid red;
+}
+#fadeDiv{
+	width: 960px;
+	margin:0 auto;
+	border:1px solid blue;
+}
+#fadeDiv .fadeDiv .left{
+	float: left;
+	width:530px;
+}

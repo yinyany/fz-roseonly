@@ -23,24 +23,31 @@
       <form class="layui-form" action='{{ url("admin/bute/update/$bute->id") }}' method="post">
           {{csrf_field()}}
           <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>商品类别
-            </label>      
-            <div class="layui-input-inline">
-                <select name="type_id" lay-filter="test" >
-                  <option value="0">请选择</option>
-                  @foreach($list as $v)
-                  <option @if($info->id === $v->id) selected @endif
-                   value='{{$v->id}}' > {{$v->name}}</option>
-                  @endforeach
-                </select>
-                <br> 
-                <select name="type_id" lay-verify="" id="kkk" lay-ignore>
-                  @foreach($value as $v)
-                  <option @if($info->id === $v->id) selected @endif value='{{$v->id}}'>{{$v->name}}</option>
-                  @endforeach
-                </select>
-            </div>
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>商品类别
+              </label>      
+              <div class="layui-input-inline">
+                  <select name="type_id" lay-filter="test">
+                    <option value="0">请选择</option>
+                    @foreach($list as $v)
+                    <option @if($info->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
+                    @endforeach
+                  </select>
+              </div>
+              <div class="layui-input-inline">
+                  <select name="type_id" lay-filter="test2" id="kkk">
+                    @foreach($data as $v)
+                    <option @if($ccc->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
+                    @endforeach
+                  </select>
+              </div>
+              <div class="layui-input-inline">
+                  <select name="type_id" id="mmm">
+                    @foreach($three as $v)
+                    <option @if($bbb->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
+                    @endforeach
+                  </select>
+              </div> 
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -68,15 +75,54 @@
 @section('js')
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+            <script>
+      layui.use(['upload','form'], function(){
+          var $ = layui.$
+          var upload = layui.upload;
+           $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          var form = layui.form;
+          form.on('select(test)', function(data){
+            $.ajax({
+              type:"GET",
+              url:'{{ url("/admin/bute/good") }}?id='+data.value,
+              success:function(msg){
+                var selDom = $("#kkk");
+                selDom.find("option").remove();
+                selDom.append("<option value='0'>请选择</option>");
+                for(var i = 0; i<msg.data.length; i++){ 
+                  selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
+                }
+                form.render('select');
+              },
+              error:function(data){
 
-    <script>
-        $('#flash-overlay-modal').modal();
-    </script>
-    <script>
-        layui.use(['form','layer'], function(){
-            $ = layui.jquery;
-          var form = layui.form
-          ,layer = layui.layer;
-        });
+              }
+            })
+          });
+          form.on('select(test2)', function(data){
+            $.ajax({
+              type:"GET",
+              url:'{{ url("/admin/bute/good") }}?id='+data.value,
+              success:function(msg){
+                var selDom = $("#mmm");
+                selDom.find("option").remove();
+                selDom.append("<option value='0'>请选择</option>");
+                for(var i = 0; i<msg.data.length; i++){ 
+
+                  selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
+                }
+                form.render('select');
+              },
+              error:function(data){
+
+              }
+            })
+          });
+      });
+      
     </script>
 @endsection 

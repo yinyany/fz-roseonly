@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Admin\Type;
+use App\Model\Admin\Goods;
+use App\Model\Admin\Bute;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -65,17 +67,17 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {   
-
+        $this->validate($request, [
+            'name' => 'required|max:16',
+        ],[
+            'name.required' => '类名必填',
+            'name.max' => '类名最长16位',
+        ]);
+            
         if(!$request->input('id')){
             $type = new Type;
             $type->name = $request->input("name");
             $type->save();
-            $this->validate($request, [
-                'name' => 'required|max:16',
-            ],[
-                'name.required' => '属性值必填',
-                'name.max' => '属性值最长16位',
-            ]);
             
         }else{
             // dd($request->name);
@@ -166,11 +168,23 @@ class TypeController extends Controller
     public function destroy($id)
     {   
         $list = count(Type::findOrFail($id)->getImmediateDescendants());
+        $data = Goods::where('type_id',$id)->first();
+        $attr = Bute::where('type_id',$id)->get();
+        if($data){
+            flash()->overlay('删除失败:这个子类下面有商品', 5);
+            return back();
+        }
+        if($attr){
+            flash()->overlay('删除失败:这个子类下面有属性', 5);
+            return back();
+        }
         if($list){
             flash()->overlay('删除失败,原因：这个分类有子类', 5);
             return back();
         }else{
             if (Type::destroy($id)) {
+                
+                // dd($attr);
                 flash()->overlay('删除成功', 1);
                 return redirect('/admin/type');
             }else{

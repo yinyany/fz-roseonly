@@ -44,7 +44,7 @@ class ValueController extends Controller
             //获取文件的后缀
             $ext = $field->getClientOriginalExtension();
             $newName = md5(time().rand(1,6666)).'.'.$ext;
-            $path = $field->move(public_path().'/uploades',$newName);
+            $path = $field->move(public_path().'/values',$newName);
             return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
         }
         
@@ -57,7 +57,6 @@ class ValueController extends Controller
      */
     public function create()
     {   
-       
         $data = Bute::get();
         // dd($data);
         return view('admin.values.create',['data'=>$data]);
@@ -71,6 +70,10 @@ class ValueController extends Controller
      */
     public function store(Request $request)
     {   
+        if($request->bute_id==0){
+            flash()->overlay('请选择属性名', 5);
+            return back();
+        }
         $data = Bute::where('name',$request->bute_id)->first();
         $this->validate($request, [
             'name' => 'required|max:16',
@@ -112,7 +115,9 @@ class ValueController extends Controller
     {
         $values = Value::findOrFail($id);
         $data = Bute::get();
+        // dd($data);
         $datas = Bute::where('id',$values->bute_id)->first();
+        // dd($datas);
         return view('admin.values.edit',['values'=>$values,'data'=>$data,'datas'=>$datas]);
     }
 
@@ -125,12 +130,16 @@ class ValueController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        if($request->bute_id==0){
+            flash()->overlay('请选择属性名', 5);
+            return back();
+        }
         if (!$request->has('imgurl')) {
             flash()->overlay('上传图片错误', 5);
             return back();
         }
-        $data = Bute::where('name',$request->bute_id)->first()->toArray();
-        $input['bute_id'] = $data['id'];
+        $data = Bute::where('id',$request->bute_id)->first();
+        $input['bute_id'] = $data->id;
         $input['name'] = $request->name;
         $input['imgurl'] = $request->imgurl;
         // dd($input);

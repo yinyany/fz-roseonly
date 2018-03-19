@@ -179,3 +179,28 @@ Route::get('stock/edit/{id}','StockController@edit');
 Route::post('stock/update/{id}','StockController@update');
 //执行删除方法
 Route::get('stock/destroy/{id}','StockController@destroy');
+
+
+//加载订单列表
+Route::get('order','OrderController@index');
+//加载订单详情页面
+Route::get('order/edit/{id}','OrderController@edit');
+//执行修改订单详情页面
+Route::post('order/update/{id}','OrderController@update');
+
+
+
+//评论管理--------------------------------------------------------------------
+
+//加载评论列表
+Route::get('comment','CommentController@index');
+//加载回复评论页面
+Route::get('comment/edit/{id}','CommentController@edit');
+Route::post('comment/update/{id}','CommentController@update');
+// //加载回复评论页面
+// Route::get('pers/create','PermissionController@create');
+// Route::post('pers/store','PermissionController@store');
+
+// //删除权限
+// Route::get('pers/destroy/{id}','PermissionController@destroy');
+

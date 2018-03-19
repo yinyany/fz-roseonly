@@ -11,8 +11,20 @@ class Order extends Model
      *
      * @var string
      */
-    protected $table = 'Order';
+    protected $table = 'Orders';
 
     protected $primaryKey = 'id';
+
+
+
+    public function member()
+    {
+        return $this->belongsTo('App\Model\admin\Member','id','member_id');
+    }
+
+    public function order_goods()
+    {
+        return $this->belongsTo('App\Model\admin\Member','id','order_id');
+    }
 
 }

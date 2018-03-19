@@ -17,6 +17,7 @@ class ButeController extends Controller
      */
     public function index(Request $request)
     {   
+        
         $where=[];
         $keywords = $request->name;
         if ($keywords != '') {
@@ -54,15 +55,17 @@ class ButeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        
+        if($request->type_id==0){
+            flash()->overlay('请选择类别', 5);
+            return back();
+        }
         $this->validate($request, [
-            'name' => 'required|unique:butes|max:16',
-            'type_id'=>'required',
+            'name' => 'required|max:16',
         ],[
             'name.required' => '属性名必填',
-            'name.unique' => '属性名已存在',
             'name.max' => '属性名最长16位',
-            'type_id.required' => '必选',
         ]);
         $data = Bute::create(['name' =>$request->name,'type_id'=>$request->input('type_id')]);
         if($data) {
@@ -92,13 +95,21 @@ class ButeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        //查询该属性名
         $bute = Bute::findOrFail($id);
+        // 查询所有的1级类
+        $list = Type::where('parent_id',null)->get();
         $info = Type::where('id',$bute->type_id)->first()->getRoot();
         $value = $info->getLeaves();
-        // dd($value->toArray());
-        $list = Type::where('parent_id',null)->get();
-        return view('admin.bute.edit',['bute'=>$bute,'list'=>$list,'info'=>$info,'value'=>$value]);
+        //所有的2级类
+        $data = Type::where('parent_id',$info->id)->get();
+        $bbb = Type::where('id',$bute->type_id)->first();
+        // 找出这个商品的2级类
+        $ccc = Type::where('id',$bbb->parent_id)->first();
+        // 获取当前节点的3几类
+        $three = $ccc->getImmediateDescendants();
+        return view('admin.bute.edit',['bute'=>$bute,'list'=>$list,'info'=>$info,'value'=>$value,'data'=>$data,'ccc'=>$ccc,'bbb'=>$bbb,'three'=>$three]);
     }
 
     /**
@@ -109,7 +120,11 @@ class ButeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        if($request->type_id==0){
+            flash()->overlay('请选择类别', 5);
+            return back();
+        }
         $input = $request->except('_token');
         $this->validate($request, [
             'name' => 'required|max:16',

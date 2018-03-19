@@ -1,0 +1,64 @@
+/*购物车内容区域*/
+section{
+	width: 1240px;
+	margin:0 auto;
+}
+.clear:after{
+	clear: both;
+	height: 0;
+	content: "";
+	overflow: hidden;
+	display: block;
+}
+#about_one{
+	width: 118px;
+	height: 504px;
+	margin-top: 80px;
+	margin-right: 40px;
+	float: left;
+	background-color: #d9d9d9;
+	text-align: center;
+}
+#about_one ul li{
+	width: 118px;
+	height: 42px;
+}
+#about_one ul li a{
+	cursor: auto;
+	font:14px/42px 'Î¢ÈíÑÅºÚ';
+	color: #000;
+} 
+#about_two{
+	width: 1083px;
+	margin-left: 158px;
+	border-bottom: 2px solid #414141;
+	margin-bottom: 15px;
+}
+#about_two h2{
+	text-align: center;
+	font:20px/80px 微软雅黑;
+	height: 80px;
+	border-bottom: 2px solid #414141;
+	margin-bottom: 15px;
+}
+#about_two h5{
+	margin-top:10px;
+	margin-bottom: 20px;
+	/*line-height: 20px;*/
+	color:#414141;
+}
+#about_two h4{
+	margin-top:20px;
+	font-size:16px;
+	color:#000;
+}
+#about_two .about_three{
+	border-top:1px solid #9d9d9d;
+	margin-top:20px;
+}
+.about_three a{
+	line-height: 30px;
+}
+.about_abn{
+	margin-top:40px;
+}

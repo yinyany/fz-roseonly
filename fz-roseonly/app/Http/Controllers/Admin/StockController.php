@@ -76,7 +76,19 @@ class StockController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {      
+    {   
+        if($request->good_id==0){
+            flash()->overlay('请选择商品名', 5);
+            return back();
+        }
+        if($request->bid==0){
+            flash()->overlay('请选择属性名', 5);
+            return back();
+        }
+        if($request->vid==0){
+            flash()->overlay('请选择属性值', 5);
+            return back();
+        }
         $bb = $request->input('vid');
         // dd($bb);
         $this->validate($request, [
@@ -144,7 +156,18 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($bb);
+        if($request->good_id==0){
+            flash()->overlay('请选择商品名', 5);
+            return back();
+        }
+        if($request->bid==0){
+            flash()->overlay('请选择属性名', 5);
+            return back();
+        }
+        if($request->vid==0){
+            flash()->overlay('请选择属性值', 5);
+            return back();
+        }
         $this->validate($request, [
             'price' => 'required|numeric',
             'stock'=>'required|integer',

@@ -23,13 +23,13 @@
     <div class="x-body">
       <form class="layui-form" action="{{ url('admin/values/store') }}" method="post">
           {{csrf_field()}}
-          
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>属性名：
               </label>
               <div class="layui-input-inline">
                   <select name="bute_id" lay-verify="">
+                    <option value="0">请选择</option>
                     @foreach($data as $list)
                     <option>{{$list->name}}</option>
                     @endforeach
@@ -100,7 +100,7 @@
           ,field:'imgurl'
           ,done: function(res){
             $('#file').val(res.data.src);
-            $('#url').attr("src",'/uploades/'+res.data.src);
+            $('#url').attr("src",'/values/'+res.data.src);
           }
           ,error: function(){
             //请求异常回调

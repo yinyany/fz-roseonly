@@ -27,6 +27,7 @@
               </label>
               <div class="layui-input-inline">
                 <select name="good_id" lay-verify="">
+                    <option value="0">请选择</option>
                     @foreach($goods as $v)
                     <option value="{{$v->id}}">{{$v->name}}</option>
                     @endforeach

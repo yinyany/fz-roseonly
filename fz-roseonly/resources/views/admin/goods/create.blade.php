@@ -28,10 +28,10 @@
                   <span class="x-red">*</span>商品类别
               </label>      
               <div class="layui-input-inline">
-                  <select name="type_id" lay-filter="test" >
+                  <select name="type_id" lay-filter="test">
                     <option value="0">请选择</option>
                     @foreach($list as $v)
-                    <option value='{{$v->id}}'>{{$v->name}}</option>
+                    <option value='{{$v->id}}' >{{$v->name}}</option>
                     @endforeach
                   </select>
               </div>
@@ -44,7 +44,7 @@
                   <select name="type_id" id="mmm">
                     <option value="0">请选择</option>
                   </select>
-              </div>
+              </div> 
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -72,6 +72,26 @@
                   <span class="x-red">*</span>显示
               </label>
               <img src="" id="url" style="width: 200px;">
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>内容
+              </label>
+              <div class="layui-form-mid layui-word-aux">
+                <script id="container" style="width:800px" name="content" type="text/plain">
+                </script>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>价格
+              </label>
+              <div class="layui-input-inline">
+                <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" type="text" name="price" class="layui-input" value="{{old('price')}}">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red"></span>@if($errors->has('price')) {{$errors->first('price')}} @endif
+              </div>
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -102,9 +122,6 @@
 @section('js')
     <script src="//code.jquery.com/jquery.js"></script>
     <script>
-        $('#flash-overlay-modal').modal();
-    </script>
-    <script>
       layui.use(['upload','form'], function(){
           var $ = layui.$
           var upload = layui.upload;
@@ -120,7 +137,7 @@
             ,field:'imgurl'
             ,done: function(res){
               $('#file').val(res.data.src);
-              $('#url').attr("src",'/uploads/'+res.data.src);
+              $('#url').attr("src",'/good/'+res.data.src);
             }
             ,error: function(){
               //请求异常回调
@@ -134,6 +151,7 @@
               success:function(msg){
                 var selDom = $("#kkk");
                 selDom.find("option").remove();
+                selDom.append("<option value='0'>请选择</option>");
                 for(var i = 0; i<msg.data.length; i++){
                   selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
                 }
@@ -162,6 +180,12 @@
             })
           }); 
       });
-      
+    </script>
+    <script type="text/javascript" src="{{ asset('static/admin/ue/ueditor.config.js') }}"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="{{ asset('static/admin/ue/ueditor.all.js') }}"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
     </script>
 @endsection 

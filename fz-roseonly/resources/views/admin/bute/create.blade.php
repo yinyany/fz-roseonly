@@ -73,7 +73,7 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-        <script>
+    <script>
       layui.use(['upload','form'], function(){
           var $ = layui.$
           var upload = layui.upload;
@@ -90,6 +90,7 @@
               success:function(msg){
                 var selDom = $("#kkk");
                 selDom.find("option").remove();
+                selDom.append("<option value='0'>请选择</option>");
                 for(var i = 0; i<msg.data.length; i++){ 
                   selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
                 }
@@ -107,6 +108,7 @@
               success:function(msg){
                 var selDom = $("#mmm");
                 selDom.find("option").remove();
+                selDom.append("<option value='0'>请选择</option>");
                 for(var i = 0; i<msg.data.length; i++){ 
                   selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
                 }
