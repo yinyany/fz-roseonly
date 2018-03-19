@@ -237,7 +237,7 @@
                                         </td>
                                         <td>
                                             <a href="javascript:;" class="file" style="float: left;">选择文件
-                                                <input type="file" name="" id="kkk">
+                                                <input type="file" name="imgurl" id="kkk">
                                             </a>
                                         </td>
                                         
@@ -526,19 +526,21 @@
                     </script>
                     <script type="text/javascript">
                         $(function(){
-                            $('#kkk').click(function(){
-                              $("#kkk").unbind().change(function(){
-                                $.ajax({
-                                  type:"GET",
-                                  url:'{{ url("/member/file") }}',
-                                  success:function(msg){
-                                  },
-                                  error:function(data){
-
-                                  }
-                                })
-                              })
+                          var fileM=document.querySelector("#kkk");
+                          $("#kkk").on("change",function(){
+                            console.log(fileM.files[0].name);
+                            $.ajax({
+                                type:"GET",
+                                url:'{{ url("/file/mmm") }}',
+                                data:'{"name":+fileM.files[0].name+}',
+                                success:function(msg){
+                                    // alert("请求成功");
+                                },
+                                error:function(msg){
+                                    // alert("请求失败");
+                                }
                             })
+                          })
                         })
                     </script>
                 </div>

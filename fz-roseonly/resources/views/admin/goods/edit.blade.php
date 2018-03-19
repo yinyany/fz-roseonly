@@ -82,7 +82,7 @@
                   <span class="x-red">*</span>内容
               </label>
               <div class="layui-form-mid layui-word-aux">
-                <script id="container" style="width:800px" name="content" type="text/plain">{{$goods->content}}</script>
+                <script id="container" style="width:800px" name="content" type="text/plain">{!!$goods->content!!}</script>
               </div>
           </div>
           <div class="layui-form-item">

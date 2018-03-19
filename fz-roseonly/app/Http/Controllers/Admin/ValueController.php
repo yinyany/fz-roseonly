@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Model\Admin\Value;
 use App\Model\Admin\Bute;
+use App\Model\Admin\Type;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -57,8 +58,7 @@ class ValueController extends Controller
      */
     public function create()
     {   
-        $data = Bute::get();
-        // dd($data);
+        $data = Type::where('parent_id',null)->get();
         return view('admin.values.create',['data'=>$data]);
     }
 
@@ -115,11 +115,12 @@ class ValueController extends Controller
     public function edit($id)
     {
         $values = Value::findOrFail($id);
-        $data = Bute::get();
-        // dd($data);
-        $datas = Bute::where('id',$values->bute_id)->first();
-        // dd($datas);
-        return view('admin.values.edit',['values'=>$values,'data'=>$data,'datas'=>$datas]);
+        $data = Bute::get(['id','name'])->toArray();
+        $datas = [];
+        foreach ($data as $k => $v) {
+            $datas[$v['id']] = $v['name'];
+        }
+        return view('admin.values.edit',['values'=>$values,'datas'=>$datas]);
     }
 
     /**
@@ -131,16 +132,10 @@ class ValueController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        if($request->bute_id==0){
-            flash()->overlay('请选择属性名', 5);
-            return back();
-        }
         if (!$request->has('imgurl')) {
             flash()->overlay('上传图片错误', 5);
             return back();
         }
-        $data = Bute::where('id',$request->bute_id)->first();
-        $input['bute_id'] = $data->id;
         $input['name'] = $request->name;
         $input['imgurl'] = $request->imgurl;
         // dd($input);
@@ -170,5 +165,16 @@ class ValueController extends Controller
             flash()->overlay('删除失败', 5);
             return back();
         }
+    }
+
+    public function value(Request $request){
+        $info = Type::where('id',$request->id)->first();
+        $value = $info->getImmediateDescendants();
+        return ['code'=>0,'msg'=>'','data'=>$value];
+    }
+
+    public function values(Request $request){
+        $attr = Bute::where('type_id',$request->id)->get();
+        return ['code'=>0,'msg'=>'','data'=>$attr];
     }
 }

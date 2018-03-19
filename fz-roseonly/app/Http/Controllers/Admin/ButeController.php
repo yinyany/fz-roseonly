@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Admin\Bute;
+use App\Model\Admin\Value;
 use App\Model\Admin\Type;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -152,6 +153,7 @@ class ButeController extends Controller
     public function destroy($id)
     {
         if (Bute::destroy($id)) {
+            Value::where('bute_id',$id)->delete();
             flash()->overlay('删除成功', 1);
             return redirect('admin/bute');
         }else{

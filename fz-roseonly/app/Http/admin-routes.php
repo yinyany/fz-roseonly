@@ -164,6 +164,11 @@ Route::get('values/destroy/{id}','ValueController@destroy');
 //上传图片方法
 Route::post('values/upload','ValueController@upload');
 
+Route::get('value/value','ValueController@value');
+
+Route::get('values/values','ValueController@values');
+
+
 //库存列表管理=================================================
 
 //库存列表页面
