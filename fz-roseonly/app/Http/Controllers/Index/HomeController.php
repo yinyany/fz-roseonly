@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Index;
 use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
-use App\Model\Admin\Type;
-use App\Model\Admin\Carousel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Model\Admin\Type;
+use App\Model\Admin\Carousel;
 
 class HomeController extends Controller
 {
@@ -18,7 +18,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         //导航栏
         $list = Type::where('depth',0)->get();
         // dd($list->toArray());
@@ -41,7 +41,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 点击用户名跳转个人中心
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,7 +52,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 个人中心修改用户密码
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -96,7 +96,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 执行修改个人信息
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -107,17 +107,15 @@ class HomeController extends Controller
     }
 
     /**
-     * 首页banner图
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function banner()
+    public function update(Request $request, $id)
     {
-        $banner = Carousel::all();
-        $count  = Carousel::count();
-        return view();
+        //
     }
 
     /**
@@ -136,12 +134,12 @@ class HomeController extends Controller
         //接受图片信息
         $field = $request->all();
         var_dump($field);
-        // if($field->isValid()){
-        //     //获取文件的后缀
-        //     $ext = $field->getClientOriginalExtension();
-        //     $newName = md5(time().rand(1,6666)).'.'.$ext;
-        //     $path = $field->move(public_path().'/uploads/member',$newName);
-        //     return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
-        // }
+        $array=explode('.', $field);
+        var_dump($array);
+            // //获取文件的后缀
+            // $ext = $field->getClientOriginalExtension();
+            // $newName = md5(time().rand(1,6666)).'.'.$ext;
+            // $path = $field->move(public_path().'/uploads/member',$newName);
+            // return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
     }
 }

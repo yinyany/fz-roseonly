@@ -528,13 +528,13 @@
                         $(function(){
                           var fileM=document.querySelector("#kkk");
                           $("#kkk").on("change",function(){
-                            console.log(fileM.files[0].name);
+                            console.log(fileM.files[0].name);//点击那个显示那个图片的名字
                             $.ajax({
                                 type:"GET",
                                 url:'{{ url("/file/mmm") }}',
-                                data:'{"name":+fileM.files[0].name+}',
+                                data:{"name":fileM.files[0].name},
                                 success:function(msg){
-                                    
+                                    // alert("请求成功");
                                 },
                                 error:function(msg){
                                     // alert("请求失败");
