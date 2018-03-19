@@ -2,7 +2,7 @@
 namespace App\Model\Admin;
 
 use Baum\Node;
-
+use App\Model\Admin\Bute;
 /**
 * Type
 */
@@ -15,6 +15,8 @@ class Type extends Node {
    */
   protected $table = 'types';
 
+
+  protected $fillable = ['name'];
   //////////////////////////////////////////////////////////////////////////////
 
   //
@@ -100,5 +102,18 @@ class Type extends Node {
   // Please refer the Laravel documentation for further instructions on how
   // to hook your own callbacks/observers into this events:
   // http://laravel.com/docs/5.0/eloquent#model-events
+  //  把父类id换成类名
+      // public function getParentIdAttribute($value){
+      //   $datas = [null=>'顶级分类'];
+      //   $data = Type::get(['id','name','depth'])->toArray();
+      //   foreach ($data as  $v) {
+      //     $path = '';
+      //     for($i=0;$i<=$v['depth'];$i++){
+      //       $path .= '|---';
+      //     }
+      //       $datas[$v['id']] = $path.$v['name'];  
+      //   }
+      //   return $datas[$value];
+      // }
 
 }

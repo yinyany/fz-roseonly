@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Admin\Type;
+use App\Model\Admin\Goods;
+use App\Model\Admin\Bute;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -19,14 +21,25 @@ class TypeController extends Controller
         $where=[];
         $keywords = $request->name;
         if ($keywords != '') {
-                $type = Type::where('name','like',"%$keywords%")->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
+                $type = Type::where('name','like',"%$keywords%")->orderBy('lft','asc')->paginate(env('PAGE_SIZE',10));
                 $count = Type::where('name','like',"%$keywords%")->count();
 
             }else{
-                $type = Type::orderBy('name','desc')->paginate(env('PAGE_SIZE',10));
+                $type = Type::orderBy('lft','asc')->paginate(env('PAGE_SIZE',10));
                 $count = Type::count();
             }
-            return view('admin.type.index',['type'=>$type,'count'=>$count,'keywords'=>$keywords]);
+
+            $datas = [null=>'顶级分类'];
+            $data = Type::get(['id','name','depth'])->toArray();
+            foreach ($data as  $v) {
+              $path = '';
+              for($i=0;$i<=$v['depth'];$i++){
+                $path .= '|---';
+              }
+                $datas[$v['id']] = $path.$v['name'];  
+            }
+            return view('admin.type.index',['type'=>$type,'count'=>$count,'keywords'=>$keywords,'datas'=>$datas]);
+        
     }
 
     /**
@@ -36,32 +49,15 @@ class TypeController extends Controller
      */
     public function create()
     {   
-        $id = $_GET['id']?$_GET['id']:null;
-
-        $type = Type::findOrFail($id);
-        dd($type);
-        return view('admin.type.create',['id'=>$id]);
-    }
-
-
-    public function upload(Request $request)
-    {   
-        //接受图片信息
-        $field = $request->file('imgurl');
-        //判读图片是否为正常图片
-        if($field->isValid()){
-            //获取文件的后缀
-            $ext = $field->getClientOriginalExtension();
-            //给文件重新起个名字
-            $newName = md5(time().rand(1,6666)).'.'.$ext;
-            //移动文件
-            $path = $field->move(public_path().'/uploads',$newName);
-            return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
+        $id = isset($_GET['id'])?$_GET['id']:null;
+        if($id===null){
+            return view('admin.type.create');
+        }else{
+            $info = Type::findOrFail($id)->ancestorsAndSelf()->get()->toArray();
+            return view('admin.type.creates',['id'=>$id,'info'=>$info]);
         }
         
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -70,24 +66,30 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $this->validate($request, [
-            'name' => 'required|unique:types|max:16',
+            'name' => 'required|max:16',
         ],[
             'name.required' => '类名必填',
-            'name.unique' => '类名已存在',
             'name.max' => '类名最长16位',
         ]);
-        if (!$request->has('imgurl')) {
-            flash()->overlay('上传图片错误', 5);
-            return back();
+            
+        if(!$request->input('id')){
+            $type = new Type;
+            $type->name = $request->input("name");
+            $type->save();
+            
+        }else{
+            // dd($request->name);
+            $role = Type::findOrFail($request->input('id'));
+            // dd($role);
+            $role->children()->create(['name' => $request->input("name")]);
+            
         }
-        $type = new Type;
-        $type->imgurl = $request->input("imgurl"); 
-        $type->name = $request->input("name");
-        $type->save();
+
         flash()->overlay('添加成功',1);
         return redirect('/admin/type');
+        
     }
 
     /**
@@ -98,11 +100,7 @@ class TypeController extends Controller
      */
     public function show(Request $request)
     {   
-        $type = Type::where('parent_id',null)->paginate(env('PAGE_SIZE',10));
-        $types = Type::where('parent_id',!null)->paginate(env('PAGE_SIZE',10));
-        
-        
-        return view('admin.type.show',['type'=>$type]);
+
     }
 
     /**
@@ -112,8 +110,15 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $list = Type::findOrFail($id);
+        if($list->parent_id === null){
+            return view('admin.type.edit',['list'=>$list]);
+        }else{
+            $info = Type::findOrFail($id)->ancestors()->get()->toArray();
+            return view('admin.type.edits',['info'=>$info,'id'=>$id,'list'=>$list]);
+        }
+        
     }
 
     /**
@@ -124,8 +129,34 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $list = Type::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required|max:16',
+        ],[
+            'name.required' => '属性值必填',
+            'name.max' => '属性值最长16位',
+        ]);
+        if($list->parent_id === null){
+            $model = Type::where('id',$id)->update(['name'=>$request->name,'imgurl'=>$request->imgurl]);
+            if ($model) {
+                flash()->overlay('修改成功', 1);
+                return redirect('admin/type');
+            }else{
+                flash()->overlay('修改失败', 5);
+                return back();
+            }
+        }else{
+            $model = Type::where('id',$id)->update(['name'=>$request->name]);
+            if ($model) {
+                flash()->overlay('修改成功', 1);
+                return redirect('admin/type');
+            }else{
+                flash()->overlay('修改失败', 5);
+                return back();
+            }
+        }
+       
     }
 
     /**
@@ -135,13 +166,33 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-    }
-
-
-    public function type()
-    {
+    {   
+        $list = count(Type::findOrFail($id)->getImmediateDescendants());
+        $data = Goods::where('type_id',$id)->first();
+        $attr = Bute::where('type_id',$id)->get();
+        if($data){
+            flash()->overlay('删除失败:这个子类下面有商品', 5);
+            return back();
+        }
+        if($attr){
+            flash()->overlay('删除失败:这个子类下面有属性', 5);
+            return back();
+        }
+        if($list){
+            flash()->overlay('删除失败,原因：这个分类有子类', 5);
+            return back();
+        }else{
+            if (Type::destroy($id)) {
+                
+                // dd($attr);
+                flash()->overlay('删除成功', 1);
+                return redirect('/admin/type');
+            }else{
+                flash()->overlay('删除失败', 5);
+                return back();
+            }
+        }
+        
         
     }
 

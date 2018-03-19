@@ -23,7 +23,6 @@
     <div class="x-body">
       <form class="layui-form" action="{{ url('/admin/type/store') }}" method="post">
           {{csrf_field()}}
-          <input type="hidden" value="{{$id}}" name="id">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>类名
@@ -34,21 +33,6 @@
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red"></span>@if($errors->has('name')) {{$errors->first('name')}} @endif
               </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>图片
-              </label>
-              <button type="button" class="layui-btn" id="test1">
-                <i class="layui-icon">&#xe67c;</i>上传图片
-              </button>
-              <input type="hidden" name="imgurl" value="{{old('name')}}" id="file">
-          </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>显示
-              </label>
-              <img src="" id="url" style="width: 200px;">
           </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
@@ -73,25 +57,6 @@
         layui.use('upload', function(){
           var $ = layui.$
           var upload = layui.upload;
-
-           $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-          //执行实例
-          var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            ,url: '{{ url("/admin/carousel/upload") }}' //上传接口
-            ,field:'imgurl'
-            ,done: function(res){
-              $('#file').val(res.data.src);
-              $('#url').attr("src",'/uploads/'+res.data.src);
-            }
-            ,error: function(){
-              //请求异常回调
-            }
-          });
       });
     </script>
 @endsection 
