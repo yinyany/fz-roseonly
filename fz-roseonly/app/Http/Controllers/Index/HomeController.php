@@ -130,4 +130,9 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function file()
+    {
+        return 111;
+    }
 }

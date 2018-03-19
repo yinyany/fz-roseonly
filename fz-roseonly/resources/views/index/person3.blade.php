@@ -10,6 +10,37 @@
     <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
+    <style type="text/css">
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #ccc;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file:hover {
+            background: #ccc;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 @endsection 
 
 
@@ -153,8 +184,8 @@
                                             <!-- 上传的头像 -->
                                             <!-- 上传的头像 -->
                                             <img src="{{ asset('static/index/images/details/img1.jpg') }}" width="100px" height="100px" style="float:left;">
-
-                                            <!-- 上传头像按钮 -->
+                                             
+                                            <!-- <input type="file" name="" value="选择图片" > -->
                                             <!-- 上传头像按钮 -->
                                             <!-- 上传头像按钮 -->
                                             <!-- 上传头像按钮 -->
@@ -204,8 +235,12 @@
                                                 >已婚</option>
                                             </select>
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <a href="javascript:;" class="file" style="float: left;">选择文件
+                                                <input type="file" name="" id="kkk">
+                                            </a>
+                                        </td>
+                                        
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -223,8 +258,9 @@
                                             @endif
                                             > 女
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="2">
+                                        </td>
+                                        
                                     </tr>
                                     <tr id="select_city">
                                         <td></td>
@@ -239,7 +275,7 @@
                                             <div id="show"></div>
                                         </td> -->
                                         <td colspan="2">
-                                            <input type="text" name="address" value="{{ $model->address }}" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:400px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;">
+                                            <input type="text" name="address" value="{{ $model->address }}" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:350px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;">
                                         </td>
                                     </tr>
                                    <!--  <script type="text/javascript">
@@ -255,7 +291,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>邮箱</td>
-                                        <td><input type="text" name="email" value="{{ $model->email }}" class="text" style="width:400px; text-indent: 20px;"></td>
+                                        <td><input type="text" name="email" value="{{ $model->email }}" class="text" style="width:350px; text-indent: 20px;"></td>
                                         <td colspan="2"></td>
                                     </tr>
                                 </table>
@@ -488,7 +524,23 @@
                         }
                       }
                     </script>
-                    
+                    <script type="text/javascript">
+                        $(function(){
+                            $('#kkk').click(function(){
+                              $("#kkk").unbind().change(function(){
+                                $.ajax({
+                                  type:"GET",
+                                  url:'{{ url("/member/file") }}',
+                                  success:function(msg){
+                                  },
+                                  error:function(data){
+
+                                  }
+                                })
+                              })
+                            })
+                        })
+                    </script>
                 </div>
             </div>
         </div>

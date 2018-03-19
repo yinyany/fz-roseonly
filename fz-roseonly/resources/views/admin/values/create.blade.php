@@ -31,7 +31,7 @@
                   <select name="bute_id" lay-verify="">
                     <option value="0">请选择</option>
                     @foreach($data as $list)
-                    <option>{{$list->name}}</option>
+                    <option value="{{$list->id}}">{{$list->name}}</option>
                     @endforeach
                   </select> 
               </div>
