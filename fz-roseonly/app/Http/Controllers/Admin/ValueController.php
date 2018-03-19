@@ -74,7 +74,8 @@ class ValueController extends Controller
             flash()->overlay('请选择属性名', 5);
             return back();
         }
-        $data = Bute::where('name',$request->bute_id)->first();
+        //
+        $data = Bute::where('id',$request->bute_id)->first();
         $this->validate($request, [
             'name' => 'required|max:16',
         ],[

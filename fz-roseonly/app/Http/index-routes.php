@@ -29,6 +29,7 @@ Route::post('/newpass/{id}','HomeController@newpass');
 Route::post('/newmember/{id}','HomeController@newmember');
 //添加收货地址
 Route::post('/newmember/{id}','HomeController@newmember');
+Route::get('/member/file','HomeController@file');
 //加载添加会员页面
 
 

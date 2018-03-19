@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Model\Admin\Type;
 use App\Model\Admin\Goods;
+use App\Model\Admin\Value;
 use App\Model\Admin\Bute;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -169,13 +170,8 @@ class TypeController extends Controller
     {   
         $list = count(Type::findOrFail($id)->getImmediateDescendants());
         $data = Goods::where('type_id',$id)->first();
-        $attr = Bute::where('type_id',$id)->get();
         if($data){
             flash()->overlay('删除失败:这个子类下面有商品', 5);
-            return back();
-        }
-        if($attr){
-            flash()->overlay('删除失败:这个子类下面有属性', 5);
             return back();
         }
         if($list){
@@ -183,8 +179,11 @@ class TypeController extends Controller
             return back();
         }else{
             if (Type::destroy($id)) {
-                
-                // dd($attr);
+                $attr = Bute::where('type_id',$id)->get();
+                foreach ($attr as $v) {
+                    Value::where('bute_id',$v->id)->delete();
+                }
+                Bute::where('type_id',$id)->delete();
                 flash()->overlay('删除成功', 1);
                 return redirect('/admin/type');
             }else{
