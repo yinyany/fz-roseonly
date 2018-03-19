@@ -91,6 +91,7 @@ class GoodsController extends Controller
             flash()->overlay('上传图片错误', 5);
             return back();
         }
+
         $goods = new Goods;
         $goods->imgurl = $request->input("imgurl"); 
         $goods->name = $request->input("name");

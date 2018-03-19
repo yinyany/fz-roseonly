@@ -36,11 +36,12 @@
         width:1240px;
         height:35px;
         line-height:35px;
+        position: relative;
         margin:0 auto;
     }
     /*++++++++++ 左边两个logo图标+链接 +++++++++++*/
     #head .head_left{
-        float:left;
+        /*float:left;*/
         border-left:1px solid #ccc;
         border-right:1px solid #ccc;
     }
@@ -68,10 +69,27 @@
         background:url("../images/comment/head_loveroseonly_on.png") no-repeat scroll center center;
     }
     /*++++++++++ 右边登录、注册、购物袋 +++++++++++*/
+    .select_com{
+        width:250px;
+        height:35px;
+        line-height: 35px;
+        position: absolute;
+        margin-left:800px;
+    }
+    .select_com .input_com{
+        width:180px;
+        height: 25px;
+        background-color: #fff;
+        border:none;
+        border-radius: 30px;
+    }
     .head_right{
-        float:right;
+        /*float:right;*/
+        position: absolute;
+        margin-left: 1100px;
         line-height:35px;
     }
+
     .head_right>span{
         float:left;
         text-align: center;
