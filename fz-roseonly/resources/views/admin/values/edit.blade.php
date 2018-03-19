@@ -66,7 +66,7 @@
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>显示
               </label>
-              <img src="/values/{{ $values->imgurl }}" style="height: 100px;" id="url" style="width: 200px;">
+              <img src="/uploads/values/{{ $values->imgurl }}" style="height: 100px;" id="url" style="width: 200px;">
           </div>
           </div>
           <div class="layui-form-item">
@@ -105,7 +105,7 @@
           ,field:'imgurl'
           ,done: function(res){
             $('#file').val(res.data.src);
-            $('#url').attr("src",'/values/'+res.data.src);
+            $('#url').attr("src",'/uploads/values/'+res.data.src);
           }
           ,error: function(){
             //请求异常回调

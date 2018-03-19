@@ -47,7 +47,7 @@ class GoodsController extends Controller
             //获取文件的后缀
             $ext = $field->getClientOriginalExtension();
             $newName = md5(time().rand(1,6666)).'.'.$ext;
-            $path = $field->move(public_path().'/good',$newName);
+            $path = $field->move(public_path().'/uploads/good',$newName);
             return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
         }
         

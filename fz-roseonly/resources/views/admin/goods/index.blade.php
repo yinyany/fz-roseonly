@@ -46,8 +46,8 @@
             <td>{{ $list->id }}</td>
             <td>{{ $datas[$list->type_id]}}</td> 
             <td>{{ $list->name }}</td>
-            <td><img src="/good/{{ $list->imgurl }}"></td>
-            <td>{{ $list->content }}</td>
+            <td><img src="/uploads/good/{{ $list->imgurl }}"></td>
+            <td>{!! $list->content !!}</td>
             <td>{{ $list->price }}</td>
             <td>{{ $list->votes }}</td>
             <td>{{ $list->state }}</td>

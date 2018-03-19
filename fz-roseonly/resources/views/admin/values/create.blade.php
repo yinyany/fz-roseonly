@@ -100,7 +100,7 @@
           ,field:'imgurl'
           ,done: function(res){
             $('#file').val(res.data.src);
-            $('#url').attr("src",'/values/'+res.data.src);
+            $('#url').attr("src",'/uploads/values/'+res.data.src);
           }
           ,error: function(){
             //请求异常回调

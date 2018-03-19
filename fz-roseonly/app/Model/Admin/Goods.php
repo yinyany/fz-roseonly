@@ -22,6 +22,10 @@ class Goods extends Model
     //  */
     // protected $fillable = ['name','display_name','description']; 
     
+    public function getConnentAttribute()
+    {
+        
+    }
 
 
     //购物车关联商品

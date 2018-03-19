@@ -81,7 +81,7 @@
           ,field:'imgurl'
           ,done: function(res){
             $('#file').val(res.data.src);
-            $('#url').attr("src",'/uploads/'+res.data.src);
+            $('#url').attr("src",'/uploads/banner/'+res.data.src);
           }
           ,error: function(){
             //请求异常回调

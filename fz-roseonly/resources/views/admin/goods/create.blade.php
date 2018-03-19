@@ -137,7 +137,7 @@
             ,field:'imgurl'
             ,done: function(res){
               $('#file').val(res.data.src);
-              $('#url').attr("src",'/good/'+res.data.src);
+              $('#url').attr("src",'/uploads/good/'+res.data.src);
             }
             ,error: function(){
               //请求异常回调
