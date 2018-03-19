@@ -174,10 +174,6 @@ class TypeController extends Controller
             flash()->overlay('删除失败:这个子类下面有商品', 5);
             return back();
         }
-        if($attr){
-            flash()->overlay('删除失败:这个子类下面有属性', 5);
-            return back();
-        }
         if($list){
             flash()->overlay('删除失败,原因：这个分类有子类', 5);
             return back();
