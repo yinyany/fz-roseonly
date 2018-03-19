@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Index;
 use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
+use App\Model\Admin\Type;
+use App\Model\Admin\Carousel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -17,11 +19,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index.index');
+        //导航栏
+        $list = Type::where('depth',0)->get();
+        // dd($list->toArray());
+        // $data[] = $list[1]->getImmediateDescendants()->toArray();
+        $datas = [];
+        foreach ($list as $key => $value) {
+            $datas[] = $value->getDescendantsAndSelf()->toHierarchy();
+        }
+        // dd($datas);
+        foreach ($datas as $key => $value) {
+            foreach ($value as $key => $v) {
+                $array[] = $v;
+            }
+        }
+        // dd($array);
+        //banner
+        $banner = Carousel::where('state','启用')->get();
+        $count  = Carousel::where('state','启用')->count();
+        return view('index.index',['banner'=>$banner,'count'=>$count,'array'=>$array]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 点击用户名跳转个人中心
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +52,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 个人中心修改用户密码
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -76,7 +96,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 执行修改个人信息
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -87,15 +107,17 @@ class HomeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 首页banner图
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function banner()
     {
-        //
+        $banner = Carousel::all();
+        $count  = Carousel::count();
+        return view();
     }
 
     /**

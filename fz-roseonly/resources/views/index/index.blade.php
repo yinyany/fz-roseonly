@@ -15,21 +15,16 @@
             <div id="banner">
                 <!-- 轮播图片 -->
                 <ul class="banner">
-                    <li><a href="javascript:;"><img src="{{ asset('static/index/images/index/index_banner1.jpg') }}" alt=""></a></li>
-                    <li><a href="javascript:;"><img src="{{ asset('static/index/images/index/index_banner2.jpg') }}" alt=""></a></li>
-                    <li><a href="javascript:;"><img src="{{ asset('static/index/images/index/index_banner3.jpg') }}" alt=""></a></li>
-                    <li><a href="javascript:;"><img src="{{ asset('static/index/images/index/index_banner4.jpg') }}" alt=""></a></li>
-                    <li><a href="javascript:;"><img src="{{ asset('static/index/images/index/index_banner5.jpg') }}" alt=""></a></li>
-                    <li><a href="javascript:;"><img src="{{ asset('static/index/images/index/index_banner6.jpg') }}" alt=""></a></li>
+                    @foreach($banner as $v)
+                    <li><img src="/uploads/banner/{{ $v->imgurl }}" alt=""></li>
+                    @endforeach
                 </ul>
                 <!-- 点击按钮-->
                 <ul class="icon cl">
                     <li class="banner_hover"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    @for($i = 1;$i < $count;$i++)
+                        <li></li>
+                    @endfor
                 </ul>
                 <!-- 左右箭头 -->
                 <div class="arrow">

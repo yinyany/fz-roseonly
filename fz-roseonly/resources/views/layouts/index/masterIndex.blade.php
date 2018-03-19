@@ -89,167 +89,25 @@
                             </div>
                         </div>
                     </li>
+                    @foreach($array as $list)
                     <li class="flower">
-                        <a href="javascript:;">鲜花玫瑰</a>
+                        <a href="javascript:;">{{ $list['name'] }}</a>
                         <div class="next">
                             <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">玫瑰长盒</a>
-                                    <a href="javascript:;">玫瑰手捧</a>
-                                    <a href="javascript:;">玫瑰花篮</a>
-                                    <a href="javascript:;">玫瑰水晶花盒</a>
+                                @foreach($list['children'] as $value)
+                                <div class="column1" style="border-right: 1px solid #414141;">
+                                    <b>{{ $value['name'] }}</b>
+                                    @foreach($value['children'] as $v)
+                                    <a href="javascript:;">{{ $v['name'] }}</a>
+                                    @endforeach
                                 </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">经典永续</a>
-                                    <a href="javascript:;">恒久真爱</a>
-                                    <a href="javascript:;">爱在满怀</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">for all love</a>
-                                </div>
-                                <div class="column3">
-                                    <b>规格</b>
-                                    <a href="javascript:;">19支80cm</a>
-                                    <a href="javascript:;">11支80cm</a>
-                                    <a href="javascript:;">19支40cm</a>
-                                    <a href="javascript:;">11支40cm</a>
-                                </div>
+                                @endforeach
                                 <a href=""><img src="{{ asset('static/index/images/comment/flower.jpg') }}" alt=""></a>
                                 <p class="cl"></p>
                             </div>
                         </div>
                     </li>
-                    <li class="rose">
-                        <a href="javascript:;">永生玫瑰</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">音乐玫瑰</a>
-                                    <a href="javascript:;">玫瑰球形</a>
-                                    <a href="javascript:;">玫瑰圆盒</a>
-                                    <a href="javascript:;">玫瑰方盒</a>
-                                    <a href="javascript:;">玫瑰心形盒</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">玫瑰熊</a>
-                                    <a href="javascript:;">全世爱</a>
-                                    <a href="javascript:;">经典永续</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">一生一世</a>
-                                    <a href="javascript:;">for all love</a>
-                                </div>
-                                <div class="column3">
-                                    <b>规格</b>
-                                    <a href="javascript:;">巨型</a>
-                                    <a href="javascript:;">大型</a>
-                                    <a href="javascript:;">中型</a>
-                                    <a href="javascript:;">小型</a>
-                                    <a href="javascript:;">Mini</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/rose.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="jewel">
-                        <a href="javascript:;">玫瑰珠宝</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">项链</a>
-                                    <a href="javascript:;">手链</a>
-                                    <a href="javascript:;">耳饰</a>
-                                    <a href="javascript:;">手镯</a>
-                                    <a href="javascript:;">戒指</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">玫瑰熊</a>
-                                    <a href="javascript:;">生辰石</a>
-                                    <a href="javascript:;">玫瑰经典</a>
-                                    <a href="javascript:;">经典永续</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">全心全意</a>
-                                    <a href="javascript:;">幸运精灵</a>
-                                </div>
-                                <div class="column3">
-                                    <b>材质</b>
-                                    <a href="javascript:;">18K玫瑰金镶钻</a>
-                                    <a href="javascript:;">18K白金镶钻</a>
-                                    <a href="javascript:;">18K玫瑰金</a>
-                                    <a href="javascript:;">18K白金</a>
-                                    <a href="javascript:;">9K玫瑰金</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/jewel.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ornaments">
-                        <a href="javascript:;">玫瑰饰品</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">项链</a>
-                                    <a href="javascript:;">手链</a>
-                                    <a href="javascript:;">耳饰</a>
-                                    <a href="javascript:;">手镯</a>
-                                    <a href="javascript:;">戒指</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">玫瑰经典</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">时光之吻</a>
-                                    <a href="javascript:;">全心全意</a>
-                                    <a href="javascript:;">情有独钟</a>
-                                    <a href="javascript:;">幸运精灵</a>
-                                    <a href="javascript:;">经典永续</a>
-                                </div>
-                                <div class="column3">
-                                    <b>材质</b>
-                                    <a href="javascript:;">925银镀玫瑰金</a>
-                                    <a href="javascript:;">925银镀白金</a>
-                                    <a href="javascript:;">925银珍珠</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/ronaments.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;">高端定制</a></li>
-                    <li><a href="javascript:;">专卖店</a></li>
-                    <li class="oath">
-                        <a href="javascript:;">诺誓世界</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>品牌介绍</b>
-                                    <a href="javascript:;">品牌故事</a>
-                                    <a href="javascript:;">产品故事</a>
-                                    <a href="javascript:;">明星时刻</a>
-                                    <a href="javascript:;">真爱见证</a>
-                                    <a href="javascript:;">活动资讯</a>
-                                    <a href="javascript:;">诺誓百科</a>
-                                </div>
-                                <div class="column2">
-                                    <b>节日百科</b>
-                                    <a href="javascript:;">情人节百科</a>
-                                    <a href="javascript:;">母亲节百科</a>
-                                    <a href="javascript:;">520百科</a>
-                                    <a href="javascript:;">七夕节百科</a>
-                                    <a href="javascript:;">圣诞节百科</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/oath.png') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                     <!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
                     <div class="head_right" style="display: none;">
                     <a href="javascript:;" class="login">登录</a>
