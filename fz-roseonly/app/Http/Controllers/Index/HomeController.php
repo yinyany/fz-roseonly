@@ -7,11 +7,14 @@ use App\Model\Index\Home;
 use App\Model\Admin\Member;
 use App\Model\Admin\Type;
 use App\Model\Admin\Carousel;
+use App\Model\Index\Arrayindex;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -19,25 +22,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //导航栏
-        $list = Type::where('depth',0)->get();
-        // dd($list->toArray());
-        // $data[] = $list[1]->getImmediateDescendants()->toArray();
-        $datas = [];
-        foreach ($list as $key => $value) {
-            $datas[] = $value->getDescendantsAndSelf()->toHierarchy();
-        }
+        $data = new Arrayindex;
+        $array = $data->index();
         // dd($datas);
-        foreach ($datas as $key => $value) {
-            foreach ($value as $key => $v) {
-                $array[] = $v;
-            }
-        }
-        // dd($array);
-        //banner
+                //banner
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
-        return view('index.index',['banner'=>$banner,'count'=>$count,'array'=>$array]);
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
     }
 
     /**
@@ -46,9 +37,12 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function member($id)
-    {
+    {   
+        $data = new Arrayindex;
+        $array = $data->index();
+        // dd($datas);
         $model = Member::findOrFail($id);
-        return view('index.person3',['model'=>$model]);
+        return view('index.person3',['model'=>$model,'array'=>$array]);
     }
 
     /**
