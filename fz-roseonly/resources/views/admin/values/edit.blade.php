@@ -29,18 +29,8 @@
                     <span class="x-red">*</span>属性名：
                 </label>
                 <div class="layui-input-inline">
-                  <select name="bute_id" lay-verify="">
-                    <option value="0">请选择</option>
-                    @foreach($data as $list)
-                    
-                    <option value="{{$list->id}}"  @if($list->id === $datas->id)
-                      selected
-                    @endif>{{$list->name}}
-                    </option>
-                    
-                    @endforeach
-                  </select> 
-              </div>
+                  <input type="text"  name="bute_id" class="layui-input" value="{{$datas[$values->bute_id]}}" disabled>
+                </div>
             </div>
             <div class="layui-form-item">
               <label for="username" class="layui-form-label">

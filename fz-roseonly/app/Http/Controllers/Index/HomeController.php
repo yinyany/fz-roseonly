@@ -131,8 +131,17 @@ class HomeController extends Controller
         //
     }
 
-    public function file()
+    public function mmm(Request $request)
     {
-        return 111;
+        //接受图片信息
+        $field = $request->all();
+        var_dump($field);
+        // if($field->isValid()){
+        //     //获取文件的后缀
+        //     $ext = $field->getClientOriginalExtension();
+        //     $newName = md5(time().rand(1,6666)).'.'.$ext;
+        //     $path = $field->move(public_path().'/uploads/member',$newName);
+        //     return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
+        // }
     }
 }
