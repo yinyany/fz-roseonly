@@ -26,11 +26,9 @@ Route::get('/member/{id}','HomeController@member');
 //修改密码
 Route::post('/newpass/{id}','HomeController@newpass');
 //修改个人信息
-Route::post('/newmember/{id}','HomeController@newmember');
-//添加收货地址
-Route::post('/newmember/{id}','HomeController@newmember');
-//
-Route::get('/file/mmm','HomeController@mmm');
+Route::post('/newmember/{id}','HomeController@update');
+//上传头像的方法
+Route::post('/file/newmember','HomeController@newmember');
 //加载添加会员页面
 
 

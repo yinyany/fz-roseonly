@@ -25,7 +25,7 @@ class CreateMemberTable extends Migration
             $table->string('address');
             $table->string('email')->unique();
             $table->string('fere');
-            $table->string('fere-phone');
+            $table->string('fere_phone');
             $table->timestamps();
         });
     }

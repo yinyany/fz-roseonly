@@ -175,7 +175,10 @@ Route::get('values/values','ValueController@values');
 Route::get('stock','StockController@index');
 //加载添加页面
 Route::get('stock/create','StockController@create');
+//选择属性名方法
 Route::get('stock/good','StockController@good');
+//选择商品方法
+Route::get('stock/goods','StockController@goods');
 //执行添加方法
 Route::post('stock/store','StockController@store');
 //加载修改页面

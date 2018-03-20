@@ -5,39 +5,30 @@ namespace App\Http\Controllers\Index;
 use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Model\Admin\Type;
 use App\Model\Admin\Carousel;
+use App\Model\Index\Arrayindex;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        //导航栏
-        $list = Type::where('depth',0)->get();
-        // dd($list->toArray());
-        // $data[] = $list[1]->getImmediateDescendants()->toArray();
-        $datas = [];
-        foreach ($list as $key => $value) {
-            $datas[] = $value->getDescendantsAndSelf()->toHierarchy();
-        }
+    {
+        $data = new Arrayindex;
+        $array = $data->index();
         // dd($datas);
-        foreach ($datas as $key => $value) {
-            foreach ($value as $key => $v) {
-                $array[] = $v;
-            }
-        }
-        // dd($array);
-        //banner
+                //banner
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
-        return view('index.index',['banner'=>$banner,'count'=>$count,'array'=>$array]);
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
     }
 
     /**
@@ -46,9 +37,12 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function member($id)
-    {
+    {   
+        $data = new Arrayindex;
+        $array = $data->index();
+        // dd($datas);
         $model = Member::findOrFail($id);
-        return view('index.person3',['model'=>$model]);
+        return view('index.person3',['model'=>$model,'array'=>$array]);
     }
 
     /**
@@ -90,9 +84,18 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function newmember($id)
+    public function newmember(Request $request)
     {
-        //
+        //接受图片信息
+        $field = $request->file('imgurl');
+        $data = $request->id;
+        if($field->isValid()){
+            $ext = $field->getClientOriginalExtension();
+            $newName = md5(time().rand(1,6666)).'.'.$ext;
+            Member::where('id',$data)->update(['imgurl'=>$newName]);
+            $path = $field->move(public_path().'/uploads/picture',$newName);
+            return ['code'=>0,'msg'=>'','data'=>['src'=>$newName,'data'=>$data]];
+        }
     }
 
     /**
@@ -114,8 +117,31 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $this->validate($request, [
+            'name' => 'required|max:36',
+            'fere' => 'max:36',
+            'fere_phone' => 'digits:11',
+            'phone' => 'required|digits:11',
+            'email' => 'required|email',
+        ],[
+            'name.required' => '姓名必填',
+            'name.max' => '姓名最长36位',
+            'fere.max' => '姓名最长36位',
+            'fere_phone.digits' => '手机号为11位',
+            'phone.required' => '手机号必填',
+            'phone.digits' => '手机号为11位',
+            'email.required' => '邮箱必填',
+            'email.email' => '邮箱格式错误',
+        ]);
+        $id = $request->id;
+        $data = Member::where('id',$id)->update(['name'=>$request->name,'fere'=>$request->fere,'phone'=>$request->phone,'fere_phone'=>$request->fere_phone,'birthday'=>$request->birthday,'sex'=>$request->sex,'address'=>$request->address,'email'=>$request->email,'affective'=>$request->affective]);
+        if($data>0){
+
+            return back();
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -129,17 +155,8 @@ class HomeController extends Controller
         //
     }
 
-    public function mmm(Request $request)
-    {
-        //接受图片信息
-        $field = $request->all();
-        var_dump($field);
-        $array=explode('.', $field);
-        var_dump($array);
-            // //获取文件的后缀
-            // $ext = $field->getClientOriginalExtension();
-            // $newName = md5(time().rand(1,6666)).'.'.$ext;
-            // $path = $field->move(public_path().'/uploads/member',$newName);
-            // return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
+    public function picture(Request $request)
+    {   
+       
     }
 }

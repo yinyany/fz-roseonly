@@ -176,17 +176,29 @@ class GoodsController extends Controller
     public function destroy($id)
     {
         $stock = Stock::where('good_id',$id)->first();
-        if($stock->stock >0){
-            flash()->overlay('删除失败,原因这个商品还有库存', 5);
-            return back();
-        }
-        if (Goods::destroy($id)) {
-            flash()->overlay('删除成功', 1);
-            return redirect('admin/bute');
+        if($stock==null){
+           if (Goods::destroy($id)) {
+                flash()->overlay('删除成功', 1);
+                return redirect('admin/goods');
+            }else{
+                flash()->overlay('删除失败', 5);
+                return back();
+            } 
         }else{
-            flash()->overlay('删除失败', 5);
-            return back();
+            if($stock->stock >0){
+                flash()->overlay('删除失败,原因这个商品还有库存', 5);
+                return back();
+            }else{
+              if (Goods::destroy($id)) {
+                    flash()->overlay('删除成功', 1);
+                    return redirect('admin/goods');
+                }else{
+                    flash()->overlay('删除失败', 5);
+                    return back();
+                }   
+            }
         }
+        
     }
 
     public function good(Request $request){
