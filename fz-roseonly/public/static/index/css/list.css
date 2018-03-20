@@ -68,6 +68,11 @@ li{
 	height:415px;
 	float:left;
 }
+.list_con li:hover{
+	width:310px;
+	height:415px;
+	background: #f5f2f2;
+}
 .list_con li a img{
 	width:260px;
 	height:260px;
@@ -75,7 +80,7 @@ li{
 	margin:25px 25px 0;
 }
 .list_con li a img:hover{
-	transition: scale(1.1);
+	transform: scale(1.1);
 }
 .list_con li a h3{
 	height:30px;

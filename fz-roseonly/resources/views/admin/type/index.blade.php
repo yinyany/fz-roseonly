@@ -18,23 +18,21 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="{{ url('/admin/type') }}" method="get">
-          <input type="text" name="name"  placeholder="请输入类名" autocomplete="off" class="layui-input" value="{{$keywords?$keywords:''}}">
+          <input type="text" name="name"  placeholder="请输入关键字" autocomplete="off" class="layui-input" value="{{$keywords?$keywords:''}}">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
 
       <xblock>
         
-        <a class="layui-btn" style="text-decoration: none;color: white;" href='{{ url("admin/type/create") }}'><i class="layui-icon"></i>添加主类</a>
+        <a class="layui-btn" style="text-decoration: none;color: white;" href="{{ url('admin/type/create') }}"><i class="layui-icon"></i>添加主类</a>
         <a class="layui-btn" href="javascript:;" style="text-decoration: none;float: right;">共有数据：{{$count}} 条</a>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>主类</th>
-            <th>图片</th>
-            <th>嵌套深度</th>
+            <th>父类</th>
             <th>类名</th>
             <th>添加时间</th>
             <th>操作</th>
@@ -43,15 +41,10 @@
           @foreach($type as $list)
           <tr>
             <td>{{ $list->id }}</td>
-            <td>
-              @if($list->parent_id === null)
-                {{ $list->name }}
-              @else
-                {{ $list->parent_id }}
-              @endif
-            </td>
-            <td><img src="/uploads/{{ $list->imgurl }}" style="width: 200px;"></td>
-            <td>{{ $list->depth }}</td>
+            <td>  
+                {{ $datas[$list->parent_id]}}
+              
+            </td> 
             <td>{{ $list->name }}</td>
             <td>{{ $list->created_at }}</td>
             <td class="td-manage">
@@ -59,9 +52,6 @@
                 <i class="layui-icon">&#xe654;</i>
               </a>
               <a title="修改" href='{{ url("admin/type/edit/$list->id") }}'>
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="show" href='{{ url("admin/type/show") }}'>
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" href='{{ url("admin/type/destroy/$list->id") }}'>

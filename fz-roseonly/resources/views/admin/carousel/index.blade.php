@@ -41,7 +41,7 @@
           @foreach($carousel as $list)
           <tr>
             <td>{{ $list->id }}</td>
-            <td><img src="/uploads/{{ $list->imgurl }}" style="width: 200px;"></td>
+            <td><img src="/uploads/banner/{{ $list->imgurl }}" style="width: 200px;"></td>
             <td class="td-status">
               @if($list->state === "启用")
                 <span class="layui-btn layui-btn-normal layui-btn-mini">{{ $list->state }}</span>

@@ -26,12 +26,30 @@ Route::get('/member/{id}','HomeController@member');
 //修改密码
 Route::post('/newpass/{id}','HomeController@newpass');
 //修改个人信息
+Route::post('/newmember/{id}','HomeController@update');
+//上传头像的方法
+Route::post('/file/newmember','HomeController@newmember');
+//加载添加会员页面
 Route::post('/newmember/{id}','HomeController@newmember');
 //添加收货地址
 Route::post('/newmember/{id}','HomeController@newmember');
-//加载添加会员页面
+//
+Route::get('/file/mmm','HomeController@mmm');
 
 
+
+
+//加载商品列表页面-------------------------------------------------
+Route::get('/list/{id}','ListController@index');
+//根据销量排序
+Route::get('/list/votes/{id}','ListController@votes');
+//根据创建时间排序
+Route::get('/list/create/{id}','ListController@create');
+//根据价格排序
+Route::get('/list/price/{id}','ListController@price');
+
+//加载商品详情页面
+Route::get('/detail/{id}','ListController@detail');
 
 
 

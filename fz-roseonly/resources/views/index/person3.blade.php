@@ -2,6 +2,7 @@
 @section('title', '个人中心')
 
 @section('link')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/person.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/css/city.css') }}">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -10,6 +11,40 @@
     <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
+    <style type="text/css">
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #ccc;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file:hover {
+            background: #ccc;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .layui-upload-file{
+            display: none;
+        }
+    </style>
 @endsection 
 
 
@@ -131,8 +166,11 @@
                             <a href="javascript:;">修改密码</a>
                         </h3>
                         <div class="sec3" class="selected1">
-                            <form action="{{ url('/newmember',[$model->id]) }}" method="post">
+                            <iframe name="formsubmit" style="display:none;">    
+                            </iframe>
+                            <form action='{{ url("/newmember/$model->id") }}' method="post" target="formsubmit">
                                 {{ csrf_field() }}
+                                
                                 <table id="person_info">
                                     <colgroup>
                                         <col width="120">
@@ -147,30 +185,29 @@
                                         <td>姓名</td>
                                         <td>
                                             <input type="text" name="name" maxlength=15 class="text" value="{{ $model->name }}" style="text-indent: 20px;">
+                                            @if($errors->has('name')) {{$errors->first('name')}} @endif
                                         </td>
                                         <td colspan="2" rowspan="3">
                                             <!-- 上传的头像 -->
-                                            <!-- 上传的头像 -->
-                                            <!-- 上传的头像 -->
-                                            <img src="{{ asset('static/index/images/details/img1.jpg') }}" width="100px" height="100px" style="float:left;">
 
-                                            <!-- 上传头像按钮 -->
-                                            <!-- 上传头像按钮 -->
-                                            <!-- 上传头像按钮 -->
-                                            <!-- 上传头像按钮 -->
+                                            <img src="/uploads/picture/{{ $model->imgurl }}" width="100px" height="100px" style="float:left;" id="picture" >
+                                            <input type="hidden" name="imgurl" value="{{$model->imgurl}}" id="two">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>爱人名字</td>
                                         <td><input type="text" name="fere" value="{{ $model->fere }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
+                                        @if($errors->has('fere')) {{$errors->first('fere')}} @endif
                                         <td>手机</td>
-                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;">
+                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;" id="phone">
+                                        @if($errors->has('phone')) {{$errors->first('phone')}} @endif
                                         </td>
                                         <td colspan="2"></td>
                                     </tr>
                                     <tr>
                                         <td>爱人手机</td>
                                         <td><input type="text" name="fere_phone" value="{{ $model->fere_phone }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
+                                        @if($errors->has('fere_phone')) {{$errors->first('fere_phone')}} @endif
                                         <td>生日</td>
                                         <td><input type="text" name="birthday" value="{{ $model->birthday }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
                                         <td colspan="2"></td>
@@ -181,7 +218,7 @@
                                         <td></td>
                                         <td>情感状态</td>
                                         <td>
-                                            <select name="marriage" id="marriage">
+                                            <select name="affective" id="marriage">
                                                 <option value=""
                                                 @if($model->affective == null)
                                                     selected
@@ -204,8 +241,12 @@
                                                 >已婚</option>
                                             </select>
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <a href="javascript:;" id="test" class="file" style="float: left;" >选择图片
+                                                <input type="hidden" name="id" value="{{$model->id}}" id="prc">
+                                            </a>
+                                        </td>
+                                        
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -223,39 +264,25 @@
                                             @endif
                                             > 女
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="2">
+                                        </td>
+                                        
                                     </tr>
                                     <tr id="select_city">
                                         <td></td>
                                         <td></td>
                                         <td>居住地</td>
-                                        <!-- <td>
-                                            <select name="s_province" id="s_province"></select>
-                                            <select name="s_city" id="s_city"></select>
-                                            <select id="s_county" name="s_county"></select>
-                                            <script class="resources library" src="{{ asset('static/index/js/area.js') }}" type="text/javascript"></script>
-                                            <script type="text/javascript">_init_area();</script>
-                                            <div id="show"></div>
-                                        </td> -->
+
                                         <td colspan="2">
-                                            <input type="text" name="address" value="{{ $model->address }}" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:400px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;">
+                                            <input type="text" name="address" value="{{ $model->address }}" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:350px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;">
                                         </td>
                                     </tr>
-                                   <!--  <script type="text/javascript">
-                                        var Gid  = document.getElementById ;
-                                        var showArea = function(){
-                                            Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +  
-                                            Gid('s_city').value + " - 县/区" + 
-                                            Gid('s_county').value + "</h3>"
-                                                                    }
-                                        // Gid('s_county').setAttribute('onchange','showArea()');
-                                    </script> -->
+                             
                                     <tr>
                                         <td></td>
                                         <td></td>
                                         <td>邮箱</td>
-                                        <td><input type="text" name="email" value="{{ $model->email }}" class="text" style="width:400px; text-indent: 20px;"></td>
+                                        <td><input type="text" name="email" value="{{ $model->email }}" class="text" style="width:350px; text-indent: 20px;"></td>
                                         <td colspan="2"></td>
                                     </tr>
                                 </table>
@@ -488,11 +515,46 @@
                         }
                       }
                     </script>
-                    
                 </div>
             </div>
+            @include('flash::message')
         </div>
     </article>
+    <script type="text/javascript">
+        $(function(){
+           $("#phone").focus(function(){
+                alert(111);
+            }); 
+        })
+        
+    </script>
+    <script src="{{ asset('static/admin/lib/layui/layui.js') }}"></script>
+    <script>
+        layui.use('upload', function(){
+            var $ = layui.$
+            var upload = layui.upload;
+
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var prc = $('#prc').val();
+            var uploadInst = upload.render({
+                elem: '#test' //绑定元素
+                ,url: '{{ url("/file/newmember") }}' //上传接口
+                ,field:'imgurl'
+                ,data:{'id':prc}
+                ,done: function(res){
+                  $('#two').attr('src',res.data.src);
+                  $('#picture').attr('src','/uploads/picture/'+res.data.src);
+                }
+                ,error: function(){
+                  //请求异常回调
+                }
+            });
+        });  
+    </script>
     @include('flash::message')
 
 @endsection

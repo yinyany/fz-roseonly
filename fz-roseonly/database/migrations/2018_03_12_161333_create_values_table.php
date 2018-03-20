@@ -16,6 +16,7 @@ class CreateValuesTable extends Migration
             $table->increments('id');  //属性值编号
             $table->string('name','36');  //属性值名称
             $table->tinyInteger('bute_id');   //属性名表id
+            $table->string('imgurl');   //图片的路径
             $table->timestamps();
         });
     }

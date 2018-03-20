@@ -21,6 +21,7 @@ class CreateGoodsTable extends Migration
             $table->enum('state', ['热卖', '售馨','下架']); //枚举
             $table->string('content');   //商品的详情
             $table->integer('votes');   //销量
+            $table->integer('price');   //商品的价格
             $table->timestamps();
         });
     }

@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Index;
 use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
+use App\Model\Admin\Type;
+use App\Model\Admin\Carousel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index.index');
+         //导航栏
+        $array = Type::get()->toHierarchy();
+
+        $banner = Carousel::where('state','启用')->get();
+        $count  = Carousel::where('state','启用')->count();
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
     }
 
     /**
@@ -26,9 +35,12 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function member($id)
-    {
+    {   
+         //导航栏
+        $array = Type::get()->toHierarchy();
+        // dd($datas);
         $model = Member::findOrFail($id);
-        return view('index.person3',['model'=>$model]);
+        return view('index.person3',['model'=>$model,'array'=>$array]);
     }
 
     /**
@@ -70,9 +82,18 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function newmember($id)
+    public function newmember(Request $request)
     {
-        //
+        //接受图片信息
+        $field = $request->file('imgurl');
+        $data = $request->id;
+        if($field->isValid()){
+            $ext = $field->getClientOriginalExtension();
+            $newName = md5(time().rand(1,6666)).'.'.$ext;
+            Member::where('id',$data)->update(['imgurl'=>$newName]);
+            $path = $field->move(public_path().'/uploads/picture',$newName);
+            return ['code'=>0,'msg'=>'','data'=>['src'=>$newName,'data'=>$data]];
+        }
     }
 
     /**
@@ -94,8 +115,31 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $this->validate($request, [
+            'name' => 'required|max:36',
+            'fere' => 'max:36',
+            'fere_phone' => 'digits:11',
+            'phone' => 'required|digits:11',
+            'email' => 'required|email',
+        ],[
+            'name.required' => '姓名必填',
+            'name.max' => '姓名最长36位',
+            'fere.max' => '姓名最长36位',
+            'fere_phone.digits' => '手机号为11位',
+            'phone.required' => '手机号必填',
+            'phone.digits' => '手机号为11位',
+            'email.required' => '邮箱必填',
+            'email.email' => '邮箱格式错误',
+        ]);
+        $id = $request->id;
+        $data = Member::where('id',$id)->update(['name'=>$request->name,'fere'=>$request->fere,'phone'=>$request->phone,'fere_phone'=>$request->fere_phone,'birthday'=>$request->birthday,'sex'=>$request->sex,'address'=>$request->address,'email'=>$request->email,'affective'=>$request->affective]);
+        if($data>0){
+
+            return back();
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -107,5 +151,10 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function picture(Request $request)
+    {   
+       
     }
 }
