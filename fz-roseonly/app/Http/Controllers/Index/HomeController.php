@@ -7,7 +7,6 @@ use App\Model\Index\Home;
 use App\Model\Admin\Member;
 use App\Model\Admin\Type;
 use App\Model\Admin\Carousel;
-use App\Model\Index\Arrayindex;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -22,10 +21,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = new Arrayindex;
-        $array = $data->index();
-        // dd($datas);
-                //banner
+         //导航栏
+        $array = Type::get()->toHierarchy();
+
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
         return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
@@ -38,8 +36,8 @@ class HomeController extends Controller
      */
     public function member($id)
     {   
-        $data = new Arrayindex;
-        $array = $data->index();
+         //导航栏
+        $array = Type::get()->toHierarchy();
         // dd($datas);
         $model = Member::findOrFail($id);
         return view('index.person3',['model'=>$model,'array'=>$array]);

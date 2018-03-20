@@ -21,135 +21,54 @@
                 
                 <!-- 排序 -->
                 <div id="paixu">
-                    <a class="first selected" href="javascript:;">综合</a>
-                    <a class="first" href="javascript:;">销量</a>
-                    <a class="first" href="javascript:;">最新</a>
-                    <a class="first" href="javascript:;">价格</a>
-                    <input type="number" name="" placeholder="¥" min="0">
+                    <a class="first selected" href="{{ url('/list',[$id]) }}">综合</a>
+                    <a class="first" href="{{ url('/list/votes',[$id]) }}">销量</a>
+                    <a class="first" href="{{ url('/list/create',[$id]) }}">最新</a>
+                    <a class="first" href="{{ url('/list/price',[$id]) }}">价格</a>
+                   <!--  <input type="number" name="" placeholder="¥" min="0">
                     <span>—</span>
-                    <input type="number" name="" placeholder="¥" min="0">
+                    <input type="number" name="" placeholder="¥" min="0"> -->
                 </div>
 
                 <ul class="list_con" style="display: block;">
+                    @foreach($list as $v)
                     <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list1.png') }}">
-                            <h3>永生玫瑰-经典永续系列</h3>
-                            <p>经典许愿 单朵版 大型音乐球</p>
-                            <h2>￥1999.0</h2>
+                        <a href="{{ url('/detail',[$v->id]) }}">
+                            <img src="/uploads/good/{{ $v->imgurl }}">
+                            <h3>{{ $v->name }}</h3>
+                            <p>{{ $v->state }} 月销量{{ $v->votes }}</p>
+                            <h2>￥{{ $v->price }}</h2>
                         </a>
                     </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list2.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心狗嫣红 灰色端坐版(13cm) 中型公仔</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list3.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心狗嫣红 灰色端坐版 中型圆球</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list4.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>玫瑰熊嫣红 花球版 大型圆球</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list5.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心熊嫣红 灰色站立版 中型公仔</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list6.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心熊嫣红 灰色端坐版 中型公仔</p>
-                            <h2>￥1314.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list7.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>玫瑰狗嫣红 定制版 30cm公仔</p>
-                            <h2>￥19999.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list8.png') }}">
-                            <h3>永生玫瑰-星座经典系列</h3>
-                            <p>摩羯座 单朵 Mini音乐球</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list9.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心熊嫣红 灰色站立版 中型公仔</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list10.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心熊嫣红 灰色端坐版 中型公仔</p>
-                            <h2>￥1314.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list11.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>玫瑰狗嫣红 定制版 30cm公仔</p>
-                            <h2>￥19999.0</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list12.png') }}">
-                            <h3>永生玫瑰-星座经典系列</h3>
-                            <p>摩羯座 单朵 Mini音乐球</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('static/index/images/list/list13.png') }}">
-                            <h3>永生玫瑰-玫瑰公仔系列</h3>
-                            <p>甜心熊嫣红 灰色站立版 中型公仔</p>
-                            <h2>￥1520.0</h2>
-                        </a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="cl"></div>
             <!-- 底部 -->
             <div class="bot_list" >
-                 分页
+                {!! $list->render() !!}
             </div>
         </section>
     </article>
 @endsection
 
 @section('js')
+    <script type="text/javascript">
+        var url = window.location.href;
+        // alert(url);  
+        $("#paixu a").each(function () {  
+            if (returnUrl($(this).attr("href")) == returnUrl(url)) {  
+                console.log($(this));  
+                $(this).addClass("selected").siblings().removeClass('selected');  
+            }  
+        });  
+        //以下为截取url的方法  
+        function returnUrl(href) {  
+            var number = href.substring(28);  
+            // alert(number);
+            return href.substring(number + 1);  
+        }  
 
+    </script>
 @endsection 
 
