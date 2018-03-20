@@ -26,7 +26,7 @@
                   <span class="x-red">*</span>商品名
               </label>
               <div class="layui-input-inline">
-                <select name="good_id" lay-verify="">
+                <select name="good_id" lay-filter="test1">
                     <option value="0">请选择</option>
                     @foreach($goods as $v)
                     <option value="{{$v->id}}">{{$v->name}}</option>
@@ -39,11 +39,8 @@
                   <span class="x-red">*</span>属性名
               </label>
               <div class="layui-input-inline">
-                <select name="bid" lay-filter="test">
+                <select name="bid" lay-filter="test" id="vvv">
                     <option value='0' >请选择</option>
-                    @foreach($bute as $v)
-                    <option value="{{$v->id}}">{{$v->name}}</option>
-                    @endforeach
                 </select>
               </div>
           </div>
@@ -128,6 +125,24 @@
               }
           })
         });
+        form.on('select(test1)', function(data){
+          $.ajax({
+            type:"GET",
+            url:'{{ url("/admin/stock/goods") }}?id='+data.value,
+            success:function(msg){
+                var selDom3 = $("#vvv");
+                selDom3.find("option").remove();
+                selDom3.append("<option value='0'>请选择</option>");
+                for(var i = 0; i<msg.data.length; i++){
+                  selDom3.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
+                }
+                form.render('select');                
+            },
+            error:function(data){
+
+            }
+          })
+        }); 
       });
           
     </script>

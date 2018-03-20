@@ -29,7 +29,7 @@
                 <select name="good_id" lay-verify="">
                     <option value="0">请选择</option>
                     @foreach($goods as $v)
-                    <option @if($data->name === $v->name) selected @endif value="{{$v->id}}">{{$v->name}}</option>
+                    <option @if($data->id === $v->id) selected @endif value="{{$v->id}}">{{$v->name}}</option>
                     @endforeach
                 </select>
               </div>
@@ -42,7 +42,7 @@
                 <select name="bid" lay-filter="test">
                     <option value='0' >请选择</option>
                     @foreach($bute as $v)
-                    <option @if($datas->name === $v->name) selected @endif value="{{$v->id}}">{{$v->name}}</option>
+                    <option @if($datas->id === $v->id) selected @endif value="{{$v->id}}">{{$v->name}}</option>
                     @endforeach
                 </select>
               </div>
@@ -55,7 +55,7 @@
                 <select name="vid" lay-filter="" id="kkk">
                     <option value='0' >请选择</option>
                     @foreach($value as $v)
-                    <option @if($values->name === $v->name) selected @endif value="{{$v->id}}">{{$v->name}}</option>
+                    <option @if($values->id === $v->id) selected @endif value="{{$v->id}}">{{$v->name}}</option>
                     @endforeach
                 </select>
               </div>

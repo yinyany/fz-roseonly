@@ -30,7 +30,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 点击用户名跳转个人中心
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,7 +44,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 个人中心修改用户密码
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -82,13 +82,22 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function newmember($id)
+    public function newmember(Request $request)
     {
-        //
+        //接受图片信息
+        $field = $request->file('imgurl');
+        $data = $request->id;
+        if($field->isValid()){
+            $ext = $field->getClientOriginalExtension();
+            $newName = md5(time().rand(1,6666)).'.'.$ext;
+            Member::where('id',$data)->update(['imgurl'=>$newName]);
+            $path = $field->move(public_path().'/uploads/picture',$newName);
+            return ['code'=>0,'msg'=>'','data'=>['src'=>$newName,'data'=>$data]];
+        }
     }
 
     /**
-     * 执行修改个人信息
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -99,17 +108,38 @@ class HomeController extends Controller
     }
 
     /**
-     * 首页banner图
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function banner()
-    {
-        $banner = Carousel::all();
-        $count  = Carousel::count();
-        return view();
+    public function update(Request $request, $id)
+    {   
+        $this->validate($request, [
+            'name' => 'required|max:36',
+            'fere' => 'max:36',
+            'fere_phone' => 'digits:11',
+            'phone' => 'required|digits:11',
+            'email' => 'required|email',
+        ],[
+            'name.required' => '姓名必填',
+            'name.max' => '姓名最长36位',
+            'fere.max' => '姓名最长36位',
+            'fere_phone.digits' => '手机号为11位',
+            'phone.required' => '手机号必填',
+            'phone.digits' => '手机号为11位',
+            'email.required' => '邮箱必填',
+            'email.email' => '邮箱格式错误',
+        ]);
+        $id = $request->id;
+        $data = Member::where('id',$id)->update(['name'=>$request->name,'fere'=>$request->fere,'phone'=>$request->phone,'fere_phone'=>$request->fere_phone,'birthday'=>$request->birthday,'sex'=>$request->sex,'address'=>$request->address,'email'=>$request->email,'affective'=>$request->affective]);
+        if($data>0){
+
+            return back();
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -123,17 +153,8 @@ class HomeController extends Controller
         //
     }
 
-    public function mmm(Request $request)
-    {
-        //接受图片信息
-        $field = $request->all();
-        var_dump($field);
-        // if($field->isValid()){
-        //     //获取文件的后缀
-        //     $ext = $field->getClientOriginalExtension();
-        //     $newName = md5(time().rand(1,6666)).'.'.$ext;
-        //     $path = $field->move(public_path().'/uploads/member',$newName);
-        //     return ['code'=>0,'msg'=>'','data'=>['src'=>$newName]];
-        // }
+    public function picture(Request $request)
+    {   
+       
     }
 }

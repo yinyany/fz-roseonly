@@ -141,6 +141,7 @@ class StockController extends Controller
         $data = Goods::where('id',$stock->good_id)->first();
         //所有的属性名
         $bute = Bute::get();
+        //所属的属性名
         $datas = Bute::where('id',$stock->bid)->first();
         $value = Value::where('bute_id',$datas->id)->get();
         $values = Value::where('id',$stock->vid)->first();
@@ -209,10 +210,17 @@ class StockController extends Controller
             return back();
         }
     }
-
+    //接受传过来的属性值
     public function good(Request $request){
         //根据ajax传过来id查值
         $info = Value::where('bute_id',$request->id)->get();
         return ['code'=>0,'msg'=>'','data'=>$info];
+    }
+    //接受传过来的商品名
+    public function goods(Request $request){
+        //根据ajax传过来id查值
+        $info = Goods::where('id',$request->id)->first();
+        $data = Bute::where('type_id',$info->type_id)->get();
+        return ['code'=>0,'msg'=>'','data'=>$data];
     }
 }
