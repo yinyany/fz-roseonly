@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Member;
-use App\Model\admin\Order_goods;
-use App\Model\admin\Order;
+use App\Model\Admin\Member;
+use App\Model\Admin\Order_goods;
+use App\Model\Admin\Order;
 
 
 class OrderhomeController extends Controller
@@ -20,8 +20,27 @@ class OrderhomeController extends Controller
      */
     public function index()
     {
+
+       //-------以前的获取session方法---------------- 
+
+        // // dd($request->session()->has('usersInfo'));
+        // if(!$request->session()->has('usersInfo')){
+        //     return view('authindex.login');
+        // }
+        // $value = $request->session()->all();
+        // // dd($value['usersInfo']['id']);
+        // $memid = $value['usersInfo']['id'];
+
+
+         // ------------优化后的获取session的方法-----------
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+
+        $memid = session('usersInfo')['id'];
+        
         //查询出会员的id是多少，再通过购物车查商品
-        $order = Order::where('member_id',1)->get();
+        $order = Order::where('member_id',$memid)->get();
 
         // foreach ($order as $k=>$v) {
         //     echo $v['id'];

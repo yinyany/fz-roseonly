@@ -14,7 +14,7 @@ class CreateOrderGoodsTable extends Migration
     {
         Schema::create('order_goods', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id');                     //订单ID
+            $table->string('order_id',100);                     //订单ID
             $table->integer('goods_id');                     //商品ID
             $table->integer('goods_num');                    //商品购买数量   
             $table->double('goods_prices',20,2);                //单个价格

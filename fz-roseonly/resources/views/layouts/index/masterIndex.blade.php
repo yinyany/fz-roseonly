@@ -11,7 +11,7 @@
     @section('link')
         {{-- 此区块继承加载其他外部引入文件 --}} 
     @show
-
+    
 </head>
 <body>
     <header>
@@ -25,6 +25,7 @@
                 </div>
                 <!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
                 <div class="head_right">
+
                     @if(session('usersInfo') != null)
                         <a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login">{{ session('usersInfo')['name'] }}</a>
                         <span>|</span>
@@ -36,8 +37,12 @@
                         <a href="{{ url('/authindex/register') }}" class="register">注册</a>
                         <span>|</span>
                     @endif
-                    <a href="javascript:;" class="shopCar"></a>
+                    <a href="{{ url('/shopcar') }}" class="shopCar"></a>
+                    @if(session('usersInfo.shopnum') == null)
                     <span id="shopNum">(0)</span>
+                    @elseif(session('usersInfo.shopnum') !=null))
+                    <span id="shopNum">({{ session('usersInfo.shopnum') }})</span>
+                    @endif
                 </div>
             </div>
         </div>

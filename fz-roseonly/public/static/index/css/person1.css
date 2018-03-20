@@ -68,16 +68,18 @@
 }
 
 #order .order_con .sec1 .per_ada .nickper{
-   width:410px;
-   height:20px;
+   width:910px;
+   height:40px;
    line-height: 40px;
-    margin-top:20px;
+    margin-top:10px;
    /*position: absolute;*/
-   margin-left:60px;
+   margin-left:10px;
    top:0px;
    font-size: 14px;
    color:#414141;
-   left:60px;
+   left:20px;
+   text-align: left;
+   /*background: #f00;*/
 }
 #order .order_con .sec1 p{
     color:#333;

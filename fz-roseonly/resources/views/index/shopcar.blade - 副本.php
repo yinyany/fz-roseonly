@@ -8,6 +8,7 @@
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('static/index/js/js/jquery.qrcode.js') }}" type="text/javascript"></script> -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection 
 
@@ -24,7 +25,7 @@
                 </div>
                 <!-- 表格 -->
 
-                    <table id="cartTable" >
+                     <table id="cartTable" >
                     <thead>
                         <tr>
                             <th >
@@ -38,10 +39,10 @@
                             <th >操作</th>
                         </tr>
                     </thead>
-             
+
                     <tbody>
-                        @if($shop == NULL)
-                        <tr><th colspan="6" style="height:120px; font-size: 20px;">没有添加商品，赶快去选购吧!</th></tr>
+                        @if($shop == '')
+                        <tr>没有添加商品，赶快去选购吧!</tr>
                         @else
                         @foreach($shop as $list)
                         <tr class="on">
@@ -53,23 +54,21 @@
                                 <span>{{$list['goods']['name']}}</span>
                                 
                             </td>
-                            <td class="price">{{$list['goods']['unitprice']}}</td>
+                            <td class="price">5999.88</td>
                             <td class="count">
                                 <span class="reduce"></span>
                                 <input class="count-input" type="text" value="{{$list['num']}}">
-                                <input type="hidden" name="id" value="{{$list['id']}}" class="id">
                                 <span class="add">+</span></td>
-                                
-                            <td class="subtotal">{{$list['goods']['unitprice'] * $list['num']}}</td>
+                            <td class="subtotal">{{5999.8 * $list['num']}}</td>
                             <td class="operation"><span class="delete">删除</span></td>
+                            <input type="hidden" name="goods_id[]" value="{{$list['goods']['id']}}" class="goodsid">
                         </tr>
-                       {{ csrf_field() }}
                         @endforeach 
                         @endif
                     </tbody>
                 </table>
     
-                
+                {{ csrf_field()}}
                 <!-- ++++++++++ 结算+++++++++++ -->
 
                 <div class="foot" id="foot">
@@ -77,10 +76,7 @@
                         <input type="checkbox" class="check-all check">&nbsp;&nbsp;全选
                     </label>
                     <a class="fl delete" id="deleteAll" href="javascript:;">删除</a>
-                    <div class="fr closing" id="jiesuan">
-                        
-                         结 算
-                    </div>
+                    <div class="fr closing" id="jiesuan">结 算</div>
                     <input type="hidden" id="cartTotalPrice">
                     <div class="fr total">
                         合计：￥
@@ -98,8 +94,18 @@
                                 <img src="http://www.jq22.com/demo/jquery-guc20151105/images/1.jpg">
                                 <span class="del" index="0">取消选择</span>
                             </div>
-                           
-                        
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/2.jpg">
+                                <span class="del" index="1">取消选择</span>
+                            </div>
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/3.jpg">
+                                <span class="del" index="2">取消选择</span>
+                            </div>
+                            <div>
+                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/4.jpg">
+                                <span class="del" index="3">取消选择</span>
+                            </div>
                         </div>
                         <span class="arrow">◆<span>◆</span></span> 
                     </div>
@@ -117,9 +123,7 @@
     </article>
 @endsection
 
-
-
 @section('js')
-    <!-- 添加显示与隐藏 -->
 
 @endsection 
+

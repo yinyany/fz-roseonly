@@ -23,8 +23,6 @@
         var selectedViewList = document.getElementById('selectedViewList'); //浮层已选商品列表容器
         var selected = document.getElementById('selected'); //已选商品
         var foot = document.getElementById('foot');
-        var jiesuan = document.getElementById('jiesuan');
-        
 
         // 更新总数和总价格，已选浮层
         function getTotal() {
@@ -50,7 +48,6 @@
                 foot.className = 'foot';
             }
         }
-
         // 计算单行价格
         function getSubtotal(tr) {
             var cells = tr.cells;
@@ -58,7 +55,6 @@
             var subtotal = cells[4]; //小计td
             var countInput = tr.getElementsByTagName('input')[1]; //数目input
             var span = tr.getElementsByTagName('span')[1]; //-号
-
             //写入HTML
             subtotal.innerHTML = (parseInt(countInput.value) * parseFloat(price.innerHTML)).toFixed(2);
             //如果数目只有一个，把-号去掉
@@ -85,107 +81,6 @@
                 getTotal();//选完更新总计
             }
         }
-
-        //更新数据库商品
-        function subshopcar(id,num){
-            // ajax 提交
-            $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-            });
-
-            $.ajax({  
-                cache: false,
-                type: "POST",
-                // url: '{{url("shopcar.update.id")}}',
-                url: "shopcar/update/"+id,
-
-                data: {'num':num},
-                async: true,//相当于ajax里的同步异步 
-                success:function(msg){
-                    // alert("成功");
-                },
-                error:function(msg){
-                    // alert("失败");
-                }
-            })          
-        }
-
-        //删除商品
-        function delshop(id){
-            $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-            });
-
-              $.ajax({  
-                cache: false,
-                type: "POST",
-                // url: '{{url("shopcar.update.id")}}',
-                url: "shopcar/destroy/"+id,
-                async: true,//相当于ajax里的同步异步 
-                success:function(msg){
-                    // alert("成功");
-                },
-                error:function(msg){
-                    // alert("失败");
-                }
-            })          
-        }
-
-        //提交商品
-        function subtoorder(id,num){
-            // ajax 提交
-            $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-            });
-
-            $.ajax({  
-                cache: false,
-                type: "POST",
-                // url: '{{url("shopcar.update.id")}}',
-                url: "shopcar/store",
-                data: {'goods_id':'id','goods_num':num},
-                async: true,//相当于ajax里的同步异步 
-                success:function(msg){
-                    // alert("成功");
-                },
-                error:function(msg){
-                    // alert("失败");
-                }
-            })          
-        }
-
-        //获取总价和订单号
-        function subordernum(ordernum,totalprice,info){
-            // ajax 提交
-            $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-            });
-
-            $.ajax({  
-                cache: false,
-                type: "POST",
-                // url: '{{url("shopcar.update.id")}}',
-                url: "shopcar/store",
-                data: {'order_number':ordernum,'pay_prices':totalprice,'info':info},
-                async: true,//相当于ajax里的同步异步 
-                success:function(msg){
-                    // alert("成功");
-                },
-                error:function(msg){
-                    // alert("失败");
-                }
-            })
-        }
-
-
 
         // 显示已选商品弹层
         selected.onclick = function () {
@@ -214,28 +109,21 @@
                 var cls = el.className; //触发元素的class
                 var countInout = this.getElementsByTagName('input')[1]; // 数目input
                 var value = parseInt(countInout.value); //数目
-                var godid = this.getElementsByTagName('input')[2].value; // 获取id的值 
-
-                // console.log(godid);
-                // var goodsnum = countInout.value;
                 //通过判断触发元素的class确定用户点击了哪个元素
                 switch (cls) {
                     case 'add': //点击了加号
-                        countInout.value= value + 1;
+                        countInout.value = value + 1;
                         getSubtotal(this);
-                        subshopcar(godid,countInout.value);
                         break;
                     case 'reduce': //点击了减号
                         if (value > 1) {
                             countInout.value = value - 1;
                             getSubtotal(this);
-                            subshopcar(godid,countInout.value);
                         }
                         break;
                     case 'delete': //点击了删除
                         var conf = confirm('确定删除此商品吗？');
                         if (conf) {
-                            delshop(godid);
                             this.parentNode.removeChild(this);
                         }
                         break;
@@ -244,10 +132,6 @@
             }
             // 给数目输入框绑定keyup事件
             tr[i].getElementsByTagName('input')[1].onkeyup = function () {
-                
-                var god = this.parentNode.getElementsByClassName('id')[0].value;
-                // console.log(god);
-
                 var val = parseInt(this.value);
                 if (isNaN(val) || val <= 0) {
                     val = 1;
@@ -256,66 +140,39 @@
                     this.value = val;
                 }
                 getSubtotal(this.parentNode.parentNode); //更新小计
-                subshopcar(god,this.value);
                 getTotal(); //更新总数
             }
         }
 
         //点击提交订单
 
-       // $("#jiesuan").click(function(){
-
-       //      $.ajaxSetup({
-       //              headers: {
-       //                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-       //              }
-       //      });
-       //      var tr=$(".on");
-       //      var id[] = tr.children(".goodsid").val(); 
-       //      print_r(id);
-       //      // $.ajax({
-       //      //     cache: false,
-       //      //     type: "POST",
-       //      //     url: "",
-       //      //     data: {id:id,_token:"{{ csrf_token()}}"},
-       //      //     async: true,//相当于ajax里的同步异步 
-       //      //     success:function(msg){
-
-       //      //     },
-       //      //     error:function(msg){
-       //      //         alert("123");
-       //      //     }
-       //      // })            
-       //  }) 
-
-        // var id = tr[1].getElementsByTagName('input')[2].value;
-        //  alert(id); 
-
-        jiesuan.onclick = function(){
-            var goid='';
-            var gonum='';
-            for (var i = 0; i < tr.length; i++) {               
-                if(tr[i].getElementsByTagName('input')[0].checked){
-                    // console.log(tr[i].getElementsByTagName('input')[2].value);
-                    var goodid = tr[i].getElementsByTagName('input')[2].value;
-                    var goodnum = tr[i].getElementsByTagName('input')[1].value;
-
-                    goid +=goodid+"@";   
-                    gonum +=goodnum+"@";
-                    // subtoorder(goodid,goodnum);//提交已选商品
-                    // delshop(tr[i].getElementsByTagName('input')[2].value); //购物车删除提交后的商品
-                     tr[i].parentNode.removeChild(tr[i]); // 删除相应节点
-                            i--; //回退下标位置
+       $("#jiesuan").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
-            var totalprices = priceTotal.innerHTML;
-            // var ordernum = this.getElementsByTagName('input')[0].value;
-            // console.log(ordernum);
-            // subordernum(ordernum,totalprices,ginfo);
-            
-            window.location.href="shopcar/jiesuan"+'?goid='+goid+'&gonum='+gonum+'&totalprices='+totalprices;
+            });
 
-        }
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "",
+                data: "",
+                async: true,//相当于ajax里的同步异步
+                success:function(msg){
+
+                },
+                error:function(msg){
+                    alert('结算失败');
+                }
+            })
+
+                           
+
+        }) 
+
+
+
 
 
 
@@ -327,8 +184,6 @@
                     for (var i = 0; i < tr.length; i++) {
                         // 如果被选中，就删除相应的行
                         if (tr[i].getElementsByTagName('input')[0].checked) {
-                            // console.log(tr[i].getElementsByTagName('input')[2].value);
-                            // delshop(tr[i].getElementsByTagName('input')[2].value);
                             tr[i].parentNode.removeChild(tr[i]); // 删除相应节点
                             i--; //回退下标位置
                         }
@@ -343,6 +198,9 @@
         // 默认全选
         checkAllInputs[0].checked = true;
         checkAllInputs[0].onclick();
-             
+
+    
+        
+     
 
     }

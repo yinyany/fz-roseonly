@@ -309,11 +309,11 @@
                 }
             }
             var totalprices = priceTotal.innerHTML;
-            // var ordernum = this.getElementsByTagName('input')[0].value;
+            var ordernum = this.getElementsByTagName('input')[0].value;
             // console.log(ordernum);
             // subordernum(ordernum,totalprices,ginfo);
             
-            window.location.href="shopcar/jiesuan"+'?goid='+goid+'&gonum='+gonum+'&totalprices='+totalprices;
+            window.location.href="shopcar/store"+'?goid='+goid+'&gonum='+gonum+'&totalprices='+totalprices+'&ordernum='+ordernum;
 
         }
 
