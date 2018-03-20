@@ -31,9 +31,21 @@ Route::post('/newmember/{id}','HomeController@newmember');
 Route::post('/newmember/{id}','HomeController@newmember');
 //
 Route::get('/file/mmm','HomeController@mmm');
-//加载添加会员页面
 
 
+
+
+//加载商品列表页面-------------------------------------------------
+Route::get('/list/{id}','ListController@index');
+//根据销量排序
+Route::get('/list/votes/{id}','ListController@votes');
+//根据创建时间排序
+Route::get('/list/create/{id}','ListController@create');
+//根据价格排序
+Route::get('/list/price/{id}','ListController@price');
+
+//加载商品详情页面
+Route::get('/detail/{id}','ListController@detail');
 
 
 
