@@ -29,7 +29,6 @@
               </label>      
               <div class="layui-input-inline">
                   <select name="type_id" lay-filter="test">
-                    <option value="0">请选择</option>
                     @foreach($list as $v)
                     <option @if($info->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
                     @endforeach
@@ -37,20 +36,33 @@
               </div>
               <div class="layui-input-inline">
                   <select name="type_id" lay-filter="test2" id="kkk">
-                    @foreach($data as $v)
-                    <option @if($ccc->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
-                    @endforeach
+                    
+                    <option value="{{$bbb->id}}">{{$bbb->name}}</option>
+
                   </select>
               </div>
-              <div class="layui-input-inline">
-                  <select name="type_id" id="mmm">
-                    @foreach($three as $v)
-                    <option @if($bbb->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
-                    @endforeach
-                  </select>
-              </div> 
           </div>
-           <div class="layui-form-item">
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>属性名
+              </label>
+              <div class="layui-input-inline">
+                <select name="bid" lay-filter="test">
+                    <option value='{{$datas->id}}' >{{$datas->name}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>属性值
+              </label>
+              <div class="layui-input-inline">
+                <select name="vid" lay-filter="" id="kkk">
+                    <option value="{{$values->id}}">{{$values->name}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>商品
               </label>
@@ -94,6 +106,17 @@
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red"></span>@if($errors->has('price')) {{$errors->first('price')}} @endif
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>库存
+              </label>
+              <div class="layui-input-inline">
+                  <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" type="text" name="stock" class="layui-input" value="{{$goods->stock}}">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red"></span>@if($errors->has('stock')) {{$errors->first('stock')}} @endif
               </div>
           </div>
           <div class="layui-form-item">

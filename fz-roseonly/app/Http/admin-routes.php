@@ -80,6 +80,10 @@ Route::get('goods/edit/{id}','GoodsController@edit');
 Route::post('goods/update/{id}','GoodsController@update');
 //修改删除方法
 Route::get('goods/destroy/{id}','GoodsController@destroy');
+//商品添加属性的方法
+Route::get('/goods/attr','GoodsController@attr');
+//添加属性值得方法
+Route::get('/goods/value','GoodsController@value');
 
 
 // 权限管理--------------------------------------------------------

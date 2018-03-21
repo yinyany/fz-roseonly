@@ -184,8 +184,7 @@
                                         <td></td>
                                         <td>姓名</td>
                                         <td>
-                                            <input type="text" name="name" maxlength=15 class="text" value="{{ $model->name }}" style="text-indent: 20px;">
-                                            @if($errors->has('name')) {{$errors->first('name')}} @endif
+                                            <input type="text" name="name" maxlength=15 class="text" value="{{ $model->name }}" style="text-indent: 20px;" readonly="readonly">
                                         </td>
                                         <td colspan="2" rowspan="3">
                                             <!-- 上传的头像 -->
@@ -199,7 +198,7 @@
                                         <td><input type="text" name="fere" value="{{ $model->fere }}" maxlength=15 class="text" style="text-indent: 20px;"></td>
                                         @if($errors->has('fere')) {{$errors->first('fere')}} @endif
                                         <td>手机</td>
-                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;" id="phone">
+                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;" id="phone1" autofocus="">
                                         @if($errors->has('phone')) {{$errors->first('phone')}} @endif
                                         </td>
                                         <td colspan="2"></td>
@@ -520,20 +519,10 @@
             @include('flash::message')
         </div>
     </article>
-    <script type="text/javascript">
-        $(function(){
-           $("#phone").focus(function(){
-                alert(111);
-            }); 
-        })
-        
-    </script>
-    <script src="{{ asset('static/admin/lib/layui/layui.js') }}"></script>
     <script>
         layui.use('upload', function(){
             var $ = layui.$
             var upload = layui.upload;
-
              $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

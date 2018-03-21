@@ -82,10 +82,6 @@ class ValueController extends Controller
             'name.required' => '属性值必填',
             'name.max' => '属性值最长16位',
         ]);
-        if (!$request->has('imgurl')) {
-            flash()->overlay('上传图片错误', 5);
-            return back();
-        }
         $datas = new Value;
         $datas->imgurl = $request->input("imgurl"); 
         $datas->name = $request->input("name");
@@ -120,6 +116,7 @@ class ValueController extends Controller
         foreach ($data as $k => $v) {
             $datas[$v['id']] = $v['name'];
         }
+
         return view('admin.values.edit',['values'=>$values,'datas'=>$datas]);
     }
 

@@ -32,9 +32,12 @@
             <th>ID</th>
             <th>类名</th>
             <th>商品名</th>
+            <th>属性名</th>
+            <th>属性值</th>
             <th>商品图片</th>
             <th>商品简介</th>
             <th>商品价格</th>
+            <th>商品库存</th>
             <th>商品销售量</th>
             <th>商品状态</th>
             <th>添加时间</th>
@@ -44,11 +47,14 @@
           @foreach($goods as $list)
           <tr>
             <td>{{ $list->id }}</td>
-            <td>{{ $datas[$list->type_id]}}</td> 
+            <td>{{ $datas[$list->type_id]}}</td>
             <td>{{ $list->name }}</td>
+            <td>{{ $attrs[$list->bid]}}</td>
+            <td>{{ $vvs[$list->vid]}}</td>
             <td><img src="/uploads/good/{{ $list->imgurl }}"></td>
             <td>{!! $list->content !!}</td>
             <td>{{ $list->price }}</td>
+            <td>{{ $list->stock }}</td>
             <td>{{ $list->votes }}</td>
             <td>{{ $list->state }}</td>
             <td>{{ $list->created_at }}</td>

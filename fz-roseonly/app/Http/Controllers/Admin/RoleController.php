@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Role;
-use App\Model\admin\Permission;
+use App\Model\Admin\Role;
+use App\Model\Admin\Permission;
 
 class RoleController extends Controller
 {

@@ -40,11 +40,6 @@
                     <option value="0">请选择</option>
                   </select>
               </div>
-              <div class="layui-input-inline">
-                  <select name="type_id" lay-filter="test3" id="mmm">
-                    <option value="0">请选择</option>
-                  </select>
-              </div> 
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -53,9 +48,7 @@
               <div class="layui-input-inline">
                   <select name="bute_id" lay-filter="" id="nnn">
                     <option value="0">请选择</option>
-                    @foreach($data as $list)
-                    <option value="{{$list->id}}">{{$list->name}}</option>
-                    @endforeach
+                    
                   </select> 
               </div>
              
@@ -149,24 +142,6 @@
             })
           });
           form.on('select(test2)', function(data){
-            $.ajax({
-              type:"GET",
-              url:'{{ url("/admin/value/value") }}?id='+data.value,
-              success:function(msg){
-                var selDom2 = $("#mmm");
-                selDom2.find("option").remove();
-                selDom2.append("<option value='0'>请选择</option>");
-                for(var i = 0; i<msg.data.length; i++){
-                  selDom2.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
-                }
-                form.render('select');
-              },
-              error:function(data){
-
-              }
-            })
-          });
-          form.on('select(test3)', function(data){
             $.ajax({
               type:"GET",
               url:'{{ url("/admin/values/values") }}?id='+data.value,

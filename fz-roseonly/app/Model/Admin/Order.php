@@ -19,12 +19,12 @@ class Order extends Model
 
     public function member()
     {
-        return $this->belongsTo('App\Model\admin\Member','id','member_id');
+        return $this->belongsTo('App\Model\Admin\Member','id','member_id');
     }
 
     public function order_goods()
     {
-        return $this->belongsTo('App\Model\admin\Member','id','order_id');
+        return $this->hasMany('App\Model\Admin\Order_goods','order_id','order_number');
     }
 
 }
