@@ -12,8 +12,6 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -56,7 +54,6 @@ class HomeController extends Controller
             flash()->overlay('原始密码错误', 5);
             return back();
         }
-
         $this->validate($request, [
             'password' => 'required|confirmed|min:6',
         ],[
@@ -117,14 +114,11 @@ class HomeController extends Controller
     public function update(Request $request, $id)
     {   
         $this->validate($request, [
-            'name' => 'required|max:36',
             'fere' => 'max:36',
             'fere_phone' => 'digits:11',
             'phone' => 'required|digits:11',
             'email' => 'required|email',
         ],[
-            'name.required' => '姓名必填',
-            'name.max' => '姓名最长36位',
             'fere.max' => '姓名最长36位',
             'fere_phone.digits' => '手机号为11位',
             'phone.required' => '手机号必填',
@@ -133,11 +127,13 @@ class HomeController extends Controller
             'email.email' => '邮箱格式错误',
         ]);
         $id = $request->id;
+        dd($request->name);
         $data = Member::where('id',$id)->update(['name'=>$request->name,'fere'=>$request->fere,'phone'=>$request->phone,'fere_phone'=>$request->fere_phone,'birthday'=>$request->birthday,'sex'=>$request->sex,'address'=>$request->address,'email'=>$request->email,'affective'=>$request->affective]);
         if($data>0){
-
+            flash()->overlay('修改成功', 1);
             return back();
         }else{
+            flash()->overlay('修改失败', 5);
             return back();
         }
     }

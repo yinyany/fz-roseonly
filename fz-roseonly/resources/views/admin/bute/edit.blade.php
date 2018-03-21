@@ -28,26 +28,16 @@
               </label>      
               <div class="layui-input-inline">
                   <select name="type_id" lay-filter="test">
-                    <option value="0">请选择</option>
                     @foreach($list as $v)
-                    <option @if($info->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
+                    <option @if($info->id === $v->id) selected @endif value='{{$v->id}}' disabled>{{$v->name}}</option>
                     @endforeach
                   </select>
               </div>
               <div class="layui-input-inline">
-                  <select name="type_id" lay-filter="test2" id="kkk">
-                    @foreach($data as $v)
-                    <option @if($ccc->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
-                    @endforeach
+                  <select name="type_id" lay-filter="test2">
+                    <option value="{{$bbb->id}}">{{$bbb->name}}</option>
                   </select>
               </div>
-              <div class="layui-input-inline">
-                  <select name="type_id" id="mmm">
-                    @foreach($three as $v)
-                    <option @if($bbb->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
-                    @endforeach
-                  </select>
-              </div> 
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -59,6 +49,17 @@
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red"></span><span style="color: red;">@if($errors->has('name')) {{$errors->first('name')}} @endif</span>
               </div>
+          </div>
+           <div class="layui-form-item">
+              <label class="layui-form-label">
+                <span class="x-red">*</span>状态
+              </label>
+              <div class="layui-input-inline">
+                <select name="state" lay-verify="">
+                  <option @if($bute->state==="单选") selected @endif value="单选">单选</option>
+                  <option @if($bute->state==="多选") selected @endif value="多选">多选</option>
+                </select> 
+              </div>  
           </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
@@ -83,45 +84,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-          });
-          var form = layui.form;
-          form.on('select(test)', function(data){
-            $.ajax({
-              type:"GET",
-              url:'{{ url("/admin/bute/good") }}?id='+data.value,
-              success:function(msg){
-                var selDom = $("#kkk");
-                selDom.find("option").remove();
-                selDom.append("<option value='0'>请选择</option>");
-                for(var i = 0; i<msg.data.length; i++){ 
-                  selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
-                }
-                form.render('select');
-              },
-              error:function(data){
-
-              }
-            })
-          });
-          form.on('select(test2)', function(data){
-            $.ajax({
-              type:"GET",
-              url:'{{ url("/admin/bute/good") }}?id='+data.value,
-              success:function(msg){
-                var selDom = $("#mmm");
-                selDom.find("option").remove();
-                selDom.append("<option value='0'>请选择</option>");
-                for(var i = 0; i<msg.data.length; i++){ 
-
-                  selDom.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
-                }
-                form.render('select');
-              },
-              error:function(data){
-
-              }
-            })
-          });
+          }); 
       });
       
     </script>

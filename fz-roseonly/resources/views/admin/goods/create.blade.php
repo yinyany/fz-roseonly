@@ -4,6 +4,7 @@
 @section('link')
     <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="/static/template.js"></script>
 @endsection 
 
 
@@ -40,12 +41,41 @@
                     <option value="0">请选择</option>
                   </select>
               </div>
-              <div class="layui-input-inline">
-                  <select name="type_id" id="mmm">
-                    <option value="0">请选择</option>
-                  </select>
-              </div> 
           </div>
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>属性名：
+              </label>
+              <div class="layui-input-inline" lay-filter="test4" id="nnn">
+                <input type="checkbox" name="" title="请选择属性名" disabled>
+              </div>
+          </div>
+          <div id="rai1"></div>
+
+          <script  id='rai' type="text/html">
+            <div  class="layui-form-item" id="radio<%=data.bute.id%>">
+                <label for="username" class="layui-form-label" id="value">
+                    <span class="x-red">*</span><%=data.bute.name%></label>
+                <div class="layui-input-inline" lay-filter="test4" id="values">
+                  <%for (var i = 0; i < data.data.length; i++) {%>
+                  <input type='radio' name='vid[<%=data.data[i].bute_id%>]' value='<%=data.data[i].id%>' title='<%=data.data[i].name%>' lay-filter='test4'>
+                  <%}%>
+                </div>
+            </div>
+          </script>
+          <div id="chec1"></div>
+          <script  id='chec' type="text/html">
+            <div  class="layui-form-item" id="checkbo<%=data.bute.id%>">
+                <label for="username" class="layui-form-label" id="value">
+                    <span class="x-red">*</span><%=data.bute.name%></label>
+                <div class="layui-input-inline" lay-filter="test4" id="values">
+                  <%for (var i = 0; i < data.data.length; i++) {%>
+                    <input type='checkbox' name='vid[<%=data.data[i].bute_id%>][]' value='<%=data.data[i].id%>' title='<%=data.data[i].name%>'>
+                  <%}%>
+                </div>
+            </div>
+          </script>
+
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>商品
@@ -91,6 +121,17 @@
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red"></span>@if($errors->has('price')) {{$errors->first('price')}} @endif
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>库存
+              </label>
+              <div class="layui-input-inline">
+                <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" type="text" name="stock" class="layui-input" value="{{old('price')}}">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red"></span>@if($errors->has('stock')) {{$errors->first('stock')}} @endif
               </div>
           </div>
           <div class="layui-form-item">
@@ -165,20 +206,59 @@
           form.on('select(test2)', function(data){
             $.ajax({
               type:"GET",
-              url:'{{ url("/admin/goods/good") }}?id='+data.value,
+              url:'{{ url("/admin/goods/attr") }}?id='+data.value,
               success:function(msg){
-                var selDom2 = $("#mmm");
-                selDom2.find("option").remove();
-                for(var i = 0; i<msg.data.length; i++){
-                  selDom2.append("<option value='"+msg.data[i].id+"'>"+msg.data[i].name+"</option>");
+                var selDom3 = $("#nnn");
+                if(msg.data==''){
+                  selDom3.children().remove();
+                  selDom3.append("<input type='checkbox' name='' title='请选择属性值'' disabled>");
+                  form.render('checkbox');
+                }else{
+                  selDom3.children().remove();
+                  for(var i = 0; i<msg.data.length; i++){
+                    selDom3.append("<input type='checkbox' name='bid[]' value='"+msg.data[i].id+"' title='"+msg.data[i].name+"' lay-filter='test4'>");
+                  }
+                  form.render('checkbox');
                 }
-                form.render('select');
               },
               error:function(data){
 
               }
             })
-          }); 
+          });
+          form.on('checkbox(test4)', function(data){
+            if(data.elem.checked===true){
+              $.ajax({
+                type:"GET",
+                url:'{{ url("/admin/goods/value") }}?id='+data.value,
+                success:function(msg){
+                  if(msg.data.bute.state==='单选'){
+                    var html = template(document.getElementById('rai').innerHTML,{data:msg.data,name:'vid[]'});
+                    document.getElementById('rai1').innerHTML += html;
+                    form.render('radio');
+                  }else{
+                    var html = template(document.getElementById('chec').innerHTML,{data:msg.data,name:'vid[]'});
+                    document.getElementById('chec1').innerHTML += html;
+                    form.render('checkbox');
+                  }
+                     
+                },
+                error:function(data){
+
+                }
+              })
+            }else{
+              var radio = document.getElementById('radio'+data.value);
+              var check = document.getElementById('checkbo'+data.value);
+              if (radio!=null) {
+                document.getElementById('rai1').removeChild(radio);
+              }
+              if (check!=null) {
+                document.getElementById('chec1').removeChild(check);
+              }
+            }
+            
+          });
       });
     </script>
     <script type="text/javascript" src="{{ asset('static/admin/ue/ueditor.config.js') }}"></script>

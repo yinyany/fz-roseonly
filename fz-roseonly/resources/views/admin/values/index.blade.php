@@ -44,7 +44,9 @@
             <td>{{ $list->id }}</td>
             <td>{{$datas[$list->bute_id] }}</td>
             <td>{{ $list->name }}</td>
-            <td><img src="/uploads/values/{{ $list->imgurl }}"></td>
+            <td>
+                <img src="/uploads/values/{{ $list->imgurl }}">
+            </td> 
             <td>{{ $list->created_at }}</td>
             <td class="td-manage">
               <a title="修改" href='{{ url("admin/values/edit/$list->id") }}'>

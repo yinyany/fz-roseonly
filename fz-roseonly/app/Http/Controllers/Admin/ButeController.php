@@ -68,7 +68,7 @@ class ButeController extends Controller
             'name.required' => '属性名必填',
             'name.max' => '属性名最长16位',
         ]);
-        $data = Bute::create(['name' =>$request->name,'type_id'=>$request->input('type_id')]);
+        $data = Bute::create(['name' =>$request->name,'type_id'=>$request->input('type_id'),'state'=>$request->state]);
         if($data) {
             flash()->overlay('添加成功', 1);
             return redirect('admin/bute');
@@ -108,9 +108,7 @@ class ButeController extends Controller
         $bbb = Type::where('id',$bute->type_id)->first();
         // 找出这个商品的2级类
         $ccc = Type::where('id',$bbb->parent_id)->first();
-        // 获取当前节点的3几类
-        $three = $ccc->getImmediateDescendants();
-        return view('admin.bute.edit',['bute'=>$bute,'list'=>$list,'info'=>$info,'value'=>$value,'data'=>$data,'ccc'=>$ccc,'bbb'=>$bbb,'three'=>$three]);
+        return view('admin.bute.edit',['bute'=>$bute,'list'=>$list,'info'=>$info,'value'=>$value,'data'=>$data,'ccc'=>$ccc,'bbb'=>$bbb]);
     }
 
     /**
@@ -122,10 +120,6 @@ class ButeController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        if($request->type_id==0){
-            flash()->overlay('请选择类别', 5);
-            return back();
-        }
         $input = $request->except('_token');
         $this->validate($request, [
             'name' => 'required|max:16',

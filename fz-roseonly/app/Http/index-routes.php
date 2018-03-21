@@ -30,11 +30,9 @@ Route::post('/newmember/{id}','HomeController@update');
 //上传头像的方法
 Route::post('/file/newmember','HomeController@newmember');
 //加载添加会员页面
-Route::post('/newmember/{id}','HomeController@newmember');
+Route::post('/newmember/{id}','HomeController@update');
 //添加收货地址
-Route::post('/newmember/{id}','HomeController@newmember');
-//
-Route::get('/file/mmm','HomeController@mmm');
+// Route::post('/newmember/{id}','HomeController@newmember');
 
 
 
