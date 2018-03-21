@@ -9,6 +9,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use App\Model\Admin\Goods_shopcar;
+use App\Model\Admin\Goods;
+
 
 class AuthindexController extends Controller
 {
@@ -44,7 +47,11 @@ class AuthindexController extends Controller
         // dd($info['name']);
         //验证账号是否存在
         $user = Member::where('name',$info['name'])->first();
-        if (!$user) {
+
+        $userInfo = $user->toArray();
+        $userId = $userInfo['id'];
+        // dd($userId);
+         if (!$user) {
             flash()->overlay('账号不存在', 5);
             return back();
         }
@@ -65,6 +72,15 @@ class AuthindexController extends Controller
         // //登陆成功
         //放置登陆信息,位置登陆状态
         $request->session()->put('usersInfo', $user->toArray());
+        // session(['usersInfo' => $user->toArray()]);
+
+         //查询出会员的id是多少，再通过购物车查商品
+        $shopcar = Goods_shopcar::with('goods')->where('member_id',$userId)->get();
+
+        // dd($shopcar->toArray());
+        $shopgoods = $shopcar->toArray();
+        $request->session()->put('usersInfo.shopnum',count($shopgoods));
+
         // session(['usersInfo'=>$user->toArray()]);
         return redirect('/');
     }

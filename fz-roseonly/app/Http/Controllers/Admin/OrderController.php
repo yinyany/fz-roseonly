@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Order;
-use App\Model\admin\Member;
+use App\Model\Admin\Order;
+use App\Model\Admin\Member;
 
 
 class OrderController extends Controller

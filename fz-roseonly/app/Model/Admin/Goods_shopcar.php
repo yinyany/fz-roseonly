@@ -17,7 +17,7 @@ class Goods_shopcar extends Model
 
     public function goods()
     {
-        return $this->belongsTo('App\Model\admin\Goods','goods_id');
+        return $this->belongsTo('App\Model\Admin\Goods','goods_id');
     }
 
 }

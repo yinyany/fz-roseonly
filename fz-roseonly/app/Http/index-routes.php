@@ -53,5 +53,11 @@ Route::get('/detail/{id}','ListController@detail');
 
 // 购物车页面 ----------------------------------------------------
 
-Route::get('shopcar','ShopcarController@index');
-Route::get('orderhome','OrderhomeController@index');
+Route::get('/shopcar','ShopcarController@index');
+//修改购物车数据
+Route::post('/shopcar/update/{id}','ShopcarController@update');
+Route::post('/shopcar/destroy/{id}','ShopcarController@destroy');
+Route::post('/shopcar/store','ShopcarController@store');
+Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
+
+Route::get('/orderhome','OrderhomeController@index');

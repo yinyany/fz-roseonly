@@ -78,7 +78,7 @@
                     </label>
                     <a class="fl delete" id="deleteAll" href="javascript:;">删除</a>
                     <div class="fr closing" id="jiesuan">
-                        
+                        <input type="hidden" name="order_number" value="{{ date('YmdHis').rand(100,200) }}">
                          结 算
                     </div>
                     <input type="hidden" id="cartTotalPrice">

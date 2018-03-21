@@ -14,9 +14,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');    
-            $table->integer('order_number')->unique();        //订单号  
+            $table->string('order_number',100)->unique();        //订单号  
             $table->integer('member_id');                     //会员ID    
             $table->double('pay_prices',20,2);                //实际支付价格
+            $table->integer('shaddress_id');                  //收货地址关联Id
             $table->tinyInteger('is_pay');                    //是否支付 0：未支付，1：完成支付
             $table->integer('pay_time');                      //支付时间 UNIX时间戳  
             $table->tinyInteger('is_ship');                   //是否发货。0：未发货，1：已发货
