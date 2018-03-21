@@ -73,7 +73,7 @@
                     <div class="list">
                         <ul class="flower">
                             <li>
-                                <a href="" title="经典-许愿">
+                                <a href="javascript:;" title="经典-许愿">
                                     <img src="{{ asset('static/index/images/index/flower1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 许愿</span>
@@ -83,7 +83,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -93,7 +93,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -103,7 +103,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -113,7 +113,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -123,7 +123,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -133,7 +133,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -143,7 +143,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/flower8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -156,7 +156,7 @@
                         </ul>
                         <ul class="rose" style="display: none;">
                             <li>
-                                <a href="" title="经典-许愿">
+                                <a href="javascript:;" title="经典-许愿">
                                     <img src="{{ asset('static/index/images/index/rose1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 许愿</span>
@@ -166,7 +166,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -176,7 +176,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -186,7 +186,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -196,7 +196,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -206,7 +206,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -216,7 +216,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -226,7 +226,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/rose8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -239,7 +239,7 @@
                         </ul>
                         <ul class="gem" style="display: none;"><!-- 珠宝 -->
                             <li>
-                                <a href="" title="经典-许愿">
+                                <a href="javascript:;" title="经典-许愿">
                                     <img src="{{ asset('static/index/images/index/gem1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 许愿</span>
@@ -249,7 +249,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -259,7 +259,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -269,7 +269,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -279,7 +279,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -289,7 +289,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -299,7 +299,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -309,7 +309,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/gem8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -322,7 +322,7 @@
                         </ul>
                         <ul class="decoration" style="display: none;"><!-- 饰品 -->
                             <li>
-                                <a href="" title="经典-许愿">
+                                <a href="javascript:;" title="经典-许愿">
                                     <img src="{{ asset('static/index/images/index/decoration1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 许愿</span>
@@ -332,7 +332,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -342,7 +342,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -352,7 +352,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -362,7 +362,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -372,7 +372,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -382,7 +382,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>
@@ -392,7 +392,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="经典-朱砂">
+                                <a href="javascript:;" title="经典-朱砂">
                                     <img src="{{ asset('static/index/images/index/decoration8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 朱砂</span>

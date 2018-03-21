@@ -22,6 +22,8 @@ class DetailController extends Controller
         //导航栏
         $array = Type::get()->toHierarchy();
 
+        //搜索商品
+        
         return view('index.detail',['array'=>$array,'list'=>$list,'id'=>$id]);
     }
 

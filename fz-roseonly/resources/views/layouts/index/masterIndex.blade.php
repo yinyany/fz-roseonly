@@ -20,8 +20,8 @@
 			<div class="head">
 				<!-- ++++++++++ 左边两个logo图标+链接 +++++++++++ -->
 				<div class="head_left">
-					<a href="javascript:;" class="roseonly onHead"></a>
-					<a href="javascript:;" class="loveroseonly"></a>
+					<a href="{{ url('/') }}" class="roseonly onHead"></a>
+					<a href="{{ url('/') }}" class="loveroseonly"></a>
 				</div>
 				<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
 				<div class="select_com" style="margin-left:850px;">
@@ -51,7 +51,7 @@
 		</div>
 		<!-- ++++++++++ logo +++++++++++ -->
 		<div id="logo">
-			<a href="index.html">
+			<a href="{{ url('/') }}">
 				<img src="{{ asset('static/index/images/comment/logo.jpg') }}" alt="roseonly官网" title="roseonly官网">
 			</a>
 		</div>
