@@ -31,8 +31,8 @@ Route::post('/newmember/{id}','HomeController@update');
 Route::post('/file/newmember','HomeController@newmember');
 //加载添加会员页面
 Route::post('/newmember/{id}','HomeController@update');
-//添加收货地址
-// Route::post('/newmember/{id}','HomeController@newmember');
+//修改个人资料
+Route::post('/memadress','HomeController@memadress');
 
 
 

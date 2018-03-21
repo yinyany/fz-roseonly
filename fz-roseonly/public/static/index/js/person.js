@@ -16,5 +16,3 @@ $(function(){
         $('#order .order_con .sec3').eq(index1).show().siblings('div').hide();
     })
 })
-
-

@@ -121,7 +121,7 @@ class GoodsController extends Controller
         // dd($types->toArray());
         foreach($types as $v){
             if($v->state  === '单选'){
-
+                
             }elseif($v->state  === '多选'){
 
             }

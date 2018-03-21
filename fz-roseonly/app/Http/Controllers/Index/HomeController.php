@@ -87,7 +87,6 @@ class HomeController extends Controller
         if($field->isValid()){
             $ext = $field->getClientOriginalExtension();
             $newName = md5(time().rand(1,6666)).'.'.$ext;
-            Member::where('id',$data)->update(['imgurl'=>$newName]);
             $path = $field->move(public_path().'/uploads/picture',$newName);
             return ['code'=>0,'msg'=>'','data'=>['src'=>$newName,'data'=>$data]];
         }
@@ -144,9 +143,25 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function memadress(Request $request)
+    {   
+        // var_dump($request->fere);
+        $info['fere'] = $request->fere;
+        $info['fere_phone'] = $request->fere_phone;
+        $info['name'] = $request->name;
+        $info['phone'] = $request->phone;
+        $info['birthday'] = $request->birthday;
+        $info['affective'] = $request->affective;
+        $info['sex'] = $request->sex;
+        $info['address'] = $request->address;
+        $info['email'] = $request->email;
+        $info['imgurl'] = $request->two;
+        $id = $request->id;
+        // var_dump($id);
+        $meber = Member::where('id',$id)->update($info);
+        // var_dump($meber);
+        return ['code'=>0,'msg'=>'','data'=>$meber];
+
     }
 
     public function picture(Request $request)
