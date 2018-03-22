@@ -8,10 +8,10 @@
 	<script src="{{ asset('static/index/js/jquery.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('static/index/js/comment.js') }}" type="text/javascript"></script>
 
-	@section('link')
-		{{-- 此区块继承加载其他外部引入文件 --}} 
-	@show
-
+    @section('link')
+        {{-- 此区块继承加载其他外部引入文件 --}} 
+    @show
+    
 </head>
 <body>
 	<header>
@@ -23,7 +23,6 @@
 					<a href="javascript:;" class="roseonly onHead"></a>
 					<a href="javascript:;" class="loveroseonly"></a>
 				</div>
-
 				<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
                 <div class="head_right" style="width:170px;">
                     @if(session('usersInfo') != null)
@@ -186,7 +185,7 @@
 			<div class="left">
 				<a href="javascript:;"><img src="{{ asset('static/index/images/comment/footer_logo.png') }}" alt=""></a>
 				<p>
-					<span>关注我们</span>
+					<span  style="display: inline;margin-left:-120px;">关注我们</span>
 					<a class="weixin">
 						<img src="{{ asset('static/index/images/comment/weixin.png') }}" class="small">
 					</a>

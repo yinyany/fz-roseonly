@@ -117,7 +117,7 @@ class ShopcarController extends Controller
         // dd($info);
         $goid = explode("@",rtrim($info['goid'],'@'));
         $gonum = explode("@",rtrim($info['gonum'],'@'));
-        // count($goid);
+        count($goid);
         // dd(count($goid));
    
         // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
@@ -160,8 +160,11 @@ class ShopcarController extends Controller
                                             ->get();
         // dd($order);                                    
         // dd($order->toArray());
+        
 
         $orderb = $order->toArray();
+        $ordernum = count($orderb);
+        // dd( $ordernum );
 
   //导航栏
         $array = Type::get()->toHierarchy();
@@ -175,7 +178,7 @@ class ShopcarController extends Controller
         // dd($memainfo['memaddress']);
         $memaddress = $memainfo['memaddress'];
 
-        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress]);
+        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress,'ordernum'=>$ordernum]);
 
     }
 
@@ -244,8 +247,6 @@ class ShopcarController extends Controller
 
         $infogoid = $request->goid;
         $infogonum = $request->gonum;
-
-
 
         $totalprices = $request->totalprices;
         // $info['ordernum'] = $request->ordernum;

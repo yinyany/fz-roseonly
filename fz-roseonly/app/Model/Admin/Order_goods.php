@@ -17,7 +17,7 @@ class Order_goods extends Model
 
     public function goods()
     {
-        return $this->belongsTo('App\Model\Admin\Goods','goods_id');
+        return $this->belongsTo('App\Model\Admin\Goods','goods_id','id');
     }
 
     public function order()
