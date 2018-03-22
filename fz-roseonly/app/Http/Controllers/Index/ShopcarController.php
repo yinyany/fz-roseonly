@@ -61,9 +61,27 @@ class ShopcarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+        $memid = session('usersInfo')['id'];
+
+        // dd($memid);  
+
+        $shpeople = $request->shpeople;
+        $shphone = $request->shphone;
+        $shaddress = $request->shaddress;
+        $postcode = $request->postcode;
+
+       $orderis =   Memaddress::insert(['shpeople'=>$shpeople,
+                    'member_id'=>$memid,
+                    'shphone'=>$shphone,
+                    'shaddress'=>$shaddress,
+                    'shpostcode'=>$postcode
+                    ]);
+       return redirect("shopcar/show/$memid");
     }
 
     /**
@@ -85,6 +103,14 @@ class ShopcarController extends Controller
         $info['gonum'] = $request->godnum;
         $totalprices = $request->totalprice;
         $ordernum = $request->ordernum;
+
+        $ornum = Order::where('order_number',$ordernum)->first();
+
+        if($ornum){
+            flash()->overlay('该商品已添加至订单', 1);
+            return back();
+        }
+
         $createtime = $request->created_at;
         $shaddid = $request->shaddress_id;
         // dd($info);
@@ -93,35 +119,28 @@ class ShopcarController extends Controller
         // count($goid);
         // dd(count($goid));
    
-        //查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
+        // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
        for ($i=0; $i <count($goid) ; $i++) { 
            // echo $gonum[$i];
            Order_goods::insert(['order_id'=>$ordernum,
                             'goods_id'=>$goid[$i],
                             'goods_num'=>$gonum[$i]
                             ]);
+           Goods_shopcar::destroy($goid[$i]);
 
        }
-       Order::insert(['order_number'=>$ordernum,
+     $orderis =   Order::insert(['order_number'=>$ordernum,
                     'member_id'=>$memid,
                     'pay_prices'=>$totalprices,
                     'created_at'=>$createtime,
                     'shaddress_id'=>$shaddid
                     ]);
         
-       // dd($request->session()->has('usersInfo'));
-        // $this->show($memid,$goid);
-         $order = Order::with('order_goods')->where('member_id',$memid)
-                                            ->get();
-                                            // ->where('');
-        // dd($order->toArray());
-        $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
-        $shopinfo = $shop->toArray();
-
-
-        // dd($shopinfo);
-        return view('index.person3');
-
+       if($orderis){
+            return redirect("shopcar/show/$memid");
+       }else{
+            return back();
+       }
     }
 
     /**
@@ -132,7 +151,22 @@ class ShopcarController extends Controller
      */
     public function show($id)
     {
-       
+
+       // dd($request->session()->has('usersInfo'));
+        // $this->show($memid,$goid);
+         $order = Order::with('order_goods.goods')->with('memaddress')->where('member_id',$id)
+                                            ->orderby('created_at','desc')
+                                            ->get();
+        // dd($order);                                    
+        // dd($order->toArray());
+
+        $orderb = $order->toArray();
+
+
+        // dd($shopinfo);
+        // dd($shopinfo);
+        return view('index.person3',['order'=>$orderb]);
+
     }
 
     /**
@@ -187,9 +221,11 @@ class ShopcarController extends Controller
     }
 
 
-
-
-
+    /**
+     * [购物车页面点击结算后跳转至收货地址选择页面]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function jiesuan(Request $request){
         if (session('usersInfo') == NULL) {
             return view('authindex/login');
@@ -198,6 +234,9 @@ class ShopcarController extends Controller
 
         $infogoid = $request->goid;
         $infogonum = $request->gonum;
+
+
+
         $totalprices = $request->totalprices;
         // $info['ordernum'] = $request->ordernum;
         // dd($info);

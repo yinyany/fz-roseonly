@@ -57,7 +57,10 @@ Route::get('/shopcar','ShopcarController@index');
 //修改购物车数据
 Route::post('/shopcar/update/{id}','ShopcarController@update');
 Route::post('/shopcar/destroy/{id}','ShopcarController@destroy');
+Route::get('/shopcar/show/{id}','ShopcarController@show');
 Route::post('/shopcar/store','ShopcarController@store');
+Route::post('/shopcar/create','ShopcarController@create');
 Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
 
 Route::get('/orderhome','OrderhomeController@index');
+Route::get('/orderhome/destroy/{id}','OrderhomeController@destroy');
