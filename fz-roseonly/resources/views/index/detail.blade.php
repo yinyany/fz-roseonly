@@ -16,34 +16,26 @@
                 <div class="fadeDiv">
                     <div class="fadeLeft">
                         <ul>
-                            <li style="display: block;"><img src="{{ asset('static/index/images/details/opt_big1.png') }}" alt="玫瑰熊-嫣红" width="350" height="350" title="玫瑰熊-嫣红"></li>
-                            <li><img src="{{ asset('static/index/images/details/opt_big2.png') }}" alt="玫瑰熊-嫣红" width="350" height="350" title="玫瑰熊-嫣红"></li>
-                            <li><img src="{{ asset('static/index/images/details/opt_big3.png') }}" alt="玫瑰熊-嫣红" width="350" height="350" title="玫瑰熊-嫣红"></li>
-                            <li><img src="{{ asset('static/index/images/details/opt_big4.png') }}" alt="玫瑰熊-嫣红" width="350" height="350" title="玫瑰熊-嫣红"></li>
-                            <li><img src="{{ asset('static/index/images/details/opt_big4.png') }}" alt="玫瑰熊-嫣红" width="350" height="350" title="玫瑰熊-嫣红"></li>                              
+                            <li style="display: block;"><img src="/uploads/good/{{ $list->imgurl }}"  width="350" height="350" ></li>                           
                         </ul>
                         <ol>
-                             <li class="selected"><img src="{{ asset('static/index/images/details/opt_sma1.png') }}" width="55" height="55"></li>
-                             <li><img src="{{ asset('static/index/images/details/opt_sma2.png') }}" width="55" height="55"></li>
-                             <li><img src="{{ asset('static/index/images/details/opt_sma3.png') }}" width="55" height="55"></li>
-                             <li><img src="{{ asset('static/index/images/details/opt_sma4.png') }}" width="55" height="55"></li>
-                             <li><img src="{{ asset('static/index/images/details/opt_sma4.png') }}" width="55" height="55"></li>
+                             <li class="selected"><img src="/uploads/good/{{ $list->imgurl }}" width="55" height="55"></li>
                         </ol>
                     </div> 
                     <div class="pro_det">
-                        <p>经典永续-经典19支许愿 80cm长形</p>
-                        <p>1021010014</p>
+                        <p>{{ $list->name }}</p>
+
                         <div class="price">
                              <p class="font">价格：</p>
-                             <p>¥2399.0</p>
+                             <p>¥{{ $list->price }}</p>
                              <strong style="display: block;clear:both;"></strong>   
                         </div>
+                        <p class="font">商品属性：</p>
                         <div class="color">
-                            <p class="font">颜色：</p>
-                            <p class="color_img">
-                                <a href=""><img src="{{ asset('static/index/images/details/opt_sma1.png') }}" alt=""></a>
+                            <div class="color_img">
+                               {!! shopStr2Arr($list->bid) !!}
                                 <strong style="display: block;clear:both;"></strong> 
-                            </p>
+                            </div>
                             <strong style="display: block;clear:both;"></strong>  
                         </div>
                         <div class="number">
@@ -69,157 +61,51 @@
                 </div>
             </div>
 
-            <div id="param">
-                <h3>产品参数</h3>
-                <table>
-                    <col>
-                    <col>
-                    <col width="180">
-                    <col>
-                    <col>
-                    <tr>
-                        <td><b>•适用场景：</b></td>
-                        <td>求婚、纪念日</td>
-                        <td></td>
-                        <td><b>•鲜花朵数：</b></td>
-                        <td>19支</td>
-                    </tr>
-                    <tr>
-                        <td><b>•适用对象：</b></td>
-                        <td>女朋友</td>
-                        <td></td>
-                        <td><b>•颜色分类：</b></td>
-                        <td>许愿</td>
-                    </tr>
-                    <tr>
-                        <td><b>•适用节日：</b></td>
-                        <td>情人节、520表白日、七夕节</td>
-                        <td></td>
-                        <td><b>•产品规格：</b></td>
-                        <td>81*21*13cm</td>
-                    </tr>
-                </table>
-                <strong style="display: block;clear:both;"></strong>
-            </div>
-
             <div id="detail">
                 <img src="{{ asset('static/index/images/details/xq_08.png') }}">
                 <h2 class="title"><span style="color: red;">商品详情</span><span>买家评论</span></h2>
                 <div class="cont">
                     <div calss="img" style="display: block">
-                        <img src="{{ asset('static/index/images/details/15.jpg') }}" alt="颜色">
-                        <img src="{{ asset('static/index/images/details/4.jpg') }}" alt="颜色">
-                        <img src="{{ asset('static/index/images/details/5.jpg') }}" alt="颜色">
-                        <img src="{{ asset('static/index/images/details/6.jpg') }}" alt="颜色">
-                        <img src="{{ asset('static/index/images/details/7.jpg') }}" alt="颜色">
-                        <img src="{{ asset('static/index/images/details/16.jpg') }}" alt="颜色">
+                       {!! $list->content !!}
                         <strong style="display: block;clear: both;"></strong>
                     </div>
                     <div class="comment">
                         <ul id="pn">
-                            <li class="list0">
-                                <a class="close" href="javascript:;">X</a>
-                                <div class="head"><img src="{{ asset('static/index/images/details/img1.jpg') }}" width="60px" height="60px"> </div>
-                               
-                                  
-                                <div class="content">
-                                    <p class="text">
-                                      <span class="name">Andy：</span>
-                                      哈哈哈哈哈谁还没个妈～//@我的朋友是个呆B: 饮水机那个蕾丝罩我给跪了//@八卦_我实在是太CJ了:仿佛看到了自己家
-                                    </p> 
-                                    <div class="pic">
-                                        <img src="{{ asset('static/index/images/details/opt_sma1.png') }}" width="30px" height="30px">
-                                    
-                                    </div>
-                                    
-                               
-                                <div class="good">
-                                    <span class="date">02-14 23:01</span>
-                                    <a class="dzan" href="javascript:;">赞</a>
-                                </div>
-                                 <div class="people" total="2980">2980人觉得很赞</div>
-                                <div class="comment-list">
-                                    <div class="comment" user="self">
-                                        <div class="comment-left"> <img src="{{ asset('static/index/images/details/img2.jpg') }}" width="30px" height="30px"></div>
-                                   
-                               
-                                        <div class="comment-right">
-                                            <div class="comment-text">
-                                                <span class="user">老王：</span>
-                                                 我住隔壁我姓王
+                            <!-- //评论 -->
+                            @foreach($comment as $values)
+                                <li class="list0">
+                                      <!-- 首次评论用户个人头像 -->
+                                      <div class="head"><img src="/uploads/picture/{{ $values->member->imgurl }}" width="60px" height="60px"> </div>
+                                      <!-- 首次评论内容 -->
+                                      <div class="content">
+                                          <p class="text">
+                                            <span class="name">{{$values->member->name}}：</span>
+                                            {{ $values->content }}
+                                          </p> 
+                                      <!-- 评论时间 -->
+                                      <div class="good">
+                                          <span class="date">{{ $values->created_at }}</span>
+                                      </div>
+                                      <div class="people"></div>
+                                            <!-- 追加评论1 -->
+                                            <div class="comment-list">
+                                                <div class="comment" user="self">
+                                                      <div class="comment-right">
+                                                          <div class="comment-text">
+                                                              <!-- 追加评论用户 -->
+                                                              <span class="user">管理员:</span>
+                                                              <!-- 追加评论内容 -->
+                                                               {{ $values->reply }}
+                                                          </div>
+                                                      </div>
+                                                </div>
                                             </div>
-                                            <div class="comment-date">02-14 22:00
-                                                 <a class="comment-zan" href="javascript:;" total="23" my="1">23 取消赞</a>
-                                                 <a class="comment-dele" href="javascript:;">回复</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comment" user="self">
-                                          <div class="comment-left">
-                                            <img src="{{ asset('static/index/images/details/img3.jpg') }}" width="30px" height="30px">
-                                          </div>
-                                          <div class="comment-right">
-                                              <div class="comment-text">
-                                                <span class="user">我：</span>看哭了留卡号吧
-                                              </div>
-                                              <div class="comment-date">02-14 24:00
-                                                <a class="comment-zan" href="javascript:;" total="0" my="0">赞</a>
-                                                <a class="comment-dele" href="javascript:;">删除</a>
-                                              </div>
-                                          </div>
-                                    </div>
-                                </div>
-                                     <div class="hf">
-                                         <textarea type="text" class="hf-text" autocomplete="off" maxlength="100">评论…</textarea>
-                                         <button class="hf-btn">回复</button>
-                                         <span class="hf-nub">0/100</span>
-                                     </div> 
-                                </div>
-                             </li>
-                             <li class="list0">
-                             <a class="close" href="javascript:;">X</a>
-                             <div class="head">
-                                <img src="{{ asset('static/index/images/details/img4.jpg') }}" width="60px" height="60px">
-                            </div>
-                             <div class="content">
-                             <p class="text"><span class="name">Andy：</span>哈哈哈哈哈谁还没个妈～//@我的朋友是个呆B: 饮水机那个蕾丝罩我给跪了//@八卦_我实在是太CJ了:仿佛看到了自己家</p> 
-                             <div class="pic">
-                                <img src="{{ asset('static/index/images/details/img1.jpg') }}" width="30px" height="30px">
-                            </div>
-                             <div class="good">
-                                <span class="date">02-14 23:01</span>
-                                <a class="dzan" href="javascript:;">赞</a>
-                            </div>
-                             <div class="people" total="0" style="display: none;">
-                                 
-                             </div>
-                             <div class="comment-list">
-                             <div class="comment" user="self">
-                              <div class="comment-left">
-                                <img src="{{ asset('static/index/images/details/16.png') }}" width="30px" height="30px">
-                            </div>
-                              <div class="comment-right">
-                              <div class="comment-text">
-                                <span class="user">我：</span>
-                                看哭了留卡号吧</div>
-                              <div class="comment-date">02-14 24:00
-                              <a class="comment-zan" href="javascript:;" total="286" my="1">286 取消赞</a>
-                              <a class="comment-dele" href="javascript:;">删除</a>
-                              </div>
-                              </div>
-                             </div>
-                             </div>
-                             <div class="hf">
-                             <textarea type="text" class="hf-text" autocomplete="off" maxlength="100">评论…</textarea>
-                             <button class="hf-btn">回复</button>
-                             <span class="hf-nub">0/100</span>
-                             </div>
-                             </div>
-                             </li>
+                                      </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
-                </div>
-                    
+                </div>   
             </div>
 
 

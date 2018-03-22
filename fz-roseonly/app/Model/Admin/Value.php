@@ -16,4 +16,8 @@ class Value extends Model
   //       }
   //       return $datas[$value];
   //   }
+  	public function bute()
+    {
+        return $this->belongsTo('App\Model\Admin\Bute','type_id');
+    }
 }

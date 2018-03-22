@@ -84,6 +84,7 @@ Route::get('goods/destroy/{id}','GoodsController@destroy');
 Route::get('/goods/attr','GoodsController@attr');
 //添加属性值得方法
 Route::get('/goods/value','GoodsController@value');
+Route::get('/goods/color','GoodsController@color');
 
 
 // 权限管理--------------------------------------------------------
@@ -171,6 +172,8 @@ Route::post('values/upload','ValueController@upload');
 Route::get('value/value','ValueController@value');
 
 Route::get('values/values','ValueController@values');
+
+
 
 
 //库存列表管理=================================================

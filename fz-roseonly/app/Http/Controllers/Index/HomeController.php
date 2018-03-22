@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
 use App\Model\Admin\Type;
+use App\Model\Admin\Bute;
 use App\Model\Admin\Carousel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -20,8 +21,9 @@ class HomeController extends Controller
     public function index()
     {
          //导航栏
-        $array = Type::get()->toHierarchy();
-
+        $array = Type::with('bute.value')->get()->toHierarchy();
+        // $bute =  Bute::where('state','单选')->get();
+        // dd($array->toArray());
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
         return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
@@ -35,7 +37,8 @@ class HomeController extends Controller
     public function member($id)
     {   
          //导航栏
-        $array = Type::get()->toHierarchy();
+        $array = Type::with('bute.value')->get()->toHierarchy();
+        
         // dd($datas);
         $model = Member::findOrFail($id);
         return view('index.person3',['model'=>$model,'array'=>$array]);

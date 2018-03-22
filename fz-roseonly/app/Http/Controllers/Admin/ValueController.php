@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Admin\Value;
+use App\Model\Admin\Goods;
 use App\Model\Admin\Bute;
 use App\Model\Admin\Type;
 use App\Http\Requests;
@@ -28,12 +29,19 @@ class ValueController extends Controller
             $values = Value::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
             $count = Value::count();
         }
-        $data = Bute::get(['id','name'])->toArray();
+        $data = Bute::get(['id','name','type_id'])->toArray();
+        $type = Type::get(['id','name'])->toArray();
         $datas = [];
+        $types = [];
+        $typeid = [];
+        foreach($type as $k => $v){
+            $typeid[$v['id']] = $v['name'];
+        }
         foreach ($data as $k => $v) {
             $datas[$v['id']] = $v['name'];
+            $types[$v['id']] = $v['type_id'];
         }
-        return view('admin.values.index',['values'=>$values,'count'=>$count,'keywords'=>$keywords,'datas'=>$datas]);
+        return view('admin.values.index',['values'=>$values,'count'=>$count,'keywords'=>$keywords,'datas'=>$datas,'types'=>$types,'typeid'=>$typeid ]);
     }
 
 
@@ -70,11 +78,14 @@ class ValueController extends Controller
      */
     public function store(Request $request)
     {   
+        if($request->type_id==0){
+            flash()->overlay('请选择商品类名', 5);
+            return back();
+        }
         if($request->bute_id==0){
             flash()->overlay('请选择属性名', 5);
             return back();
         }
-        //
         $data = Bute::where('id',$request->bute_id)->first();
         $this->validate($request, [
             'name' => 'required|max:16',
@@ -83,7 +94,6 @@ class ValueController extends Controller
             'name.max' => '属性值最长16位',
         ]);
         $datas = new Value;
-        $datas->imgurl = $request->input("imgurl"); 
         $datas->name = $request->input("name");
         $datas->bute_id = $data->id;
         $datas->save();
@@ -116,7 +126,6 @@ class ValueController extends Controller
         foreach ($data as $k => $v) {
             $datas[$v['id']] = $v['name'];
         }
-
         return view('admin.values.edit',['values'=>$values,'datas'=>$datas]);
     }
 
@@ -129,13 +138,7 @@ class ValueController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        if (!$request->has('imgurl')) {
-            flash()->overlay('上传图片错误', 5);
-            return back();
-        }
         $input['name'] = $request->name;
-        $input['imgurl'] = $request->imgurl;
-        // dd($input);
         $values = Value::where('id',$id)->update($input);
         // dd($values);
         if ($values) {
@@ -154,7 +157,17 @@ class ValueController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $data = Goods::get();
+        // dd($data);
+        foreach ($data as  $v) {
+            // dd (strpos($v->bid,"$id"));
+            if(strpos($v->bid,"$id")  > 0){
+               flash()->overlay('删除失败,当前属性值正在出售', 5);
+               return back(); 
+            }
+        }
+        // dd();
         if (Value::destroy($id)) {
             flash()->overlay('删除成功', 1);
             return redirect('admin/values');
@@ -163,13 +176,7 @@ class ValueController extends Controller
             return back();
         }
     }
-
-    public function value(Request $request){
-        $info = Type::where('id',$request->id)->first();
-        $value = $info->getImmediateDescendants();
-        return ['code'=>0,'msg'=>'','data'=>$value];
-    }
-
+    //获取属性名
     public function values(Request $request){
         $attr = Bute::where('type_id',$request->id)->get();
         return ['code'=>0,'msg'=>'','data'=>$attr];

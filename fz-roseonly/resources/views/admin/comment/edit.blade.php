@@ -22,30 +22,6 @@
     <div class="x-body">
       <form class="layui-form" action='{{ url("admin/comment/update/$node->id") }}' method="post">
           {{csrf_field()}}
-
-          @foreach($parent as $value)
-              <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <span class="x-red">*</span>评论
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text"  name="name" class="layui-input" value="{{ $value->content }}" disabled>
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="L_email" class="layui-form-label">
-                    <span class="x-red">*</span>回复
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" name="display_name" class="layui-input" value="{{ $value->reply }}" disabled>
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>
-            </div>
-          @endforeach()
           <div class="layui-form-item">
                 <label for="username" class="layui-form-label">
                     <span class="x-red">*</span>评论

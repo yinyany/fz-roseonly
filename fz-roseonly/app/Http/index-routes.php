@@ -38,7 +38,8 @@ Route::post('/newmember/{id}','HomeController@update');
 
 
 //加载商品列表页面-------------------------------------------------
-Route::get('/list/{id}','ListController@index');
+Route::get('/list/{id}/{type?}/{order?}','ListController@index');
+// Route::get('/list/type/{id}','ListController@type');
 //根据销量排序
 Route::get('/list/votes/{id}','ListController@votes');
 //根据创建时间排序

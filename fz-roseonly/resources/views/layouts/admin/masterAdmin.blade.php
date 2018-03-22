@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="{{ asset('static/admin/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ asset('static/admin/css/font.css') }}">
     <link rel="stylesheet" href="{{ asset('static/admin/css/xadmin.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('static/admin/css1/layui.css') }}"> -->
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{ asset('static/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
     <script type="text/javascript" src="{{ asset('static/admin/js/xadmin.js') }}"></script>

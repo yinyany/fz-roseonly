@@ -23,6 +23,8 @@ class ShopcarController extends Controller
      */
     public function index(Request $request)
     {
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
 
         // // dd($request->session()->has('usersInfo'));
         // if(!$request->session()->has('usersInfo')){
@@ -50,7 +52,7 @@ class ShopcarController extends Controller
 
         // $request->session()->put('usersInfo.shopnum',count($shopgoods));
         // dd(session('usersInfo.shopnum'));
-        return view('index.shopcar',['shop'=>$shopgoods]);
+        return view('index.shopcar',['shop'=>$shopgoods,'array'=>$array]);
         
 
 
@@ -74,6 +76,9 @@ class ShopcarController extends Controller
      */
     public function store(Request $request)
     {
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
 
        if (session('usersInfo') == NULL) {
             return view('authindex/login');
@@ -120,7 +125,7 @@ class ShopcarController extends Controller
 
 
         // dd($shopinfo);
-        return view('index.person3');
+        return view('index.person3',['array'=>$array]);
 
     }
 
@@ -191,6 +196,9 @@ class ShopcarController extends Controller
 
 
     public function jiesuan(Request $request){
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
         if (session('usersInfo') == NULL) {
             return view('authindex/login');
         }
@@ -225,7 +233,8 @@ class ShopcarController extends Controller
                                      'totalprices'=>$totalprices,
                                      'memaddress'=>$memaddress,
                                      'goid'=>$infogoid,
-                                     'gonum'=>$infogonum
+                                     'gonum'=>$infogonum,
+                                     'array'=>$array
                                     ]);
 
 

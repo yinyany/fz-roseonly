@@ -36,20 +36,8 @@ class GoodsController extends Controller
         foreach ($data as $k => $v) {
             $datas[$v['id']] = $v['name'];
         }
-         //显示属性名
-        $attr = Bute::get(['id','name'])->toArray();
-        $attrs = [];
-        foreach ($attr as $k => $v) {
-            $attrs[$v['id']] = $v['name'];
-        }
-        //显示属性值
-        $vv = Value::get(['id','name'])->toArray();
-        $vvs = [];
-        foreach ($vv as $k => $v) {
-            $vvs[$v['id']] = $v['name'];
-        }
         return view('admin.goods.index',['goods'=>$goods,'count'=>$count,'keywords'=>$keywords,
-            'datas'=>$datas,'attrs'=>$attrs,'vvs'=>$vvs]);
+            'datas'=>$datas]);
     }
 
 
@@ -89,47 +77,52 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {   
-        $vids = $request->input('vid');
-        // dd($vid);
-
+        // dd($request->all());
         if($request->type_id==0){
             flash()->overlay('请选择类名', 5);
             return back();
         }
-        // $this->validate($request, [
-        //     'name' => 'required|max:50',
-        //     'content' => 'required',
-        //     'price' => 'required|numeric',
-        // ],[
-        //     'name.required' => '商品名必填',
-        //     'content.required' => '内容必填',
-        //     'name.max' => '商品名最长50位',
-        //     'price.required' => '价格必填',
-        //     'price.numeric' => '价格格式不正确',
-        // ]);
-        // if (!$request->has('imgurl')) {
-        //     flash()->overlay('上传图片错误', 5);
-        //     return back();
-        // }
-        $bid =[];
-        foreach ($vids as $key => $value) {
-            $bid[] = $key;
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'content' => 'required',
+            'price' => 'required|numeric',
+        ],[
+            'name.required' => '商品名必填',
+            'content.required' => '内容必填',
+            'name.max' => '商品名最长50位',
+            'price.required' => '价格必填',
+            'price.numeric' => '价格格式不正确',
+        ]);
+        if (!$request->has('imgurl')) {
+            flash()->overlay('上传图片错误', 5);
+            return back();
         }
-        // dd($bid);
-        $types = Bute::whereIn('id',$bid)->get();
-            
+
+        //属性值id集合
+        $vid =$request->vid;
+        //定义空的属性集合
+        $vidStr = '';
+        //多选属性名id
+        $arrtId = '';
+        //多选属性值
+        $colorArr = [];
+        // dd($vid);
+        //商品属性
         // dd($types->toArray());
-        foreach($types as $v){
-            if($v->state  === '单选'){
-
-            }elseif($v->state  === '多选'){
-
+        foreach($vid as $k => $v){
+            if(!is_array($v)){
+                $vidStr.=$k.":".$v.",";
+            }else{
+                $arrtId = $k;
+                $colorArr=$v;
             }
         }
-        
-        $vid = json_encode($vids);
-        // dd($vid);
-        foreach ($bb as $k=>$v) {
+        // $vidStr .= $arrtId.":".$colorArr
+        // dd($request->input("imgurl"));
+        foreach($colorArr as $value) {
+            $dd = $vidStr;
+            $dd .= $arrtId.":".$value;
+
             $goods = new Goods;
             $goods->imgurl = $request->input("imgurl"); 
             $goods->name = $request->input("name");
@@ -138,10 +131,11 @@ class GoodsController extends Controller
             $goods->content = $request->input('content');
             $goods->price =$request->price;
             $goods->stock =$request->stock;
-            $goods->bid =$request->bid;
-            $goods->vid =$v;
+            $goods->bid =$dd;
+            // dd($goods->bid);
             $goods->save();
         }
+        
         flash()->overlay('添加成功',1);
         return redirect('/admin/goods');
     }
@@ -168,18 +162,17 @@ class GoodsController extends Controller
         //获取要修改的数据
         $goods = Goods::findOrFail($id);
         // 查询所有的1级类
-        $list = Type::where('parent_id',null)->get();
         $info = Type::where('id',$goods->type_id)->first()->getRoot();
-        $value = $info->getLeaves();
-        //所有的2级类
-        $data = Type::where('parent_id',$info->id)->get();
+        // dd($info);
+        $value = Type::where('id',$goods->type_id)->first();
+        // dd($goods);
         // 找出这个商品的2级类
-        $ccc = Type::where('id',$bbb->parent_id)->first();
-        //所属的属性名
-        $datas = Bute::where('id',$goods->bid)->first();
-        $value = Value::where('bute_id',$datas->id)->get();
-        $values = Value::where('id',$goods->vid)->first();
-        return view('admin.goods.edit',['goods'=>$goods,'list'=>$list,'info'=>$info,'value'=>$value,'data'=>$data,'ccc'=>$ccc,'bbb'=>$bbb,'datas'=>$datas,'value'=>$value,'values'=>$values]);
+        // $ccc = Type::where('id',$bbb->parent_id)->first();
+        // //所属的属性名
+        // $datas = Bute::where('id',$goods->bid)->first();
+        // $value = Value::where('bute_id',$datas->id)->get();
+        // $values = Value::where('id',$goods->vid)->first();
+        return view('admin.goods.edit',['goods'=>$goods,'info'=>$info,'value'=>$value]);
     }
 
     /**
@@ -205,8 +198,6 @@ class GoodsController extends Controller
         $input['name'] = $request->name;
         $input['type_id'] = $request->type_id;
         $input['content'] = $request->content;
-        $input['bid'] = $request->bid;
-        $input['vid'] = $request->vid;
         $input['price'] = $request->price;
         $input['stock'] = $request->stock;
         $goods = Goods::where('id',$id)->update($input);
@@ -236,15 +227,16 @@ class GoodsController extends Controller
         } 
     }
     //获取类别的方法
-    public function good(Request $request){
-        $info = Type::where('id',$request->id)->first();
-        $value = $info->getImmediateDescendants();
-        return ['code'=>0,'msg'=>'','data'=>$value];
-    }
+    // public function good(Request $request){
+        
+    //     return ['code'=>0,'msg'=>'','data'=>];
+    // }
     //获取属性名的方法
     public function attr(Request $request){
         $attr = Bute::where('type_id',$request->id)->get();
-        return ['code'=>0,'msg'=>'','data'=>$attr];
+        $info = Type::where('id',$request->id)->first();
+        $value = $info->getImmediateDescendants();
+        return ['code'=>0,'msg'=>'','data'=>['attr'=>$attr,'value'=>$value]];
     }
     //获取属性值得方法
     public function value(Request $request){
@@ -252,5 +244,10 @@ class GoodsController extends Controller
         $info = Value::where('bute_id',$request->id)->get();
         $bute = Bute::where('id',$request->id)->first();
         return ['code'=>0,'msg'=>'','data'=>['data'=>$info,'bute'=>$bute]];
+    }
+    //获取多选后的单选
+    public function color(Request $request){
+        $data = $request->id;
+        return ['code'=>0,'msg'=>'','data'=>$data];
     }
 }
