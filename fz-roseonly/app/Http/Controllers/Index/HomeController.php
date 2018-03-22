@@ -87,6 +87,7 @@ class HomeController extends Controller
         if($field->isValid()){
             $ext = $field->getClientOriginalExtension();
             $newName = md5(time().rand(1,6666)).'.'.$ext;
+            Member::where('id',$data)->update(['imgurl'=>$newName]);
             $path = $field->move(public_path().'/uploads/picture',$newName);
             return ['code'=>0,'msg'=>'','data'=>['src'=>$newName,'data'=>$data]];
         }
@@ -145,22 +146,19 @@ class HomeController extends Controller
      */
     public function memadress(Request $request)
     {   
-        // var_dump($request->fere);
         $info['fere'] = $request->fere;
-        $info['fere_phone'] = $request->fere_phone;
+        $info['fere_phone'] = $request->productName;
         $info['name'] = $request->name;
-        $info['phone'] = $request->phone;
-        $info['birthday'] = $request->birthday;
-        $info['affective'] = $request->affective;
-        $info['sex'] = $request->sex;
-        $info['address'] = $request->address;
+        $info['phone'] = $request->phone1;
+        $info['birthday'] = $request->test1;
+        $info['affective'] = $request->marriage;
+        $info['sex'] = $request->val;
+        $info['address'] = $request->det_address;
         $info['email'] = $request->email;
-        $info['imgurl'] = $request->two;
         $id = $request->id;
-        // var_dump($id);
-        $meber = Member::where('id',$id)->update($info);
+        Member::where('id',$id)->update($info);
         // var_dump($meber);
-        return ['code'=>0,'msg'=>'','data'=>$meber];
+        return ['code'=>0,'msg'=>'','data'=>$info];
 
     }
 

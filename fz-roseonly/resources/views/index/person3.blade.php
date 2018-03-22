@@ -258,7 +258,7 @@
                                         <td style="width: 300px;">爱人名字</td>
                                         <td><input type="text" name="fere" value="{{ $model->fere }}" maxlength=15 class="text" style="text-indent: 20px;" id="fere"></td>
                                         <td>手机</td>
-                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;" id="phone1" onblur="test_()">
+                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;" id="phone1" onblur="test1_()">
                                         </td>
                                         <td colspan="2"></td>
                                     </tr>
@@ -313,7 +313,7 @@
                                         <td></td>
                                         <td></td>
                                         <td >性别</td>
-                                        <td id="sex">
+                                        <td >
                                             <input type="radio" name="sex" value='男' class="sex" 
                                             @if($model->sex == "男")
                                                 checked
@@ -460,12 +460,13 @@
                                  <span class="mobilenumber">
                                      15234375791
                                 </span>
+                                <div style="margin-left:30px;margin-top:10px;"> 邮编：<a style="display:inline; margin-left:10px;">044200</a></div>
                                 
                             </div>
                             <div class="opera">
                             <!--如果这里出现2操作就在第一个上面加oneMore,出现3个的加More-->
                             <a href="javascript:;" onclick="popWinAddressDivEdit('221270','niu',
-                                '6','128','1163','盐湖区','15234375791','','1','044000');" class="black oneMore">编辑</a>
+                                '6','128','1163','盐湖区','15234375791','','1','044000');" class="black oneMore">删除</a>
                             </div>
 
                         </div>
@@ -593,21 +594,6 @@
                            } 
                           
                         }
-                         btn1.onclick = function(){
-                           if(divEle.style.display == 'block'){
-                              divEle.style.display = 'none';
-                              btn.innerHTML = '添加新地址';
-                              btn.style="color:#333";
-
-                           }else{
-                              divEle.style.display = 'block';
-                              btn.innerHTML = '取消';
-                              btn.style="color:red";
-                           } 
-                          
-                        }
-                        
-
 
                       }
                     </script>
@@ -616,12 +602,6 @@
             @include('flash::message')
         </div>
     </article>
-    <script type="text/javascript">
-        $(function(){
-            
-        })
-          
-    </script>
     <script>
         //修改头像
         layui.use(['upload','form'], function(){
@@ -641,6 +621,7 @@
                 ,done: function(res){
                   $('#two').attr('src',res.data.src);
                   $('#picture').attr('src','/uploads/picture/'+res.data.src);
+                  alert('头像修改成功');
                 }
                 ,error: function(){
                   //请求异常回调
@@ -648,6 +629,7 @@
             });
             $("#form").submit(function(e){
               //资料提交不刷新
+              var val=$('input:radio[name="sex"]:checked').val();
               var name=$('#name').val();
               var two=$('#two').val();
               var fere=$('#fere').val();
@@ -656,7 +638,6 @@
               var productName=$('#productName').val();
               var test1=$('#test1').val();
               var marriage=$('#marriage').val();
-              var sex=$('#sex').val();
               var det_address=$('#det_address').val();
               var email=$('#email').val();
               $.ajax({
@@ -665,17 +646,16 @@
                 data:{
                     'id':id,
                     'name':name,
-                    'two':two,
                     'phone1':phone1,
                     'productName':productName,
                     'test1':test1,
                     'marriage':marriage,
-                    'sex':sex,
+                    'val':val,
                     'det_address':det_address,   
                     'email':email,
                     'fere':fere
                 },
-                dataType:'json',
+                dataType:'text',
                 success:function(res){
                     alert('修改成功');
                 },
@@ -690,13 +670,28 @@
     <script type="text/javascript">
         //验证手机号
      function test_(){  
-        var theinput=document.getElementById("productName").value;  
+        var theinput=document.getElementById("productName").value;
+            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
+            if(theinput==''){
+                return false;
+            }
+            if(p1.test(theinput)==false) {          
+                alert('请填写正确电话号码!!');           
+                document.getElementById("phone1").value="";  
+            }
+            
+      }  
+      function test1_(){  
+        var theinput=document.getElementById("phone1").value;  
             var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;  
-             //(p1.test(theinput));  
-                if(p1.test(theinput)==false) {          
-                    alert('请填写正确电话号码!!');           
-                    document.getElementById("productName").value="";  
-                }  
+             //(p1.test(theinput));
+             if(theinput==''){
+                return false;
+            }
+            if(p1.test(theinput)==false) {          
+                alert('请填写正确电话号码!!');           
+                document.getElementById("phone1").value="";  
+            }  
       }  
     </script>
     <script>
