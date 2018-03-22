@@ -53,14 +53,14 @@
                                 <span>{{$list['goods']['name']}}</span>
                                 
                             </td>
-                            <td class="price">{{$list['goods']['unitprice']}}</td>
+                            <td class="price">{{$list['goods']['price']}}</td>
                             <td class="count">
                                 <span class="reduce"></span>
                                 <input class="count-input" type="text" value="{{$list['num']}}">
-                                <input type="hidden" name="id" value="{{$list['id']}}" class="id">
+                                <input type="hidden" name="id" value="{{$list['goods_id']}}" class="id">
                                 <span class="add">+</span></td>
                                 
-                            <td class="subtotal">{{$list['goods']['unitprice'] * $list['num']}}</td>
+                            <td class="subtotal">{{$list['goods']['price'] * $list['num']}}</td>
                             <td class="operation"><span class="delete">删除</span></td>
                         </tr>
                        {{ csrf_field() }}
@@ -84,18 +84,18 @@
                     <input type="hidden" id="cartTotalPrice">
                     <div class="fr total">
                         合计：￥
-                        <span id="priceTotal"></span>
+                        <span id="priceTotal">0.00</span>
                     </div>
                     <div class="fr selected" id="selected">
                         已选商品
-                        <span id="selectedTotal">4</span>件
+                        <span id="selectedTotal">0</span>件
                         <span class="arrow up">︽</span>
                         <span class="arrow down">︾</span>
                     </div>
                     <div class="selected-view">
                         <div id="selectedViewList" class="clearfix">
                             <div>
-                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/1.jpg">
+                                <img src="">
                                 <span class="del" index="0">取消选择</span>
                             </div>
                            

@@ -7,8 +7,12 @@
 
 	<script src="{{ asset('static/index/js/jquery.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('static/index/js/comment.js') }}" type="text/javascript"></script>
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ asset('static/admin/css/xadmin.css') }}">
 	
+=======
+
+>>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
     @section('link')
         {{-- 此区块继承加载其他外部引入文件 --}} 
     @show
@@ -21,33 +25,45 @@
 			<div class="head">
 				<!-- ++++++++++ 左边两个logo图标+链接 +++++++++++ -->
 				<div class="head_left">
+<<<<<<< HEAD
 					<a href="{{ url('/') }}" class="roseonly onHead"></a>
 					<a href="{{ url('/') }}" class="loveroseonly"></a>
 				</div>
 				<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
+=======
+					<a href="javascript:;" class="roseonly onHead"></a>
+					<a href="javascript:;" class="loveroseonly"></a>
+				</div>
+				<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
+                <div class="head_right" style="width:170px;">
+                    @if(session('usersInfo') != null)
+                        <a href="{{ url('/shopcar/show',[session('usersInfo')['id']]) }}" class="login" style="width:70px;">{{ session('usersInfo')['name'] }}</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/logout') }}" class="register">退出</a>
+                        <span>|</span>
+                    @elseif(session('usersInfo') == null)
+                        <a href="{{ url('/authindex/login') }}" class="login">登录</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/register') }}" class="register">注册</a>
+                        <span>|</span>
+                    @endif
+                    <a href="{{ url('/shopcar') }}" class="shopCar"></a>
+                     @if(session('usersInfo.shopnum') == null)
+                    <span id="shopNum">(0)</span>
+                    @elseif(session('usersInfo.shopnum') !=null))
+                    <span id="shopNum">({{ session('usersInfo.shopnum') }})</span>
+                    @endif
+                </div>
+>>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
 				<div class="select_com" style="margin-left:850px;">
 					<form action="" method="post">
 						<input type="text" name="" placeholder="请输入关键字搜索" style="border:none;width:180px; height:25px;border-radius: 30px;text-indent: 12px;outline:none;font-size: 12px;">
-						<button style="float:right;margin:5px 40px 0px 0px;width:22px;height:22px;border:none; background: #e7e7e7;outline:none;">
+						<button style="float:right;margin:5px 10px 0px 0px;width:22px;height:22px;border:none; background: #e7e7e7;outline:none;">
 							<img style="width:25px;" src="{{ asset('static/index/images/comment/sou.png') }}">
 						</button>
 					</form>
 				</div>
-				<div class="head_right">
-					@if(session('usersInfo') != null)
-						<a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login">{{ session('usersInfo')['name'] }}</a>
-						<span>|</span>
-						<a href="{{ url('/authindex/logout') }}" class="register">退出</a>
-						<span>|</span>
-					@elseif(session('usersInfo') == null)
-						<a href="{{ url('/authindex/login') }}" class="login">登录</a>
-						<span>|</span>
-						<a href="{{ url('/authindex/register') }}" class="register">注册</a>
-						<span>|</span>
-					@endif
-					<a href="javascript:;" class="shopCar"></a>
-					<span id="shopNum">(0)</span>
-				</div>
+				
 			</div>
 		</div>
 		<!-- ++++++++++ logo +++++++++++ -->
@@ -98,6 +114,7 @@
 							</div>
 						</div>
 					</li>
+<<<<<<< HEAD
                     @foreach($array as $v)
 					<li class="flower">
                         <a href="{{ url('/list',[$v->id]) }}">{{ $v->name }}</a>
@@ -125,10 +142,32 @@
                         </div>
                     </li>
                     @endforeach
+=======
+					{{--@foreach($array as $list)
+					<li class="flower">
+						<a href="{{ url('/list',[$list['id']]) }}">{{ $list['name'] }}</a>
+						<div class="next">
+							<div class="child">
+								@foreach($list['children'] as $value)
+								<div class="column1" style="border-right: 1px solid #414141;">
+									<b>{{ $value['name'] }}</b>
+									@foreach($value['children'] as $v)
+									<a href="{{ url('/list',[$v['id']]) }}">{{ $v['name'] }}</a>
+									@endforeach
+								</div>
+								@endforeach
+								<a href=""><img src="{{ asset('static/index/images/comment/flower.jpg') }}" alt=""></a>
+								<p class="cl"></p>
+							</div>
+						</div>
+					</li>
+					@endforeach--}}
+>>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
 					<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
 
 					<div class="head_right" style="display: none;">
 						@if(session('usersInfo') != null)
+<<<<<<< HEAD
 							<a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login">{{ session('usersInfo')['name'] }}</a>
 							<span>|</span>
 							<a href="{{ url('/authindex/logout') }}" class="register">退出</a>
@@ -148,6 +187,24 @@
 						<a href="javascript:;" class="shopCar" style="background:url({{ asset('static/index/images/comment/shopCarNav.png)no-repeat scroll center center;') }}"></a>
 						<span id="shopNum">(0)</span>
 					   <!--  <input type="text" placeholder="输入信息">  -->
+=======
+                        <a href="{{ url('/shopcar/show',[session('usersInfo')['id']]) }}" class="login" style="width:70px;">{{ session('usersInfo')['name'] }}</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/logout') }}" class="register">退出</a>
+                        <span>|</span>
+                    @elseif(session('usersInfo') == null)
+                        <a href="{{ url('/authindex/login') }}" class="login">登录</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/register') }}" class="register">注册</a>
+                        <span>|</span>
+                    @endif
+                    <a href="{{ url('/shopcar') }}" class="shopCar" style="background:url({{ asset('static/index/images/comment/shopCarNav.png)no-repeat scroll center center;') }}"></a>
+                     @if(session('usersInfo.shopnum') == null)
+                    <span id="shopNum">(0)</span>
+                    @elseif(session('usersInfo.shopnum') !=null))
+                    <span id="shopNum">({{ session('usersInfo.shopnum') }})</span>
+                    @endif
+>>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
 					</div>
 					<div class="cl"></div>
 				</div>
@@ -193,7 +250,7 @@
 			<div class="left">
 				<a href="javascript:;"><img src="{{ asset('static/index/images/comment/footer_logo.png') }}" alt=""></a>
 				<p>
-					<span>关注我们</span>
+					<span  style="display: inline;margin-left:-120px;">关注我们</span>
 					<a class="weixin">
 						<img src="{{ asset('static/index/images/comment/weixin.png') }}" class="small">
 					</a>

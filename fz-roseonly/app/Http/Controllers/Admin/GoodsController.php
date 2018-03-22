@@ -97,6 +97,17 @@ class GoodsController extends Controller
             flash()->overlay('上传图片错误', 5);
             return back();
         }
+<<<<<<< HEAD
+=======
+        // dd($bid);
+        $types = Bute::whereIn('id',$bid)->get();
+            
+        // dd($types->toArray());
+        foreach($types as $v){
+            if($v->state  === '单选'){
+                
+            }elseif($v->state  === '多选'){
+>>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
 
         //属性值id集合
         $vid =$request->vid;

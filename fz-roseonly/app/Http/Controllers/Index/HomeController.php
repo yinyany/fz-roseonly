@@ -147,9 +147,22 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function memadress(Request $request)
+    {   
+        $info['fere'] = $request->fere;
+        $info['fere_phone'] = $request->productName;
+        $info['name'] = $request->name;
+        $info['phone'] = $request->phone1;
+        $info['birthday'] = $request->test1;
+        $info['affective'] = $request->marriage;
+        $info['sex'] = $request->val;
+        $info['address'] = $request->det_address;
+        $info['email'] = $request->email;
+        $id = $request->id;
+        Member::where('id',$id)->update($info);
+        // var_dump($meber);
+        return ['code'=>0,'msg'=>'','data'=>$info];
+
     }
 
     public function picture(Request $request)

@@ -31,13 +31,13 @@ class Goods extends Model
     //购物车关联商品
     public function goods_shopcars()
     {
-        return $this->belongsTo('App\Model\Admin\Goods_shopcars','id','goods_id');
+        return $this->belongsTo('App\Model\Admin\Goods_shopcars','goods_id','id');
     }
 
     // 订单关联商品
     public function order_goods()
     {
-        return $this->belongsTo('App\Model\Admin\Order_goods','id','goods_id');
+        return $this->belongsTo('App\Model\Admin\Order_goods','goods_id','id');
     }
 
 

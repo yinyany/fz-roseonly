@@ -31,8 +31,8 @@ Route::post('/newmember/{id}','HomeController@update');
 Route::post('/file/newmember','HomeController@newmember');
 //加载添加会员页面
 Route::post('/newmember/{id}','HomeController@update');
-//添加收货地址
-// Route::post('/newmember/{id}','HomeController@newmember');
+//修改个人资料
+Route::post('/memadress','HomeController@memadress');
 
 
 
@@ -58,7 +58,11 @@ Route::get('/shopcar','ShopcarController@index');
 //修改购物车数据
 Route::post('/shopcar/update/{id}','ShopcarController@update');
 Route::post('/shopcar/destroy/{id}','ShopcarController@destroy');
+Route::get('/shopcar/show/{id}','ShopcarController@show');
 Route::post('/shopcar/store','ShopcarController@store');
+Route::post('/shopcar/create','ShopcarController@create');
 Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
 
 Route::get('/orderhome','OrderhomeController@index');
+Route::get('/orderhome/destroy/{id}','OrderhomeController@destroy');
+Route::post('/orderhome/update/{id}','OrderhomeController@update');

@@ -12,6 +12,7 @@ use App\Model\Admin\Member;
 use App\Model\Admin\Order;
 use App\Model\Admin\Order_goods;
 use App\Model\Index\Memaddress;
+use App\Model\Admin\Type;
 
 
 class ShopcarController extends Controller
@@ -63,9 +64,27 @@ class ShopcarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+        $memid = session('usersInfo')['id'];
+
+        // dd($memid);  
+
+        $shpeople = $request->shpeople;
+        $shphone = $request->shphone;
+        $shaddress = $request->shaddress;
+        $postcode = $request->postcode;
+
+       $orderis =   Memaddress::insert(['shpeople'=>$shpeople,
+                    'member_id'=>$memid,
+                    'shphone'=>$shphone,
+                    'shaddress'=>$shaddress,
+                    'shpostcode'=>$postcode
+                    ]);
+       return redirect("shopcar/show/$memid");
     }
 
     /**
@@ -90,30 +109,40 @@ class ShopcarController extends Controller
         $info['gonum'] = $request->godnum;
         $totalprices = $request->totalprice;
         $ordernum = $request->ordernum;
+
+        $ornum = Order::where('order_number',$ordernum)->first();
+
+        if($ornum){
+            flash()->overlay('该商品已添加至订单', 1);
+            return back();
+        }
+
         $createtime = $request->created_at;
         $shaddid = $request->shaddress_id;
         // dd($info);
         $goid = explode("@",rtrim($info['goid'],'@'));
         $gonum = explode("@",rtrim($info['gonum'],'@'));
-        // count($goid);
+        count($goid);
         // dd(count($goid));
    
-        //查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
+        // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
        for ($i=0; $i <count($goid) ; $i++) { 
            // echo $gonum[$i];
            Order_goods::insert(['order_id'=>$ordernum,
                             'goods_id'=>$goid[$i],
                             'goods_num'=>$gonum[$i]
                             ]);
+           Goods_shopcar::destroy($goid[$i]);
 
        }
-       Order::insert(['order_number'=>$ordernum,
+     $orderis =   Order::insert(['order_number'=>$ordernum,
                     'member_id'=>$memid,
                     'pay_prices'=>$totalprices,
                     'created_at'=>$createtime,
                     'shaddress_id'=>$shaddid
                     ]);
         
+<<<<<<< HEAD
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
          $order = Order::with('order_goods')->where('member_id',$memid)
@@ -127,6 +156,13 @@ class ShopcarController extends Controller
         // dd($shopinfo);
         return view('index.person3',['array'=>$array]);
 
+=======
+       if($orderis){
+            return redirect("shopcar/show/$memid");
+       }else{
+            return back();
+       }
+>>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
     }
 
     /**
@@ -137,7 +173,34 @@ class ShopcarController extends Controller
      */
     public function show($id)
     {
-       
+
+       // dd($request->session()->has('usersInfo'));
+        // $this->show($memid,$goid);
+         $order = Order::with('order_goods.goods')->with('memaddress')->where('member_id',$id)
+                                            ->orderby('created_at','desc')
+                                            ->get();
+        // dd($order);                                    
+        // dd($order->toArray());
+        
+
+        $orderb = $order->toArray();
+        $ordernum = count($orderb);
+        // dd( $ordernum );
+
+  //导航栏
+        $array = Type::get()->toHierarchy();
+        // dd($datas);
+        $model = Member::findOrFail($id);
+        // dd($shopinfo);
+        // dd($shopinfo);
+         $memadd = Member::with('memaddress')->where('id',$id)->first();
+
+        $memainfo = $memadd->toArray();   
+        // dd($memainfo['memaddress']);
+        $memaddress = $memainfo['memaddress'];
+
+        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress,'ordernum'=>$ordernum]);
+
     }
 
     /**
@@ -192,9 +255,11 @@ class ShopcarController extends Controller
     }
 
 
-
-
-
+    /**
+     * [购物车页面点击结算后跳转至收货地址选择页面]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function jiesuan(Request $request){
         //导航栏
         $array = Type::with('bute.value')->get()->toHierarchy();
@@ -206,6 +271,7 @@ class ShopcarController extends Controller
 
         $infogoid = $request->goid;
         $infogonum = $request->gonum;
+
         $totalprices = $request->totalprices;
         // $info['ordernum'] = $request->ordernum;
         // dd($info);

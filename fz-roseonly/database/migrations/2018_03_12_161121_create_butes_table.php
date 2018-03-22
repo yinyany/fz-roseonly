@@ -16,6 +16,7 @@ class CreateButesTable extends Migration
             $table->increments('id');  //属性名编号
             $table->string('name','36');   //属性名
             $table->tinyInteger('type_id');   //分类表id
+            $table->enum('state', ['单选','多选']); //枚举
             $table->timestamps();
         });
     }
