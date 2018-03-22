@@ -45,7 +45,7 @@
                 <div class="order_con">
                     <!-- 我的订单信息 -->
                    
-                    <div class="sec1 sec">
+                    <!-- <div class="sec1 sec"> -->
                         @foreach($order as $list)
                         <!-- 订单标号内容 -->
                         <div class="con_r">
@@ -257,8 +257,11 @@
                                         </td>
                                         <td colspan="2" rowspan="3">
                                             <!-- 上传的头像 -->
-
-                                            <img src="/uploads/picture/{{ $model->imgurl }}" width="100px" height="100px" style="float:left;" id="picture" >
+                                            @if($model->imgurl===null)
+                                                <img src="">
+                                            @else
+                                                <img src="/uploads/picture/{{ $model->imgurl }}" width="100px" height="100px" style="float:left;" id="picture" >
+                                            @endif
                                             <input type="hidden" name="imgurl" value="{{$model->imgurl}}" id="two">
                                         </td>
                                     </tr>
@@ -631,7 +634,7 @@
                 ,done: function(res){
                   $('#two').attr('src',res.data.src);
                   $('#picture').attr('src','/uploads/picture/'+res.data.src);
-                  alert('头像修改成功');
+                  window.location.reload();
                 }
                 ,error: function(){
                   //请求异常回调
