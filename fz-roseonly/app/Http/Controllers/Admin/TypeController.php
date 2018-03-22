@@ -51,9 +51,15 @@ class TypeController extends Controller
     public function create()
     {   
         $id = isset($_GET['id'])?$_GET['id']:null;
+
         if($id===null){
             return view('admin.type.create');
         }else{
+            $type = Type::where('id',$id)->first();
+            if($type->depth === 1 ){
+                flash()->overlay('不能添加3级分类', 5);
+                return back();
+            }
             $info = Type::findOrFail($id)->ancestorsAndSelf()->get()->toArray();
             return view('admin.type.creates',['id'=>$id,'info'=>$info]);
         }

@@ -17,6 +17,11 @@ class Type extends Node {
 
 
   protected $fillable = ['name'];
+
+  public function bute()
+    {
+        return $this->hasMany('App\Model\Admin\Bute','type_id','id');
+    }
   //////////////////////////////////////////////////////////////////////////////
 
   //

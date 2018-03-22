@@ -32,14 +32,11 @@
             <th>ID</th>
             <th>类名</th>
             <th>商品名</th>
-            <th>属性名</th>
-            <th>属性值</th>
-            <th>商品图片</th>
-            <th>商品简介</th>
-            <th>商品价格</th>
-            <th>商品库存</th>
-            <th>商品销售量</th>
-            <th>商品状态</th>
+            <th>属性</th>
+            <th>图片</th>
+            <th>价格</th>
+            <th>库存</th>
+            <th>销售量</th>
             <th>添加时间</th>
             <th>操作</th>
         </thead>
@@ -49,15 +46,12 @@
             <td>{{ $list->id }}</td>
             <td>{{ $datas[$list->type_id]}}</td>
             <td>{{ $list->name }}</td>
-            <td>{{ $attrs[$list->bid]}}</td>
-            <td>{{ $vvs[$list->vid]}}</td>
+            <td style="width:170px">{!! shopStr2Arr($list->bid) !!}</td>
             <td><img src="/uploads/good/{{ $list->imgurl }}"></td>
-            <td>{!! $list->content !!}</td>
-            <td>{{ $list->price }}</td>
-            <td>{{ $list->stock }}</td>
-            <td>{{ $list->votes }}</td>
-            <td>{{ $list->state }}</td>
-            <td>{{ $list->created_at }}</td>
+            <td style="width:90px">{{ $list->price }}</td>
+            <td style="width:70px">{{ $list->stock }}</td>
+            <td style="width:80px">{{ $list->votes }}</td>
+            <td style="width:105px">{{ $list->created_at }}</td>
             <td class="td-manage">
               <a title="修改" href='{{ url("admin/goods/edit/$list->id") }}'>
                 <i class="layui-icon">&#xe642;</i>

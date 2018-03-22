@@ -38,7 +38,8 @@ Route::post('/memadress','HomeController@memadress');
 
 
 //加载商品列表页面-------------------------------------------------
-Route::get('/list/{id}','ListController@index');
+Route::get('/list/{id}/{type?}/{order?}','ListController@index');
+// Route::get('/list/type/{id}','ListController@type');
 //根据销量排序
 Route::get('/list/votes/{id}','ListController@votes');
 //根据创建时间排序
@@ -64,3 +65,4 @@ Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
 
 Route::get('/orderhome','OrderhomeController@index');
 Route::get('/orderhome/destroy/{id}','OrderhomeController@destroy');
+Route::post('/orderhome/update/{id}','OrderhomeController@update');

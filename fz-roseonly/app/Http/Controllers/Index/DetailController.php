@@ -20,8 +20,11 @@ class DetailController extends Controller
     public function detail($id)
     {
         //导航栏
-        $array = Type::get()->toHierarchy();
+        $array = Type::with('bute.value')->get()->toHierarchy();
+        
 
+        //搜索商品
+        
         return view('index.detail',['array'=>$array,'list'=>$list,'id'=>$id]);
     }
 

@@ -31,4 +31,9 @@ class Member extends Model
     {
         return $this->hasMany('App\Model\Index\Memaddress','member_id');
     }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Model\Admin\Comment','mid','id');
+    }
 }

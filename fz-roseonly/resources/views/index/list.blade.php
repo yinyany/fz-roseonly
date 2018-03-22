@@ -21,10 +21,50 @@
                 
                 <!-- 排序 -->
                 <div id="paixu">
-                    <a class="first selected" href="{{ url('/list',[$id]) }}">综合</a>
-                    <a class="first" href="{{ url('/list/votes',[$id]) }}">销量</a>
-                    <a class="first" href="{{ url('/list/create',[$id]) }}">最新</a>
-                    <a class="first" href="{{ url('/list/price',[$id]) }}">价格</a>
+                    <a class="first
+                    @if($order === null)
+                        selected
+                    @endif
+                     " href="
+                    @if($type === 'null')
+                        {{ url('/list',[$id]) }}
+                    @elseif($type === 'type')
+                        {{ url('/list',[$id,$type]) }}
+                    @endif
+                    ">综合</a>
+                    <a class="first
+                    @if($order === 'votes')
+                        selected
+                    @endif
+                    " href="
+                    @if($type === 'null')
+                        {{ url('/list',[$id,'null','votes']) }}
+                    @elseif($type === 'type')
+                        {{ url('/list',[$id,$type,'votes']) }}
+                    @endif
+                    ">销量</a>
+                    <a class="first
+                    @if($order === 'created_at')
+                        selected
+                    @endif
+                    " href="
+                    @if($type === 'null')
+                        {{ url('/list',[$id,'null','created_at']) }}
+                    @elseif($type === 'type')
+                        {{ url('/list',[$id,$type,'created_at']) }}
+                    @endif
+                    ">最新</a>
+                    <a class="first
+                    @if($order === 'price')
+                        selected
+                    @endif
+                    " href="
+                    @if($type === 'null')
+                        {{ url('/list',[$id,'null','price']) }}
+                    @elseif($type === 'type')
+                        {{ url('/list',[$id,$type,'price']) }}
+                    @endif
+                    ">价格</a>
                    <!--  <input type="number" name="" placeholder="¥" min="0">
                     <span>—</span>
                     <input type="number" name="" placeholder="¥" min="0"> -->

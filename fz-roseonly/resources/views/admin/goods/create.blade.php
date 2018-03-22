@@ -5,6 +5,16 @@
     <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="/static/template.js"></script>
+    <style type="text/css">
+      .layui-form-item .layui-input-inline{
+        width: 160px;
+      }
+      .layui-btn{
+        height: 30px;
+        line-height: 30px;
+      }
+      .layui-btn
+    </style>
 @endsection 
 
 
@@ -37,7 +47,7 @@
                   </select>
               </div>
               <div class="layui-input-inline">
-                  <select name="type_id" lay-filter="test2" id="kkk">
+                  <select name="type_id" id="kkk">
                     <option value="0">请选择</option>
                   </select>
               </div>
@@ -61,6 +71,7 @@
                   <input type='radio' name='vid[<%=data.data[i].bute_id%>]' value='<%=data.data[i].id%>' title='<%=data.data[i].name%>' lay-filter='test4'>
                   <%}%>
                 </div>
+                
             </div>
           </script>
           <div id="chec1"></div>
@@ -70,7 +81,8 @@
                     <span class="x-red">*</span><%=data.bute.name%></label>
                 <div class="layui-input-inline" lay-filter="test4" id="values">
                   <%for (var i = 0; i < data.data.length; i++) {%>
-                    <input type='checkbox' name='vid[<%=data.data[i].bute_id%>][]' value='<%=data.data[i].id%>' title='<%=data.data[i].name%>'>
+                    <input type='checkbox' name='vid[<%=data.data[i].bute_id%>][]' value='<%=data.data[i].id%>' title='<%=data.data[i].name%>' lay-filter='test5'>
+
                   <%}%>
                 </div>
             </div>
@@ -87,7 +99,7 @@
                   <span class="x-red"></span>@if($errors->has('name')) {{$errors->first('name')}} @endif
               </div>
           </div>
-          <div class="layui-form-item">
+         <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>图片
               </label>
@@ -96,7 +108,6 @@
               </button>
               <input type="hidden" name="imgurl" value="" id="file">
           </div>
-          
           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>显示
@@ -124,11 +135,11 @@
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
+              <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>库存
               </label>
               <div class="layui-input-inline">
-                <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" type="text" name="stock" class="layui-input" value="{{old('price')}}">
+                  <input type="text"  name="stock" class="layui-input" value="{{old('stock')}}">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red"></span>@if($errors->has('stock')) {{$errors->first('stock')}} @endif
@@ -203,11 +214,18 @@
               }
             })
           });
-          form.on('select(test2)', function(data){
+          form.on('select(test)', function(data){
             $.ajax({
               type:"GET",
               url:'{{ url("/admin/goods/attr") }}?id='+data.value,
               success:function(msg){
+                var selDom = $("#kkk");
+                selDom.find("option").remove();
+                selDom.append("<option value='0'>请选择</option>");
+                for(var i = 0; i<msg.data.value.length; i++){
+                  selDom.append("<option value='"+msg.data.value[i].id+"'>"+msg.data.value[i].name+"</option>");
+                }
+                form.render('select');
                 var selDom3 = $("#nnn");
                 if(msg.data==''){
                   selDom3.children().remove();
@@ -215,8 +233,8 @@
                   form.render('checkbox');
                 }else{
                   selDom3.children().remove();
-                  for(var i = 0; i<msg.data.length; i++){
-                    selDom3.append("<input type='checkbox' name='bid[]' value='"+msg.data[i].id+"' title='"+msg.data[i].name+"' lay-filter='test4'>");
+                  for(var i = 0; i<msg.data.attr.length; i++){
+                    selDom3.append("<input type='checkbox' name='bid[]' value='"+msg.data.attr[i].id+"' title='"+msg.data.attr[i].name+"' lay-filter='test4'>");
                   }
                   form.render('checkbox');
                 }
@@ -259,6 +277,31 @@
             }
             
           });
+          // form.on('checkbox(test5)', function(data){
+          //   var value = data.value;
+          //  if(data.elem.checked===true){
+              
+          //     var values = data.value;
+          //     $(this).before("<div class='layui-form-mid layui-word-aux' id='div'><input type='text' name='stock[]' required  lay-verify='required' placeholder='库存' class='layui-input' id='input' style='height: 30px;line-height: 30px;'></div>");  
+          //     var uploadInst = upload.render({
+          //       elem: '#'+value //绑定元素
+          //       ,url: '{{ url("/admin/goods/upload") }}' //上传接口
+          //       ,field:'imgurl'
+          //       ,done: function(res){
+          //         console.log(res.data.src);
+          //         $('#'+values).val(res.data.src);
+          //       }
+          //       ,error: function(){
+          //         //请求异常回调
+          //       }
+          //     }); 
+          //  }else{
+          //   $('#div').remove();
+          //   $('#input').remove();
+          //  }
+           
+          // });
+          
       });
     </script>
     <script type="text/javascript" src="{{ asset('static/admin/ue/ueditor.config.js') }}"></script>

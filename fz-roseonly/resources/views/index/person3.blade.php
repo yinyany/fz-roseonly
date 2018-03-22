@@ -12,18 +12,8 @@
     <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
-    <link rel="icon" href="../images/index_images/log_tb.jpg">
-    
-<!--     <link rel="stylesheet" href="./Purchase page.css" type="text/css">
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="keywords" content="jQuery省市区三级联动" />
-    <meta name="description" content="jQuery实现省、市、区三级联动的代码网上应该已经挺多了，今天群里一名成员投了篇关于省、市、区三级联动的实现代码，不同的一点是他将代码片段封装成了jQuery插件。" />
-    <link href="./Province_css/city.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="./My Receiving address.js/jquery.min_1.js"></script>
-    <script type="text/javascript" src="./My Receiving address.js/city.min.js"></script> -->
+    <link rel="icon" href="{{ asset('static/index/images/index_images/log_tb.jpg') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @endsection 
 
@@ -48,7 +38,7 @@
                     <!-- <div class="sec1 sec"> -->
                         @foreach($order as $list)
                         <!-- 订单标号内容 -->
-                        <div class="con_r">
+                        <div class="con_r" >
                             <ul class="con_ra">
                                 <li>
                                     <div>
@@ -73,7 +63,7 @@
                                 </li>
                                 <li>
                                     <div>
-                                         <span class="center-a">消费时间：</span>
+                                         <span class="center-a">添加时间：</span>
                                          <span class="center-b" >{{ $list['created_at'] }}</span>
                                     </div>
                                   
@@ -89,27 +79,65 @@
                                 <li>
                                     <div class="center-all">
                                         <span class="center-a">订单操作：</span>
-                                        <span class="center-c"> 等待付款</span>
-                                        <input type="hidden" name="id" value="{{$list['id']}}" class="orderid">
-                                        <a href='{{url("orderhome/destroy/$list[id]")}}'class="orderdel">取消订单</a>
+                                        @if($list['is_pay'] == 1)
+                                        <button class="btn center-c" style="border:none;">已付款</button> 
+                                        @else
+                                             <button class="btn center-c showModel" style="border:none;">等待付款</button>
+                                             <a href='{{url("orderhome/destroy/$list[id]")}}'class="orderdel">取消订单</a>
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
-                            <div style="margin-left: 10px;">
-                                <p style="margin-bottom:10px;color:#777;">
-                                    <span style="margin-right:20px; ">收货人：<strong style="color:#333;">{{ $list['memaddress']['shpeople']}}</strong></span>
+
+                        <div id="modal" class="modal" >  
+                            <div class="modal-content">  
+                                <header class="modal-header" >  
+                                    <h4 style="margin-left:300px;border:none;">请输入支付密码</h4>  
+                                    <span class="close">×</span>  
+                                </header>  
+                                <!-- form 表单信息 -->
+                                 <form action='{{ url("/orderhome/update/$list[id]") }}' method="post">
+                                     {{ csrf_field()}}
+                                    <div class="modal-body">  
+                                           <div class="paycontainer">
+                                            <input type="password" minlength="6" maxlength="6" class="paypasswordcontainer"
+                                                   oncontextmenu="return false" onpaste="return false" oncopy="return false"
+                                                   oncut="return false" autocomplete="off">
+                                            <div class="sixpassword">
+                                                <i class="active"><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <span class="guanbiao"></span>
+                                            </div>
+                                        </div>
+                                          
+                                    </div>   
+                                    <input type="hidden" name="id" value="{{$list['id']}}">
+                                    <input type="hidden" name="pay_time" value="{{ time() }}">
+                                    <div class="modal-footer" style="margin-bottom: 20px;"> 
+                                        <button class="cancel">取消</button>  
+                                        <button class="sure" type="submit">确定</button>  
+                                    </div> 
+                               </form>  
+                            </div>  
+                        </div>
+                            <div style="clear:both;"></div>
+                            <div>
+                                <p style="color:#777;margin-bottom:10px;">
+                                    <span style="margin-right:20px;">收货人：<strong style="color:#333;">{{ $list['memaddress']['shpeople']}}</strong></span>
                                     <span style="margin-right:20px;">收货地址：<strong style="color:#333;">{{ $list['memaddress']['shaddress']}}</strong></span>
                                 </p>
                                 <p style="margin-bottom:10px;color:#777;"  >
                                     <span style="margin-right:90px; ">收货人电话：<strong style="color:#333;">{{ $list['memaddress']['shphone']}}</strong></span>
                                     <span style="margin-right:10px; ">收货人邮编：<strong style="color:#333;">{{ $list['memaddress']['shpostcode']}}</strong></span>
                                 </p>
-                                
-                                
                             </div>
                             @foreach($list['order_goods'] as $ordergoods ) 
-                            <div class="con_bom">
-                                 <img src="/uploads/picture/{{ $model->imgurl }}" alt="" >
+                            <div class="con_bom"  >
+                                {{-- <img src="/uploads/picture/{{ $ordergoods['goods']['imgurl'] }}" alt="" > --}} 
                                  <div class="cona_left">
                                      <ul>
                                          <li>
@@ -119,7 +147,7 @@
                                           <li>
                                              <span class="center-q">单价:</span>
                                              <span class="center-w">
-                                            ￥<label >{{$ordergoods['goods']['unitprice']}}</label>
+                                            ￥<label >{{$ordergoods['goods']['price']}}</label>
                                             </span>
                                          </li>
                                           <li>
@@ -137,99 +165,17 @@
                                         
                                      </ul>
                                  </div>
-                                  
                             </div>
-                            
+                            @endforeach
                         </div>
-                        <!-- 结束订单标号内容 -->
-
-                        <div id="modal" class="modal" >  
-                            <div class="modal-content">  
-                                <header class="modal-header" >  
-                                    <h4 style="margin-left:300px;border:none;">请输入支付密码</h4>  
-                                    <span class="close">×</span>  
-                                </header>  
-                                <!-- form 表单信息 -->
-                                 <form action="">
-
-                                <div class="modal-body">  
-                                       <div class="paycontainer">
-                                        <input type="password" minlength="6" maxlength="6" class="paypasswordcontainer"
-                                               oncontextmenu="return false" onpaste="return false" oncopy="return false"
-                                               oncut="return false" autocomplete="off">
-                                        <div class="sixpassword">
-                                            <i class="active"><b></b></i>
-                                            <i><b></b></i>
-                                            <i><b></b></i>
-                                            <i><b></b></i>
-                                            <i><b></b></i>
-                                            <i><b></b></i>
-                                            <span class="guanbiao"></span>
-                                        </div>
-                                    </div>
-                                    <p></p>  
-                                    
-                                </div>   
-                                <div class="modal-footer" style="margin-bottom: 20px;"> 
-                                    <button id="cancel">取消</button>  
-                                    <button id="sure">确定</button>  
-                                </div> 
-                               </form>  
-                            </div>  
-                        </div>
-                        <script type="text/javascript">
-                             $(function(){
-                                $(".paypasswordcontainer").keyup(function(){
-                                    $input_val=$(this).val();
-                                    $input=$input_val.length;
-                                    for (var x = 0; x <= 6; x++) {
-                                        $("p").html($input);
-                                        if ($input == 0) {
-                                            $(".sixpassword").find("i").eq(0).addClass("active").siblings("i").removeClass("active");
-                                            $(".sixpassword").find("b").css({"display": "none"});
-                                            $(".guangbiao").css({"left": 0});
-                                        }
-                                        else if ($input == 6) {
-                                            $(".sixpassword").find("b").css({"display": "block"});
-                                            $(".sixpassword").find("i").eq(5).addClass("active").siblings("i").removeClass("active");
-                                            $(".guangbiao").css({"left": 5 * 50});
-                                        }else{
-                                            $(".sixpassword").find("i").eq($input).addClass("active").siblings("i").removeClass("active");
-                                            $(".sixpassword").find("i").eq($input).prevAll("i").find("b").css({"display":"block"});
-                                            $(".sixpassword").find("i").eq($input).nextAll("i").find("b").css({"display":"none"});
-                                            $(".guanbiao").css("left",$input*50);
-                                        }
-                                    }
-                                })
-
-                            })
-                        </script>
-                   <!-- 弹框 -->
-                        <script>  
-                            var btn = document.getElementById('showModel');  
-                            var close = document.getElementsByClassName('close')[0];  
-                            var cancel = document.getElementById('cancel');  
-                            var modal = document.getElementById('modal');  
-                            btn.addEventListener('click', function(){  
-                                modal.style.display = "block";  
-                            });  
-                            close.addEventListener('click', function(){  
-                                modal.style.display = "none";  
-                            });  
-                            cancel.addEventListener('click', function(){  
-                                modal.style.display = "none";  
-                            });  
-
-                        </script>  
-                           @endforeach
-                        </div>
-                        <!-- 结束订单标号内容 -->
                         @endforeach
-                    </div>
-                   
-                   
+                        <input type="hidden" name="ordernum" id="ordernum" value="{{$ordernum}}">
+                        <!-- 结束订单标号内容 -->
+                       
+                       
+                   </div>
                     <!-- 基本信息 -->
-                   {{-- <div class="sec4 sec hide">
+                    <div class="sec4 sec hide">
                         <h3>
                             <a href="javascript:;" class="person_hover">基本信息</a>
                             <a href="javascript:;">修改密码</a>
@@ -269,13 +215,13 @@
                                         <td style="width: 300px;">爱人名字</td>
                                         <td><input type="text" name="fere" value="{{ $model->fere }}" maxlength=15 class="text" style="text-indent: 20px;" id="fere"></td>
                                         <td>手机</td>
-                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;" id="phone1" onblur="test1_()">
+                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;"  onblur="test1_()">
                                         </td>
                                         <td colspan="2"></td>
                                     </tr>
                                     <tr>
                                         <td>爱人手机</td>
-                                        <td><input type="text" name="fere_phone" value="{{ $model->fere_phone }}" maxlength=15 class="text" style="text-indent: 10px;" id="productName" onblur="test_()"></td>
+                                        <td><input type="text" name="fere_phone" value="{{ $model->fere_phone }}" maxlength=15 class="text" style="text-indent: 10px;" onblur="test_()"></td>
                                         
                                         <td>生日</td>
                                         <td>
@@ -460,33 +406,33 @@
                         <div class="card_money">
                             收获地址管理 
                         </div>
-                        <!-- 产品信息 -->
-                        <div class="smod_addres" style="margin-bottom: 5px;">
+                        @foreach($memaddress as $list)
+                        <div class="smod_addres">
                             <p>常<br>用<br>地<br>址<br></p>
                             <div class="nickname">
-                                <span >niu<em>收</em></span>
+                                <span >{{$list['shpeople']}} <em> 收</em></span>
                                  <span >
-                                     <strong>山西省</strong><strong>运城市</strong><strong>盐湖区</strong><em style="font-style:normal">北城街道货场路</em>
+                                     <strong>{{$list['shaddress']}}</strong>
                                  </span>
                                  <span class="mobilenumber">
-                                     15234375791
+                                     {{$list['shphone']}}
                                 </span>
-                                <div style="margin-left:30px;margin-top:10px;"> 邮编：<a style="display:inline; margin-left:10px;">044200</a></div>
+                                <div style="margin-left:30px;margin-top:10px;"> 邮编：<a style="display:inline; margin-left:10px;">{{$list['shpostcode']}}</a></div>
                                 
                             </div>
                             <div class="opera">
                             <!--如果这里出现2操作就在第一个上面加oneMore,出现3个的加More-->
-                            <a href="javascript:;" onclick="popWinAddressDivEdit('221270','niu',
-                                '6','128','1163','盐湖区','15234375791','','1','044000');" class="black oneMore">删除</a>
+                            <a href="javascript:;" class="black oneMore">删除</a>
                             </div>
 
                         </div>
+                        @endforeach
                         <div class="new_addres">
                             <a href="javascript:;" onclick="" class="add_address">
                             添加新地址
                              </a>   
                         </div>
-                         <div id="add" >
+                        <div id="add" >
                             <form action="" method="post">
                                 
                                 <table>
@@ -496,7 +442,7 @@
                                             收 货 人 :&nbsp;&nbsp;
                                         </td>
                                         <td class="two">
-                                            <input type="text" name="shpeople" style="width:200px;height:30px;">
+                                            <input type="text" name="shpeople" id="productName" style="width:200px;height:30px;">
                                         </td>
                                         <td></td>
                                     </tr>
@@ -505,7 +451,7 @@
                                             手机号码 :&nbsp;&nbsp;
                                         </td>
                                         <td class="two">
-                                            <input type="text" name="shphone" style="width:200px;height:30px;">
+                                            <input type="text" name="shphone" id="phone1" style="width:200px;height:30px;">
                                         </td>
                                         <td></td>
                                     </tr>   
@@ -574,7 +520,6 @@
                                             </table>
                                         </form> 
                                     </div>
-                                   
                                 </div>
                                 <div class="save_sumbmit">
                                     <input type="submit" value="保存" style="width:100px;height:30px;">
@@ -582,7 +527,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>--}}
+                    </div>
                     <!-- 添加显示与隐藏 -->
                     <script type="text/javascript">
 
@@ -599,13 +544,12 @@
                               btn.innerHTML = '添加新地址';
                               btn.style="color:#333";
                       
-                      //      }else{
-                      //         divEle.style.display = 'block';
-                      //         btn.innerHTML = '取消';
-                      //         btn.style="color:red";
-                      //      } 
+                           }else{
+                              divEle.style.display = 'block';
+                              btn.innerHTML = '取消';
+                              btn.style="color:red";
+                           } 
                           
-
                         }
 
                       }
@@ -678,7 +622,6 @@
               })
               return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });
-
         });  
     </script>
     <script type="text/javascript">
@@ -718,8 +661,57 @@
             elem: '#test1' //指定元素
           });
         });
-
     </script>
+    <script type="text/javascript">
+     $(function(){
+        $(".paypasswordcontainer").keyup(function(){
+            $input_val=$(this).val();
+            $input=$input_val.length;
+            for (var x = 0; x <= 6; x++) {
+                $("p").html($input);
+                if ($input == 0) {
+                    $(".sixpassword").find("i").eq(0).addClass("active").siblings("i").removeClass("active");
+                    $(".sixpassword").find("b").css({"display": "none"});
+                    $(".guangbiao").css({"left": 0});
+                }
+                else if ($input == 6) {
+                    $(".sixpassword").find("b").css({"display": "block"});
+                    $(".sixpassword").find("i").eq(5).addClass("active").siblings("i").removeClass("active");
+                    $(".guangbiao").css({"left": 5 * 50});
+                }else{
+                    $(".sixpassword").find("i").eq($input).addClass("active").siblings("i").removeClass("active");
+                    $(".sixpassword").find("i").eq($input).prevAll("i").find("b").css({"display":"block"});
+                    $(".sixpassword").find("i").eq($input).nextAll("i").find("b").css({"display":"none"});
+                    $(".guanbiao").css("left",$input*50);
+                }
+            }
+        })
+    })
+</script>
+                        <!-- 弹框 -->
+<script>  
+
+    var ordnum = document.getElementById('ordernum').value;
+    // alert(ordnum);
+    for (var i = 0; i < ordnum; i++) {
+        var btn = document.getElementsByClassName('showModel');
+        var close = document.getElementsByClassName('close')[i];  
+        var cancel = document.getElementsByClassName('cancel')[i];  
+        var modal = document.getElementsByClassName('modal')[i];  
+        console.log(btn[i]);
+        btn[i].addEventListener('click', function(){  
+            modal.style.display = "block";  
+        });  
+        close.addEventListener('click', function(){  
+            modal.style.display = "none";  
+        });  
+        cancel.addEventListener('click', function(){  
+            modal.style.display = "none";  
+        });  
+    }   
+    var btn = document.getElementsByClassName('showModel')[0];  
+    
+</script>  
     @include('flash::message')
 
 @endsection

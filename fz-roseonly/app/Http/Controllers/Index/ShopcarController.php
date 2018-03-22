@@ -12,6 +12,7 @@ use App\Model\Admin\Member;
 use App\Model\Admin\Order;
 use App\Model\Admin\Order_goods;
 use App\Model\Index\Memaddress;
+use App\Model\Admin\Type;
 
 
 class ShopcarController extends Controller
@@ -23,6 +24,8 @@ class ShopcarController extends Controller
      */
     public function index(Request $request)
     {
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
 
         // // dd($request->session()->has('usersInfo'));
         // if(!$request->session()->has('usersInfo')){
@@ -50,7 +53,7 @@ class ShopcarController extends Controller
 
         // $request->session()->put('usersInfo.shopnum',count($shopgoods));
         // dd(session('usersInfo.shopnum'));
-        return view('index.shopcar',['shop'=>$shopgoods]);
+        return view('index.shopcar',['shop'=>$shopgoods,'array'=>$array]);
         
 
 
@@ -92,6 +95,9 @@ class ShopcarController extends Controller
      */
     public function store(Request $request)
     {
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
 
        if (session('usersInfo') == NULL) {
             return view('authindex/login');
@@ -116,7 +122,7 @@ class ShopcarController extends Controller
         // dd($info);
         $goid = explode("@",rtrim($info['goid'],'@'));
         $gonum = explode("@",rtrim($info['gonum'],'@'));
-        // count($goid);
+        count($goid);
         // dd(count($goid));
    
         // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
@@ -136,11 +142,27 @@ class ShopcarController extends Controller
                     'shaddress_id'=>$shaddid
                     ]);
         
+
+       // dd($request->session()->has('usersInfo'));
+        // $this->show($memid,$goid);
+         $order = Order::with('order_goods')->where('member_id',$memid)
+                                            ->get();
+                                            // ->where('');
+        // dd($order->toArray());
+        $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
+        $shopinfo = $shop->toArray();
+
+
+        // dd($shopinfo);
+        return view('index.person3',['array'=>$array]);
+
+
        if($orderis){
             return redirect("shopcar/show/$memid");
        }else{
             return back();
        }
+
     }
 
     /**
@@ -159,13 +181,25 @@ class ShopcarController extends Controller
                                             ->get();
         // dd($order);                                    
         // dd($order->toArray());
+        
 
         $orderb = $order->toArray();
+        $ordernum = count($orderb);
+        // dd( $ordernum );
 
-
+  //导航栏
+        $array = Type::get()->toHierarchy();
+        // dd($datas);
+        $model = Member::findOrFail($id);
         // dd($shopinfo);
         // dd($shopinfo);
-        return view('index.person3',['order'=>$orderb]);
+         $memadd = Member::with('memaddress')->where('id',$id)->first();
+
+        $memainfo = $memadd->toArray();   
+        // dd($memainfo['memaddress']);
+        $memaddress = $memainfo['memaddress'];
+
+        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress,'ordernum'=>$ordernum]);
 
     }
 
@@ -227,6 +261,9 @@ class ShopcarController extends Controller
      * @return [type]           [description]
      */
     public function jiesuan(Request $request){
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
         if (session('usersInfo') == NULL) {
             return view('authindex/login');
         }
@@ -234,8 +271,6 @@ class ShopcarController extends Controller
 
         $infogoid = $request->goid;
         $infogonum = $request->gonum;
-
-
 
         $totalprices = $request->totalprices;
         // $info['ordernum'] = $request->ordernum;
@@ -264,7 +299,8 @@ class ShopcarController extends Controller
                                      'totalprices'=>$totalprices,
                                      'memaddress'=>$memaddress,
                                      'goid'=>$infogoid,
-                                     'gonum'=>$infogonum
+                                     'gonum'=>$infogonum,
+                                     'array'=>$array
                                     ]);
 
 

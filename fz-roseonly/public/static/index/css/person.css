@@ -418,7 +418,7 @@
     padding-right:5px;
     float:left;
     line-height: 45px;
-    text-align: left;
+    /*text-align: left;*/
 }
 .sec1 .con_r .con_ra li .center-a{
     display:inline;

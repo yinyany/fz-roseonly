@@ -142,7 +142,7 @@
                                         </p>
                                         <p>
                                             <span >商品单价：</span>
-                                            <span >{{$list['goods']['unitprice']}}</span>
+                                            <span >{{$list['goods']['price']}}</span>
                                         </p>
                                     </div>
                                 </div>

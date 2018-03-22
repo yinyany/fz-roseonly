@@ -43,26 +43,6 @@
                   <span class="x-red"></span>
               </div>
             </div>
-            <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>图片
-              </label>
-              <button type="button" class="layui-btn" id="test1">
-                <i class="layui-icon">&#xe67c;</i>上传图片
-              </button>
-              <input type="hidden" name="imgurl" value="{{$values->imgurl}}" id="file">
-          </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>显示
-              </label>
-              @if(!isset($values->imgurl))
-                <img src="/uploads/values/{{ $values->imgurl }}" style="height: 100px;" id="url" style="width: 200px;">
-              @else
-               <img src="" style="height: 100px;" id="url" style="width: 200px;">
-              @endif
-          </div>
-          </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -92,19 +72,19 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
         });
-        //执行实例
-        var uploadInst = upload.render({
-          elem: '#test1' //绑定元素
-          ,url: '{{ url("/admin/values/upload") }}' //上传接口
-          ,field:'imgurl'
-          ,done: function(res){
-            $('#file').val(res.data.src);
-            $('#url').attr("src",'/uploads/values/'+res.data.src);
-          }
-          ,error: function(){
-            //请求异常回调
-          }
-        });
+        // //执行实例
+        // var uploadInst = upload.render({
+        //   elem: '#test1' //绑定元素
+        //   ,url: '{{ url("/admin/values/upload") }}' //上传接口
+        //   ,field:'imgurl'
+        //   ,done: function(res){
+        //     $('#file').val(res.data.src);
+        //     $('#url').attr("src",'/uploads/values/'+res.data.src);
+        //   }
+        //   ,error: function(){
+        //     //请求异常回调
+        //   }
+        // });
       });
     </script>
 @endsection 

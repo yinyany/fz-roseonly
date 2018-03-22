@@ -103,7 +103,22 @@ class OrderhomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        // dd('123123');
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+        $memid = session('usersInfo')['id'];
+        $pay_time = $request->pay_time;
+
+        $order = Order::where('id',$id)->update(['pay_time'=>$pay_time,'is_pay'=>1]);
+
+        if ($order) {
+
+        return redirect("shopcar/show/$memid");
+                                                 
+        }                                     
+
     }
 
     /**
