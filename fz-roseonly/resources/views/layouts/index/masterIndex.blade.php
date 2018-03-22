@@ -48,7 +48,7 @@
 				<div class="select_com" style="margin-left:850px;">
 					<form action="{{ url('/listname') }}" method="post">
 						{{ csrf_field() }}
-						<input type="text" name="name" placeholder="请输入商品名称" value="{{session('ss')?session('ss'):''}}" style="border:none;width:180px; height:25px;border-radius: 30px;text-indent: 12px;outline:none;font-size: 12px;">
+						<input type="text" name="name" placeholder="请输入商品名称" value="{{session()->pull('ss', '')}}" style="border:none;width:180px; height:25px;border-radius: 30px;text-indent: 12px;outline:none;font-size: 12px;">
 						<button style="float:right;margin:5px 10px 0px 0px;width:22px;height:22px;border:none; background: #e7e7e7;outline:none;">
 							<img style="width:25px;" src="{{ asset('static/index/images/comment/sou.png') }}">
 						</button>
