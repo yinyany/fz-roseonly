@@ -96,12 +96,6 @@
                             <cite>商品列表</cite>
                         </a>
                     </li >
-                    <li>
-                        <a _href="{{ url('admin/stock') }}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>库存管理</cite>
-                        </a>
-                    </li >
                 </ul>
             </li>
             <li>

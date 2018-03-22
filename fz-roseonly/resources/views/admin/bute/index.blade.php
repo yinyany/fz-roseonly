@@ -34,6 +34,7 @@
             <th>ID</th>
             <th>类别名</th>
             <th>属性名</th>
+            <th>状态</th>
             <th>添加时间</th>
             <th>操作</th>
         </thead>
@@ -43,6 +44,7 @@
             <td>{{ $list->id }}</td>
             <td>{{ $datas[$list->type_id] }}</td>
             <td>{{ $list->name }}</td>
+            <td>{{ $list->state }}</td>
             <td>{{ $list->created_at }}</td>
             <td class="td-manage">
               <a title="修改" href='{{ url("admin/bute/edit/$list->id") }}'>

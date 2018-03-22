@@ -56,7 +56,11 @@
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>显示
               </label>
-              <img src="/uploads/values/{{ $values->imgurl }}" style="height: 100px;" id="url" style="width: 200px;">
+              @if(!isset($values->imgurl))
+                <img src="/uploads/values/{{ $values->imgurl }}" style="height: 100px;" id="url" style="width: 200px;">
+              @else
+               <img src="" style="height: 100px;" id="url" style="width: 200px;">
+              @endif
           </div>
           </div>
           <div class="layui-form-item">
