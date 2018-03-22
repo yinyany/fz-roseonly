@@ -405,7 +405,7 @@
 /*提交订单信息*/
 .sec1 .con_r{
    width: 100%;
-   height: 246px;
+
    margin:10px auto;
    background:#e8e8e8;
 }
@@ -457,6 +457,7 @@
     width:100%;
     position: relative;
     height:141px;
+    border-bottom:1px solid #ccc;
 }
 .sec1 .con_bom img{
     width: 100px;

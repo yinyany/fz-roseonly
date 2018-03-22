@@ -114,6 +114,12 @@ class OrderhomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Order::destroy($id)) {
+            // flash()->overlay('删除成功', 1);
+            return back();
+        }else{
+            // flash()->overlay('删除失败', 5);
+            return back();
+        }
     }
 }

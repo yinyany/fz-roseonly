@@ -26,5 +26,10 @@ class Order extends Model
     {
         return $this->hasMany('App\Model\Admin\Order_goods','order_id','order_number');
     }
+    
+    public function memaddress()
+    {
+        return $this->belongsTo('App\Model\Index\Memaddress','shaddress_id','id');
+    }
 
 }

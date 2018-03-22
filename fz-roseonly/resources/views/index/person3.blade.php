@@ -66,13 +66,14 @@
                     <!-- 我的订单信息 -->
                    
                     <div class="sec1 sec">
+                        @foreach($order as $list)
                         <!-- 订单标号内容 -->
                         <div class="con_r">
                             <ul class="con_ra">
                                 <li>
                                     <div>
                                         <span class="center-a">订单编号：</span>
-                                        <span class="center-b">2018030617255527</span> 
+                                        <span class="center-b">{{$list['order_number']}}</span> 
                                     </div>
                                    
                                 </li>
@@ -93,7 +94,7 @@
                                 <li>
                                     <div>
                                          <span class="center-a">消费时间：</span>
-                                         <span class="center-b" >2018-03-06 17:25</span>
+                                         <span class="center-b" >{{ $list['created_at'] }}</span>
                                     </div>
                                   
                                 </li>
@@ -101,7 +102,7 @@
                                     <div>
                                         <span class="center-a">订单金额：</span>
                                         <span class="center-b">
-                                        ￥<label id="jep618650" class="jep">3999.0</label>
+                                        ￥<label id="jep618650" class="jep">{{ $list['pay_prices'] }}</label>
                                         </span>
                                     </div>
                                 </li>
@@ -109,58 +110,64 @@
                                     <div class="center-all">
                                         <span class="center-a">订单操作：</span>
                                         <span class="center-c"> 等待付款</span>
-                                       <a href="">取消订单</a>
+                                        <input type="hidden" name="id" value="{{$list['id']}}" class="orderid">
+                                        <a href='{{url("orderhome/destroy/$list[id]")}}'class="orderdel">取消订单</a>
                                     </div>
-                                   
                                 </li>
                             </ul>
+                            <div style="margin-left: 10px;">
+                                <p style="margin-bottom:10px;color:#777;">
+                                    <span style="margin-right:20px; ">收货人：<strong style="color:#333;">{{ $list['memaddress']['shpeople']}}</strong></span>
+                                    <span style="margin-right:20px;">收货地址：<strong style="color:#333;">{{ $list['memaddress']['shaddress']}}</strong></span>
+                                </p>
+                                <p style="margin-bottom:10px;color:#777;"  >
+                                    <span style="margin-right:90px; ">收货人电话：<strong style="color:#333;">{{ $list['memaddress']['shphone']}}</strong></span>
+                                    <span style="margin-right:10px; ">收货人邮编：<strong style="color:#333;">{{ $list['memaddress']['shpostcode']}}</strong></span>
+                                </p>
+                                
+                                
+                            </div>
+                            @foreach($list['order_goods'] as $ordergoods ) 
                             <div class="con_bom">
                                  <img src="{{ asset('static/index/images/index/decoration1.png') }}" alt="" >
                                  <div class="cona_left">
                                      <ul>
                                          <li>
                                             <span class="center-q">商品名称:</span>
-                                             <span class="center-w">项圈狗-18K双色金-项链</span>
+                                             <span class="center-w">{{$ordergoods['goods']['name']}}</span>
                                          </li>
                                           <li>
                                              <span class="center-q">单价:</span>
                                              <span class="center-w">
-                                            ￥<label >3999.0</label>
+                                            ￥<label >{{$ordergoods['goods']['unitprice']}}</label>
                                             </span>
                                          </li>
                                           <li>
                                               <span class="center-q">商品数量:</span>
-                                             <span class="center-w">1</span>
+                                             <span class="center-w">{{ $ordergoods['goods_num']}}</span>
                                          </li>
                                          <li>
                                               <span class="center-q">物流状态:</span>
                                              <span class="center-w">未发货</span>
                                          </li>
                                          <li>
-                                              <span class="center-q">物流单号:</span>
+                                             <span class="center-q">物流单号:</span>
                                              <span class="center-w"></span>
                                          </li>
-                                         <li>
-                                            <div class="cona_botto">
-                                               <span class="center-q">配送操作:</span>
-                                               <div class="coma_rightb">
-                                                    <a href="" style=" color:#60a0e1;">【查看】</a>
-                                                    <a href="" style=" color:#60a0e1;">【修改信息】</a>
-                                               </div>
-                                               
-                                            </div>
-                                              
-                                         </li>
+                                        
                                      </ul>
                                  </div>
+                                  
                             </div>
+                           @endforeach
                         </div>
                         <!-- 结束订单标号内容 -->
+                        @endforeach
                     </div>
                    
                    
                     <!-- 基本信息 -->
-                    <div class="sec4 sec hide">
+                   {{-- <div class="sec4 sec hide">
                         <h3>
                             <a href="javascript:;" class="person_hover">基本信息</a>
                             <a href="javascript:;">修改密码</a>
@@ -494,26 +501,26 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div>--}}
                     <!-- 添加显示与隐藏 -->
                     <script type="text/javascript">
-                      window.onload = function(){
-                        var btn = document.getElementsByClassName('add_address')[0];
-                        var divEle = document.getElementById('add');
-                        btn.onclick = function(){
-                           if(divEle.style.display == 'block'){
-                              divEle.style.display = 'none';
-                              btn.innerHTML = '添加新地址';
-                              btn.style="color:#333";
+                      // window.onload = function(){
+                      //   var btn = document.getElementsByClassName('add_address')[0];
+                      //   var divEle = document.getElementById('add');
+                      //   btn.onclick = function(){
+                      //      if(divEle.style.display == 'block'){
+                      //         divEle.style.display = 'none';
+                      //         btn.innerHTML = '添加新地址';
+                      //         btn.style="color:#333";
 
-                           }else{
-                              divEle.style.display = 'block';
-                              btn.innerHTML = '取消';
-                              btn.style="color:red";
-                           } 
+                      //      }else{
+                      //         divEle.style.display = 'block';
+                      //         btn.innerHTML = '取消';
+                      //         btn.style="color:red";
+                      //      } 
                           
-                        }
-                      }
+                      //   }
+                      // }
                     </script>
                 </div>
             </div>
@@ -553,6 +560,17 @@
                   //请求异常回调
                 }
             });
+
+            // $('.orderdel').click(function(){
+            //     var orderid = $('.orderid').val();
+            //     $.ajax({
+            //         type:"GET",
+            //         url: '{{ url("orderhome/destroy/orderid")}}',
+            //         success:function(msg){
+            //             console.log(msg);
+            //         }
+            //     })
+            // })  
         });  
     </script>
     @include('flash::message')

@@ -84,18 +84,18 @@
                     <input type="hidden" id="cartTotalPrice">
                     <div class="fr total">
                         合计：￥
-                        <span id="priceTotal"></span>
+                        <span id="priceTotal">0.00</span>
                     </div>
                     <div class="fr selected" id="selected">
                         已选商品
-                        <span id="selectedTotal">4</span>件
+                        <span id="selectedTotal">0</span>件
                         <span class="arrow up">︽</span>
                         <span class="arrow down">︾</span>
                     </div>
                     <div class="selected-view">
                         <div id="selectedViewList" class="clearfix">
                             <div>
-                                <img src="http://www.jq22.com/demo/jquery-guc20151105/images/1.jpg">
+                                <img src="">
                                 <span class="del" index="0">取消选择</span>
                             </div>
                            

@@ -8,271 +8,6 @@
 	<script src="{{ asset('static/index/js/jquery.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('static/index/js/comment.js') }}" type="text/javascript"></script>
 
-<<<<<<< HEAD
-    @section('link')
-        {{-- 此区块继承加载其他外部引入文件 --}} 
-    @show
-    
-</head>
-<body>
-    <header>
-        <!-- ++++++++++ 顶部链接条 +++++++++++ -->
-        <div id="head">
-            <div class="head">
-                <!-- ++++++++++ 左边两个logo图标+链接 +++++++++++ -->
-                <div class="head_left">
-                    <a href="javascript:;" class="roseonly onHead"></a>
-                    <a href="javascript:;" class="loveroseonly"></a>
-                </div>
-                <!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
-                <div class="head_right">
-
-                    @if(session('usersInfo') != null)
-                        <a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login">{{ session('usersInfo')['name'] }}</a>
-                        <span>|</span>
-                        <a href="{{ url('/authindex/logout') }}" class="register">退出</a>
-                        <span>|</span>
-                    @elseif(session('usersInfo') == null)
-                        <a href="{{ url('/authindex/login') }}" class="login">登录</a>
-                        <span>|</span>
-                        <a href="{{ url('/authindex/register') }}" class="register">注册</a>
-                        <span>|</span>
-                    @endif
-                    <a href="{{ url('/shopcar') }}" class="shopCar"></a>
-                    @if(session('usersInfo.shopnum') == null)
-                    <span id="shopNum">(0)</span>
-                    @elseif(session('usersInfo.shopnum') !=null))
-                    <span id="shopNum">({{ session('usersInfo.shopnum') }})</span>
-                    @endif
-                </div>
-            </div>
-        </div>
-        <!-- ++++++++++ logo +++++++++++ -->
-        <div id="logo">
-            <a href="index.html">
-                <img src="{{ asset('static/index/images/comment/logo.jpg') }}" alt="roseonly官网" title="roseonly官网">
-            </a>
-        </div>
-        <!-- ++++++++++ 导航条 +++++++++++ -->
-        <div id="nav">
-            <ul>
-                <div class="list">
-                    <div style="display: none;width:120px;height:30px;float: left;" class="logo">
-                        <a href="javascript:;">
-                            <img src="{{ asset('static/index/images/comment/head_roseonly_hover.png') }}" height="34" style="padding-top:3px;">
-                        </a>
-                    </div>
-                    <li class="gift">
-                        <a href="javascript:;">爱礼推荐</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>场合</b>
-                                    <a href="javascript:;">生日</a>
-                                    <a href="javascript:;">纪念日</a>
-                                    <a href="javascript:;">表白</a>
-                                    <a href="javascript:;">求婚</a>
-                                    <a href="javascript:;">重要的人</a>
-                                    <a href="javascript:;">道歉</a>
-                                </div>
-                                <div class="column2">
-                                    <b>人群</b>
-                                    <a href="javascript:;">送给她</a>
-                                    <a href="javascript:;">送给他</a>
-                                    <a href="javascript:;">送母亲</a>
-                                    <a href="javascript:;">送父亲</a>
-                                </div>
-                                <div class="column3">
-                                    <b>品类</b>
-                                    <a href="javascript:;">鲜花玫瑰</a>
-                                    <a href="javascript:;">永生玫瑰</a>
-                                    <a href="javascript:;">玫瑰珠宝</a>
-                                    <a href="javascript:;">玫瑰饰品</a>
-                                    <a href="javascript:;">玫瑰礼品</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/gift.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flower">
-                        <a href="javascript:;">鲜花玫瑰</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">玫瑰长盒</a>
-                                    <a href="javascript:;">玫瑰手捧</a>
-                                    <a href="javascript:;">玫瑰花篮</a>
-                                    <a href="javascript:;">玫瑰水晶花盒</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">经典永续</a>
-                                    <a href="javascript:;">恒久真爱</a>
-                                    <a href="javascript:;">爱在满怀</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">for all love</a>
-                                </div>
-                                <div class="column3">
-                                    <b>规格</b>
-                                    <a href="javascript:;">19支80cm</a>
-                                    <a href="javascript:;">11支80cm</a>
-                                    <a href="javascript:;">19支40cm</a>
-                                    <a href="javascript:;">11支40cm</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/flower.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="rose">
-                        <a href="javascript:;">永生玫瑰</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">音乐玫瑰</a>
-                                    <a href="javascript:;">玫瑰球形</a>
-                                    <a href="javascript:;">玫瑰圆盒</a>
-                                    <a href="javascript:;">玫瑰方盒</a>
-                                    <a href="javascript:;">玫瑰心形盒</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">玫瑰熊</a>
-                                    <a href="javascript:;">全世爱</a>
-                                    <a href="javascript:;">经典永续</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">一生一世</a>
-                                    <a href="javascript:;">for all love</a>
-                                </div>
-                                <div class="column3">
-                                    <b>规格</b>
-                                    <a href="javascript:;">巨型</a>
-                                    <a href="javascript:;">大型</a>
-                                    <a href="javascript:;">中型</a>
-                                    <a href="javascript:;">小型</a>
-                                    <a href="javascript:;">Mini</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/rose.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="jewel">
-                        <a href="javascript:;">玫瑰珠宝</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">项链</a>
-                                    <a href="javascript:;">手链</a>
-                                    <a href="javascript:;">耳饰</a>
-                                    <a href="javascript:;">手镯</a>
-                                    <a href="javascript:;">戒指</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">玫瑰熊</a>
-                                    <a href="javascript:;">生辰石</a>
-                                    <a href="javascript:;">玫瑰经典</a>
-                                    <a href="javascript:;">经典永续</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">全心全意</a>
-                                    <a href="javascript:;">幸运精灵</a>
-                                </div>
-                                <div class="column3">
-                                    <b>材质</b>
-                                    <a href="javascript:;">18K玫瑰金镶钻</a>
-                                    <a href="javascript:;">18K白金镶钻</a>
-                                    <a href="javascript:;">18K玫瑰金</a>
-                                    <a href="javascript:;">18K白金</a>
-                                    <a href="javascript:;">9K玫瑰金</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/jewel.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ornaments">
-                        <a href="javascript:;">玫瑰饰品</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>类型</b>
-                                    <a href="javascript:;">项链</a>
-                                    <a href="javascript:;">手链</a>
-                                    <a href="javascript:;">耳饰</a>
-                                    <a href="javascript:;">手镯</a>
-                                    <a href="javascript:;">戒指</a>
-                                </div>
-                                <div class="column2">
-                                    <b>系列</b>
-                                    <a href="javascript:;">玫瑰经典</a>
-                                    <a href="javascript:;">星座经典</a>
-                                    <a href="javascript:;">时光之吻</a>
-                                    <a href="javascript:;">全心全意</a>
-                                    <a href="javascript:;">情有独钟</a>
-                                    <a href="javascript:;">幸运精灵</a>
-                                    <a href="javascript:;">经典永续</a>
-                                </div>
-                                <div class="column3">
-                                    <b>材质</b>
-                                    <a href="javascript:;">925银镀玫瑰金</a>
-                                    <a href="javascript:;">925银镀白金</a>
-                                    <a href="javascript:;">925银珍珠</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/ronaments.jpg') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;">高端定制</a></li>
-                    <li><a href="javascript:;">专卖店</a></li>
-                    <li class="oath">
-                        <a href="javascript:;">诺誓世界</a>
-                        <div class="next">
-                            <div class="child">
-                                <div class="column1">
-                                    <b>品牌介绍</b>
-                                    <a href="javascript:;">品牌故事</a>
-                                    <a href="javascript:;">产品故事</a>
-                                    <a href="javascript:;">明星时刻</a>
-                                    <a href="javascript:;">真爱见证</a>
-                                    <a href="javascript:;">活动资讯</a>
-                                    <a href="javascript:;">诺誓百科</a>
-                                </div>
-                                <div class="column2">
-                                    <b>节日百科</b>
-                                    <a href="javascript:;">情人节百科</a>
-                                    <a href="javascript:;">母亲节百科</a>
-                                    <a href="javascript:;">520百科</a>
-                                    <a href="javascript:;">七夕节百科</a>
-                                    <a href="javascript:;">圣诞节百科</a>
-                                </div>
-                                <a href=""><img src="{{ asset('static/index/images/comment/oath.png') }}" alt=""></a>
-                                <p class="cl"></p>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
-                    <div class="head_right" style="display: none;">
-                    <a href="javascript:;" class="login">登录</a>
-                    <span>|</span>
-                    <a href="javascript:;" class="register">注册</a>
-                    <span>|</span>
-                    <a href="javascript:;" class="shopCar" style="background:url({{ asset('static/index/images/comment/shopCarNav.png)no-repeat scroll center center;') }}"></a>
-                    <span id="shopNum">(0)</span>
-                   <!--  <input type="text" placeholder="输入信息">  -->
-                    </div>
-                    <div class="cl"></div>
-                </div>
-            </ul>
-        </div>
-        <div class="cl"></div>
-    </header>
-=======
 	@section('link')
 		{{-- 此区块继承加载其他外部引入文件 --}} 
 	@show
@@ -288,30 +23,36 @@
 					<a href="javascript:;" class="roseonly onHead"></a>
 					<a href="javascript:;" class="loveroseonly"></a>
 				</div>
+
 				<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
+                <div class="head_right" style="width:170px;">
+                    @if(session('usersInfo') != null)
+                        <a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login" style="width:70px;">{{ session('usersInfo')['name'] }}</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/logout') }}" class="register">退出</a>
+                        <span>|</span>
+                    @elseif(session('usersInfo') == null)
+                        <a href="{{ url('/authindex/login') }}" class="login">登录</a>
+                        <span>|</span>
+                        <a href="{{ url('/authindex/register') }}" class="register">注册</a>
+                        <span>|</span>
+                    @endif
+                    <a href="{{ url('/shopcar') }}" class="shopCar"></a>
+                     @if(session('usersInfo.shopnum') == null)
+                    <span id="shopNum">(0)</span>
+                    @elseif(session('usersInfo.shopnum') !=null))
+                    <span id="shopNum">({{ session('usersInfo.shopnum') }})</span>
+                    @endif
+                </div>
 				<div class="select_com" style="margin-left:850px;">
 					<form action="" method="post">
 						<input type="text" name="" placeholder="请输入关键字搜索" style="border:none;width:180px; height:25px;border-radius: 30px;text-indent: 12px;outline:none;font-size: 12px;">
-						<button style="float:right;margin:5px 40px 0px 0px;width:22px;height:22px;border:none; background: #e7e7e7;outline:none;">
+						<button style="float:right;margin:5px 10px 0px 0px;width:22px;height:22px;border:none; background: #e7e7e7;outline:none;">
 							<img style="width:25px;" src="{{ asset('static/index/images/comment/sou.png') }}">
 						</button>
 					</form>
 				</div>
-				<div class="head_right">
-					@if(session('usersInfo') != null)
-						<a href="{{ url('/member',[session('usersInfo')['id']]) }}" class="login">{{ session('usersInfo')['name'] }}</a>
-						<span>|</span>
-						<a href="{{ url('/authindex/logout') }}" class="register">退出</a>
-						<span>|</span>
-					@elseif(session('usersInfo') == null)
-						<a href="{{ url('/authindex/login') }}" class="login">登录</a>
-						<span>|</span>
-						<a href="{{ url('/authindex/register') }}" class="register">注册</a>
-						<span>|</span>
-					@endif
-					<a href="javascript:;" class="shopCar"></a>
-					<span id="shopNum">(0)</span>
-				</div>
+				
 			</div>
 		</div>
 		<!-- ++++++++++ logo +++++++++++ -->
@@ -362,7 +103,7 @@
 							</div>
 						</div>
 					</li>
-					@foreach($array as $list)
+					{{--@foreach($array as $list)
 					<li class="flower">
 						<a href="{{ url('/list',[$list['id']]) }}">{{ $list['name'] }}</a>
 						<div class="next">
@@ -380,7 +121,7 @@
 							</div>
 						</div>
 					</li>
-					@endforeach
+					@endforeach--}}
 					<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
 					<div class="head_right" style="display: none;">
 					<a href="javascript:;" class="login">登录</a>
@@ -397,7 +138,6 @@
 		</div>
 		<div class="cl"></div>
 	</header>
->>>>>>> dda4a4018dd402a90e1c6cb0a7bbe9cb8c184d19
 
 	<!-- 主题内容区域 -->
 	@section('content')

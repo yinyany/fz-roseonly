@@ -22,9 +22,9 @@ class Memaddress extends Model
         return $this->belongsTo('App\Model\Admin\Member','id','member_id');
     }
 
-    public function order_goods()
+   public function orderaddress()
     {
-        return $this->hasMany('App\Model\Admin\Order_goods','order_id','order_number');
+        return $this->hasMany('App\Model\Admin\Order','shaddress_id','id');
     }
 
 }
