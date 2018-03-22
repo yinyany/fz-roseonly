@@ -53,14 +53,14 @@
                                 <span>{{$list['goods']['name']}}</span>
                                 
                             </td>
-                            <td class="price">{{$list['goods']['unitprice']}}</td>
+                            <td class="price">{{$list['goods']['price']}}</td>
                             <td class="count">
                                 <span class="reduce"></span>
                                 <input class="count-input" type="text" value="{{$list['num']}}">
                                 <input type="hidden" name="id" value="{{$list['id']}}" class="id">
                                 <span class="add">+</span></td>
                                 
-                            <td class="subtotal">{{$list['goods']['unitprice'] * $list['num']}}</td>
+                            <td class="subtotal">{{$list['goods']['price'] * $list['num']}}</td>
                             <td class="operation"><span class="delete">删除</span></td>
                         </tr>
                        {{ csrf_field() }}

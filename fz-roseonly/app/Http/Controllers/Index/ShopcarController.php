@@ -12,6 +12,7 @@ use App\Model\Admin\Member;
 use App\Model\Admin\Order;
 use App\Model\Admin\Order_goods;
 use App\Model\Index\Memaddress;
+use App\Model\Admin\Type;
 
 
 class ShopcarController extends Controller
@@ -162,10 +163,19 @@ class ShopcarController extends Controller
 
         $orderb = $order->toArray();
 
+  //导航栏
+        $array = Type::get()->toHierarchy();
+        // dd($datas);
+        $model = Member::findOrFail($id);
+        // dd($shopinfo);
+        // dd($shopinfo);
+         $memadd = Member::with('memaddress')->where('id',$id)->first();
 
-        // dd($shopinfo);
-        // dd($shopinfo);
-        return view('index.person3',['order'=>$orderb]);
+        $memainfo = $memadd->toArray();   
+        // dd($memainfo['memaddress']);
+        $memaddress = $memainfo['memaddress'];
+
+        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress]);
 
     }
 

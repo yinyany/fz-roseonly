@@ -139,7 +139,7 @@
                                           <li>
                                              <span class="center-q">单价:</span>
                                              <span class="center-w">
-                                            ￥<label >{{$ordergoods['goods']['unitprice']}}</label>
+                                            ￥<label >{{$ordergoods['goods']['price']}}</label>
                                             </span>
                                          </li>
                                           <li>
@@ -167,7 +167,7 @@
                    
                    
                     <!-- 基本信息 -->
-                   {{-- <div class="sec4 sec hide">
+                    <div class="sec4 sec hide">
                         <h3>
                             <a href="javascript:;" class="person_hover">基本信息</a>
                             <a href="javascript:;">修改密码</a>
@@ -393,12 +393,13 @@
                         <div class="card_money">
                             收获地址管理 
                         </div>
+                        @foreach($memaddress as $list)
                         <div class="smod_addres">
                             <p>常<br>用<br>地<br>址<br></p>
                             <div class="nickname">
                                 <span >niu<em>收</em></span>
                                  <span >
-                                     <strong>山西省</strong><strong>运城市</strong><strong>盐湖区</strong><em style="font-style:normal">北城街道货场路</em>
+                                     <strong></strong>
                                  </span>
                                  <span class="mobilenumber">
                                      15234375791
@@ -411,6 +412,7 @@
                                 '6','128','1163','盐湖区','15234375791','','1','044000');" class="black oneMore">编辑</a>
                             </div>
                         </div>
+                        @endforeach
                         <div class="new_addres">
                             <a href="javascript:;" onclick="" class="add_address">
                             添加新地址
@@ -500,7 +502,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>--}}
+                    </div>
                     <!-- 添加显示与隐藏 -->
                     <script type="text/javascript">
                       // window.onload = function(){
