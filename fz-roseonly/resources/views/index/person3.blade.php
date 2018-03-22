@@ -15,18 +15,6 @@
     <link rel="icon" href="{{ asset('static/index/images/index_images/log_tb.jpg') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    
-<!--     <link rel="stylesheet" href="./Purchase page.css" type="text/css">
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="keywords" content="jQuery省市区三级联动" />
-    <meta name="description" content="jQuery实现省、市、区三级联动的代码网上应该已经挺多了，今天群里一名成员投了篇关于省、市、区三级联动的实现代码，不同的一点是他将代码片段封装成了jQuery插件。" />
-    <link href="./Province_css/city.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="./My Receiving address.js/jquery.min_1.js"></script>
-    <script type="text/javascript" src="./My Receiving address.js/city.min.js"></script> -->
-
 @endsection 
 
 

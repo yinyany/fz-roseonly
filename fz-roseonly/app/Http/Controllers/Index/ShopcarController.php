@@ -142,7 +142,7 @@ class ShopcarController extends Controller
                     'shaddress_id'=>$shaddid
                     ]);
         
-<<<<<<< HEAD
+
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
          $order = Order::with('order_goods')->where('member_id',$memid)
@@ -156,13 +156,13 @@ class ShopcarController extends Controller
         // dd($shopinfo);
         return view('index.person3',['array'=>$array]);
 
-=======
+
        if($orderis){
             return redirect("shopcar/show/$memid");
        }else{
             return back();
        }
->>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
+
     }
 
     /**
