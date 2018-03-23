@@ -12,6 +12,10 @@ use App\Model\Admin\Member;
 
 class OrderController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware(['role:admin']);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +23,6 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // $where=[];
-        // if ($keywords != '') {
             $order = Order::where("is_pay","=",1)
                             ->orderBy('is_ship','asc')
                             ->orderBy('id','desc')
@@ -29,42 +31,7 @@ class OrderController extends Controller
                          ->orderBy('is_ship','asc')
                          ->orderBy('id','desc')
                          ->count();
-
-        // return "123123";
-        // dd($sum);
         return view('admin.order.order',['order'=>$order,'sum'=>$sum]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-       
     }
 
     /**
@@ -82,12 +49,7 @@ class OrderController extends Controller
          $memberid = $aOrderinfo['member_id']; 
          
         $member = Member::with('order')->find($memberid);  //对象形式的会员信息
-        // dd($member);
-        // dd($member->toArray());
         $memberinfo = $member->toArray();
-
-        // dd($memberinfo);
-
 
         return view('admin.order.edit',['orderinfo'=>$orderinfo,'minfo' =>$memberinfo]);
     }
@@ -118,42 +80,5 @@ class OrderController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        
-    }
-
-    // /**
-    //  * 查询已发货订单
-    //  * @return [type] [description]
-    //  */
-    //  public function shipped()
-    // {
-    //     // $where=[];
-    //     // if ($keywords != '') {
-    //         $shipped = Order::where('is_ship',"=",1)->orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
-    //         $sum = Order::where('is_ship',"=",1)->count();
-
-    //     // return "123123";
-    //     // dd($sum);
-    //     return view('admin.order.shipped',['shipped'=>$shipped,'sum'=>$sum]);
-    // }
-    
-    // public function hasmany()
-    // {
-    //      $member = Member::with('order')->find(1);
-
-    //     dd($member->toArray());
-    // }
-
-
-     
-     
-    
+   
 }

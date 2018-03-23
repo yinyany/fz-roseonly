@@ -105,9 +105,11 @@
 						</div>
 					</li>
                     @foreach($array as $v)
+                    
 					<li class="flower">
                         <a href="{{ url('/list',[$v->id]) }}">{{ $v->name }}</a>
                         <div class="next">
+
                             <div class="child">
                                 <div class="column1">
                                     <b>类型</b>
@@ -131,25 +133,7 @@
                         </div>
                     </li>
                     @endforeach
-					{{--@foreach($array as $list)
-					<li class="flower">
-						<a href="{{ url('/list',[$list['id']]) }}">{{ $list['name'] }}</a>
-						<div class="next">
-							<div class="child">
-								@foreach($list['children'] as $value)
-								<div class="column1" style="border-right: 1px solid #414141;">
-									<b>{{ $value['name'] }}</b>
-									@foreach($value['children'] as $v)
-									<a href="{{ url('/list',[$v['id']]) }}">{{ $v['name'] }}</a>
-									@endforeach
-								</div>
-								@endforeach
-								<a href=""><img src="{{ asset('static/index/images/comment/flower.jpg') }}" alt=""></a>
-								<p class="cl"></p>
-							</div>
-						</div>
-					</li>
-					@endforeach--}}
+				
 					<!-- ++++++++++ 右边登录、注册、购物袋 +++++++++++ -->
 
 					<div class="head_right" style="display: none;">

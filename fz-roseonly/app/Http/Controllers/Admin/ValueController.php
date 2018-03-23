@@ -12,6 +12,10 @@ use App\Http\Controllers\Controller;
 
 class ValueController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware(['role:admin']);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -99,17 +103,6 @@ class ValueController extends Controller
         $datas->save();
         flash()->overlay('添加成功',1);
         return redirect('/admin/values');        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

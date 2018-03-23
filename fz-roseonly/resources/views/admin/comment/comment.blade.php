@@ -42,7 +42,7 @@
           @foreach($comment as $list)
           <tr>
             <td>{{ $list->id }}</td>
-            <td>{{ $list->mid }}</td>
+            <td>{{ $mem[$list->mid] }}</td>
             <td>{{ $list->sid }}</td>
             <td>
               <a class="layui-bg-blue" href="javascript:;">评论:</a>{{ $list->content }}
