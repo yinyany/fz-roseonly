@@ -109,8 +109,8 @@ class OrderhomeController extends Controller
         $id = $request->id;
         $password = $request->zhifu;
 
-         $passwrds = bcrypt($password);
-        // dd($password);
+         $passwrds = md5($password);
+        dd($passwrds);
         // dd('123123');
         // dd($id);
         if (session('usersInfo') == NULL) {     
@@ -121,8 +121,6 @@ class OrderhomeController extends Controller
         $memberinfo = Member::where('id',$memid)->first();
 
         // dd($memberinfo);
-
-
 
 
         $pay_time = time();
