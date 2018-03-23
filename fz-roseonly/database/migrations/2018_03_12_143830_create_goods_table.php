@@ -15,7 +15,7 @@ class CreateGoodsTable extends Migration
         Schema::create('goods', function (Blueprint $table) {
             $table->increments('id');    //商品的编号
             $table->tinyInteger('type_id');   //分类表id
-            $table->tinyInteger('bid');   //属性id
+            $table->string('bid');   //属性id
             $table->string('name','36');   //商品的名称
             $table->double('price',20,2);                //单个价格
             $table->string('imgurl');   //商品图片的路径

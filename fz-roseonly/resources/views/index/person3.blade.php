@@ -84,7 +84,7 @@
                                     <div class="center-all">
                                         <span class="center-a">订单操作：</span>
                                         @if($list['is_pay'] == 1)
-                                        <button class="btn center-c" style="border:none;">已付款</button> 
+                                        <button class="btn center-c" style="border:none;">确认收货</button> 
                                         @else
                                              <button class="btn center-c showModel" style="border:none;">等待付款<input type="hidden" value="{{$list['id']}}" class="orderid"></button>
                                              <a href='{{url("orderhome/destroy/$list[id]")}}'class="orderdel">取消订单</a>
@@ -107,7 +107,7 @@
                             </div>
                             @foreach($list['order_goods'] as $ordergoods ) 
                             <div class="con_bom"  >
-                                {{-- <img src="/uploads/picture/{{ $ordergoods['goods']['imgurl'] }}" alt="" > --}} 
+                              <img src="/uploads/picture/{{ $ordergoods['goods']['imgurl'] }}" alt=""> 
                                  <div class="cona_left">
                                      <ul>
                                          <li>
@@ -147,7 +147,7 @@
                         <!-- 结束订单标号内容 -->
                        <div id="modal" class="modal" >  
                             <div class="modal-content">  
-                                <header class="modal-header" >  
+                                <header class="modal-header">  
                                     <h4 style="margin-left:300px;border:none;">请输入支付密码</h4>  
                                     <span class="close">×</span>  
                                 </header>  

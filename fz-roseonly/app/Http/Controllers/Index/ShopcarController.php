@@ -159,7 +159,9 @@ class ShopcarController extends Controller
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
          $order = Order::with('order_goods.goods')->with('memaddress')->where('member_id',$id)
+                                            ->orderby('is_pay')
                                             ->orderby('created_at','desc')
+
                                             ->get();
         // dd($order);                                    
         // dd($order->toArray());
