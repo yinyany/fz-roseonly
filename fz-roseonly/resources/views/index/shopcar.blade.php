@@ -57,7 +57,7 @@
                             <td class="count">
                                 <span class="reduce"></span>
                                 <input class="count-input" type="text" value="{{$list['num']}}">
-                                <input type="hidden" name="id" value="{{$list['goods_id']}}" class="id">
+                                <input type="hidden" name="id" value="{{$list['id']}}" class="id">
                                 <span class="add">+</span></td>
                                 
                             <td class="subtotal">{{$list['goods']['price'] * $list['num']}}</td>

@@ -64,4 +64,4 @@ Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
 
 Route::get('/orderhome','OrderhomeController@index');
 Route::get('/orderhome/destroy/{id}','OrderhomeController@destroy');
-Route::post('/orderhome/update/{id}','OrderhomeController@update');
+Route::post('/orderhome/update','OrderhomeController@update');

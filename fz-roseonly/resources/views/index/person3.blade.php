@@ -13,19 +13,7 @@
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
     <link rel="icon" href="{{ asset('static/index/images/index_images/log_tb.jpg') }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    
-<!--     <link rel="stylesheet" href="./Purchase page.css" type="text/css">
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="keywords" content="jQuery省市区三级联动" />
-    <meta name="description" content="jQuery实现省、市、区三级联动的代码网上应该已经挺多了，今天群里一名成员投了篇关于省、市、区三级联动的实现代码，不同的一点是他将代码片段封装成了jQuery插件。" />
-    <link href="./Province_css/city.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="./My Receiving address.js/jquery.min_1.js"></script>
-    <script type="text/javascript" src="./My Receiving address.js/city.min.js"></script> -->
 
 @endsection 
 
@@ -69,7 +57,11 @@
                                 <li>
                                     <div>
                                          <span class="center-a">订单状态：</span>
+                                         @if($list['is_pay'] == 0)
                                          <span class="center-b"> 等待付款</span>
+                                         @elseif( $list['is_pay'] == 1)
+                                         <span class="center-b"> 已付款</span>
+                                         @endif
                                     </div>
                                   
                                 </li>
@@ -94,48 +86,14 @@
                                         @if($list['is_pay'] == 1)
                                         <button class="btn center-c" style="border:none;">已付款</button> 
                                         @else
-                                             <button class="btn center-c showModel" style="border:none;">等待付款</button>
+                                             <button class="btn center-c showModel" style="border:none;">等待付款<input type="hidden" value="{{$list['id']}}" class="orderid"></button>
                                              <a href='{{url("orderhome/destroy/$list[id]")}}'class="orderdel">取消订单</a>
                                         @endif
                                     </div>
                                 </li>
                             </ul>
 
-                        <div id="modal" class="modal" >  
-                            <div class="modal-content">  
-                                <header class="modal-header" >  
-                                    <h4 style="margin-left:300px;border:none;">请输入支付密码</h4>  
-                                    <span class="close">×</span>  
-                                </header>  
-                                <!-- form 表单信息 -->
-                                 <form action='{{ url("/orderhome/update/$list[id]") }}' method="post">
-                                     {{ csrf_field()}}
-                                    <div class="modal-body">  
-                                           <div class="paycontainer">
-                                            <input type="password" minlength="6" maxlength="6" class="paypasswordcontainer"
-                                                   oncontextmenu="return false" onpaste="return false" oncopy="return false"
-                                                   oncut="return false" autocomplete="off">
-                                            <div class="sixpassword">
-                                                <i class="active"><b></b></i>
-                                                <i><b></b></i>
-                                                <i><b></b></i>
-                                                <i><b></b></i>
-                                                <i><b></b></i>
-                                                <i><b></b></i>
-                                                <span class="guanbiao"></span>
-                                            </div>
-                                        </div>
-                                          
-                                    </div>   
-                                    <input type="hidden" name="id" value="{{$list['id']}}">
-                                    <input type="hidden" name="pay_time" value="{{ time() }}">
-                                    <div class="modal-footer" style="margin-bottom: 20px;"> 
-                                        <button class="cancel">取消</button>  
-                                        <button class="sure" type="submit">确定</button>  
-                                    </div> 
-                               </form>  
-                            </div>  
-                        </div>
+                        
                             <div style="clear:both;"></div>
                             <div>
                                 <p style="color:#777;margin-bottom:10px;">
@@ -168,11 +126,16 @@
                                          </li>
                                          <li>
                                               <span class="center-q">物流状态:</span>
-                                             <span class="center-w">未发货</span>
+                                             @if( $list['is_ship'] == 1 )
+                                             <span class="center-w">已发货</span>
+                                             @else
+                                              <span class="center-w">未发货</span>
+                                             @endif
+
                                          </li>
                                          <li>
                                              <span class="center-q">物流单号:</span>
-                                             <span class="center-w"></span>
+                                             <span class="center-w">{{ $list['ship_number'] }}</span>
                                          </li>
                                         
                                      </ul>
@@ -181,9 +144,42 @@
                             @endforeach
                         </div>
                         @endforeach
-                        <input type="hidden" name="ordernum" id="ordernum" value="{{$ordernum}}">
                         <!-- 结束订单标号内容 -->
-                       
+                       <div id="modal" class="modal" >  
+                            <div class="modal-content">  
+                                <header class="modal-header" >  
+                                    <h4 style="margin-left:300px;border:none;">请输入支付密码</h4>  
+                                    <span class="close">×</span>  
+                                </header>  
+                                <!-- form 表单信息 -->
+                                <form action='{{ url("/orderhome/update") }}' method="post">
+                                     {{ csrf_field() }}
+                                    <input type="hidden" name="id" id="orderid" value="">
+                                    <div class="modal-body">  
+                                           <div class="paycontainer">
+                                            <input type="password" minlength="6" maxlength="6" class="paypasswordcontainer"
+                                                   oncontextmenu="return false" onpaste="return false" oncopy="return false"
+                                                   oncut="return false" autocomplete="off" name="zhifu">
+                                            <div class="sixpassword">
+                                                <i class="active"><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <i><b></b></i>
+                                                <span class="guanbiao"></span>
+                                                <div id="names"></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>   
+                                    <div class="modal-footer" style="margin-bottom: 20px;"> 
+                                        <button class="cancel" type="reset">取消</button>  
+                                        <button class="sure" type="submit">确定</button>  
+                                    </div> 
+                                </form>  
+                            </div>  
+                        </div>
                        
                    </div>
                     <!-- 基本信息 -->
@@ -700,26 +696,29 @@
                         <!-- 弹框 -->
 <script>  
 
-    var ordnum = document.getElementById('ordernum').value;
     // alert(ordnum);
-    for (var i = 0; i < ordnum; i++) {
         var btn = document.getElementsByClassName('showModel');
-        var close = document.getElementsByClassName('close')[i];  
-        var cancel = document.getElementsByClassName('cancel')[i];  
-        var modal = document.getElementsByClassName('modal')[i];  
-        console.log(btn[i]);
-        btn[i].addEventListener('click', function(){  
-            modal.style.display = "block";  
-        });  
+        var close = document.getElementsByClassName('close')[0];  
+        var cancel = document.getElementsByClassName('cancel')[0];  
+        var modal = document.getElementsByClassName('modal')[0];  
+        var orderinput = document.getElementById('orderid');
+        for (var i = btn.length - 1; i >= 0; i--) {
+            btn[i].addEventListener('click', function(){  
+             var app = this.getElementsByClassName('orderid')[0].value;
+                 // console.log(app);
+               
+                orderinput.setAttribute('value',app);   
+                modal.style.display = "block";  
+            });   
+             // console.log(btn[i]);
+        }
+       
         close.addEventListener('click', function(){  
             modal.style.display = "none";  
         });  
         cancel.addEventListener('click', function(){  
             modal.style.display = "none";  
         });  
-    }   
-    var btn = document.getElementsByClassName('showModel')[0];  
-    
 </script>  
     @include('flash::message')
 
