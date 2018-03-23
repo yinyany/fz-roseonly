@@ -35,11 +35,6 @@
                     @endforeach
                   </select>
               </div>
-              <div class="layui-input-inline">
-                  <select name="type_id" lay-filter="test2" id="kkk">
-                    <option value="0">请选择</option>
-                  </select>
-              </div>
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -79,7 +74,7 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <script>
+<!--     <script>
       layui.use(['upload','form'], function(){
           var $ = layui.$
           var upload = layui.upload;
@@ -110,4 +105,4 @@
       });
       
     </script>
-@endsection 
+ -->@endsection 

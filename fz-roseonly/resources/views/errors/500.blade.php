@@ -1,15 +1,47 @@
-@extends('layouts.admin.masterAdmin')
-@section('title', '500 错误')
-@section('class','class="gray-bg"')
-@section('content')
-    <div class="middle-box text-center animated fadeInDown">
-        <h1>500</h1>
-        <h3 class="font-bold">服务器内部错误</h3>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>500 Internal Server Error, interior server mistake.</title>
 
-        <div class="error-desc">
-            服务器好像出错了...
-            <br/>您可以返回主页看看
-            <br/><a href="index.html" class="btn btn-primary m-t">主页</a>
+        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                color: #B0BEC5;
+                display: table;
+                font-weight: 100;
+                font-family: 'Lato';
+            }
+
+            .container {
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .content {
+                text-align: center;
+                display: inline-block;
+            }
+
+            .title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                <div class="title">500 Internal Server Error, interior server mistake.</div>
+            </div>
         </div>
-    </div>
-@endsection
+    </body>
+</html>

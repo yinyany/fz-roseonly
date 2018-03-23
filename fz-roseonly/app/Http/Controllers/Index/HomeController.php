@@ -5,13 +5,24 @@ namespace App\Http\Controllers\Index;
 use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
+use App\Model\Admin\Goods;
 use App\Model\Admin\Type;
+use App\Model\Admin\Bute;
 use App\Model\Admin\Carousel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+    public function show($name){
+        $node = Type::where('name',$name)->first();
+        $type = $node->getLeaves();
+        foreach ($type as $key => $value) {
+            $tid[] = $value->id;
+        }
+        $list = Goods::whereIn('type_id',$tid)->take(8)->get();
+        return $list;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,26 +31,18 @@ class HomeController extends Controller
     public function index()
     {
          //导航栏
-        $array = Type::get()->toHierarchy();
+        $array = Type::with('bute.value')->get()->toHierarchy();
 
+        $type['玫瑰鲜花'] = $this->show('玫瑰鲜花');
+        $type['永生玫瑰'] = $this->show('永生玫瑰');
+        $type['玫瑰珠宝']= $this->show('玫瑰珠宝');
+        $type['玫瑰香氛'] = $this->show('玫瑰香氛');
+        // dd($type);
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
-        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count,'type'=>$type]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function member($id)
-    {   
-         //导航栏
-        $array = Type::get()->toHierarchy();
-        // dd($datas);
-        $model = Member::findOrFail($id);
-        return view('index.person3',['model'=>$model,'array'=>$array]);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -91,17 +94,6 @@ class HomeController extends Controller
             $path = $field->move(public_path().'/uploads/picture',$newName);
             return ['code'=>0,'msg'=>'','data'=>['src'=>$newName,'data'=>$data]];
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -162,8 +154,4 @@ class HomeController extends Controller
 
     }
 
-    public function picture(Request $request)
-    {   
-       
-    }
 }

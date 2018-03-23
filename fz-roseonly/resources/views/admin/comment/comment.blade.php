@@ -42,14 +42,10 @@
           @foreach($comment as $list)
           <tr>
             <td>{{ $list->id }}</td>
-            <td>{{ $list->mid }}</td>
+            <td>{{ $mem[$list->mid] }}</td>
             <td>{{ $list->sid }}</td>
             <td>
-              @if($list->parent_id == null)
-                  <a class="layui-bg-blue" href="javascript:;">首次评论:</a>{{ $list->content }}
-              @else
-                  <a class="layui-bg-red" href="javascript:;">追加评论:</a>{{ $list->content }}
-              @endif
+              <a class="layui-bg-blue" href="javascript:;">评论:</a>{{ $list->content }}
             </td>
             <td>{{ $list->created_at }}</td>
             <td>

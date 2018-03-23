@@ -32,9 +32,9 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th>类别</th>
             <th>属性名</th>
             <th>属性值</th>
-            <th>图标</th>
             <th>添加时间</th>
             <th>操作</th>
         </thead>
@@ -42,11 +42,9 @@
           @foreach($values as $list)
           <tr>
             <td>{{ $list->id }}</td>
+            <td>{{ $typeid[$types[$list->bute_id]] }}</td>
             <td>{{$datas[$list->bute_id] }}</td>
             <td>{{ $list->name }}</td>
-            <td>
-                <img src="/uploads/values/{{ $list->imgurl }}">
-            </td> 
             <td>{{ $list->created_at }}</td>
             <td class="td-manage">
               <a title="修改" href='{{ url("admin/values/edit/$list->id") }}'>

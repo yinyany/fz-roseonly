@@ -34,6 +34,7 @@
           <tr>
             <th>ID</th>
             <th>用户名</th>
+            <th>头像</th>
             <th>状态</th>
             <th>手机</th>
             <th>性别</th>
@@ -46,6 +47,7 @@
           <tr>
             <td>{{ $list->id }}</td>
             <td><a href='{{ url("admin/member/show/$list->id") }}' title="点击查看详情">{{ $list->name }}</a></td>
+            <td><img src="/uploads/picture/{{ $list->imgurl }}"></td>
             <td class="td-status">
               @if($list->state === "启用")
                 <span class="layui-btn layui-btn-normal layui-btn-mini">{{ $list->state }}</span>

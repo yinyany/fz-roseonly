@@ -12,6 +12,10 @@ use App\Http\Controllers\Controller;
 
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +44,6 @@ class TypeController extends Controller
                 $datas[$v['id']] = $path.$v['name'];  
             }
             return view('admin.type.index',['type'=>$type,'count'=>$count,'keywords'=>$keywords,'datas'=>$datas]);
-        
     }
 
     /**
@@ -51,13 +54,18 @@ class TypeController extends Controller
     public function create()
     {   
         $id = isset($_GET['id'])?$_GET['id']:null;
+
         if($id===null){
             return view('admin.type.create');
         }else{
+            $type = Type::where('id',$id)->first();
+            if($type->depth === 1 ){
+                flash()->overlay('不能添加3级分类', 5);
+                return back();
+            }
             $info = Type::findOrFail($id)->ancestorsAndSelf()->get()->toArray();
             return view('admin.type.creates',['id'=>$id,'info'=>$info]);
         }
-        
     }
 
     /**
@@ -78,14 +86,12 @@ class TypeController extends Controller
         if(!$request->input('id')){
             $type = new Type;
             $type->name = $request->input("name");
-            $type->save();
-            
+            $type->save(); 
         }else{
             // dd($request->name);
             $role = Type::findOrFail($request->input('id'));
             // dd($role);
-            $role->children()->create(['name' => $request->input("name")]);
-            
+            $role->children()->create(['name' => $request->input("name")]); 
         }
 
         flash()->overlay('添加成功',1);
@@ -119,7 +125,6 @@ class TypeController extends Controller
             $info = Type::findOrFail($id)->ancestors()->get()->toArray();
             return view('admin.type.edits',['info'=>$info,'id'=>$id,'list'=>$list]);
         }
-        
     }
 
     /**
@@ -157,7 +162,6 @@ class TypeController extends Controller
                 return back();
             }
         }
-       
     }
 
     /**
@@ -191,8 +195,5 @@ class TypeController extends Controller
                 return back();
             }
         }
-        
-        
     }
-
 }

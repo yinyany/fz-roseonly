@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 
 class ButeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +61,7 @@ class ButeController extends Controller
      */
     public function store(Request $request)
     {   
-        
+        // dd($request->all());
         if($request->type_id==0){
             flash()->overlay('请选择类别', 5);
             return back();
@@ -145,7 +149,12 @@ class ButeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $info = Value::where('bute_id',$id)->get();
+        if(count($info)){
+            flash()->overlay('删除失败,当前属性下面有值', 5);
+            return back(); 
+        }
         if (Bute::destroy($id)) {
             Value::where('bute_id',$id)->delete();
             flash()->overlay('删除成功', 1);
@@ -156,9 +165,5 @@ class ButeController extends Controller
         }
     }
 
-    public function good(Request $request){
-        $info = Type::where('id',$request->id)->first();
-        $value = $info->getImmediateDescendants();
-        return ['code'=>0,'msg'=>'','data'=>$value];
-    }
+
 }

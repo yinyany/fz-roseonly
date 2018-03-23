@@ -17,18 +17,18 @@ class Comment extends Node {
    */
   protected $table = 'Comments';
 
-  public function getMidAttribute($value)
-  {
-    // $member = [];
-    $members = Member::get(['id','name'])->toArray();
-        // dd($members);
-    foreach ($members as $v) {
-        // dd($value);
-      $member[$v['id']] = $v['name'];
-    }
-        // dd($member);
-    return  $member[$value];
-  }
+  // public function getMidAttribute($value)
+  // {
+  //   // $member = [];
+  //   $members = Member::get(['id','name'])->toArray();
+  //       // dd($members);
+  //   foreach ($members as $v) {
+  //       // dd($value);
+  //     $member[$v['id']] = $v['name'];
+  //   }
+  //       // dd($member);
+  //   return  $member[$value];
+  // }
 
   public function getSidAttribute($value)
   {
@@ -42,6 +42,10 @@ class Comment extends Node {
     return  $good[$value];
   }
 
+  public function member()
+  {
+      return $this->belongsTo('App\Model\Admin\Member','mid');
+  }
   //////////////////////////////////////////////////////////////////////////////
 
   //

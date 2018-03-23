@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin|member');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,33 +55,6 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required|unique:member|max:36',
-        //     'phone' => 'required|unique:member|digits:11',
-        //     'email' => 'required|email',
-        //     'sex' => 'required|in:男,女',
-        //     'password' => 'required|confirmed|min:6',
-        // ],[
-        //     'name.required' => '用户名必填',
-        //     'name.unique' => '用户名已存在',
-        //     'name.max' => '用户名最长36位',
-
-        //     'phone.required' => '手机号必填',
-        //     'phone.unique' => '此手机号已注册',
-        //     'phone.digits' => '手机号为11位',
-
-        //     'email.required' => '邮箱必填',
-        //     'email.email' => '邮箱格式错误',
-
-        //     'sex.required' => '性别必填',
-        //     'sex.in' => '性别单选"男"或"女"',
-
-        //     'password.required' => '密码必填',
-        //     'password.confirmed' => '两次密码不一样',
-        //     'password.min'  => '密码最小6位',
-        // ]);
-        // dd($request->all());
-        // $member = Member::create($request->all());
         if (Member::create($request->all())) {
             flash()->overlay('添加成功', 1);
             return redirect('admin/member');
@@ -139,7 +117,6 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        // Member::destroy($id);
         if (Member::destroy($id)) {
             flash()->overlay('删除成功', 1);
             return redirect('admin/member');

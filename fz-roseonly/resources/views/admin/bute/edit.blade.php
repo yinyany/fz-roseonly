@@ -33,11 +33,11 @@
                     @endforeach
                   </select>
               </div>
-              <div class="layui-input-inline">
+             <!--  <div class="layui-input-inline">
                   <select name="type_id" lay-filter="test2">
                     <option value="{{$bbb->id}}">{{$bbb->name}}</option>
                   </select>
-              </div>
+              </div> -->
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -74,7 +74,7 @@
 @endsection
 
 @section('js')
-    <script src="//code.jquery.com/jquery.js"></script>
+  <!--   <script src="//code.jquery.com/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <script>
       layui.use(['upload','form'], function(){
@@ -87,5 +87,5 @@
           }); 
       });
       
-    </script>
+    </script> -->
 @endsection 

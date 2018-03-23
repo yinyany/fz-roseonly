@@ -35,10 +35,14 @@ Route::post('/newmember/{id}','HomeController@update');
 Route::post('/memadress','HomeController@memadress');
 
 
+//首页全站搜索
+Route::post('/listname','ListController@listname');
+
 
 
 //加载商品列表页面-------------------------------------------------
-Route::get('/list/{id}','ListController@index');
+Route::get('/list/{id}/{type?}/{order?}','ListController@index');
+// Route::get('/list/type/{id}','ListController@type');
 //根据销量排序
 Route::get('/list/votes/{id}','ListController@votes');
 //根据创建时间排序

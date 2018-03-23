@@ -24,6 +24,8 @@ class ShopcarController extends Controller
      */
     public function index(Request $request)
     {
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
 
         // // dd($request->session()->has('usersInfo'));
         // if(!$request->session()->has('usersInfo')){
@@ -51,7 +53,7 @@ class ShopcarController extends Controller
 
         // $request->session()->put('usersInfo.shopnum',count($shopgoods));
         // dd(session('usersInfo.shopnum'));
-        return view('index.shopcar',['shop'=>$shopgoods]);
+        return view('index.shopcar',['shop'=>$shopgoods,'array'=>$array]);
         
 
 
@@ -93,6 +95,9 @@ class ShopcarController extends Controller
      */
     public function store(Request $request)
     {
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
 
        if (session('usersInfo') == NULL) {
             return view('authindex/login');
@@ -140,11 +145,27 @@ class ShopcarController extends Controller
                     'shaddress_id'=>$shaddid
                     ]);
         
+
+       // dd($request->session()->has('usersInfo'));
+        // $this->show($memid,$goid);
+         $order = Order::with('order_goods')->where('member_id',$memid)
+                                            ->get();
+                                            // ->where('');
+        // dd($order->toArray());
+        $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
+        $shopinfo = $shop->toArray();
+
+
+        // dd($shopinfo);
+        return view('index.person3',['array'=>$array]);
+
+
        if($orderis){
             return redirect("shopcar/show/$memid");
        }else{
             return back();
        }
+
     }
 
     /**
@@ -168,7 +189,7 @@ class ShopcarController extends Controller
         
 
         $orderb = $order->toArray();
-  //导航栏
+        //导航栏
         $array = Type::get()->toHierarchy();
         // dd($datas);
         $model = Member::findOrFail($id);
@@ -242,6 +263,9 @@ class ShopcarController extends Controller
      * @return [type]           [description]
      */
     public function jiesuan(Request $request){
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
         if (session('usersInfo') == NULL) {
             return view('authindex/login');
         }
@@ -276,7 +300,8 @@ class ShopcarController extends Controller
                                      'totalprices'=>$totalprices,
                                      'memaddress'=>$memaddress,
                                      'goid'=>$infogoid,
-                                     'gonum'=>$infogonum
+                                     'gonum'=>$infogonum,
+                                     'array'=>$array
                                     ]);
 
 

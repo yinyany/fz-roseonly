@@ -23,56 +23,41 @@
     <div class="x-body">
       <form class="layui-form" action='{{ url("admin/goods/update/$goods->id") }}' method="post">
           {{csrf_field()}}
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>商品
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" style="width:220px" name="name" class="layui-input" value="{{$goods->name}}">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red"></span>@if($errors->has('name')) {{$errors->first('name')}} @endif
+              </div>
+          </div>
            <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>商品类别
               </label>      
               <div class="layui-input-inline">
                   <select name="type_id" lay-filter="test">
-                    @foreach($list as $v)
-                    <option @if($info->id === $v->id) selected @endif value='{{$v->id}}' >{{$v->name}}</option>
-                    @endforeach
+                    <option value='{{$info->id}}' >{{$info->name}}</option>
                   </select>
               </div>
               <div class="layui-input-inline">
                   <select name="type_id" lay-filter="test2" id="kkk">
-                    
-                    <option value="{{$bbb->id}}">{{$bbb->name}}</option>
-
+                    <option value="{{$value->id}}">{{$value->name}}</option>
                   </select>
               </div>
           </div>
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>属性名
+                  <span class="x-red">*</span>商品属性
               </label>
               <div class="layui-input-inline">
-                <select name="bid" lay-filter="test">
-                    <option value='{{$datas->id}}' >{{$datas->name}}</option>
-                </select>
+                  {!! shopStr2Arr($goods->bid) !!}
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>属性值
-              </label>
-              <div class="layui-input-inline">
-                <select name="vid" lay-filter="" id="kkk">
-                    <option value="{{$values->id}}">{{$values->name}}</option>
-                </select>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>商品
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text"  name="name" class="layui-input" value="{{$goods->name}}">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red"></span>@if($errors->has('name')) {{$errors->first('name')}} @endif
-              </div>
-          </div>
+          
           <div class="layui-form-item">
 
               <label for="username" class="layui-form-label">

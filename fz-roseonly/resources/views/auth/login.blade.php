@@ -21,8 +21,9 @@
             <div class="layui-input-inline" style="width:50%;">
               <input type="text" name="captcha" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
             </div>
-           <img src="{{URL::to('captcha/create')}}" id="captcha-img" onclick="reloadCaptcha();" class="pull-right" style="width:48%;">
-
+           <img src="{{URL::to('captcha/create')}}" id="captcha-img" onclick="reloadCaptcha();" class="pull-right" style="width:48%;height:50px;">
+           <!-- <img src="{{captcha_src()}}" id="captcha-img" onclick="reloadCaptcha();" class="pull-right" style="width:48%;height:50px;"> -->
+<!--             {!! captcha_img() !!} -->
             <hr class="hr15">
             <input name="remember" type="checkbox">记住密码
             <hr class="hr15">

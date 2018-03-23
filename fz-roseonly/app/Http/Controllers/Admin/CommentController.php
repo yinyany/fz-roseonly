@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,33 +40,16 @@ class CommentController extends Controller
             // dd($comment->toArray());
             $sum = Comment::count();
         }
+        $member = Member::get()->toArray();
+        $mem = [];
+        foreach ($member as $key => $value) {
+            $mem[$value['id']] = $value['name'];
+        }
+        // dd($mem);
         // $comment = Comment::all();
-        return view('admin.comment.comment',['comment'=>$comment,'sum'=>$sum,'keywords'=>$keywords]);
+        return view('admin.comment.comment',['comment'=>$comment,'sum'=>$sum,'mem'=>$mem,'keywords'=>$keywords]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //  $root = Comment::create(['mid'=>'1','sid'=>'2','content'=>'的风格的','reply'=>'过分的风格的的事']);
-        // $child1 = $root->children()->create(['mid'=>'1','sid'=>'2','content'=>'公司撒打算 发的','reply'=>'过分收到贵司的事']);
-        // $child2 = $child1->children()->create(['mid'=>'1','sid'=>'2','content'=>'收到发顺丰','reply'=>'是个分公司 ']);
-        // $child3 = $child2->children()->create(['mid'=>'1','sid'=>'2','content'=>'公司或多或少的发发的','reply'=>' 实打实打算']);
-    }
 
     /**
      * Display the specified resource.
@@ -87,9 +74,9 @@ class CommentController extends Controller
        
         $node = $this->show($id);
         // dd($node->toArray());
-        $parent = $node->getAncestors();
+        // $parent = $node->getAncestors();
         // dd($parent->toArray());
-        return view('admin.comment.edit',['node'=>$node,'parent'=>$parent]);
+        return view('admin.comment.edit',['node'=>$node]);
     }
 
     /**
@@ -113,14 +100,5 @@ class CommentController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

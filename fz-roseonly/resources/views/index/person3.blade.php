@@ -13,8 +13,6 @@
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
     <link rel="icon" href="{{ asset('static/index/images/index_images/log_tb.jpg') }}">
-
-
 @endsection 
 
 

@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class CarouselController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin|carousels');
+    }
     /**
      * Display a listing of the resource.
      *
