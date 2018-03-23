@@ -25,6 +25,7 @@ class CreateMemberTable extends Migration
             $table->enum('affective', ['未婚', '订婚','已婚']);
             $table->string('address');
             $table->string('email')->unique();
+            $table->string('paypassword');
             $table->string('fere');
             $table->string('fere_phone');
             $table->timestamps();
