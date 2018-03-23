@@ -11,6 +11,7 @@ use App\Model\Admin\Member;//引入用户模型
 use App\Model\Admin\Comment;//引入评论模型
 use App\Model\Admin\Carousel;
 use App\Http\Requests;
+use Validate;
 use App\Http\Controllers\Controller;
 
 class ListController extends Controller
@@ -85,11 +86,29 @@ class ListController extends Controller
     public function index($id,$type='null',$order=null)
     {
         // dd($type,$order);
+        $listname = null;
         //导航栏
         $array = Type::with('bute.value')->get()->toHierarchy();
+        
         $list = $this->selected($id,$type,$order);
         // dd($list->toArray());
-        return view('index.list',['array'=>$array,'list'=>$list,'id'=>$id,'type'=>$type,'order'=>$order]);
+        return view('index.list',['array'=>$array,'list'=>$list,'id'=>$id,'type'=>$type,'order'=>$order,'listname'=>$listname]);
+    }
+
+
+    public function listname(request $request,$type=null,$order=null)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        // session(['ss' => $request->name]);
+        $request->session()->put('ss',$request->name);
+        // dd($request->name);
+        $listname = 'name';
+        //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+        $list = Goods::where('name','like',"%$request->name%")->paginate(env('PAGE_SIZE',10));
+        return view('index.list',['array'=>$array,'list'=>$list,'type'=>$type,'order'=>$order,'listname'=>$listname]);
     }
     
 

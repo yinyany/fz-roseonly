@@ -35,6 +35,9 @@ Route::post('/newmember/{id}','HomeController@update');
 Route::post('/memadress','HomeController@memadress');
 
 
+//首页全站搜索
+Route::post('/listname','ListController@listname');
+
 
 
 //加载商品列表页面-------------------------------------------------

@@ -19,6 +19,7 @@ class CreateMemberTable extends Migration
             $table->enum('state', ['启用', '禁用']);
             $table->string('phone');
             $table->string('password', 60);
+            $table->string('zfpass', 60);
             $table->string('birthday');
             $table->enum('sex', ['男', '女']);
             $table->enum('affective', ['未婚', '订婚','已婚']);
