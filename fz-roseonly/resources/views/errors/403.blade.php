@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>500 Internal Server Error, interior server mistake.</title>
+        <title>403 Please practice the administrator without permission.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">500 Internal Server Error, interior server mistake.</div>
+                <div class="title">403 Please practice the administrator without permission.</div>
             </div>
         </div>
     </body>

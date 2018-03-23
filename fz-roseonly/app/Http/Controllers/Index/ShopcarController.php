@@ -179,7 +179,7 @@ class ShopcarController extends Controller
 
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
-         $order = Order::with('order_goods.goods')->with('memaddress')->where('member_id',$id)
+        $order = Order::with('order_goods.goods')->with('memaddress')->where('member_id',$id)
                                             ->orderby('created_at','desc')
                                             ->get();
         // dd($order);                                    
@@ -187,7 +187,7 @@ class ShopcarController extends Controller
         
 
         $orderb = $order->toArray();
-  //导航栏
+        //导航栏
         $array = Type::get()->toHierarchy();
         // dd($datas);
         $model = Member::findOrFail($id);

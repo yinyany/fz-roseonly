@@ -4,7 +4,7 @@
 @section('link')
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/detail.css') }}">
     <script src="{{ asset('static/index/js/detail.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('static/index/js/detail2.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('static/index/js/detail2.js') }}" type="text/javascript"></script> -->
 @endsection 
 
 
@@ -178,7 +178,7 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript"> 
+   <!--  <script type="text/javascript"> 
          //在页面加载完后立即执行多个函数。
          function addloadEvent(func){
          var oldonload=window.onload;
@@ -389,6 +389,6 @@
          }
          //遍历结束
          } 
-    </script>
+    </script> -->
 @endsection 
 

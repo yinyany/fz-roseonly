@@ -64,345 +64,45 @@
                 <div class="product">
                     <!-- 标题 -->
                     <ul class="title">
-                        <li class="product_hover"><a href="javascript:;">鲜花玫瑰</a><span></span></li>
-                        <li><a href="javascript:;">永生玫瑰</a><span></span></li>
-                        <li><a href="javascript:;">玫瑰珠宝</a><span></span></li>
-                        <li><a href="javascript:;">玫瑰饰品</a></li>
+                        <!-- <li class="product_hover"><a href="javascript:;">鲜花玫瑰</a><span></span></li> -->
+                        @foreach($type as $k =>$v)
+                        <li class="product_hover"><a href="javascript:;">{{$k}}</a></li>
+                        @endforeach
                     </ul>
                     <!-- 产品 -->
-                    <div class="list">
-                        <ul class="flower">
+                    <div class="list" style="height:660px">
+                        @foreach($type as $k =>$v)
+                        <ul class="flower" style="display:;">
+                            @foreach($v as $value)
                             <li>
                                 <a href="javascript:;" title="经典-许愿">
-                                    <img src="{{ asset('static/index/images/index/flower1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
+                                    <img src="/uploads/good/{{ $value->imgurl }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
                                     <div class="show">
-                                        <span class="title">经典永续 许愿</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形 </span><!-- 规格 -->
-                                        <span class="price">￥ 2399.0</span><!-- 价钱 -->
+                                        <span class="title">{{ $value->name }}</span>
+                                        <span class="spec">{{ $value->state }} 销量:{{ $value->votes }} </span><!-- 规格 -->
+                                        <span class="price">￥{{ $value->price }}</span><!-- 价钱 -->
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/flower8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
+                            @endforeach
                             <p class="cl"></p>
                         </ul>
-                        <ul class="rose" style="display: none;">
+                        @endforeach
+
+                        <!-- <ul class="flower" style="display: none;">
                             <li>
                                 <a href="javascript:;" title="经典-许愿">
                                     <img src="{{ asset('static/index/images/index/rose1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
                                     <div class="show">
                                         <span class="title">经典永续 许愿</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形 </span><!-- 规格 -->
-                                        <span class="price">￥ 2399.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/rose8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
+                                        <span class="spec">鲜花玫瑰 80cm长形 </span>
+                                        <span class="price">￥ 2399.0</span>
                                     </div>
                                 </a>
                             </li>
                             <p class="cl"></p>
-                        </ul>
-                        <ul class="gem" style="display: none;"><!-- 珠宝 -->
-                            <li>
-                                <a href="javascript:;" title="经典-许愿">
-                                    <img src="{{ asset('static/index/images/index/gem1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 许愿</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形 </span><!-- 规格 -->
-                                        <span class="price">￥ 2399.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/gem8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <p class="cl"></p>
-                        </ul>
-                        <ul class="decoration" style="display: none;"><!-- 饰品 -->
-                            <li>
-                                <a href="javascript:;" title="经典-许愿">
-                                    <img src="{{ asset('static/index/images/index/decoration1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 许愿</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形 </span><!-- 规格 -->
-                                        <span class="price">￥ 2399.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration2.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration3.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration4.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration5.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration6.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration7.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="经典-朱砂">
-                                    <img src="{{ asset('static/index/images/index/decoration8.png') }}" alt="经典永续 - 经典19支朱砂 80cm长形" title="经典永续 - 经典19支朱砂 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 朱砂</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形</span><!-- 规格 -->
-                                        <span class="price">￥1999.0</span><!-- 价钱 -->
-                                    </div>
-                                </a>
-                            </li>
-                            <p class="cl"></p>
-                        </ul>
+                        </ul> -->
+                        
                     </div>
                 </div>
             </div>

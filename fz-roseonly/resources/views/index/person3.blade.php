@@ -13,11 +13,6 @@
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
     <link rel="icon" href="{{ asset('static/index/images/index_images/log_tb.jpg') }}">
-
-<<<<<<< HEAD
-=======
-
->>>>>>> ead526fbce55b03de88e473cafa2ff25d5304ccc
 @endsection 
 
 

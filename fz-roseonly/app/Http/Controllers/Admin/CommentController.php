@@ -11,10 +11,10 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['role:admin']);
-    // }
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
     /**
      * Display a listing of the resource.
      *
