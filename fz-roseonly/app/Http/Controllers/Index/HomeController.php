@@ -14,15 +14,6 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function show($name){
-        $node = Type::where('name',$name)->first();
-        $type = $node->getLeaves();
-        foreach ($type as $key => $value) {
-            $tid[] = $value->id;
-        }
-        $list = Goods::whereIn('type_id',$tid)->take(8)->get();
-        return $list;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -33,14 +24,28 @@ class HomeController extends Controller
          //导航栏
         $array = Type::with('bute.value')->get()->toHierarchy();
 
-        $type['玫瑰鲜花'] = $this->show('玫瑰鲜花');
-        $type['永生玫瑰'] = $this->show('永生玫瑰');
-        $type['玫瑰珠宝']= $this->show('玫瑰珠宝');
-        $type['玫瑰香氛'] = $this->show('玫瑰香氛');
-        // dd($type);
+        //获取4个顶级类
+        $name = Type::where('depth',0)->take(4)->get();
+        // dd($name->toArray());
+        foreach ($name as $key => $value) {
+            //获取每个顶级类的节点
+            $node = Type::where('name',$value->name)->first();
+            // dd($node->toArray());
+            // 获取每个顶级类下的子节点
+            $type = $node->getLeaves();
+            // dd($type->toArray());
+            $tid = [];
+            foreach ($type as $key => $v) {
+                $tid[] = $v->id;
+            }
+            // 获取每隔子节点下的8个商品
+            $list[$value->name] = Goods::whereIn('type_id',$tid)->take(8)->get();
+            // dd($list);
+        }
+        // dd($list);
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
-        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count,'type'=>$type]);
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count,'list'=>$list]);
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-function shopStr2Arr($st)
+function shopStr2Arr($st=null)
 {
 	$arr= '';
 	$array = [];
