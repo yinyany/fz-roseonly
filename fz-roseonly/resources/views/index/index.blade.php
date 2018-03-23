@@ -64,19 +64,18 @@
                 <div class="product">
                     <!-- 标题 -->
                     <ul class="title">
-                        <!-- <li class="product_hover"><a href="javascript:;">鲜花玫瑰</a><span></span></li> -->
-                        @foreach($type as $k =>$v)
+                        @foreach($list as $k => $v)
                         <li class="product_hover"><a href="javascript:;">{{$k}}</a></li>
                         @endforeach
                     </ul>
                     <!-- 产品 -->
                     <div class="list" style="height:660px">
-                        @foreach($type as $k =>$v)
+                        @foreach($list as $k =>$v)
                         <ul class="flower" style="display:;">
                             @foreach($v as $value)
                             <li>
                                 <a href="javascript:;" title="经典-许愿">
-                                    <img src="/uploads/good/{{ $value->imgurl }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
+                                    <img src="/uploads/good/{{ $value->imgurl }}" width="200" height="200">
                                     <div class="show">
                                         <span class="title">{{ $value->name }}</span>
                                         <span class="spec">{{ $value->state }} 销量:{{ $value->votes }} </span><!-- 规格 -->
@@ -88,21 +87,6 @@
                             <p class="cl"></p>
                         </ul>
                         @endforeach
-
-                        <!-- <ul class="flower" style="display: none;">
-                            <li>
-                                <a href="javascript:;" title="经典-许愿">
-                                    <img src="{{ asset('static/index/images/index/rose1.png') }}" alt="经典永续 - 经典19支许愿 80cm长形" title="经典永续 - 经典19支许愿 80cm长形" width="200" height="200">
-                                    <div class="show">
-                                        <span class="title">经典永续 许愿</span>
-                                        <span class="spec">鲜花玫瑰 80cm长形 </span>
-                                        <span class="price">￥ 2399.0</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <p class="cl"></p>
-                        </ul> -->
-                        
                     </div>
                 </div>
             </div>

@@ -14,7 +14,42 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-   
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+         //导航栏
+        $array = Type::with('bute.value')->get()->toHierarchy();
+
+        //获取4个顶级类
+        $name = Type::where('depth',0)->take(4)->get();
+        // dd($name->toArray());
+        foreach ($name as $key => $value) {
+            //获取每个顶级类的节点
+            $node = Type::where('name',$value->name)->first();
+            // dd($node->toArray());
+            // 获取每个顶级类下的子节点
+            $type = $node->getLeaves();
+            // dd($type->toArray());
+            $tid = [];
+            foreach ($type as $key => $v) {
+                $tid[] = $v->id;
+            }
+            // 获取每隔子节点下的8个商品
+            $list[$value->name] = Goods::whereIn('type_id',$tid)->take(8)->get();
+            // dd($list);
+        }
+        // dd($list);
+        $banner = Carousel::where('state','启用')->get();
+        $count  = Carousel::where('state','启用')->count();
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count,'list'=>$list]);
+    }
+
 
     /**
      * Store a newly created resource in storage.

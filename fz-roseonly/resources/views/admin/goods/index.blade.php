@@ -49,6 +49,7 @@
             <td style="width:170px">
               @if($list->bid !== null)  
               {!! shopStr2Arr($list->bid) !!}
+
               @endif
             </td>
             <td><img src="/uploads/good/{{ $list->imgurl }}"></td>
