@@ -8,7 +8,7 @@
 	<script src="{{ asset('static/index/js/jquery.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('static/index/js/comment.js') }}" type="text/javascript"></script>
 
-    <link rel="stylesheet" href="{{ asset('static/admin/css/xadmin.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/index/css/xadmin.css') }}">
 	
     @section('link')
         {{-- 此区块继承加载其他外部引入文件 --}} 
