@@ -15,6 +15,7 @@ class Memaddress extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['member_id','shpeople','shphone','shaddress','shpostcode'];
 
 
     public function member()

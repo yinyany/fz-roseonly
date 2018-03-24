@@ -97,8 +97,7 @@ class GoodsController extends Controller
             flash()->overlay('上传图片错误', 5);
             return back();
         }
-<<<<<<< HEAD
-=======
+
         // dd($bid);
         $types = Bute::whereIn('id',$bid)->get();
             
@@ -107,25 +106,25 @@ class GoodsController extends Controller
             if($v->state  === '单选'){
                 
             }elseif($v->state  === '多选'){
->>>>>>> 73f72ded35671cfb4f6a3cb0cf19eb1546dfaad8
 
-        //属性值id集合
-        $vid =$request->vid;
-        //定义空的属性集合
-        $vidStr = '';
-        //多选属性名id
-        $arrtId = '';
-        //多选属性值
-        $colorArr = [];
-        // dd($vid);
-        //商品属性
-        // dd($types->toArray());
-        foreach($vid as $k => $v){
-            if(!is_array($v)){
-                $vidStr.=$k.":".$v.",";
-            }else{
-                $arrtId = $k;
-                $colorArr=$v;
+                //属性值id集合
+                $vid =$request->vid;
+                //定义空的属性集合
+                $vidStr = '';
+                //多选属性名id
+                $arrtId = '';
+                //多选属性值
+                $colorArr = [];
+                // dd($vid);
+                //商品属性
+                // dd($types->toArray());
+            foreach($vid as $k => $v){
+                if(!is_array($v)){
+                    $vidStr.=$k.":".$v.",";
+                }else{
+                    $arrtId = $k;
+                    $colorArr=$v;
+                }
             }
         }
         // $vidStr .= $arrtId.":".$colorArr

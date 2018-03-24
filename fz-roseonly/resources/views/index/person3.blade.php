@@ -6,14 +6,15 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/person.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/person3.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/css/city.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/message/message.css') }}">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{ asset('static/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('static/index/js/message/jquery.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('static/index/js/person.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/jquery.min_1.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/js/city.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('static/index/js/index.js') }}" type="text/javascript"></script>
     <link rel="icon" href="{{ asset('static/index/images/index_images/log_tb.jpg') }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @endsection 
 
@@ -35,7 +36,7 @@
                 <div class="order_con">
                     <!-- 我的订单信息 -->
                    
-                    <!-- <div class="sec1 sec"> -->
+                    <div class="sec1 sec">
                         @foreach($order as $list)
                         <!-- 订单标号内容 -->
                         <div class="con_r" >
@@ -171,8 +172,6 @@
                         @endforeach
                         <input type="hidden" name="ordernum" id="ordernum" value="{{$ordernum}}">
                         <!-- 结束订单标号内容 -->
-                       
-                       
                    </div>
                     <!-- 基本信息 -->
                     <div class="sec4 sec hide">
@@ -215,13 +214,13 @@
                                         <td style="width: 300px;">爱人名字</td>
                                         <td><input type="text" name="fere" value="{{ $model->fere }}" maxlength=15 class="text" style="text-indent: 20px;" id="fere"></td>
                                         <td>手机</td>
-                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;"  onblur="test1_()">
+                                        <td><input type="text" name="phone" value="{{ $model->phone }}" maxlength=15 class="text" style="text-indent: 20px;"  onblur="test1_()" id="phone1">
                                         </td>
                                         <td colspan="2"></td>
                                     </tr>
                                     <tr>
                                         <td>爱人手机</td>
-                                        <td><input type="text" name="fere_phone" value="{{ $model->fere_phone }}" maxlength=15 class="text" style="text-indent: 10px;" onblur="test_()"></td>
+                                        <td><input type="text" name="fere_phone" value="{{ $model->fere_phone }}" maxlength=15 class="text" style="text-indent: 10px;" onblur="test_()" id="productName"></td>
                                         
                                         <td>生日</td>
                                         <td>
@@ -289,13 +288,20 @@
                                     <tr id="select_city">
                                         <td></td>
                                         <td></td>
-                                        <td>居住地址</td>
+                                        <td>支付密码</td>
 
+                                        <td colspan="2">
+                                            <input type="password" name="zfpass" value="******" id="zfpass"  maxlength="200" style="display: block;width:170px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;overflow:hidden;">
+                                        </td>
+                                    </tr>
+                                    <tr id="select_city">
+                                        <td></td>
+                                        <td></td>
+                                        <td>居住地址</td>
                                         <td colspan="2">
                                             <input type="text" name="address" value="{{ $model->address }}" id="det_address" placeholder="请输入详细的地址" maxlength="200" style="display: block;width:290px;height: 30px;border:1px solid #83847e;color:#83847e;text-indent: 20px;overflow:hidden;">
                                         </td>
                                     </tr>
-                             
                                     <tr>
                                         <td></td>
                                         <td></td>
@@ -407,7 +413,7 @@
                             收获地址管理 
                         </div>
                         @foreach($memaddress as $list)
-                        <div class="smod_addres">
+                        <div class="smod_addres" style="margin-top: 10px;">
                             <p>常<br>用<br>地<br>址<br></p>
                             <div class="nickname">
                                 <span >{{$list['shpeople']}} <em> 收</em></span>
@@ -420,11 +426,9 @@
                                 <div style="margin-left:30px;margin-top:10px;"> 邮编：<a style="display:inline; margin-left:10px;">{{$list['shpostcode']}}</a></div>
                                 
                             </div>
-                            <div class="opera">
-                            <!--如果这里出现2操作就在第一个上面加oneMore,出现3个的加More-->
-                            <a href="javascript:;" class="black oneMore">删除</a>
+                            <div class="opera" >
+                                <a href="javascript:;" class="black oneMore"><input type="hidden" name="id" value="{{$list['id']}}">删除</a>   
                             </div>
-
                         </div>
                         @endforeach
                         <div class="new_addres">
@@ -433,99 +437,81 @@
                              </a>   
                         </div>
                         <div id="add" >
-                            <form action="" method="post">
-                                
-                                <table>
-                                    <tr>
-                                        <td class="one">
-                                            
-                                            收 货 人 :&nbsp;&nbsp;
-                                        </td>
-                                        <td class="two">
-                                            <input type="text" name="shpeople" id="productName" style="width:200px;height:30px;">
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="one">
-                                            手机号码 :&nbsp;&nbsp;
-                                        </td>
-                                        <td class="two">
-                                            <input type="text" name="shphone" id="phone1" style="width:200px;height:30px;">
-                                        </td>
-                                        <td></td>
-                                    </tr>   
-                                </table>
+                            <div id="content-left" class="demo">
+                                    
+                                        <table>
+                                            <tr>
+                                                <td class="one">
+                                                   
+                                                    收 货 人 :
+                                                </td>
+                                                <td class="two">
+                                                    <input type="text" name="shpeople" style="width:200px;height:30px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="one">
+                                                    
+                                                    手机号码 :
+                                                </td>
+                                                <td class="two">
+                                                    <input type="text" name="shphone" style="width:200px;height:30px;" id="shphone" onblur="test2_()">
+                                                </td>
+                                            </tr>
 
-                                <div id="content-wrap">     
-                                    <div id="content-left" class="demo">
-                                        <form action="{{ url('/memadress',[$model->id]) }}" method="post">
-                                            {{ csrf_field() }}
-                                            <div class="xzshdi" style="height:50px;">
-                                                <span style="display: inline-block;margin-top:10px;">* 所在地址</span>
-                                                <div style="margin-left: 20px;margin-top:-10px;">
-
-                                                    <span>
-                                                        
-                                                        
-                                                        <div class="infolist" style="margin-left:20px; margin-top: -14px;">
-                                                            <div class="liststyle" style="margin-left:0;">
-                                                                <span id="Province" >
-                                                                    <i>请选择省份</i>
-                                                                    <ul style="height:200px;overflow:auto;">
-                                                                        <li><a href="javascript:void(0)" alt="请选择省份">请选择省份</a></li>
-                                                                    </ul>
-                                                                    <input type="hidden" name="cho_Province" value="请选择省份">
-                                                                </span>
-                                                                <span id="City">
-                                                                    <i>请选择城市</i>
-                                                                   <ul style="height:200px;overflow:auto;">
-                                                                        <li><a href="javascript:void(0)" alt="请选择城市">请选择城市</a></li>
-                                                                    </ul>
-                                                                    <input type="hidden" name="cho_City" value="请选择城市">
-                                                                </span>
-                                                                <span id="Area">
-                                                                    <i>请选择地区</i>
-                                                                    <ul style="height:200px;overflow:auto;">
-                                                                        <li><a href="javascript:void(0)" alt="请选择地区">请选择地区</a></li>
-                                                                    </ul>
-                                                                    <input type="hidden" name="cho_Area" value="请选择地区">
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </span>
-                                                </div>
+                                        </table>
+                                        <div class="infolist">
+                                            <div class="liststyle">
+                                                <span id="Province">
+                                                    <i>请选择省份</i>
+                                                    <ul>
+                                                        <li><a href="javascript:void(0)" alt="请选择省份">请选择省份</a></li>
+                                                    </ul>
+                                                    <input type="hidden" name="cho_Province" value="">
+                                                </span>
+                                                <span id="City">
+                                                    <i>请选择城市</i>
+                                                    <ul>
+                                                        <li><a href="javascript:void(0)" alt="请选择城市">请选择城市</a></li>
+                                                    </ul>
+                                                    <input type="hidden" name="cho_City" value="">
+                                                </span>
+                                                <span id="Area">
+                                                    <i>请选择地区</i>
+                                                    <ul>
+                                                        <li><a href="javascript:void(0)" alt="请选择地区">请选择地区</a></li>
+                                                    </ul>
+                                                    <input type="hidden" name="cho_Area" value="">
+                                                </span>
                                             </div>
-                                            <table>
-                                               <tr>
-                                                    <td class="one">
-                                                       
-                                                        地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址 :&nbsp;&nbsp; 
-                                                    </td>
-                                                    <td class="two">
-                                                        <input class="dizhi" type="text" name="shadress" style="width:200px;height:30px;">
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="one">
-                                                       
-                                                        邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编 :&nbsp;&nbsp; 
-                                                    </td>
-                                                    <td class="two">
-                                                        <input type="text" name="shpostcode" style="width:200px;height:30px;"> 
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                        </form> 
-                                    </div>
-                                </div>
-                                <div class="save_sumbmit">
-                                    <input type="submit" value="保存" style="width:100px;height:30px;">
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <td class="one">
+                                                   
+                                                    地&nbsp;&nbsp;&nbsp;&nbsp;址 : &nbsp;&nbsp;
+                                                </td>
+                                                <td class="two">
+                                                    <input class="dizhi" type="text" name="xxdizhi" style="width:200px;height:30px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="one">
+                                                 
+                                                    邮&nbsp;&nbsp;&nbsp;&nbsp;编:&nbsp;&nbsp;
+                                                </td>
+                                                <td class="two">
+                                                    <input type="text" name="postcode" style="width:200px;height:30px;" id="postcode" onblur="test3_()"> 请您使用准确邮编
+                                                </td>
+                                            </tr>
+                                            
+                                          {{ csrf_field() }}
+                                        </table>
+                                        <div class="save_sumbmit">
+                                             <input type="button" value="保存" style="width:160px;height:40px;background: #414141;color:#fff;outline: none;" id="baocun">
+                                        </div>
                                     
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <!-- 添加显示与隐藏 -->
@@ -559,6 +545,7 @@
             @include('flash::message')
         </div>
     </article>
+    <script src="{{ asset('static/index/js/message/message.js') }}" charset="utf-8"></script>
     <script>
         //修改头像
         layui.use(['upload','form'], function(){
@@ -578,16 +565,21 @@
                 ,done: function(res){
                   $('#two').attr('src',res.data.src);
                   $('#picture').attr('src','/uploads/picture/'+res.data.src);
-                  window.location.reload();
+                  $.message('头像修改成功');
                 }
                 ,error: function(){
-                  //请求异常回调
+                  $.message({
+                        message:'头像修改失败',
+                        type:'error'
+                    });
                 }
             });
             $("#form").submit(function(e){
               //资料提交不刷新
               var val=$('input:radio[name="sex"]:checked').val();
               var name=$('#name').val();
+              var zfpass=$('#zfpass').val();
+              console.log(zfpass);
               var two=$('#two').val();
               var fere=$('#fere').val();
               var id=$('#prc').val();
@@ -610,14 +602,18 @@
                     'val':val,
                     'det_address':det_address,   
                     'email':email,
-                    'fere':fere
+                    'fere':fere,
+                    'zfpass':zfpass
                 },
                 dataType:'text',
                 success:function(res){
-                    alert('修改成功');
+                    $.message('修改成功');
                 },
                 error:function(res){
-                    alert('修改失败');
+                    $.message({
+                        message:'修改失败',
+                        type:'error'
+                    });
                 }
               })
               return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
@@ -625,7 +621,23 @@
         });  
     </script>
     <script type="text/javascript">
-        //验证手机号
+     //验证邮编
+     function test3_(){  
+        var theinput=document.getElementById("postcode").value;
+            var p1=/^[0-9]{6}$/;
+            if(theinput==''){
+                return false;
+            }
+            if(p1.test(theinput)==false) {          
+                $.message({
+                    message:'请填写正确的邮编',
+                    type:'error'
+                });       
+                document.getElementById("postcode").value="";  
+            }
+            
+      } 
+     //验证手机号
      function test_(){  
         var theinput=document.getElementById("productName").value;
             var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
@@ -633,8 +645,26 @@
                 return false;
             }
             if(p1.test(theinput)==false) {          
-                alert('请填写正确电话号码!!');           
-                document.getElementById("phone1").value="";  
+                $.message({
+                    message:'请填写正确电话号码',
+                    type:'error'
+                });       
+                document.getElementById("productName").value="";  
+            }
+            
+      } 
+      function test2_(){  
+        var theinput=document.getElementById("shphone").value;
+            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
+            if(theinput==''){
+                return false;
+            }
+            if(p1.test(theinput)==false) {          
+                $.message({
+                    message:'请填写正确电话号码',
+                    type:'error'
+                });       
+                document.getElementById("shphone").value="";  
             }
             
       }  
@@ -646,7 +676,10 @@
                 return false;
             }
             if(p1.test(theinput)==false) {          
-                alert('请填写正确电话号码!!');           
+                $.message({
+                    message:'请填写正确电话号码',
+                    type:'error'
+                });          
                 document.getElementById("phone1").value="";  
             }  
       }  
@@ -687,31 +720,102 @@
             }
         })
     })
-</script>
-                        <!-- 弹框 -->
-<script>  
-
-    var ordnum = document.getElementById('ordernum').value;
-    // alert(ordnum);
-    for (var i = 0; i < ordnum; i++) {
-        var btn = document.getElementsByClassName('showModel');
-        var close = document.getElementsByClassName('close')[i];  
-        var cancel = document.getElementsByClassName('cancel')[i];  
-        var modal = document.getElementsByClassName('modal')[i];  
-        console.log(btn[i]);
-        btn[i].addEventListener('click', function(){  
-            modal.style.display = "block";  
-        });  
-        close.addEventListener('click', function(){  
-            modal.style.display = "none";  
-        });  
-        cancel.addEventListener('click', function(){  
-            modal.style.display = "none";  
-        });  
-    }   
-    var btn = document.getElementsByClassName('showModel')[0];  
-    
-</script>  
+    </script>
+    <!-- 弹框 -->
+    <script>
+        var ordnum = document.getElementById('ordernum').value;
+        // alert(ordnum);
+        for (var i = 0; i < ordnum; i++) {
+            var btn = document.getElementsByClassName('showModel');
+            var close = document.getElementsByClassName('close')[i];  
+            var cancel = document.getElementsByClassName('cancel')[i];  
+            var modal = document.getElementsByClassName('modal')[i];  
+            console.log(btn[i]);
+            btn[i].addEventListener('click', function(){  
+                modal.style.display = "block";  
+            });  
+            close.addEventListener('click', function(){  
+                modal.style.display = "none";  
+            });  
+            cancel.addEventListener('click', function(){  
+                modal.style.display = "none";  
+            });  
+        }   
+        var btn = document.getElementsByClassName('showModel')[0];
+    </script>
+    <script type="text/javascript">
+          var tijiao = document.getElementById('baocun');
+          tijiao.onclick = function(){
+          var shpeople = document.getElementsByName('shpeople')[0].value;
+          var shphone = document.getElementsByName('shphone')[0].value;
+          var province = document.getElementsByName('cho_Province')[0].value;
+          var city = document.getElementsByName('cho_City')[0].value;
+          var area = document.getElementsByName('cho_Area')[0].value;
+          var dizhi = document.getElementsByName('xxdizhi')[0].value;
+          var postcode = document.getElementsByName('postcode')[0].value;
+          var btn = document.getElementsByClassName('add_address')[0];
+          var divEle = document.getElementById('add');
+          var shaddress = province+city+area+dizhi;
+                $.ajax({  
+                    cache: false,
+                    type: "POST",
+                    url: "/shopcar/creates",
+                    data: {'shpeople':shpeople,'shphone':shphone,'shaddress':shaddress,'postcode':postcode},
+                    async: true,//相当于ajax里的同步异步
+                    dataType:'json',
+                    success:function(msg){
+                        if(msg.data === '请选择省份请选择城市请选择地区'){
+                            $.message({
+                                message:'请选择地址',
+                                type:'error'
+                            });
+                        }else if(msg.data === ''){
+                            $.message({
+                                message:'添加失败',
+                                type:'error'
+                            });
+                        }else{
+                            $('.card_money').after("<div class='smod_addres'><p>常<br>用<br>地<br>址<br></p><div class='nickname'><span > "+shpeople+"<em> 收</em></span><span > <strong>"+shaddress+"</strong></span><span class='mobilenumber'>"+shphone+"</span><div style='margin-left:30px;margin-top:10px;'> 邮编：<a style='display:inline; margin-left:10px;'>"+postcode+"</a></div></div><div class='opera' ><a href='javascript:;' class='black oneMore'><input type='hidden' name='id' value=''>删除</a>   </div></div>");
+                            divEle.style.display = 'none';
+                            btn.innerHTML = '添加新地址';
+                            btn.style="color:#333";
+                            $("#content-left :input").val("");
+                            $("#content-left :input ").last().val("保存");
+                            $.message('添加成功');  
+                        }
+                        
+                    },
+                    error:function(msg){
+                        $.message({
+                            message:'添加失败',
+                            type:'error'
+                        });
+                    }
+                })
+          }
+          var opera = document.getElementsByClassName('opera');
+          for (var i = 0; i<opera.length; i++) {
+              
+              opera[i].getElementsByClassName('oneMore')[0].onclick = function(){
+                var id = this.getElementsByTagName('input')[0].value;
+                var p = this.parentNode.parentNode;
+                $.ajax({
+                    type: "GET",
+                    url: "/shopcar/destroys/"+id,
+                    success:function(msg){
+                       p.remove();
+                       $.message('删除成功');
+                    },
+                    error:function(msg){
+                        $.message({
+                            message:'修改失败',
+                            type:'error'
+                        });
+                    } 
+                })
+              }
+          }
+    </script>
     @include('flash::message')
 
 @endsection

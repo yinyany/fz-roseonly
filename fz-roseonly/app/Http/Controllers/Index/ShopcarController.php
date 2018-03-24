@@ -154,7 +154,6 @@ class ShopcarController extends Controller
 
 
         // dd($shopinfo);
-        return view('index.person3',['array'=>$array]);
 
 
        if($orderis){
@@ -304,5 +303,40 @@ class ShopcarController extends Controller
                                     ]);
 
 
+    }
+    //个人收获地址管理
+    public function creates(Request $request)
+    {
+        $memid = session('usersInfo')['id'];
+        $shpeople = $request->shpeople;
+        // var_dump($shpeople);
+        $shphone = $request->shphone;
+        $shaddress = $request->shaddress;
+        $postcode = $request->postcode;
+        if($shaddress === '请选择省份请选择城市请选择地区'){
+            return ['code'=>0,'msg'=>'请选择地址','data'=>$shaddress];
+        }
+        if($shpeople === ''){
+            return ['code'=>0,'msg'=>'添加失败','data'=>$shpeople];
+        }
+        if($shphone === ''){
+            return ['code'=>0,'msg'=>'添加失败','data'=>$shphone];
+        }
+        if($postcode === ''){
+            return ['code'=>0,'msg'=>'添加失败','data'=>$postcode];
+        }
+        $info =   Memaddress::insert(['shpeople'=>$shpeople,
+                    'member_id'=>$memid,
+                    'shphone'=>$shphone,
+                    'shaddress'=>$shaddress,
+                    'shpostcode'=>$postcode
+                    ]);
+       return ['code'=>0,'msg'=>'','data'=>$info];
+    }
+
+    public function destroys(Request $request,$id)
+    {   
+       $data = Memaddress::where('id',$id)->delete();
+       return ['code'=>0,'msg'=>'','data'=>$data];
     }
 }
