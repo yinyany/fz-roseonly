@@ -108,7 +108,8 @@ class ShopcarController extends Controller
         $info['goid'] = $request->godid;
         $info['gonum'] = $request->godnum;
         $totalprices = $request->totalprice;
-        $ordernum = $request->ordernum;
+        $ordernum = date('YmdHis').rand(100,200);
+        // dd($ordernum);
 
         $ornum = Order::where('order_number',$ordernum)->first();
 
@@ -145,7 +146,6 @@ class ShopcarController extends Controller
                     'shaddress_id'=>$shaddid
                     ]);
         
-
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
          $order = Order::with('order_goods')->where('member_id',$memid)
@@ -157,7 +157,6 @@ class ShopcarController extends Controller
 
 
         // dd($shopinfo);
-        return view('index.person3',['array'=>$array]);
 
 
        if($orderis){
@@ -186,9 +185,8 @@ class ShopcarController extends Controller
                                             ->get();
         // dd($order);                                    
         // dd($order->toArray());
-        
-
         $orderb = $order->toArray();
+        // dd($orderb);
         //导航栏
         $array = Type::get()->toHierarchy();
         // dd($datas);
