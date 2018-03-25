@@ -73,5 +73,7 @@ Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
 Route::get('/orderhome','OrderhomeController@index');
 Route::get('/orderhome/destroy/{id}','OrderhomeController@destroy');
 Route::post('/orderhome/update','OrderhomeController@update');
+
+Route::get('/orderhome/querensh/{id}','OrderhomeController@querensh');
 //商品详情加入购物车
 Route::get('/shopping/{id}/{data}','ShopcarController@shopping');

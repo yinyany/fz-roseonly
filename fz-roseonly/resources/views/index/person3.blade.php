@@ -83,9 +83,11 @@
                                 <li>
                                     <div class="center-all">
                                         <span class="center-a">订单操作：</span>
-                                        @if($list['is_pay'] == 1)
-                                        <button class="btn center-c" style="border:none;">确认收货</button> 
-                                        @else
+                                        @if($list['is_pay'] == 1 && $list['is_receipt'] == 1)
+                                            <button class="btn center-c queren" style="border:none;">交易完成</button> 
+                                        @elseif($list['is_pay'] == 1)
+                                             <button class="btn center-c queren" style="border:none;"><input type="hidden" value="{{$list['id']}}" class="orid">确认收货</button> 
+                                        @elseif($list['is_pay'] == 0)
                                              <button class="btn center-c showModel" style="border:none;">等待付款<input type="hidden" value="{{$list['id']}}" class="orderid"></button>
                                              <a href='{{url("orderhome/destroy/$list[id]")}}'class="orderdel">取消订单</a>
                                         @endif
@@ -121,12 +123,12 @@
                                             </span>
                                          </li>
                                           <li>
-                                              <span class="center-q">商品数量:</span>
+                                             <span class="center-q">商品数量:</span>
                                              <span class="center-w">{{ $ordergoods['goods_num']}}</span>
                                          </li>
                                          <li>
                                               <span class="center-q">物流状态:</span>
-                                             @if( $list['is_ship'] == 1 )
+                                             @if($list['is_pay']==1 && $list['is_ship'] == 1)
                                              <span class="center-w">已发货</span>
                                              @else
                                               <span class="center-w">未发货</span>
@@ -324,7 +326,6 @@
                                     <!-- <strong style="display: block;clear:both;"></strong> -->
 
                                 </div>
-
                             </form>
                         </div>
                         <div class="sec3"  style="display:none;">
@@ -649,7 +650,7 @@
      //验证手机号
      function test_(){  
         var theinput=document.getElementById("productName").value;
-            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
+            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\d{8}|14[57]\d{8})$/;
             if(theinput==''){
                 return false;
             }
@@ -664,7 +665,7 @@
       } 
       function test2_(){  
         var theinput=document.getElementById("shphone").value;
-            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
+            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\d{8}|14[57]\d{8})$/;
             if(theinput==''){
                 return false;
             }
@@ -679,7 +680,7 @@
       }  
       function test1_(){  
         var theinput=document.getElementById("phone1").value;  
-            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;  
+            var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\d{8}|14[57]\d{8})$/;  
              //(p1.test(theinput));
              if(theinput==''){
                 return false;
@@ -805,7 +806,6 @@
     </script>
                         <!-- 弹框 -->
 <script>  
-
     // alert(ordnum);
         var btn = document.getElementsByClassName('showModel');
         var close = document.getElementsByClassName('close')[0];  
@@ -829,6 +829,32 @@
         cancel.addEventListener('click', function(){  
             modal.style.display = "none";  
         });  
+
+        //确认收货
+        var queren = document.getElementsByClassName('queren');
+        for (var i = queren.length - 1; i >= 0; i--) {
+            queren[i].addEventListener('click', function(){  
+             var oid = this.getElementsByClassName('orid')[0].value;
+                 // console.log(oid);
+                $.ajax({  
+                    cache: false,
+                    type: "GET",
+                    // url: '{{url("shopcar.update.id")}}',
+                    url: "/orderhome/querensh/"+oid,
+                    data: {},
+                    async: true,//相当于ajax里的同步异步 
+                    success:function(msg){
+                        window.location.reload();
+                    },
+                    error:function(msg){
+                        // alert("失败");
+                    }
+                })
+               
+                
+            });   
+             // console.log(btn[i]);
+        }
 </script>  
     @include('flash::message')
 
