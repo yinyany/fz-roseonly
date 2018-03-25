@@ -284,10 +284,10 @@ body{
 	 position: relative; 
 	 border-top: 1px solid #eee;
 	}
-.head{
+/*.head{
 	width: 60px; 
 	float: left;
-}
+}*/
 .head img{
 	width: 25px;
 	/*margin-top:20px; */

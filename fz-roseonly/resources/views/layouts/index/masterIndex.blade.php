@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<title>roseonly - @yield('title')</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/comment.css') }}">
-    <link rel="stylesheet" href="{{ asset('static/index/css/xadmin.css') }}">
 	<script src="{{ asset('static/index/js/jquery.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('static/index/js/comment.js') }}" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="{{ asset('static/index/css/xadmin.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('static/admin/css/xadmin.css') }}">
 
     @section('link')
@@ -199,7 +199,7 @@
 			<div class="left">
 				<a href="javascript:;"><img src="{{ asset('static/index/images/comment/footer_logo.png') }}" alt=""></a>
 				<p>
-					<span  style="display: inline;margin-left:-120px;">关注我们</span>
+					<span  style="display: inline;">关注我们</span>
 					<a class="weixin">
 						<img src="{{ asset('static/index/images/comment/weixin.png') }}" class="small">
 					</a>
