@@ -88,8 +88,28 @@ class OrderhomeController extends Controller
      */
     public function edit($id)
     {
-        //
+      
+        // $order = Order::where('id',$id)->update(['pay_time'=>$pay_time,'is_pay'=>1]);
     }
+
+
+    public function querensh($id)
+    {
+
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+        $memid = session('usersInfo')['id'];
+        
+        $date = time();
+
+         $order = Order::where('id',$id)->update(['receipt_time'=>$date,'is_receipt'=>1]);
+
+        return  redirect("shopcar/show/$memid");
+    }
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -117,19 +137,23 @@ class OrderhomeController extends Controller
         
         $memberinfo = Member::where('id',$memid)->first();
 
-        // dd($memberinfo);
+        $mem = $memberinfo->toArray();
+        // dd($memberinfo->toArray());
+        $zfpass = $mem['zfpass'];
+        // dd($mem['zfpass']);
+        if($passwrds == $zfpass){
+           $pay_time = time();
+            $order = Order::where('id',$id)->update(['pay_time'=>$pay_time,'is_pay'=>1]);
+            if ($order) {
+            flash()->overlay('支付成功', 1);
+            return redirect("shopcar/show/$memid");                                       
+            }                                      
+        }else{
+            flash()->overlay('支付密码错误', 5);
+            return  back();
+        }
 
-
-        $pay_time = time();
-
-
-        $order = Order::where('id',$id)->update(['pay_time'=>$pay_time,'is_pay'=>1]);
-
-        if ($order) {
-
-        return redirect("shopcar/show/$memid");
-                                                 
-        }                                     
+        
 
     }
 
