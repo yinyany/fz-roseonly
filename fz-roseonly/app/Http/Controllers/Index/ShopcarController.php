@@ -357,9 +357,15 @@ class ShopcarController extends Controller
     }
 
     public function destroys(Request $request,$id)
-    {   
-       $data = Memaddress::where('id',$id)->delete();
-       return ['code'=>0,'msg'=>'','data'=>$data];
+    {  
+       if(count(Order::where('shaddress_id',$id)->get())){
+          return ['code'=>0,'msg'=>'删除失败','data'=>''];
+       }else{
+        // return 111;
+         $data = Memaddress::where('id',$id)->delete();
+         return ['code'=>0,'msg'=>'','data'=>$data];
+       }
+       
     }
 
     public function shop(Request $request){
