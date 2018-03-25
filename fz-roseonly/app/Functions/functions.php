@@ -22,4 +22,6 @@ function shopStr2Arr($st=null)
 		
 	}
 	return ($arr);
+
+	        // "files":["app/Functions/functions.php"]
 }

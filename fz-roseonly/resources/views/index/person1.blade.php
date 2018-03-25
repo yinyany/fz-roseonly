@@ -127,43 +127,82 @@
                                 <label > 快递运输 </label>
                             </div>
                             <div class="per-nav">商品清单</div>
-                             @foreach($shopinfo as $list)
-                            <!-- 商品清单信息 -->
-                            <div class="com_list">
-                                <!-- 左边商品 -->
-                                <div class="com_left">
-                                    <img src="{{ asset('static/index/images/details/recom8.png') }}" alt="">
-                                    <div class="com_pay1">
-                                        <span >商品名称：</span>
-                                        <span>{{$list['goods']['name']}}</span>
-                                        <p>
-                                            <span >商品数量：</span>
-                                            <span >{{$list['num']}}</span>
-                                        </p>
-                                        <p>
-                                            <span >商品单价：</span>
-                                            <span >{{$list['goods']['price']}}</span>
-                                        </p>
+                            @if(!empty($shopinfo))
+                                @foreach($shopinfo as $list)
+                                <!-- 商品清单信息 -->
+                                <div class="com_list">
+                                    <!-- 左边商品 -->
+                                    <div class="com_left">
+                                        <img src="{{ asset('static/index/images/details/recom8.png') }}" alt="">
+                                        <div class="com_pay1">
+                                            <span >商品名称：</span>
+                                            <span>{{$list['goods']['name']}}</span>
+                                            <p>
+                                                <span >商品数量：</span>
+                                                <span >{{$list['num']}}</span>
+                                            </p>
+                                            <p>
+                                                <span >商品单价：</span>
+                                                <span >{{$list['goods']['price']}}</span>
+                                            </p>
+                                        </div>
                                     </div>
+                                    
+                                </div><!--商品清单信息-->
+                                @endforeach
+                            @else
+                               <div class="com_list">
+                                    <!-- 左边商品 -->
+                                    <div class="com_left">
+                                        <img src="/uploads/good/{{$data->imgurl}}" alt="">
+                                        <div class="com_pay1">
+                                            <span >商品名称：</span>
+                                            <span>{{$data->name}}</span>
+                                            <p>
+                                                <span >商品数量：</span>
+                                                <span >{{$val}}</span>
+                                            </p>
+                                            <p>
+                                                <span >商品单价：</span>
+                                                <span >{{$data->price}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                </div><!--商品清单信息-->
+                            @endif
+                            
+                            @if(!empty($shopinfo))
+                                <div class="area_right">
+                                    <p style="width:150px;">
+                                       <strong>总计：{{$totalprices}}</strong>
+                                       <strong >元</strong>
+                                    </p>
+                                    
                                 </div>
-                                
-                            </div><!--商品清单信息-->
-                            @endforeach
-                            <div class="area_right">
-                                <p style="width:150px;">
-                                   <strong>总计：{{$totalprices}}</strong>
-                                   <strong >元</strong>
-                                </p>
-                                
-                            </div>
-                            <div class="pay_submit">
-                                <input type="hidden" name="godid" value="{{$goid}}">
-                                <input type="hidden" name="godnum" value="{{$gonum}}">
-                                <input type="hidden" name="totalprice" value="{{ $totalprices }}">
-                                <input type="hidden" name="created_at" value="{{date('Y-m-d H:i:s')}}">
-                                <input type="hidden" name="ordernum" value="{{ date('YmdHis').rand(100,200) }}">
-                                <input type="submit" value="提交订单">
-                            </div>
+                                <div class="pay_submit">
+                                    <input type="hidden" name="godid" value="{{$goid}}">
+                                    <input type="hidden" name="godnum" value="{{$gonum}}">
+                                    <input type="hidden" name="totalprice" value="{{ $totalprices }}">
+                                    <input type="hidden" name="created_at" value="{{date('Y-m-d H:i:s')}}">
+                                     <input type="submit" value="提交订单">
+                                </div>
+                            @else
+                                <div class="area_right">
+                                    <p style="width:150px;">
+                                       <strong>总计：{{ $data->price * $val }}</strong>
+                                       <strong >元</strong>
+                                    </p>
+                                    
+                                </div>
+                                <div class="pay_submit">
+                                    <input type="hidden" name="id" value="{{$data->id}}">
+                                    <input type="hidden" name="val" value="{{$val}}">
+                                    <input type="hidden" name="total" value="{{ $data->price * $val }}">
+                                    <input type="hidden" name="created_at" value="{{date('Y-m-d H:i:s')}}">
+                                     <input type="submit" value="提交订单">
+                                </div>
+                            @endif
                              @include('flash::message')
                         </form>
                     </div>

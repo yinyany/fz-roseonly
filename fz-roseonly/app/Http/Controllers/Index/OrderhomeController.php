@@ -42,9 +42,6 @@ class OrderhomeController extends Controller
         //查询出会员的id是多少，再通过购物车查商品
         $order = Order::where('member_id',$memid)->get();
 
-        // foreach ($order as $k=>$v) {
-        //     echo $v['id'];
-        // }
 
         dd($order->toArray());
 
@@ -110,7 +107,7 @@ class OrderhomeController extends Controller
         $password = $request->zhifu;
 
          $passwrds = md5($password);
-        dd($passwrds);
+        // dd($passwrds);
         // dd('123123');
         // dd($id);
         if (session('usersInfo') == NULL) {     

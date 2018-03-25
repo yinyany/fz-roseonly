@@ -284,10 +284,13 @@ body{
 	 position: relative; 
 	 border-top: 1px solid #eee;
 	}
+<<<<<<< HEAD
 /*.head{
 	width: 60px; 
 	float: left;
 }*/
+=======
+>>>>>>> 8a90c1a7785774f0d6303f1be93b166e43e81358
 .head img{
 	width: 25px;
 	/*margin-top:20px; */

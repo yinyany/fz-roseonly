@@ -33,8 +33,12 @@ Route::post('/file/newmember','HomeController@newmember');
 Route::post('/newmember/{id}','HomeController@update');
 //修改个人资料
 Route::post('/memadress','HomeController@memadress');
-
-
+//修改个人收获地址
+Route::post('/shopcar/creates','ShopcarController@creates');
+Route::get('/shopcar/shop','ShopcarController@shop');
+Route::get('/shopcar/shops/{id}/{data}','ShopcarController@shops');
+//删除收获地址
+Route::get('/shopcar/destroys/{id}','ShopcarController@destroys');
 //首页全站搜索
 Route::post('/listname','ListController@listname');
 
@@ -69,3 +73,5 @@ Route::get('/shopcar/jiesuan','ShopcarController@jiesuan');
 Route::get('/orderhome','OrderhomeController@index');
 Route::get('/orderhome/destroy/{id}','OrderhomeController@destroy');
 Route::post('/orderhome/update','OrderhomeController@update');
+//商品详情加入购物车
+Route::get('/shopping/{id}/{data}','ShopcarController@shopping');

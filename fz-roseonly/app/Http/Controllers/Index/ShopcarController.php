@@ -99,65 +99,84 @@ class ShopcarController extends Controller
         $array = Type::with('bute.value')->get()->toHierarchy();
 
 
-       if (session('usersInfo') == NULL) {
+        if (session('usersInfo') == NULL) {
             return view('authindex/login');
         }
         $memid = session('usersInfo')['id'];
-        // dd($memid);
-
-        $info['goid'] = $request->godid;
-        $info['gonum'] = $request->godnum;
-        $totalprices = $request->totalprice;
-        $ordernum = $request->ordernum;
-
+        //生成订单
+        $ordernum = date('YmdHis').rand(100,200);
+        //查询订单是否存在
         $ornum = Order::where('order_number',$ordernum)->first();
-
         if($ornum){
             flash()->overlay('该商品已添加至订单', 1);
             return back();
         }
-
-        $createtime = $request->created_at;
         $shaddid = $request->shaddress_id;
-        // dd($info);
-        $goid = explode("@",rtrim($info['goid'],'@'));
-        $gonum = explode("@",rtrim($info['gonum'],'@'));
-        // count($goid);
-        // dd(count($goid));
-    
-        $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
-        $shopinfo = $shop->toArray();
-
-        // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
-       for ($i=0; $i <count($goid) ; $i++) { 
-           // echo $gonum[$i];
-           Order_goods::insert(['order_id'=>$ordernum,
-                            'goods_id'=>$shopinfo[$i]['goods_id'],
-                            'goods_num'=>$gonum[$i]
-                            ]);
-           Goods_shopcar::destroy($goid[$i]);
-
-       }
-     $orderis =   Order::insert(['order_number'=>$ordernum,
-                    'member_id'=>$memid,
-                    'pay_prices'=>$totalprices,
-                    'created_at'=>$createtime,
-                    'shaddress_id'=>$shaddid
-                    ]);
+        $createtime = $request->created_at;
+        // dd($memid);
+        // dd($request->godid);
+        if($request->godid !=null){
+            $info['goid'] = $request->godid;
+            $info['gonum'] = $request->godnum;
+            $totalprices = $request->totalprice; 
+            // dd($ordernum);
+            // dd($info);
+            $goid = explode("@",rtrim($info['goid'],'@'));
+            $gonum = explode("@",rtrim($info['gonum'],'@'));
+            // count($goid);
+            // dd(count($goid));
         
+            $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
+            $shopinfo = $shop->toArray();
 
-       // dd($request->session()->has('usersInfo'));
-        // $this->show($memid,$goid);
-         $order = Order::with('order_goods')->where('member_id',$memid)
-                                            ->get();
-                                            // ->where('');
-        // dd($order->toArray());
-        $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
-        $shopinfo = $shop->toArray();
+            // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
+            for ($i=0; $i <count($goid) ; $i++) { 
+               // echo $gonum[$i];
+               Order_goods::insert(['order_id'=>$ordernum,
+                                'goods_id'=>$shopinfo[$i]['goods_id'],
+                                'goods_num'=>$gonum[$i]
+                                ]);
+               Goods_shopcar::destroy($goid[$i]);
+
+           }
+           $orderis =   Order::insert(['order_number'=>$ordernum,
+                        'member_id'=>$memid,
+                        'pay_prices'=>$totalprices,
+                        'created_at'=>$createtime,
+                        'shaddress_id'=>$shaddid
+                        ]);
+            
+           // dd($request->session()->has('usersInfo'));
+            // $this->show($memid,$goid);
+             $order = Order::with('order_goods')->where('member_id',$memid)
+                                                ->get();
+                                                // ->where('');
+            // dd($order->toArray());
+            $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
+            $shopinfo = $shop->toArray();
 
 
-        // dd($shopinfo);
-        return view('index.person3',['array'=>$array]);
+            // dd($shopinfo);
+        }else{
+            
+            $total = $request->total;
+            // dd($total);
+            $goid = $request->id;
+            $gonum = $request->val;
+            $createtime = $request->created_at;
+            // dd($ordernum);
+            Order_goods::insert(['order_id'=>$ordernum,
+                                'goods_id'=>$goid,
+                                'goods_num'=>$gonum
+                                ]);
+
+            $orderis =   Order::insert(['order_number'=>$ordernum,
+                        'member_id'=>$memid,
+                        'pay_prices'=>$total,
+                        'created_at'=>$createtime,
+                        'shaddress_id'=>$shaddid
+                        ]);
+        }
 
 
        if($orderis){
@@ -166,6 +185,8 @@ class ShopcarController extends Controller
             return back();
        }
 
+
+        
     }
 
     /**
@@ -186,9 +207,8 @@ class ShopcarController extends Controller
                                             ->get();
         // dd($order);                                    
         // dd($order->toArray());
-        
-
         $orderb = $order->toArray();
+        // dd($orderb);
         //导航栏
         $array = Type::get()->toHierarchy();
         // dd($datas);
@@ -305,5 +325,71 @@ class ShopcarController extends Controller
                                     ]);
 
 
+    }
+    //个人收获地址管理
+    public function creates(Request $request)
+    {
+        $memid = session('usersInfo')['id'];
+        $shpeople = $request->shpeople;
+        // var_dump($shpeople);
+        $shphone = $request->shphone;
+        $shaddress = $request->shaddress;
+        $postcode = $request->postcode;
+        if($shaddress === '请选择省份请选择城市请选择地区'){
+            return ['code'=>0,'msg'=>'请选择地址','data'=>$shaddress];
+        }
+        if($shpeople === ''){
+            return ['code'=>0,'msg'=>'添加失败','data'=>$shpeople];
+        }
+        if($shphone === ''){
+            return ['code'=>0,'msg'=>'添加失败','data'=>$shphone];
+        }
+        if($postcode === ''){
+            return ['code'=>0,'msg'=>'添加失败','data'=>$postcode];
+        }
+        $info =   Memaddress::insert(['shpeople'=>$shpeople,
+                    'member_id'=>$memid,
+                    'shphone'=>$shphone,
+                    'shaddress'=>$shaddress,
+                    'shpostcode'=>$postcode
+                    ]);
+       return ['code'=>0,'msg'=>'','data'=>$info];
+    }
+
+    public function destroys(Request $request,$id)
+    {   
+       $data = Memaddress::where('id',$id)->delete();
+       return ['code'=>0,'msg'=>'','data'=>$data];
+    }
+
+    public function shop(Request $request){
+        $id = $request->id;
+        $val = $request->val;
+        return ['code'=>0,'msg'=>'','data'=>['id'=>$id,'val'=>$val]];
+    }
+
+    public function shops(Request $request,$id,$val){
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+        $memid = session('usersInfo')['id'];
+        $array = Type::with('bute.value')->get()->toHierarchy();
+        $memadd = Member::with('memaddress')->where('id',$memid)->first();
+        $memainfo = $memadd->toArray();   
+        // dd($memainfo['memaddress']);
+        $memaddress = $memainfo['memaddress'];
+        $data = Goods::where('id',$id)->first();
+        return view('index.person1',['data'=>$data,'val'=>$val,'array'=>$array,'memaddress'=>$memaddress]);
+    }
+
+    public function shopping(Request $request,$id,$val){
+        if (session('usersInfo') == NULL) {
+            return view('authindex/login');
+        }
+        $memid = session('usersInfo')['id'];
+        $data = Goods_shopcar::create(['member_id'=>$memid,'goods_id'=>$id,'num'=>$val]);
+        return redirect('/shopcar');
+
+        
     }
 }

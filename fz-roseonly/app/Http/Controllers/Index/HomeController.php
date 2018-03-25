@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -110,29 +112,7 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $this->validate($request, [
-            'fere' => 'max:36',
-            'fere_phone' => 'digits:11',
-            'phone' => 'required|digits:11',
-            'email' => 'required|email',
-        ],[
-            'fere.max' => '姓名最长36位',
-            'fere_phone.digits' => '手机号为11位',
-            'phone.required' => '手机号必填',
-            'phone.digits' => '手机号为11位',
-            'email.required' => '邮箱必填',
-            'email.email' => '邮箱格式错误',
-        ]);
-        $id = $request->id;
-        dd($request->name);
-        $data = Member::where('id',$id)->update(['name'=>$request->name,'fere'=>$request->fere,'phone'=>$request->phone,'fere_phone'=>$request->fere_phone,'birthday'=>$request->birthday,'sex'=>$request->sex,'address'=>$request->address,'email'=>$request->email,'affective'=>$request->affective]);
-        if($data>0){
-            flash()->overlay('修改成功', 1);
-            return back();
-        }else{
-            flash()->overlay('修改失败', 5);
-            return back();
-        }
+        
     }
 
     /**
@@ -152,11 +132,11 @@ class HomeController extends Controller
         $info['sex'] = $request->val;
         $info['address'] = $request->det_address;
         $info['email'] = $request->email;
+        $info['zfpass'] = md5($request->zfpass);
         $id = $request->id;
-        Member::where('id',$id)->update($info);
+        $data = Member::where('id',$id)->update($info);
         // var_dump($meber);
-        return ['code'=>0,'msg'=>'','data'=>$info];
+        return ['code'=>0,'msg'=>'','data'=>$data];
 
     }
-
 }
