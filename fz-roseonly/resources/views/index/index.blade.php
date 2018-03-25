@@ -74,7 +74,7 @@
                         <ul class="flower" style="display:;">
                             @foreach($v as $value)
                             <li>
-                                <a href="javascript:;" title="经典-许愿">
+                                <a href="{{ url('/detail',[$value->id]) }}" title="经典-许愿">
                                     <img src="/uploads/good/{{ $value->imgurl }}" width="200" height="200">
                                     <div class="show">
                                         <span class="title">{{ $value->name }}</span>
