@@ -100,7 +100,7 @@ class OrderhomeController extends Controller
             return view('authindex/login');
         }
         $memid = session('usersInfo')['id'];
-        
+
         $date = time();
 
          $order = Order::where('id',$id)->update(['receipt_time'=>$date,'is_receipt'=>1]);
@@ -124,6 +124,13 @@ class OrderhomeController extends Controller
 
             
         $id = $request->id;
+
+        $ordergoods = Order::with('order_goods')->where('id',$id)->first();
+        // dd($ordergoods->toArray());
+        $a = $ordergoods->toArray();
+        $b =  $a['order_goods'];
+        // dd(count($b));
+      
         $password = $request->zhifu;
 
          $passwrds = md5($password);
@@ -146,6 +153,9 @@ class OrderhomeController extends Controller
             $order = Order::where('id',$id)->update(['pay_time'=>$pay_time,'is_pay'=>1]);
             if ($order) {
             flash()->overlay('支付成功', 1);
+            // for(){
+
+            // }
             return redirect("shopcar/show/$memid");                                       
             }                                      
         }else{

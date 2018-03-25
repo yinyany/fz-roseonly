@@ -24,7 +24,7 @@ class Member extends Model
 
     public function order()
     {
-        return $this->hasMany('App\Model\Admin\Order','member_id');
+        return $this->hasMany('App\Model\Admin\Order','member_id','id');
     }
 
     public function memaddress()

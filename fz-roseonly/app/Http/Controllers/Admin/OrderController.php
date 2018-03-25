@@ -8,6 +8,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Order;
 use App\Model\Admin\Member;
+use App\Model\Admin\Goods_shopcar;
+use App\Model\Admin\Goods;
+use App\Model\Admin\Order_goods;
+use App\Model\Index\Memaddress;
+use App\Model\Admin\Type;
 
 
 class OrderController extends Controller
@@ -43,15 +48,23 @@ class OrderController extends Controller
     public function edit($id)
     {
         //订单的id查询数据
-         $orderinfo = Order::findOrFail($id);   //对象形式的订单信息
-         // dd($orderinfo);
-         $aOrderinfo = $orderinfo->toArray(); //数组形式的订单信息
-         $memberid = $aOrderinfo['member_id']; 
+         // $orderinfo = Order::findOrFail($id);   //对象形式的订单信息
+         // dd($orderinfo->toArray());
+         // $aOrderinfo = $orderinfo->toArray(); //数组形式的订单信息
+         // $orderid = $aOrderinfo['id']; 
          
-        $member = Member::with('order')->find($memberid);  //对象形式的会员信息
-        $memberinfo = $member->toArray();
+        $order = Order::with('order_goods.goods')->with('memaddress')->where('id',$id)
+                                            ->orderby('is_pay')
+                                            ->orderby('created_at','desc')
+                                            ->first();
+        // $memberinfo = $member->toArray();
 
-        return view('admin.order.edit',['orderinfo'=>$orderinfo,'minfo' =>$memberinfo]);
+        // dd($order->toArray());
+        // $orderinfo = $order->toArray();
+        // dd($order);
+
+
+        return view('admin.order.edit',['orderinfo'=>$order]);
     }
 
     /**
