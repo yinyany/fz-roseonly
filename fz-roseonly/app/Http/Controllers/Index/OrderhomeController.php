@@ -107,7 +107,7 @@ class OrderhomeController extends Controller
         $password = $request->zhifu;
 
          $passwrds = md5($password);
-        dd($passwrds);
+        // dd($passwrds);
         // dd('123123');
         // dd($id);
         if (session('usersInfo') == NULL) {     
