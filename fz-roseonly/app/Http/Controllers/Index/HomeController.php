@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Index;
 use Illuminate\Http\Request;
 use App\Model\Index\Home;
 use App\Model\Admin\Member;
+use App\Model\Admin\Goods;
 use App\Model\Admin\Type;
 use App\Model\Admin\Bute;
 use App\Model\Admin\Carousel;
@@ -13,6 +14,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -22,27 +25,31 @@ class HomeController extends Controller
     {
          //导航栏
         $array = Type::with('bute.value')->get()->toHierarchy();
-        // $bute =  Bute::where('state','单选')->get();
-        // dd($array->toArray());
+
+        //获取4个顶级类
+        $name = Type::where('depth',0)->take(4)->get();
+        // dd($name->toArray());
+        foreach ($name as $key => $value) {
+            //获取每个顶级类的节点
+            $node = Type::where('name',$value->name)->first();
+            // dd($node->toArray());
+            // 获取每个顶级类下的子节点
+            $type = $node->getLeaves();
+            // dd($type->toArray());
+            $tid = [];
+            foreach ($type as $key => $v) {
+                $tid[] = $v->id;
+            }
+            // 获取每隔子节点下的8个商品
+            $list[$value->name] = Goods::whereIn('type_id',$tid)->take(8)->get();
+            // dd($list);
+        }
+        // dd($list);
         $banner = Carousel::where('state','启用')->get();
         $count  = Carousel::where('state','启用')->count();
-        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count]);
+        return view('index.index',['array' => $array,'banner'=>$banner,'count'=>$count,'list'=>$list]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function member($id)
-    {   
-         //导航栏
-        $array = Type::with('bute.value')->get()->toHierarchy();
-        
-        // dd($datas);
-        $model = Member::findOrFail($id);
-        return view('index.person3',['model'=>$model,'array'=>$array]);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -97,17 +104,6 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -143,6 +139,4 @@ class HomeController extends Controller
         return ['code'=>0,'msg'=>'','data'=>$data];
 
     }
-
-   
 }

@@ -98,9 +98,15 @@ class ListController extends Controller
 
     public function listname(request $request,$type=null,$order=null)
     {
+        // dd($request->name);
+        if($request->name === ""){
+            return back();
+        }
+
         $this->validate($request, [
             'name' => 'required',
         ]);
+        
         // session(['ss' => $request->name]);
         $request->session()->put('ss',$request->name);
         // dd($request->name);

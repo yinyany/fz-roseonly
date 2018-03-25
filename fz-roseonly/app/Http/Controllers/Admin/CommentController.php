@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -36,8 +40,14 @@ class CommentController extends Controller
             // dd($comment->toArray());
             $sum = Comment::count();
         }
+        $member = Member::get()->toArray();
+        $mem = [];
+        foreach ($member as $key => $value) {
+            $mem[$value['id']] = $value['name'];
+        }
+        // dd($mem);
         // $comment = Comment::all();
-        return view('admin.comment.comment',['comment'=>$comment,'sum'=>$sum,'keywords'=>$keywords]);
+        return view('admin.comment.comment',['comment'=>$comment,'sum'=>$sum,'mem'=>$mem,'keywords'=>$keywords]);
     }
 
 
@@ -90,14 +100,5 @@ class CommentController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

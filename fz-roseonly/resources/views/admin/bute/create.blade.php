@@ -53,8 +53,8 @@
               </label>
               <div class="layui-input-inline">
                 <select name="state" lay-verify="">
-                  <option value="单选" selected>单选</option>
-                  <option value="多选">多选</option>
+                  <option value="单选" >单选</option>
+                  <option value="多选" selected>多选</option>
                 </select> 
               </div>  
           </div>

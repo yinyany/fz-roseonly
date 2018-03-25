@@ -46,7 +46,12 @@
             <td>{{ $list->id }}</td>
             <td>{{ $datas[$list->type_id]}}</td>
             <td>{{ $list->name }}</td>
-            <td style="width:170px">{!! shopStr2Arr($list->bid) !!}</td>
+            <td style="width:170px">
+              @if($list->bid !== null)  
+              {!! shopStr2Arr($list->bid) !!}
+
+              @endif
+            </td>
             <td><img src="/uploads/good/{{ $list->imgurl }}"></td>
             <td style="width:90px">{{ $list->price }}</td>
             <td style="width:70px">{{ $list->stock }}</td>

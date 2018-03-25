@@ -11,6 +11,10 @@ use App\Model\Admin\Permission;
 
 class RoleController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -143,9 +147,6 @@ class RoleController extends Controller
         $role->save();
 
         $perPid = $request->input('pid',[]);
-        // dd($roleData);
-        // Role::where('id', $id)->update(['description' => $roleData]);
-       
 
         $role->perms()->sync($perPid);
 

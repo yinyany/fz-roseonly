@@ -161,8 +161,7 @@
                                 <input type="hidden" name="godnum" value="{{$gonum}}">
                                 <input type="hidden" name="totalprice" value="{{ $totalprices }}">
                                 <input type="hidden" name="created_at" value="{{date('Y-m-d H:i:s')}}">
-                                <input type="hidden" name="ordernum" value="{{ date('YmdHis').rand(100,200) }}">
-                                <input type="submit" value="提交订单">
+                                 <input type="submit" value="提交订单">
                             </div>
                              @include('flash::message')
                         </form>

@@ -13,6 +13,10 @@ use App\Http\Controllers\Controller;
 
 class GoodsController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -78,7 +82,7 @@ class GoodsController extends Controller
     public function store(Request $request)
     {   
         // dd($request->all());
-        if($request->type_id==0){
+        if($request->type_id == 0){
             flash()->overlay('请选择类名', 5);
             return back();
         }
@@ -98,41 +102,28 @@ class GoodsController extends Controller
             return back();
         }
 
-        // dd($bid);
-        $types = Bute::whereIn('id',$bid)->get();
-            
-        // dd($types->toArray());
-        foreach($types as $v){
-            if($v->state  === '单选'){
-                
-            }elseif($v->state  === '多选'){
-
-                //属性值id集合
-                $vid =$request->vid;
-                //定义空的属性集合
-                $vidStr = '';
-                //多选属性名id
-                $arrtId = '';
-                //多选属性值
-                $colorArr = [];
-                // dd($vid);
-                //商品属性
-                // dd($types->toArray());
-            foreach($vid as $k => $v){
-                if(!is_array($v)){
-                    $vidStr.=$k.":".$v.",";
-                }else{
-                    $arrtId = $k;
-                    $colorArr=$v;
-                }
+        //属性值id集合
+        $vid =$request->vid;
+        //定义空的属性集合
+        $vidStr = '';
+        //多选属性名id
+        $arrtId = '';
+        //多选属性值
+        $colorArr = [];
+        // dd($vid);
+        //商品属性
+        foreach($vid as $k => $v){
+            if(!is_array($v)){
+                $vidStr.=$k.":".$v.",";
+            }else{
+                $arrtId = $k;
+                $colorArr=$v;
             }
         }
-        // $vidStr .= $arrtId.":".$colorArr
-        // dd($request->input("imgurl"));
+
         foreach($colorArr as $value) {
             $dd = $vidStr;
             $dd .= $arrtId.":".$value;
-
             $goods = new Goods;
             $goods->imgurl = $request->input("imgurl"); 
             $goods->name = $request->input("name");
@@ -150,16 +141,6 @@ class GoodsController extends Controller
         return redirect('/admin/goods');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {   
-
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -176,12 +157,6 @@ class GoodsController extends Controller
         // dd($info);
         $value = Type::where('id',$goods->type_id)->first();
         // dd($goods);
-        // 找出这个商品的2级类
-        // $ccc = Type::where('id',$bbb->parent_id)->first();
-        // //所属的属性名
-        // $datas = Bute::where('id',$goods->bid)->first();
-        // $value = Value::where('bute_id',$datas->id)->get();
-        // $values = Value::where('id',$goods->vid)->first();
         return view('admin.goods.edit',['goods'=>$goods,'info'=>$info,'value'=>$value]);
     }
 
@@ -236,11 +211,7 @@ class GoodsController extends Controller
             return back();
         } 
     }
-    //获取类别的方法
-    // public function good(Request $request){
-        
-    //     return ['code'=>0,'msg'=>'','data'=>];
-    // }
+   
     //获取属性名的方法
     public function attr(Request $request){
         $attr = Bute::where('type_id',$request->id)->get();

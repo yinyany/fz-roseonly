@@ -108,7 +108,8 @@ class ShopcarController extends Controller
         $info['goid'] = $request->godid;
         $info['gonum'] = $request->godnum;
         $totalprices = $request->totalprice;
-        $ordernum = $request->ordernum;
+        $ordernum = date('YmdHis').rand(100,200);
+        // dd($ordernum);
 
         $ornum = Order::where('order_number',$ordernum)->first();
 
@@ -122,14 +123,17 @@ class ShopcarController extends Controller
         // dd($info);
         $goid = explode("@",rtrim($info['goid'],'@'));
         $gonum = explode("@",rtrim($info['gonum'],'@'));
-        count($goid);
+        // count($goid);
         // dd(count($goid));
-   
+    
+        $shop = Goods_shopcar::with('goods')->whereIn('id',$goid)->get();
+        $shopinfo = $shop->toArray();
+
         // 查询出会员的id是多少，再通过购物车查商品  //存入订单号和会员id，
        for ($i=0; $i <count($goid) ; $i++) { 
            // echo $gonum[$i];
            Order_goods::insert(['order_id'=>$ordernum,
-                            'goods_id'=>$goid[$i],
+                            'goods_id'=>$shopinfo[$i]['goods_id'],
                             'goods_num'=>$gonum[$i]
                             ]);
            Goods_shopcar::destroy($goid[$i]);
@@ -142,7 +146,6 @@ class ShopcarController extends Controller
                     'shaddress_id'=>$shaddid
                     ]);
         
-
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
          $order = Order::with('order_goods')->where('member_id',$memid)
@@ -176,17 +179,15 @@ class ShopcarController extends Controller
        // dd($request->session()->has('usersInfo'));
         // $this->show($memid,$goid);
          $order = Order::with('order_goods.goods')->with('memaddress')->where('member_id',$id)
+                                            ->orderby('is_pay')
                                             ->orderby('created_at','desc')
+
                                             ->get();
         // dd($order);                                    
         // dd($order->toArray());
-        
-
         $orderb = $order->toArray();
-        $ordernum = count($orderb);
-        // dd( $ordernum );
-
-  //导航栏
+        // dd($orderb);
+        //导航栏
         $array = Type::get()->toHierarchy();
         // dd($datas);
         $model = Member::findOrFail($id);
@@ -198,7 +199,7 @@ class ShopcarController extends Controller
         // dd($memainfo['memaddress']);
         $memaddress = $memainfo['memaddress'];
 
-        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress,'ordernum'=>$ordernum]);
+        return view('index.person3',['order'=>$orderb,'model'=>$model,'array'=>$array,'memaddress'=>$memaddress]);
 
     }
 
@@ -270,7 +271,6 @@ class ShopcarController extends Controller
 
         $infogoid = $request->goid;
         $infogonum = $request->gonum;
-
         $totalprices = $request->totalprices;
         // $info['ordernum'] = $request->ordernum;
         // dd($info);

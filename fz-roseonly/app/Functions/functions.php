@@ -1,6 +1,6 @@
 <?php
 
-function shopStr2Arr($st)
+function shopStr2Arr($st=null)
 {
 	$arr= '';
 	$array = [];
@@ -22,4 +22,6 @@ function shopStr2Arr($st)
 		
 	}
 	return ($arr);
+
+	        // "files":["app/Functions/functions.php"]
 }

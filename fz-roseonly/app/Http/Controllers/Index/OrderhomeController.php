@@ -42,9 +42,6 @@ class OrderhomeController extends Controller
         //查询出会员的id是多少，再通过购物车查商品
         $order = Order::where('member_id',$memid)->get();
 
-        // foreach ($order as $k=>$v) {
-        //     echo $v['id'];
-        // }
 
         dd($order->toArray());
 
@@ -101,15 +98,30 @@ class OrderhomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
+
+            
+        $id = $request->id;
+        $password = $request->zhifu;
+
+         $passwrds = md5($password);
+        dd($passwrds);
         // dd('123123');
-        if (session('usersInfo') == NULL) {
+        // dd($id);
+        if (session('usersInfo') == NULL) {     
             return view('authindex/login');
         }
         $memid = session('usersInfo')['id'];
-        $pay_time = $request->pay_time;
+        
+        $memberinfo = Member::where('id',$memid)->first();
+
+        // dd($memberinfo);
+
+
+        $pay_time = time();
+
 
         $order = Order::where('id',$id)->update(['pay_time'=>$pay_time,'is_pay'=>1]);
 

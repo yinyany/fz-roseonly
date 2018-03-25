@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>404 NOT FOUND.</title>
+        <title>404 The page does not exist, please refresh and try again.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -32,7 +32,7 @@
             }
 
             .title {
-                font-size: 72px;
+                font-size: 32px;
                 margin-bottom: 40px;
             }
         </style>
@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">404 NOT FOUND.</div>
+                <div class="title">404 The page does not exist, please refresh and try again.</div>
             </div>
         </div>
     </body>

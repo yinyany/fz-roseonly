@@ -11,6 +11,10 @@ use App\Model\Admin\Role;
 
 class UserController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +32,6 @@ class UserController extends Controller
             $user = User::orderBy('id','desc')->paginate(env('PAGE_SIZE',10));
             $sum = User::count();
         }
-        
         
         // dd($sum);
         return view('admin.user.user',['user'=>$user,'sum'=>$sum,'keywords'=>$keywords]);
@@ -69,10 +72,6 @@ class UserController extends Controller
             'password.confirmed' => '两次密码不一样',
             'password.min'  => '密码最小6位',
         ]);
-        // dd($request->all());
-        // $name = $request->name;
-        // $name = $request->email;
-        // $name = $request->password;
         $User = User::create([
             'name' => $request->name,
             'email' => $request->email,
