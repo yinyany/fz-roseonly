@@ -49,7 +49,7 @@
                                 <input class="check-one check" type="checkbox">
                             </td>
                             <td class="goods">
-                                <img src="{{ asset('static/index/images/shopcar/tut.png') }}" alt="">
+                                <img src="/uploads/good/{{$list['goods']['imgurl']}}" alt="">
                                 <span>{{$list['goods']['name']}}</span>
                                 
                             </td>

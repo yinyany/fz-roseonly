@@ -107,7 +107,7 @@
                             </div>
                             @foreach($list['order_goods'] as $ordergoods ) 
                             <div class="con_bom"  >
-                              <img src="/uploads/picture/{{ $ordergoods['goods']['imgurl'] }}" alt=""> 
+                              <img src="/uploads/good/{{ $ordergoods['goods']['imgurl'] }}" alt=""> 
                                  <div class="cona_left">
                                      <ul>
                                          <li>

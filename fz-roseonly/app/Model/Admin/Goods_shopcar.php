@@ -15,6 +15,8 @@ class Goods_shopcar extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['member_id','goods_id','num'];
+
     public function goods()
     {
         return $this->belongsTo('App\Model\Admin\Goods','goods_id','id');
