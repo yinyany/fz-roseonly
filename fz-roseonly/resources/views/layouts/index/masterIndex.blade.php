@@ -4,10 +4,6 @@
 	<meta charset="UTF-8">
 	<title>roseonly - @yield('title')</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('static/index/css/comment.css') }}">
-<<<<<<< HEAD
-=======
-    <!-- <link rel="stylesheet" href="{{ asset('static/index/css/xadmin.css') }}"> -->
->>>>>>> 8a90c1a7785774f0d6303f1be93b166e43e81358
 	<script src="{{ asset('static/index/js/jquery.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('static/index/js/comment.js') }}" type="text/javascript"></script>
     <!-- <link rel="stylesheet" href="{{ asset('static/index/css/xadmin.css') }}"> -->
