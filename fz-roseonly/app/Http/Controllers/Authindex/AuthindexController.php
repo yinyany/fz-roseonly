@@ -48,7 +48,6 @@ class AuthindexController extends Controller
         //验证账号是否存在
         $user = Member::where('name',$info['name'])->first();
 
-        
         // dd($userId);
          if (!$user) {
             flash()->overlay('账号不存在', 5);
@@ -67,7 +66,9 @@ class AuthindexController extends Controller
             flash()->overlay('密码错误', 5);
             return back();
         }
+
         $userInfo = $user->toArray();
+
         $userId = $userInfo['id'];
         // //登陆成功
         //放置登陆信息,位置登陆状态

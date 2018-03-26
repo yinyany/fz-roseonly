@@ -30,7 +30,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label" style="font-size: 18px;">订单号：</label>
           <div class="layui-input-block"> 
-            <input type="text" name="order_number" value="{{$orderinfo->order_number}}" autocomplete="off" class="layui-input" style="width:250px;border:none;font-size:20px;color:#f00;" disabled>
+            <input type="text" name="order_number" value="{{$orderinfo->order_number}}" autocomplete="off" class="layui-input" style="width:280px;border:none;font-size:20px;color:#f00;" disabled>
           </div>
         </div>
         <hr>
@@ -39,19 +39,19 @@
            <table class="layui-table" lay-even>
               <tr>
                 <td style="width:100px;">收货人姓名：</td>
-                <td>{{ $minfo['name']}}</td>
+                <td>{{ $orderinfo->memaddress->shpeople}}</td>
               </tr>
               <tr>
-                <td>收货人地址：</td>
-                <td></td>
+                <td>收货人地址:</td>
+                <td>{{ $orderinfo->memaddress->shaddress}}</td>
               </tr>
               <tr>
                 <td>收货人电话：</td>
-                <td></td>
+                <td>{{ $orderinfo->memaddress->shphone}}</td>
               </tr>
               <tr>
-                <td>电子邮件：</td>
-                <td></td>
+                <td>邮编：</td>
+                <td>{{ $orderinfo->memaddress->shpostcode}}</td>
               </tr>
           </table>
         </div>
@@ -61,11 +61,11 @@
           <table class="layui-table" lay-even>
               <tr>
                 <td style="width:100px;">订单编号：</td>
-                <td></td>
+                <td>{{ $orderinfo->order_number }}</td>
               </tr>
               <tr>
                 <td>下单时间：</td>
-                <td>{{$orderinfo->is_pay}}</td>
+                <td>{{ date("Y-m-d H:i:s",$orderinfo->pay_time) }}</td>
               </tr>
           </table>
         </div>
@@ -90,20 +90,15 @@
                 </tr> 
               </thead>
               <tbody>
+                @foreach( $orderinfo->order_goods as $list)
                 <tr>
-                  <td style="height:100px"><img src="" style="width: 200px;"></td>
-                  <td>的撒发达</td>
-                  <td>阿斯顿发士大夫撒旦飞洒地方撒地方撒旦法师打发撒旦法的萨芬</td>
-                  <td>21</td>
-                  <td>21333</td>
+                  <td style="height:100px"><img src="/uploads/good/{{$list->goods->imgurl}}" style="width: 200px;"></td>
+                  <td>roseonly</td>
+                  <td>{{ $list->goods->name}}</td>
+                  <td>{{ $list->goods_num}}</td>
+                  <td>{{ $list->goods->price}}</td>
                 </tr>
-                <tr>
-                  <td style="height:100px"><img src=""></td>
-                  <td>的撒发达</td>
-                  <td>阿斯顿发士大夫撒旦飞洒地方撒地方撒旦法师打发撒旦法的萨芬</td>
-                  <td>21</td>
-                  <td>21333</td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
         </div>  

@@ -791,8 +791,17 @@
                     type: "GET",
                     url: "/shopcar/destroys/"+id,
                     success:function(msg){
-                       p.remove();
-                       $.message('删除成功');
+                        console.log(msg.data);
+                       if(msg.data === ''){
+                            $.message({
+                            message:'删除失败,订单有这个地址',
+                            type:'error'
+                        });
+                       }else{
+                         p.remove();
+                         $.message('删除成功');
+                       }
+                       
                     },
                     error:function(msg){
                         $.message({
