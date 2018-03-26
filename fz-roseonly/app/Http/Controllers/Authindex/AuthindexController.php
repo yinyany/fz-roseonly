@@ -68,7 +68,7 @@ class AuthindexController extends Controller
         }
 
         $userInfo = $user->toArray();
-        // dd($userInfo);
+
         $userId = $userInfo['id'];
         // //登陆成功
         //放置登陆信息,位置登陆状态
