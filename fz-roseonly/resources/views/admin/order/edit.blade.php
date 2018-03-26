@@ -30,7 +30,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label" style="font-size: 18px;">订单号：</label>
           <div class="layui-input-block"> 
-            <input type="text" name="order_number" value="{{$orderinfo->order_number}}" autocomplete="off" class="layui-input" style="width:180px;border:none;font-size:20px;color:#f00;" disabled>
+            <input type="text" name="order_number" value="{{$orderinfo->order_number}}" autocomplete="off" class="layui-input" style="width:250px;border:none;font-size:20px;color:#f00;" disabled>
           </div>
         </div>
         <hr>
