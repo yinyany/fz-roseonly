@@ -361,7 +361,6 @@ class ShopcarController extends Controller
        if(count(Order::where('shaddress_id',$id)->get())){
           return ['code'=>0,'msg'=>'删除失败','data'=>''];
        }else{
-        // return 111;
          $data = Memaddress::where('id',$id)->delete();
          return ['code'=>0,'msg'=>'','data'=>$data];
        }
